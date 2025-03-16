@@ -1,0 +1,405 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 350 25% 58%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 217 36% 37%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 350 25% 58%;
+    --radius: 0.5rem;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Update the background color to match the charcoal */
+body {
+  background-color: #2b2d42;
+  color: #f8f4f1;
+  font-feature-settings: "rlig" 1, "calt" 1;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Remove any section background colors and ensure smooth transitions */
+section {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  transition: background-color 0.5s ease;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Gradient text effect - updated for rose gold */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-rose via-rose to-rose/80;
+}
+
+/* Animated floating elements */
+.floating-element {
+  animation: float 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+.floating-element-slow {
+  animation: float 12s ease-in-out infinite;
+  will-change: transform;
+}
+
+.floating-element-fast {
+  animation: float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Dot indicators */
+.dot-indicator {
+  @apply h-2 w-2 rounded-full;
+}
+
+.dot-blue {
+  @apply bg-sapphire;
+}
+
+.dot-pink {
+  @apply bg-rose;
+}
+
+.dot-green {
+  @apply bg-beige;
+}
+
+.dot-yellow {
+  @apply bg-ivory;
+}
+
+.dot-purple {
+  @apply bg-sapphire;
+}
+
+.dot-orange {
+  @apply bg-rose;
+}
+
+/* Animated background gradient */
+.animated-gradient {
+  background: linear-gradient(-45deg, #b76e79, #3d5a80, #e0d5c0, #b76e79);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Glass effect */
+.glass-effect {
+  @apply bg-white/10 backdrop-blur-lg border border-white/20;
+}
+
+/* Text shadow for better readability on images */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Animated underline effect */
+.animated-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.animated-underline::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #b76e79;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.animated-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Reveal animations */
+.reveal-bottom {
+  @apply opacity-0 translate-y-8;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-bottom.revealed {
+  @apply opacity-100 translate-y-0;
+}
+
+.reveal-left {
+  @apply opacity-0 -translate-x-8;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-left.revealed {
+  @apply opacity-100 translate-x-0;
+}
+
+.reveal-right {
+  @apply opacity-0 translate-x-8;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-right.revealed {
+  @apply opacity-100 translate-x-0;
+}
+
+/* Glow effect */
+.glow {
+  box-shadow: 0 0 15px rgba(183, 110, 121, 0.5);
+  transition: box-shadow 0.3s ease;
+}
+
+.glow:hover {
+  box-shadow: 0 0 25px rgba(183, 110, 121, 0.8);
+}
+
+/* Gradient border */
+.gradient-border {
+  position: relative;
+  border-radius: 0.5rem;
+  background-clip: padding-box;
+  padding: 1px;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -1px;
+  border-radius: inherit;
+  background: linear-gradient(to right, #b76e79, #3d5a80);
+}
+
+/* Gradient button hover effect */
+.gradient-btn-hover {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.gradient-btn-hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, #b76e79, #3d5a80);
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.gradient-btn-hover:hover::before {
+  opacity: 1;
+}
+
+/* Animated dots */
+.animated-dots {
+  position: relative;
+}
+
+.animated-dots::after {
+  content: "...";
+  position: absolute;
+  animation: dots 2s infinite;
+}
+
+@keyframes dots {
+  0%,
+  20% {
+    content: ".";
+  }
+  40% {
+    content: "..";
+  }
+  60%,
+  100% {
+    content: "...";
+  }
+}
+
+/* Shimmer effect */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Smooth section transitions */
+
+/* Section transition overlays */
+.section-fade-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, #2b2d42, transparent);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.7;
+}
+
+.section-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to top, #2b2d42, transparent);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.7;
+}
+
+/* Parallax effect */
+.parallax {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.parallax-layer {
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Enhanced card hover effects */
+.enhanced-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.enhanced-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(183, 110, 121, 0.1);
+}
+
+/* Button hover animations */
+.btn-hover-slide {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-hover-slide::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+}
+
+.btn-hover-slide:hover::after {
+  left: 100%;
+}
+
+/* Improved scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(43, 45, 66, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(183, 110, 121, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(183, 110, 121, 0.7);
+}
+
+/* Text highlight */
+::selection {
+  background: rgba(183, 110, 121, 0.3);
+  color: #f8f4f1;
+}
+
+/* Custom utility classes for Soluvia Design */
+.bg-gradient-soluvia {
+  background: linear-gradient(135deg, #b76e79 0%, #3d5a80 100%);
+}
+
+.text-gradient-soluvia {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-rose via-sapphire to-rose;
+}
+
+.border-gradient-soluvia {
+  border-width: 1px;
+  border-style: solid;
+  border-image: linear-gradient(135deg, #b76e79 0%, #3d5a80 100%) 1;
+}
+
