@@ -1,10 +1,18 @@
-"use client"
+"use client";
 
-import { useRef, useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { motion, useInView, AnimatePresence } from "framer-motion"
-import { ArrowRight, Palette, Globe, ShoppingCart, Code, BarChart, Smartphone } from "lucide-react"
+import { useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import {
+  ArrowRight,
+  Palette,
+  Globe,
+  ShoppingCart,
+  Code,
+  BarChart,
+  Smartphone,
+} from "lucide-react";
 
 const services = [
   {
@@ -21,7 +29,8 @@ const services = [
     id: "e-commerce",
     icon: ShoppingCart,
     title: "E-commerce",
-    description: "Powerful online stores that drive sales and provide seamless shopping experiences.",
+    description:
+      "Powerful online stores that drive sales and provide seamless shopping experiences.",
     color: "rose",
     image: "/placeholder.svg?height=600&width=800",
     link: "/services/ecommerce",
@@ -30,7 +39,8 @@ const services = [
     id: "seo",
     icon: Globe,
     title: "SEO Optimization",
-    description: "Boost your online visibility and drive organic traffic with our comprehensive SEO strategies.",
+    description:
+      "Boost your online visibility and drive organic traffic with our comprehensive SEO strategies.",
     color: "beige",
     image: "/placeholder.svg?height=600&width=800",
     link: "/services/seo-optimization",
@@ -39,7 +49,8 @@ const services = [
     id: "development",
     icon: Code,
     title: "Web Development",
-    description: "Custom web applications and functionality tailored to your specific business needs.",
+    description:
+      "Custom web applications and functionality tailored to your specific business needs.",
     color: "sapphire",
     image: "/placeholder.svg?height=600&width=800",
     link: "/services/web-development",
@@ -58,26 +69,28 @@ const services = [
     id: "mobile",
     icon: Smartphone,
     title: "Mobile Apps",
-    description: "Native and cross-platform mobile applications that extend your digital presence to all devices.",
+    description:
+      "Native and cross-platform mobile applications that extend your digital presence to all devices.",
     color: "rose",
     image: "/placeholder.svg?height=600&width=800",
     link: "/services/mobile-apps",
   },
-]
+];
 
 export function RedesignedServicesSection() {
-  const [activeService, setActiveService] = useState(services[0].id)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const [activeService, setActiveService] = useState(services[0].id);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
-  const currentService = services.find((service) => service.id === activeService) || services[0]
+  const currentService =
+    services.find((service) => service.id === activeService) || services[0];
 
   return (
     <section ref={ref} className="relative py-24 md:py-32">
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute left-0 top-0 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
+        <div className="absolute left-0 top-0 h-96 w-96 rounded-full bg-rose/0 blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-sapphire/0 blur-3xl"></div>
       </div>
 
       <div className="container relative z-10">
@@ -91,7 +104,8 @@ export function RedesignedServicesSection() {
             Our <span className="text-gradient-soluvia">Services</span>
           </h2>
           <p className="mt-4 text-lg text-ivory/70">
-            We offer a comprehensive range of services to help your business thrive in the digital landscape
+            We offer a comprehensive range of services to help your business
+            thrive in the digital landscape
           </p>
         </motion.div>
 
@@ -107,7 +121,10 @@ export function RedesignedServicesSection() {
               }`}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: services.findIndex((s) => s.id === service.id) * 0.1 }}
+              transition={{
+                duration: 0.5,
+                delay: services.findIndex((s) => s.id === service.id) * 0.1,
+              }}
             >
               {service.title}
             </motion.button>
@@ -128,7 +145,9 @@ export function RedesignedServicesSection() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-rose/20 to-sapphire/20 text-rose mr-4">
                   {<currentService.icon className="h-6 w-6" />}
                 </div>
-                <h3 className="text-2xl font-bold text-ivory">{currentService.title}</h3>
+                <h3 className="text-2xl font-bold text-ivory">
+                  {currentService.title}
+                </h3>
               </div>
 
               <p className="text-ivory/70 mb-6">{currentService.description}</p>
@@ -142,7 +161,8 @@ export function RedesignedServicesSection() {
                   href={currentService.link}
                   className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-gradient-to-r from-rose to-sapphire text-ivory font-medium hover:shadow-lg hover:shadow-rose/20 transition-all duration-300"
                 >
-                  Learn More <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  Learn More{" "}
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </motion.div>
             </div>
@@ -200,7 +220,8 @@ export function RedesignedServicesSection() {
                   href={service.link}
                   className="inline-flex items-center text-rose transition-colors hover:text-sapphire"
                 >
-                  Learn more <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  Learn more{" "}
+                  <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
 
@@ -210,6 +231,5 @@ export function RedesignedServicesSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
-

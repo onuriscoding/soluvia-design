@@ -1,8 +1,15 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import { Search, Lightbulb, PenTool, Code, Rocket, BarChart } from "lucide-react"
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import {
+  Search,
+  Lightbulb,
+  PenTool,
+  Code,
+  Rocket,
+  BarChart,
+} from "lucide-react";
 
 const processSteps = [
   {
@@ -47,11 +54,11 @@ const processSteps = [
       "We provide ongoing support, maintenance, and optimization to help your website evolve and continue driving business results.",
     color: "bg-beige",
   },
-]
+];
 
 export function RedesignedProcessSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.1 })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -61,19 +68,23 @@ export function RedesignedProcessSection() {
         staggerChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
-  }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
 
   return (
     <section ref={ref} className="relative py-24 md:py-32 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
-        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
-        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
+        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/0 blur-3xl"></div>
+        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-sapphire/0 blur-3xl"></div>
       </div>
 
       <div className="container relative z-10">
@@ -110,11 +121,17 @@ export function RedesignedProcessSection() {
             >
               {/* Timeline dot */}
               <div className="absolute left-0 md:left-1/2 top-0 transform md:-translate-x-1/2 w-4 h-4 rounded-full border-4 border-charcoal bg-charcoal z-10">
-                <div className={`absolute inset-0 rounded-full ${step.color} animate-pulse`}></div>
+                <div
+                  className={`absolute inset-0 rounded-full ${step.color} animate-pulse`}
+                ></div>
               </div>
 
               {/* Content */}
-              <div className={`ml-10 md:ml-0 md:w-1/2 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}>
+              <div
+                className={`ml-10 md:ml-0 md:w-1/2 ${
+                  index % 2 === 0 ? "md:pr-12" : "md:pl-12"
+                }`}
+              >
                 <div className="p-6 rounded-xl bg-charcoal/50 backdrop-blur-sm border border-ivory/10 hover:border-rose/30 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-rose/5">
                   <div className="flex items-center mb-4">
                     <div
@@ -122,7 +139,9 @@ export function RedesignedProcessSection() {
                     >
                       {step.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-ivory">{step.title}</h3>
+                    <h3 className="text-xl font-bold text-ivory">
+                      {step.title}
+                    </h3>
                   </div>
                   <p className="text-ivory/70">{step.description}</p>
                 </div>
@@ -132,6 +151,5 @@ export function RedesignedProcessSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
-

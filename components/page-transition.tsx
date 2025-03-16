@@ -1,20 +1,20 @@
-"use client"
+"use client";
 
-import { type ReactNode, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { usePathname } from "next/navigation"
+import { type ReactNode, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 interface PageTransitionProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export function PageTransition({ children }: PageTransitionProps) {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   // Scroll to top on page change
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <AnimatePresence mode="wait">
@@ -28,6 +28,5 @@ export function PageTransition({ children }: PageTransitionProps) {
         {children}
       </motion.div>
     </AnimatePresence>
-  )
+  );
 }
-

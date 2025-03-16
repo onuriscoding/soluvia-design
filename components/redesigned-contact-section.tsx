@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import { Send, CheckCircle, AlertCircle, Mail, Phone } from "lucide-react"
+import { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Send, CheckCircle, AlertCircle, Mail, Phone } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 export function RedesignedContactSection() {
   const [formState, setFormState] = useState({
@@ -18,54 +18,60 @@ export function RedesignedContactSection() {
     phone: "",
     message: "",
     service: "web-design",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [message, setMessage] = useState("")
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
 
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormState((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!formState.name || !formState.email || !formState.message) {
-      setStatus("error")
-      setMessage("Please fill out all required fields")
-      return
+      setStatus("error");
+      setMessage("Please fill out all required fields");
+      return;
     }
 
-    setIsSubmitting(true)
-    setStatus("loading")
+    setIsSubmitting(true);
+    setStatus("loading");
 
     // Simulate form submission
     setTimeout(() => {
-      setIsSubmitting(false)
-      setIsSubmitted(true)
-      setStatus("success")
-      setMessage("Thank you for your message! We'll get back to you soon.")
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      setStatus("success");
+      setMessage("Thank you for your message! We'll get back to you soon.");
       setFormState({
         name: "",
         email: "",
         phone: "",
         message: "",
         service: "web-design",
-      })
-    }, 1500)
-  }
+      });
+    }, 1500);
+  };
 
   return (
     <section ref={ref} className="relative py-24 md:py-32 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
-        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
-        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
+        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/0 blur-3xl"></div>
+        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-sapphire/0 blur-3xl"></div>
       </div>
 
       <div className="container relative z-10">
@@ -79,8 +85,8 @@ export function RedesignedContactSection() {
             Get in <span className="text-gradient-soluvia">Touch</span>
           </h2>
           <p className="mt-4 text-lg text-ivory/70">
-            Have a project in mind? We'd love to hear from you. Fill out the form below and we'll get back to you as
-            soon as possible.
+            Have a project in mind? We'd love to hear from you. Fill out the
+            form below and we'll get back to you as soon as possible.
           </p>
         </motion.div>
 
@@ -108,9 +114,12 @@ export function RedesignedContactSection() {
                     <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r from-rose/20 to-sapphire/20">
                       <CheckCircle className="h-10 w-10 text-rose" />
                     </div>
-                    <h3 className="mb-2 text-2xl font-bold text-ivory">Message Sent!</h3>
+                    <h3 className="mb-2 text-2xl font-bold text-ivory">
+                      Message Sent!
+                    </h3>
                     <p className="mb-6 text-ivory/70">
-                      Thank you for reaching out. We'll get back to you as soon as possible.
+                      Thank you for reaching out. We'll get back to you as soon
+                      as possible.
                     </p>
                     <Button
                       onClick={() => setIsSubmitted(false)}
@@ -224,7 +233,10 @@ export function RedesignedContactSection() {
                     >
                       {isSubmitting ? (
                         <span className="flex items-center">
-                          <svg className="mr-2 h-4 w-4 animate-spin" viewBox="0 0 24 24">
+                          <svg
+                            className="mr-2 h-4 w-4 animate-spin"
+                            viewBox="0 0 24 24"
+                          >
                             <circle
                               className="opacity-25"
                               cx="12"
@@ -261,10 +273,13 @@ export function RedesignedContactSection() {
           >
             <div className="space-y-8">
               <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-ivory">Contact Information</h3>
+                <h3 className="text-2xl font-bold text-ivory">
+                  Contact Information
+                </h3>
                 <p className="text-ivory/70">
-                  We're here to help with any questions you may have about our services. Reach out to us through any of
-                  the following channels.
+                  We're here to help with any questions you may have about our
+                  services. Reach out to us through any of the following
+                  channels.
                 </p>
               </div>
 
@@ -274,7 +289,9 @@ export function RedesignedContactSection() {
                     <Mail className="h-5 w-5" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-medium text-ivory mb-1">Email Us</h4>
+                    <h4 className="text-lg font-medium text-ivory mb-1">
+                      Email Us
+                    </h4>
                     <a
                       href="mailto:hello@soluviadesign.com"
                       className="text-ivory/70 hover:text-rose transition-colors"
@@ -289,8 +306,13 @@ export function RedesignedContactSection() {
                     <Phone className="h-5 w-5" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-medium text-ivory mb-1">Call Us</h4>
-                    <a href="tel:+15551234567" className="text-ivory/70 hover:text-sapphire transition-colors">
+                    <h4 className="text-lg font-medium text-ivory mb-1">
+                      Call Us
+                    </h4>
+                    <a
+                      href="tel:+15551234567"
+                      className="text-ivory/70 hover:text-sapphire transition-colors"
+                    >
                       +1 (555) 123-4567
                     </a>
                   </div>
@@ -298,7 +320,9 @@ export function RedesignedContactSection() {
               </div>
 
               <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-ivory">Business Hours</h3>
+                <h3 className="text-2xl font-bold text-ivory">
+                  Business Hours
+                </h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-ivory/70">Monday - Friday</span>
@@ -316,85 +340,96 @@ export function RedesignedContactSection() {
               </div>
 
               <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-ivory">Connect With Us</h3>
+                <h3 className="text-2xl font-bold text-ivory">
+                  Connect With Us
+                </h3>
                 <div className="flex gap-4">
-                  {["facebook", "twitter", "instagram", "linkedin"].map((platform) => (
-                    <a
-                      key={platform}
-                      href="#"
-                      className="flex h-10 w-10 items-center justify-center rounded-full bg-charcoal/70 text-ivory/70 hover:bg-rose/20 hover:text-rose transition-colors duration-300 border border-ivory/10"
-                      aria-label={platform}
-                    >
-                      {platform === "facebook" && (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="h-5 w-5"
-                        >
-                          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                        </svg>
-                      )}
-                      {platform === "twitter" && (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="h-5 w-5"
-                        >
-                          <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                        </svg>
-                      )}
-                      {platform === "instagram" && (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="h-5 w-5"
-                        >
-                          <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                        </svg>
-                      )}
-                      {platform === "linkedin" && (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="h-5 w-5"
-                        >
-                          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                          <rect width="4" height="12" x="2" y="9" />
-                          <circle cx="4" cy="4" r="2" />
-                        </svg>
-                      )}
-                    </a>
-                  ))}
+                  {["facebook", "twitter", "instagram", "linkedin"].map(
+                    (platform) => (
+                      <a
+                        key={platform}
+                        href="#"
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-charcoal/70 text-ivory/70 hover:bg-rose/20 hover:text-rose transition-colors duration-300 border border-ivory/10"
+                        aria-label={platform}
+                      >
+                        {platform === "facebook" && (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-5 w-5"
+                          >
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                          </svg>
+                        )}
+                        {platform === "twitter" && (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-5 w-5"
+                          >
+                            <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+                          </svg>
+                        )}
+                        {platform === "instagram" && (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-5 w-5"
+                          >
+                            <rect
+                              width="20"
+                              height="20"
+                              x="2"
+                              y="2"
+                              rx="5"
+                              ry="5"
+                            />
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                          </svg>
+                        )}
+                        {platform === "linkedin" && (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-5 w-5"
+                          >
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect width="4" height="12" x="2" y="9" />
+                            <circle cx="4" cy="4" r="2" />
+                          </svg>
+                        )}
+                      </a>
+                    )
+                  )}
                 </div>
               </div>
             </div>
@@ -402,6 +437,5 @@ export function RedesignedContactSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

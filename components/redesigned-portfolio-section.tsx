@@ -1,24 +1,29 @@
-"use client"
+"use client";
 
-import { useState, useRef } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { motion, useInView, AnimatePresence } from "framer-motion"
-import { ArrowRight, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
+import { useState, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import {
+  ArrowRight,
+  ExternalLink,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 type PortfolioItem = {
-  id: string
-  title: string
-  category: string
-  client: string
-  description: string
-  challenge: string
-  solution: string
-  results: string
-  technologies: string[]
-  images: string[]
-  link: string
-}
+  id: string;
+  title: string;
+  category: string;
+  client: string;
+  description: string;
+  challenge: string;
+  solution: string;
+  results: string;
+  technologies: string[];
+  images: string[];
+  link: string;
+};
 
 const portfolioItems: PortfolioItem[] = [
   {
@@ -34,7 +39,13 @@ const portfolioItems: PortfolioItem[] = [
       "We created a custom design that emphasized elegance and sophistication, with high-quality imagery and smooth animations. The e-commerce functionality was integrated seamlessly, with a focus on a streamlined checkout process.",
     results:
       "The new website led to a 35% increase in online sales and a significant improvement in user engagement metrics.",
-    technologies: ["Next.js", "Tailwind CSS", "Shopify", "Framer Motion", "Stripe"],
+    technologies: [
+      "Next.js",
+      "Tailwind CSS",
+      "Shopify",
+      "Framer Motion",
+      "Stripe",
+    ],
     images: [
       "/placeholder.svg?height=600&width=800",
       "/placeholder.svg?height=600&width=800",
@@ -76,7 +87,13 @@ const portfolioItems: PortfolioItem[] = [
       "We designed a visually stunning website with immersive imagery, virtual tours, and an integrated booking system that allowed guests to easily reserve spa treatments and accommodations.",
     results:
       "Online bookings increased by 60%, and the average time spent on the website doubled, indicating higher user engagement with the content.",
-    technologies: ["WordPress", "WooCommerce", "Custom PHP", "JavaScript", "Matterport Integration"],
+    technologies: [
+      "WordPress",
+      "WooCommerce",
+      "Custom PHP",
+      "JavaScript",
+      "Matterport Integration",
+    ],
     images: [
       "/placeholder.svg?height=600&width=800",
       "/placeholder.svg?height=600&width=800",
@@ -84,30 +101,34 @@ const portfolioItems: PortfolioItem[] = [
     ],
     link: "/portfolio/wellness-retreat",
   },
-]
+];
 
 export function RedesignedPortfolioSection() {
-  const [activeItem, setActiveItem] = useState(portfolioItems[0].id)
-  const [activeImageIndex, setActiveImageIndex] = useState(0)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const [activeItem, setActiveItem] = useState(portfolioItems[0].id);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
-  const currentItem = portfolioItems.find((item) => item.id === activeItem) || portfolioItems[0]
+  const currentItem =
+    portfolioItems.find((item) => item.id === activeItem) || portfolioItems[0];
 
   const nextImage = () => {
-    setActiveImageIndex((prev) => (prev + 1) % currentItem.images.length)
-  }
+    setActiveImageIndex((prev) => (prev + 1) % currentItem.images.length);
+  };
 
   const prevImage = () => {
-    setActiveImageIndex((prev) => (prev - 1 + currentItem.images.length) % currentItem.images.length)
-  }
+    setActiveImageIndex(
+      (prev) =>
+        (prev - 1 + currentItem.images.length) % currentItem.images.length
+    );
+  };
 
   return (
     <section ref={ref} className="relative py-24 md:py-32 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
-        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
-        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
+        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/0 blur-3xl"></div>
+        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-sapphire/0 blur-3xl"></div>
       </div>
 
       <div className="container relative z-10">
@@ -121,7 +142,8 @@ export function RedesignedPortfolioSection() {
             Featured <span className="text-gradient-soluvia">Projects</span>
           </h2>
           <p className="mt-4 text-lg text-ivory/70">
-            Explore our portfolio of successful projects that have helped businesses achieve their goals
+            Explore our portfolio of successful projects that have helped
+            businesses achieve their goals
           </p>
         </motion.div>
 
@@ -130,8 +152,8 @@ export function RedesignedPortfolioSection() {
             <motion.button
               key={item.id}
               onClick={() => {
-                setActiveItem(item.id)
-                setActiveImageIndex(0)
+                setActiveItem(item.id);
+                setActiveImageIndex(0);
               }}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeItem === item.id
@@ -140,7 +162,10 @@ export function RedesignedPortfolioSection() {
               }`}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: portfolioItems.findIndex((i) => i.id === item.id) * 0.1 }}
+              transition={{
+                duration: 0.5,
+                delay: portfolioItems.findIndex((i) => i.id === item.id) * 0.1,
+              }}
             >
               {item.title}
             </motion.button>
@@ -173,8 +198,13 @@ export function RedesignedPortfolioSection() {
                         className="absolute inset-0"
                       >
                         <Image
-                          src={currentItem.images[activeImageIndex] || "/placeholder.svg"}
-                          alt={`${currentItem.title} - Image ${activeImageIndex + 1}`}
+                          src={
+                            currentItem.images[activeImageIndex] ||
+                            "/placeholder.svg"
+                          }
+                          alt={`${currentItem.title} - Image ${
+                            activeImageIndex + 1
+                          }`}
                           fill
                           className="object-cover"
                         />
@@ -211,7 +241,9 @@ export function RedesignedPortfolioSection() {
                         key={index}
                         onClick={() => setActiveImageIndex(index)}
                         className={`h-2 w-2 rounded-full transition-all duration-300 ${
-                          activeImageIndex === index ? "bg-rose w-6" : "bg-ivory/30 hover:bg-ivory/50"
+                          activeImageIndex === index
+                            ? "bg-rose w-6"
+                            : "bg-ivory/30 hover:bg-ivory/50"
                         }`}
                         aria-label={`Go to image ${index + 1}`}
                       />
@@ -226,14 +258,19 @@ export function RedesignedPortfolioSection() {
                     {currentItem.category}
                   </span>
                 </div>
-                <h3 className="text-2xl font-bold text-ivory mb-2">{currentItem.title}</h3>
+                <h3 className="text-2xl font-bold text-ivory mb-2">
+                  {currentItem.title}
+                </h3>
                 <p className="text-ivory/70 mb-4">
-                  Client: <span className="text-ivory">{currentItem.client}</span>
+                  Client:{" "}
+                  <span className="text-ivory">{currentItem.client}</span>
                 </p>
                 <p className="text-ivory/70 mb-6">{currentItem.description}</p>
 
                 <div className="mb-6">
-                  <h4 className="text-lg font-medium text-ivory mb-2">Technologies Used:</h4>
+                  <h4 className="text-lg font-medium text-ivory mb-2">
+                    Technologies Used:
+                  </h4>
                   <div className="flex flex-wrap gap-2">
                     {currentItem.technologies.map((tech) => (
                       <span
@@ -257,15 +294,21 @@ export function RedesignedPortfolioSection() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-charcoal/50 backdrop-blur-sm border border-ivory/10 rounded-xl p-6 transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-rose/5 hover:border-rose/30">
-                <h4 className="text-lg font-medium text-ivory mb-3">The Challenge</h4>
+                <h4 className="text-lg font-medium text-ivory mb-3">
+                  The Challenge
+                </h4>
                 <p className="text-ivory/70">{currentItem.challenge}</p>
               </div>
               <div className="bg-charcoal/50 backdrop-blur-sm border border-ivory/10 rounded-xl p-6 transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-rose/5 hover:border-rose/30">
-                <h4 className="text-lg font-medium text-ivory mb-3">Our Solution</h4>
+                <h4 className="text-lg font-medium text-ivory mb-3">
+                  Our Solution
+                </h4>
                 <p className="text-ivory/70">{currentItem.solution}</p>
               </div>
               <div className="bg-charcoal/50 backdrop-blur-sm border border-ivory/10 rounded-xl p-6 transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-rose/5 hover:border-rose/30">
-                <h4 className="text-lg font-medium text-ivory mb-3">The Results</h4>
+                <h4 className="text-lg font-medium text-ivory mb-3">
+                  The Results
+                </h4>
                 <p className="text-ivory/70">{currentItem.results}</p>
               </div>
             </div>
@@ -287,6 +330,5 @@ export function RedesignedPortfolioSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
-

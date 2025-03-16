@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { useState, useRef } from "react"
-import { motion, AnimatePresence, useInView } from "framer-motion"
-import { ChevronDown, ChevronUp } from "lucide-react"
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 type FAQ = {
-  question: string
-  answer: string
-}
+  question: string;
+  answer: string;
+};
 
 const faqs: FAQ[] = [
   {
@@ -40,23 +40,23 @@ const faqs: FAQ[] = [
     answer:
       "Yes, we work with clients globally. Our digital workflow and communication tools allow us to collaborate effectively with clients regardless of their location. We schedule meetings at convenient times across different time zones to ensure smooth communication.",
   },
-]
+];
 
 export function RedesignedFAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index)
-  }
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
     <section ref={ref} className="relative py-24 md:py-32 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
-        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
-        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
+        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/0 blur-3xl"></div>
+        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-sapphire/0 blur-3xl"></div>
       </div>
 
       <div className="container relative z-10">
@@ -67,9 +67,12 @@ export function RedesignedFAQSection() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Frequently Asked <span className="text-gradient-soluvia">Questions</span>
+            Frequently Asked{" "}
+            <span className="text-gradient-soluvia">Questions</span>
           </h2>
-          <p className="mt-4 text-lg text-ivory/70">Find answers to common questions about our services and process</p>
+          <p className="mt-4 text-lg text-ivory/70">
+            Find answers to common questions about our services and process
+          </p>
         </motion.div>
 
         <div className="mx-auto max-w-3xl">
@@ -90,7 +93,9 @@ export function RedesignedFAQSection() {
                 } backdrop-blur-sm border border-ivory/10`}
                 aria-expanded={openIndex === index}
               >
-                <span className="text-lg font-medium text-ivory">{faq.question}</span>
+                <span className="text-lg font-medium text-ivory">
+                  {faq.question}
+                </span>
                 {openIndex === index ? (
                   <ChevronUp className="h-5 w-5 text-rose" />
                 ) : (
@@ -117,6 +122,5 @@ export function RedesignedFAQSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

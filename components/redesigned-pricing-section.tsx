@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState, useRef } from "react"
-import Link from "next/link"
-import { motion, useInView, AnimatePresence } from "framer-motion"
-import { ArrowRight, Check, X } from "lucide-react"
-import { Switch } from "@/components/ui/switch"
+import { useState, useRef } from "react";
+import Link from "next/link";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { ArrowRight, Check, X } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 
 const pricingPlans = [
   {
@@ -64,19 +64,21 @@ const pricingPlans = [
     cta: "Get Started",
     popular: false,
   },
-]
+];
 
 export function RedesignedPricingSection() {
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly")
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">(
+    "monthly"
+  );
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
     <section ref={ref} className="relative py-24 md:py-32 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
-        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
-        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
+        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/0 blur-3xl"></div>
+        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-sapphire/0 blur-3xl"></div>
       </div>
 
       <div className="container relative z-10">
@@ -87,18 +89,33 @@ export function RedesignedPricingSection() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Simple, <span className="text-gradient-soluvia">Transparent</span> Pricing
+            Simple, <span className="text-gradient-soluvia">Transparent</span>{" "}
+            Pricing
           </h2>
-          <p className="mt-4 text-lg text-ivory/70">Choose the perfect plan for your business needs</p>
+          <p className="mt-4 text-lg text-ivory/70">
+            Choose the perfect plan for your business needs
+          </p>
 
           <div className="mt-8 flex items-center justify-center gap-3">
-            <span className={`text-sm ${billingCycle === "monthly" ? "text-ivory" : "text-ivory/70"}`}>Monthly</span>
+            <span
+              className={`text-sm ${
+                billingCycle === "monthly" ? "text-ivory" : "text-ivory/70"
+              }`}
+            >
+              Monthly
+            </span>
             <Switch
               checked={billingCycle === "yearly"}
-              onCheckedChange={(checked) => setBillingCycle(checked ? "yearly" : "monthly")}
+              onCheckedChange={(checked) =>
+                setBillingCycle(checked ? "yearly" : "monthly")
+              }
               className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-rose data-[state=checked]:to-sapphire"
             />
-            <span className={`text-sm ${billingCycle === "yearly" ? "text-ivory" : "text-ivory/70"}`}>
+            <span
+              className={`text-sm ${
+                billingCycle === "yearly" ? "text-ivory" : "text-ivory/70"
+              }`}
+            >
               Yearly{" "}
               <span className="ml-1 rounded-full bg-gradient-to-r from-rose to-sapphire px-2 py-0.5 text-xs text-ivory">
                 Save 10%
@@ -142,7 +159,10 @@ export function RedesignedPricingSection() {
                       transition={{ duration: 0.3 }}
                       className="text-5xl font-bold text-ivory"
                     >
-                      ${billingCycle === "monthly" ? plan.price.monthly : plan.price.yearly}
+                      $
+                      {billingCycle === "monthly"
+                        ? plan.price.monthly
+                        : plan.price.yearly}
                     </motion.span>
                   </AnimatePresence>
                   <span className="ml-2 text-ivory/70">one-time</span>
@@ -155,14 +175,23 @@ export function RedesignedPricingSection() {
                       className="flex items-start gap-3"
                       initial={{ opacity: 0, x: -20 }}
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ duration: 0.5, delay: index * 0.1 + i * 0.05 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: index * 0.1 + i * 0.05,
+                      }}
                     >
                       {feature.included ? (
                         <Check className="mt-1 h-5 w-5 flex-shrink-0 text-rose" />
                       ) : (
                         <X className="mt-1 h-5 w-5 flex-shrink-0 text-ivory/30" />
                       )}
-                      <span className={feature.included ? "text-ivory/90" : "text-ivory/50"}>{feature.text}</span>
+                      <span
+                        className={
+                          feature.included ? "text-ivory/90" : "text-ivory/50"
+                        }
+                      >
+                        {feature.text}
+                      </span>
                     </motion.li>
                   ))}
                 </ul>
@@ -192,9 +221,12 @@ export function RedesignedPricingSection() {
         >
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div>
-              <h3 className="text-xl font-bold text-ivory">Need a custom solution?</h3>
+              <h3 className="text-xl font-bold text-ivory">
+                Need a custom solution?
+              </h3>
               <p className="mt-2 text-ivory/70">
-                Contact us for a personalized quote tailored to your specific requirements.
+                Contact us for a personalized quote tailored to your specific
+                requirements.
               </p>
             </div>
             <Link
@@ -207,6 +239,5 @@ export function RedesignedPricingSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
-

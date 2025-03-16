@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useRef, useState, useEffect } from "react"
-import { motion, useInView } from "framer-motion"
-import { Users, Award, Calendar, Globe } from "lucide-react"
+import { useRef, useState, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
+import { Users, Award, Calendar, Globe } from "lucide-react";
 
 type Stat = {
-  icon: React.ReactNode
-  value: number
-  label: string
-  suffix: string
-  color: string
-}
+  icon: React.ReactNode;
+  value: number;
+  label: string;
+  suffix: string;
+  color: string;
+};
 
 const stats: Stat[] = [
   {
@@ -43,45 +43,49 @@ const stats: Stat[] = [
     suffix: "+",
     color: "text-rose",
   },
-]
+];
 
 export function StatsCounter() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
-  const [counts, setCounts] = useState<number[]>(stats.map(() => 0))
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [counts, setCounts] = useState<number[]>(stats.map(() => 0));
 
   useEffect(() => {
     if (isInView) {
       const intervals = stats.map((stat, index) => {
-        const duration = 2000 // 2 seconds for the count animation
-        const increment = stat.value / (duration / 16) // 60fps
-        let count = 0
+        const duration = 2000; // 2 seconds for the count animation
+        const increment = stat.value / (duration / 16); // 60fps
+        let count = 0;
 
         return setInterval(() => {
-          count = Math.min(count + increment, stat.value)
+          count = Math.min(count + increment, stat.value);
           setCounts((prev) => {
-            const newCounts = [...prev]
-            newCounts[index] = Math.floor(count)
-            return newCounts
-          })
+            const newCounts = [...prev];
+            newCounts[index] = Math.floor(count);
+            return newCounts;
+          });
 
           if (count >= stat.value) {
-            clearInterval(intervals[index])
+            clearInterval(intervals[index]);
           }
-        }, 16)
-      })
+        }, 16);
+      });
 
       return () => {
-        intervals.forEach((interval) => clearInterval(interval))
-      }
+        intervals.forEach((interval) => clearInterval(interval));
+      };
     }
-  }, [isInView])
+  }, [isInView]);
 
   return (
-    <section ref={ref} className="relative py-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-rose/10 to-sapphire/10"></div>
+    <section ref={ref} className="relative py-12 overflow-hidden min-height-50">
+      {/* Background elements */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute left-0 top-0 h-96 w-96 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full blur-3xl"></div>
+      </div>
 
-      <div className="container relative z-10">
+      <div className="py-16 container relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <motion.div
@@ -97,8 +101,12 @@ export function StatsCounter() {
                 {stat.icon}
               </div>
               <div className="flex items-baseline">
-                <span className="text-4xl font-bold text-ivory">{counts[index]}</span>
-                <span className="text-2xl font-bold text-rose ml-1">{stat.suffix}</span>
+                <span className="text-4xl font-bold text-ivory">
+                  {counts[index]}
+                </span>
+                <span className="text-2xl font-bold text-rose ml-1">
+                  {stat.suffix}
+                </span>
               </div>
               <p className="text-ivory/70 mt-2">{stat.label}</p>
             </motion.div>
@@ -106,6 +114,5 @@ export function StatsCounter() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-
