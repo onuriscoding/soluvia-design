@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import Link from "next/link"
-import { motion, useInView } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { useRef } from "react";
+import Link from "next/link";
+import { motion, useInView } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 export function RedesignedCTASection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   // Animated particles
   const particles = Array.from({ length: 15 }).map((_, i) => ({
@@ -17,7 +17,7 @@ export function RedesignedCTASection() {
     size: Math.random() * 4 + 1,
     duration: Math.random() * 20 + 10,
     delay: Math.random() * 5,
-  }))
+  }));
 
   return (
     <section ref={ref} className="py-24 md:py-32">
@@ -59,12 +59,13 @@ export function RedesignedCTASection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl font-bold tracking-tight text-ivory sm:text-4xl md:text-5xl">
-                Ready for a website that <span className="text-gradient-soluvia">stands out</span>?
+              <h2 className="text-3xl font-anton tracking-wide text-ivory sm:text-4xl md:text-5xl">
+                Ready for a website that{" "}
+                <span className="text-gradient-soluvia">stands out</span>?
               </h2>
               <p className="mt-6 text-lg text-ivory/80 md:text-xl">
-                Let's create something extraordinary together. Contact us today to start your journey towards digital
-                excellence.
+                Let's create something extraordinary together. Contact us today
+                to start your journey towards digital excellence.
               </p>
 
               <motion.div
@@ -75,7 +76,7 @@ export function RedesignedCTASection() {
               >
                 <Link
                   href="/contact"
-                  className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-8 py-4 text-base font-medium text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
+                  className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-8 py-4 text-base font-anton tracking-wide text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                   <span className="relative z-10 flex items-center">
@@ -86,7 +87,7 @@ export function RedesignedCTASection() {
 
                 <Link
                   href="/how-it-works"
-                  className="inline-flex min-w-[200px] items-center justify-center rounded-full border border-ivory/30 bg-charcoal/50 px-8 py-4 text-base font-medium text-ivory backdrop-blur-sm transition-all duration-300 hover:bg-charcoal/70 hover:shadow-lg"
+                  className="inline-flex min-w-[200px] items-center justify-center rounded-full border border-ivory/30 bg-charcoal/50 px-8 py-4 text-base font-anton tracking-wide text-ivory backdrop-blur-sm transition-all duration-300 hover:bg-charcoal/70 hover:shadow-lg"
                 >
                   OUR PROCESS
                 </Link>
@@ -96,6 +97,5 @@ export function RedesignedCTASection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

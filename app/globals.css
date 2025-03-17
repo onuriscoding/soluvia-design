@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 350 25% 58%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 217 36% 37%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 350 25% 58%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 0%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 0%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 0 0% 0%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 100%;
     --radius: 0.5rem;
   }
 }
@@ -33,23 +33,75 @@ html {
   overflow-x: hidden;
 }
 
-/* Update the background color to match the charcoal */
+/* Base styles */
 body {
-  background-color: #2b2d42;
-  color: #f8f4f1;
   font-feature-settings: "rlig" 1, "calt" 1;
   overflow-x: hidden;
   width: 100%;
+  color: white;
+  background: transparent;
 }
 
-/* Remove any section background colors and ensure smooth transitions */
+/* Section styling */
 section {
   position: relative;
   z-index: 1;
   background: transparent;
-  transition: background-color 0.5s ease;
   min-height: 50vh;
   overflow: hidden;
+}
+
+/* Glass effect for components that need to stand out from the video */
+.glass-effect {
+  @apply backdrop-blur-sm bg-black/10 border border-white/10;
+}
+
+/* Navigation and footer styling */
+.nav-bg {
+  @apply backdrop-blur-sm bg-black/20;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Text selection */
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Glass effect */
+.glass-effect {
+  @apply backdrop-blur-md bg-black/20 border border-white/10;
+}
+
+/* Card styling */
+.enhanced-card {
+  @apply glass-effect transition-all duration-300;
+}
+
+.enhanced-card:hover {
+  @apply transform -translate-y-1 bg-black/30;
+}
+
+/* Button hover effect */
+.btn-hover {
+  @apply transition-all duration-300 hover:bg-white hover:text-black;
 }
 
 /* Gradient text effect - updated for rose gold */
@@ -131,11 +183,6 @@ section {
   100% {
     background-position: 0% 50%;
   }
-}
-
-/* Glass effect */
-.glass-effect {
-  @apply bg-white/10 backdrop-blur-lg border border-white/20;
 }
 
 /* Text shadow for better readability on images */
@@ -333,16 +380,6 @@ section {
   transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Enhanced card hover effects */
-.enhanced-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.enhanced-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px -5px rgba(183, 110, 121, 0.1);
-}
-
 /* Button hover animations */
 .btn-hover-slide {
   position: relative;
@@ -362,30 +399,6 @@ section {
 
 .btn-hover-slide:hover::after {
   left: 100%;
-}
-
-/* Improved scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(43, 45, 66, 0.5);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(183, 110, 121, 0.5);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(183, 110, 121, 0.7);
-}
-
-/* Text highlight */
-::selection {
-  background: rgba(183, 110, 121, 0.3);
-  color: #f8f4f1;
 }
 
 /* Custom utility classes for Soluvia Design */

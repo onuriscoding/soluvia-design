@@ -88,9 +88,8 @@ export function RedesignedPricingSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Simple, <span className="text-gradient-soluvia">Transparent</span>{" "}
-            Pricing
+          <h2 className="text-3xl font-anton tracking-wide sm:text-4xl md:text-5xl">
+            Our <span className="text-gradient-soluvia">Pricing</span>
           </h2>
           <p className="mt-4 text-lg text-ivory/70">
             Choose the perfect plan for your business needs
@@ -146,26 +145,21 @@ export function RedesignedPricingSection() {
               )}
 
               <div className="p-8">
-                <h3 className="text-2xl font-bold text-ivory">{plan.name}</h3>
+                <h3 className="text-2xl font-anton tracking-wide text-ivory">
+                  {plan.name}
+                </h3>
                 <p className="mt-2 text-ivory/70">{plan.description}</p>
 
-                <div className="mt-6 flex items-baseline">
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={billingCycle}
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 20 }}
-                      transition={{ duration: 0.3 }}
-                      className="text-5xl font-bold text-ivory"
-                    >
-                      $
-                      {billingCycle === "monthly"
-                        ? plan.price.monthly
-                        : plan.price.yearly}
-                    </motion.span>
-                  </AnimatePresence>
-                  <span className="ml-2 text-ivory/70">one-time</span>
+                <div className="mt-4 flex items-baseline text-ivory">
+                  <span className="text-5xl font-anton tracking-wide">
+                    $
+                    {billingCycle === "monthly"
+                      ? plan.price.monthly
+                      : plan.price.yearly}
+                  </span>
+                  <span className="ml-1 text-2xl font-anton tracking-wide text-ivory/70">
+                    /mo
+                  </span>
                 </div>
 
                 <ul className="mt-8 space-y-4">

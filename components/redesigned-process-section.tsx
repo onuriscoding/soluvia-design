@@ -94,7 +94,7 @@ export function RedesignedProcessSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+          <h2 className="text-3xl font-anton tracking-wide sm:text-4xl md:text-5xl">
             Our <span className="text-gradient-soluvia">Process</span>
           </h2>
           <p className="mt-4 text-lg text-ivory/70">
@@ -139,7 +139,7 @@ export function RedesignedProcessSection() {
                     >
                       {step.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-ivory">
+                    <h3 className="text-xl font-anton tracking-wide text-ivory">
                       {step.title}
                     </h3>
                   </div>

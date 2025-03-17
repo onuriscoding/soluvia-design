@@ -10,7 +10,6 @@ export function VideoBackground() {
         muted
         playsInline
         className="absolute inset-0 h-full w-full object-cover"
-        style={{ filter: "brightness(0.3)" }}
       >
         <source src="/background-video.mp4" type="video/mp4" />
       </video>

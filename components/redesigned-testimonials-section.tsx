@@ -119,7 +119,7 @@ export function RedesignedTestimonialsSection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+          <h2 className="text-3xl font-anton tracking-wide sm:text-4xl md:text-5xl">
             What Our <span className="text-gradient-soluvia">Clients</span> Say
           </h2>
           <p className="mt-4 text-lg text-ivory/70">

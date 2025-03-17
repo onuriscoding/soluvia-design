@@ -119,7 +119,7 @@ export function RedesignedHeroSection() {
         >
           <div className="floating-element-slow glass-effect h-full w-full">
             <Image
-              src="/placeholder.svg?height=600&width=800"
+              src="/www.md-cars.be_ (2).png?height=600&width=800"
               alt="Website example"
               width={320}
               height={256}
@@ -128,7 +128,7 @@ export function RedesignedHeroSection() {
             <div className="absolute left-3 top-3 flex items-center gap-2">
               <span className="dot-indicator dot-blue"></span>
               <span className="text-xs font-medium text-ivory/80">
-                Web Design
+                Web Design & Development
               </span>
             </div>
           </div>
@@ -241,7 +241,7 @@ export function RedesignedHeroSection() {
           </motion.div>
 
           <motion.h1
-            className="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-ivory sm:text-6xl md:text-7xl lg:text-8xl"
+            className="mx-auto max-w-4xl text-5xl font-inter font-bold tracking-tight text-ivory sm:text-6xl md:text-7xl lg:text-8xl"
             variants={itemVariants}
           >
             Solutions via
@@ -250,7 +250,7 @@ export function RedesignedHeroSection() {
           </motion.h1>
 
           <motion.p
-            className="mx-auto mt-6 max-w-2xl text-lg text-ivory/70 md:text-xl"
+            className="mx-auto mt-6 font-inter max-w-2xl text-lg text-ivory/70 md:text-xl"
             variants={itemVariants}
           >
             We create sophisticated, elegant websites that drive business growth
@@ -264,7 +264,7 @@ export function RedesignedHeroSection() {
           >
             <Link
               href="/contact"
-              className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-medium text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
+              className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-anton tracking-wide text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
               <span className="relative z-10 flex items-center">
@@ -275,7 +275,7 @@ export function RedesignedHeroSection() {
 
             <Link
               href="/how-it-works"
-              className="inline-flex min-w-[200px] items-center justify-center rounded-full border border-ivory/30 bg-charcoal/50 px-6 py-3 text-base font-medium text-ivory backdrop-blur-sm transition-all duration-300 hover:bg-charcoal/70 hover:shadow-lg"
+              className="inline-flex min-w-[200px] items-center justify-center rounded-full border border-ivory/30 bg-charcoal/50 px-6 py-3 text-base font-anton tracking-wide text-ivory backdrop-blur-sm transition-all duration-300 hover:bg-charcoal/70 hover:shadow-lg"
             >
               OUR PROCESS
             </Link>

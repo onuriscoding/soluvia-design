@@ -114,7 +114,7 @@ export function RedesignedServicesSection() {
             <motion.button
               key={service.id}
               onClick={() => setActiveService(service.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-4 py-2 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 ${
                 activeService === service.id
                   ? "bg-gradient-to-r from-rose to-sapphire text-ivory"
                   : "bg-charcoal/50 text-ivory/70 hover:text-ivory hover:bg-charcoal/70 border border-ivory/10"
@@ -145,7 +145,7 @@ export function RedesignedServicesSection() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-rose/20 to-sapphire/20 text-rose mr-4">
                   {<currentService.icon className="h-6 w-6" />}
                 </div>
-                <h3 className="text-2xl font-bold text-ivory">
+                <h3 className="text-2xl font-anton tracking-wide text-ivory">
                   {currentService.title}
                 </h3>
               </div>
@@ -159,7 +159,7 @@ export function RedesignedServicesSection() {
               >
                 <Link
                   href={currentService.link}
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-gradient-to-r from-rose to-sapphire text-ivory font-medium hover:shadow-lg hover:shadow-rose/20 transition-all duration-300"
+                  className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-gradient-to-r from-rose to-sapphire text-ivory font-anton tracking-wide hover:shadow-lg hover:shadow-rose/20 transition-all duration-300"
                 >
                   Learn More{" "}
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -212,7 +212,7 @@ export function RedesignedServicesSection() {
                   <service.icon className="h-6 w-6" />
                 </div>
 
-                <h3 className="mb-2 text-xl font-bold text-ivory group-hover:text-rose transition-colors duration-300">
+                <h3 className="mb-2 text-xl font-anton tracking-wide text-ivory group-hover:text-rose transition-colors duration-300">
                   {service.title}
                 </h3>
                 <p className="mb-4 text-ivory/70">{service.description}</p>

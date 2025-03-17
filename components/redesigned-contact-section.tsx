@@ -81,7 +81,7 @@ export function RedesignedContactSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+          <h2 className="text-3xl font-anton tracking-wide sm:text-4xl md:text-5xl">
             Get in <span className="text-gradient-soluvia">Touch</span>
           </h2>
           <p className="mt-4 text-lg text-ivory/70">
@@ -273,7 +273,7 @@ export function RedesignedContactSection() {
           >
             <div className="space-y-8">
               <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-ivory">
+                <h3 className="text-2xl font-anton tracking-wide text-ivory">
                   Contact Information
                 </h3>
                 <p className="text-ivory/70">
@@ -320,7 +320,7 @@ export function RedesignedContactSection() {
               </div>
 
               <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-ivory">
+                <h3 className="text-2xl font-anton tracking-wide text-ivory">
                   Business Hours
                 </h3>
                 <div className="space-y-2">
@@ -340,7 +340,7 @@ export function RedesignedContactSection() {
               </div>
 
               <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-ivory">
+                <h3 className="text-2xl font-anton tracking-wide text-ivory">
                   Connect With Us
                 </h3>
                 <div className="flex gap-4">

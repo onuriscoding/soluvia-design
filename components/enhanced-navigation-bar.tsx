@@ -4,8 +4,9 @@ import type React from "react";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { ChevronDown, Menu, X, ArrowRight } from "lucide-react";
+import { ChevronUp, Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const navItems = [
   {
@@ -132,31 +133,48 @@ export function EnhancedNavigationBar() {
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center space-x-2 z-10"
+              className="flex items-center z-10"
               onMouseEnter={() => setLogoHovered(true)}
               onMouseLeave={() => setLogoHovered(false)}
             >
-              <div className="relative h-10 w-10 overflow-hidden rounded-full border border-ivory/20 transition-transform duration-300 hover:scale-105">
-                <div className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-80"></div>
-                <div className="absolute inset-0 flex items-center justify-center text-lg font-bold text-ivory">
-                  S
-                </div>
-              </div>
-
-              {/* Logo text with slide animation */}
-              <div className="overflow-hidden">
-                <div
-                  className="text-xl font-bold whitespace-nowrap transition-all duration-300"
-                  style={{
-                    transform: logoHovered
-                      ? "translateX(0)"
-                      : "translateX(-100%)",
-                    opacity: logoHovered ? 1 : 0,
+              <div className="relative flex items-center">
+                <motion.div
+                  className="flex items-center font-anton text-4xl tracking-[-0.05em] relative"
+                  animate={{
+                    width: logoHovered ? "auto" : "1.5em",
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    ease: "easeOut",
                   }}
                 >
-                  <span className="text-rose">Soluvia</span>
-                  <span className="text-ivory">Design</span>
-                </div>
+                  <span className="text-white relative">
+                    s
+                    <motion.div
+                      className="w-1.5 h-1.5 rounded-full bg-rose absolute -bottom-0.5 right-0 translate-x-0 "
+                      animate={{
+                        x: logoHovered ? "calc(100% * 13.4)" : "7px",
+                        y: logoHovered ? "calc(100% * -0.5)" : "-6px",
+                      }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                    />
+                  </span>
+                  <motion.span
+                    className="text-white overflow-hidden whitespace-nowrap"
+                    initial={{ width: 0, opacity: 0 }}
+                    animate={{
+                      width: logoHovered ? "auto" : 0,
+                      opacity: logoHovered ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    style={{
+                      marginLeft: "-0.05em",
+                      letterSpacing: "-0.05em",
+                    }}
+                  >
+                    oluvia
+                  </motion.span>
+                </motion.div>
               </div>
             </Link>
 
@@ -166,12 +184,15 @@ export function EnhancedNavigationBar() {
                 <div key={item.label} className="relative group">
                   {item.children ? (
                     <>
-                      <div className="flex items-center text-ivory/90 hover:text-ivory transition-colors font-medium py-2 relative cursor-pointer">
+                      <div className="flex items-center text-ivory/90 hover:text-ivory transition-colors font-inter font-semibold tracking-wide py-2 relative cursor-pointer">
                         <span className="relative inline-block">
                           {item.label}
                           <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose group-hover:w-full transition-all duration-300"></span>
                         </span>
-                        <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
+                        <div className="ml-1 w-4 h-4 flex items-center justify-center">
+                          <div className="w-1.5 h-1.5 rounded-full bg-rose group-hover:hidden transition-all duration-300" />
+                          <ChevronUp className="h-4 w-4 hidden group-hover:block transition-all duration-300 transform group-hover:rotate-180" />
+                        </div>
                       </div>
 
                       {/* Desktop Dropdown (Hover-based) */}
@@ -184,17 +205,22 @@ export function EnhancedNavigationBar() {
                               href={child.href}
                               className="group p-4 rounded-lg hover:bg-ivory/5 transition-colors"
                             >
-                              <div className="font-medium text-ivory mb-1 group-hover:text-rose transition-colors">
+                              <div className="font-inter tracking-wide text-ivory mb-1 group-hover:text-rose transition-colors">
                                 {child.label}
                               </div>
                               {"description" in child && (
-                                <div className="text-sm text-ivory/70 mb-2">
+                                <div className="text-sm font-thin text-ivory/70 mb-2">
                                   {child.description}
                                 </div>
                               )}
                               {"price" in child && (
-                                <div className="text-sm font-medium text-rose">
-                                  {child.price}
+                                <div className="text-sm font-bold font-inter tracking-wide text-rose">
+                                  <span className="opacity-70 font-normal text-sm">
+                                    from{" "}
+                                  </span>
+                                  <span className="text-lg font-inter text-ivory">
+                                    {child.price.replace("from ", "")}
+                                  </span>
                                 </div>
                               )}
                             </Link>
@@ -205,7 +231,7 @@ export function EnhancedNavigationBar() {
                   ) : (
                     <Link
                       href={item.href!}
-                      className="text-ivory/90 hover:text-ivory transition-colors font-medium py-2 relative group"
+                      className="text-ivory/90 hover:text-ivory transition-colors font-inter font-semibold tracking-wide py-2 relative group"
                     >
                       <span className="relative inline-block">
                         {item.label}
@@ -221,7 +247,7 @@ export function EnhancedNavigationBar() {
             <div className="hidden lg:block">
               <Link
                 href="/contact"
-                className="group relative overflow-hidden rounded-full bg-rose px-6 py-2.5 text-sm font-medium text-ivory transition-all duration-300 hover:shadow-lg hover:shadow-rose/30"
+                className="group relative overflow-hidden rounded-full bg-rose px-6 py-2.5 text-sm font-anton tracking-wide text-ivory transition-all duration-300 hover:shadow-lg hover:shadow-rose/30"
               >
                 <span className="absolute inset-0 rounded-full bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                 <span className="relative z-10">GET STARTED</span>
@@ -304,15 +330,35 @@ export function EnhancedNavigationBar() {
                   className="flex items-center"
                   onClick={closeMobileMenu}
                 >
-                  <div className="relative h-10 w-10 overflow-hidden rounded-full border border-ivory/20 mr-3">
-                    <div className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-80"></div>
-                    <div className="absolute inset-0 flex items-center justify-center text-lg font-bold text-ivory">
-                      S
-                    </div>
+                  <div className="relative h-10 w-10">
+                    <Image
+                      src="/soluvia-s-no-bg.png"
+                      alt="Soluvia Design Logo"
+                      fill
+                      className="object-contain"
+                      priority
+                    />
                   </div>
-                  <div className="text-xl font-bold">
-                    <span className="text-rose">Soluvia</span>
-                    <span className="text-ivory">Design</span>
+
+                  {/* Full logo with slide animation */}
+                  <div className="overflow-hidden h-10 w-32">
+                    <motion.div
+                      className="relative h-full w-full"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{
+                        opacity: logoHovered ? 1 : 0,
+                        x: logoHovered ? 0 : -20,
+                      }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                    >
+                      <Image
+                        src="/soluvia-no-bg.png"
+                        alt="Soluvia Design"
+                        fill
+                        className="object-contain"
+                        priority
+                      />
+                    </motion.div>
                   </div>
                 </Link>
 
@@ -368,7 +414,7 @@ export function EnhancedNavigationBar() {
                         <div>
                           <motion.button
                             onClick={(e) => toggleMobileDropdown(item.label, e)}
-                            className="flex w-full items-center justify-between text-2xl font-medium text-ivory relative"
+                            className="flex w-full items-center justify-between text-2xl font-anton tracking-wide text-ivory relative"
                             whileHover={{ x: 5 }}
                             whileTap={{ scale: 0.98 }}
                           >
@@ -402,7 +448,10 @@ export function EnhancedNavigationBar() {
                                 stiffness: 200,
                               }}
                             >
-                              <ChevronDown className="h-5 w-5" />
+                              <div className="ml-1 w-4 h-4 flex items-center justify-center">
+                                <div className="w-1.5 h-1.5 rounded-full bg-rose group-hover:hidden transition-all duration-300" />
+                                <ChevronUp className="h-4 w-4 hidden group-hover:block transition-all duration-300 transform group-hover:rotate-180" />
+                              </div>
                             </motion.div>
                           </motion.button>
 
@@ -476,8 +525,13 @@ export function EnhancedNavigationBar() {
                                           </div>
                                         )}
                                         {"price" in child && (
-                                          <div className="text-sm font-medium text-rose mt-1 ml-6">
-                                            {child.price}
+                                          <div className="text-sm font-bold font-inter tracking-wide text-rose mt-1 ml-6">
+                                            <span className="opacity-70 font-normal text-sm">
+                                              from{" "}
+                                            </span>
+                                            <span className="text-xl font-anton tracking-wider">
+                                              {child.price.replace("from ", "")}
+                                            </span>
                                           </div>
                                         )}
                                       </Link>
@@ -496,7 +550,7 @@ export function EnhancedNavigationBar() {
                           <Link
                             href={item.href!}
                             onClick={closeMobileMenu}
-                            className="block text-2xl font-medium text-ivory hover:text-rose transition-colors relative group"
+                            className="block text-2xl font-anton tracking-wide text-ivory hover:text-rose transition-colors relative group"
                           >
                             <span className="relative">
                               {item.label}
@@ -539,7 +593,7 @@ export function EnhancedNavigationBar() {
                   <Link
                     href="/contact"
                     onClick={closeMobileMenu}
-                    className="flex items-center justify-center w-full rounded-full bg-gradient-to-r from-rose to-sapphire py-4 text-base font-medium text-ivory relative z-10 group"
+                    className="flex items-center justify-center w-full rounded-full bg-gradient-to-r from-rose to-sapphire py-4 text-base font-anton tracking-wide text-ivory relative z-10 group"
                   >
                     <span className="mr-2">GET STARTED</span>
                     <motion.div
