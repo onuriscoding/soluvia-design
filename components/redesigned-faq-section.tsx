@@ -11,34 +11,34 @@ type FAQ = {
 
 const faqs: FAQ[] = [
   {
-    question: "What services does Soluvia Design offer?",
+    question: "What services does Soluvia offer?",
     answer:
-      "Soluvia Design offers a comprehensive range of digital services including web design, web development, e-commerce solutions, SEO optimization, content management systems, and digital strategy consulting. We specialize in creating sophisticated, elegant websites that drive business growth and optimize your online presence.",
+      "Soluvia offers a comprehensive range of digital services including web design, web development, AI automation, SEO optimization, content management systems, and e-commerce solutions. We create sophisticated, elegant websites that drive business growth and optimize your online presence.",
+  },
+  {
+    question: "How does your pricing structure work?",
+    answer:
+      "Our pricing is transparent and consists of a one-time setup fee (starting from €999 for essential projects) plus a custom monthly maintenance fee based on your specific needs. We tailor our maintenance packages to each client's requirements, ensuring you only pay for what your business truly needs.",
+  },
+  {
+    question: "What is your design and development process?",
+    answer:
+      "Our process begins with a discovery phase where we learn about your business, goals, and target audience. We then create wireframes and prototypes, followed by visual design. After your approval, we proceed to development, testing, and launch. Throughout the process, we maintain open communication and seek your feedback at key milestones.",
+  },
+  {
+    question: "How can AI automation benefit my business?",
+    answer:
+      "Our AI automation solutions can streamline your workflow by automating repetitive tasks, enhancing customer interactions, analyzing data patterns, and providing valuable business insights. This leads to improved efficiency, reduced operational costs, and the ability to focus your team's efforts on strategic growth initiatives.",
   },
   {
     question: "How long does it take to complete a website project?",
     answer:
-      "The timeline for a website project depends on its complexity and scope. A simple website might take 4-6 weeks, while more complex projects with custom functionality could take 8-12 weeks or more. During our initial consultation, we'll provide a more accurate timeline based on your specific requirements.",
-  },
-  {
-    question: "What is your design process like?",
-    answer:
-      "Our design process begins with a discovery phase where we learn about your business, goals, and target audience. We then move to wireframing and prototyping, followed by visual design. After your approval, we proceed to development, testing, and launch. Throughout the process, we maintain open communication and seek your feedback at key milestones.",
-  },
-  {
-    question: "Do you offer website maintenance services?",
-    answer:
-      "Yes, we offer ongoing website maintenance services to ensure your site remains secure, up-to-date, and performing optimally. Our maintenance packages include regular updates, security monitoring, performance optimization, content updates, and technical support.",
-  },
-  {
-    question: "How much does a website project cost?",
-    answer:
-      "The cost of a website project varies based on its complexity, features, and requirements. We offer different packages to accommodate various budgets and needs. During our consultation, we'll discuss your requirements and provide a detailed quote tailored to your specific project.",
+      "The timeline depends on your project's complexity and scope. A standard website typically takes 3-5 weeks, while more complex projects with custom functionality or e-commerce integration may take 8-12 weeks. During our initial consultation, we'll provide a more accurate timeline based on your specific requirements.",
   },
   {
     question: "Do you work with clients remotely?",
     answer:
-      "Yes, we work with clients globally. Our digital workflow and communication tools allow us to collaborate effectively with clients regardless of their location. We schedule meetings at convenient times across different time zones to ensure smooth communication.",
+      "Yes, we collaborate effectively with clients globally using our digital workflow and communication tools. We schedule meetings at convenient times across different time zones to ensure smooth communication throughout your project.",
   },
 ];
 
@@ -66,7 +66,7 @@ export function RedesignedFAQSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-anton tracking-wide sm:text-4xl md:text-5xl">
+          <h2 className="text-3xl font-bold tracking-thight sm:text-4xl md:text-5xl">
             Frequently Asked{" "}
             <span className="text-gradient-soluvia">Questions</span>
           </h2>

@@ -105,7 +105,7 @@ export function RedesignedTestimonialsSection() {
   };
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 overflow-hidden">
+    <section ref={ref} className="relative py-24 md:py-24 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0">
         <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/0 blur-3xl"></div>

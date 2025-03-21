@@ -19,9 +19,9 @@ const navItems = [
         price: "from 1299€",
       },
       {
-        label: "E-COMMERCE",
-        href: "/services/ecommerce",
-        description: "Online stores with seamless checkout experience",
+        label: "AI AUTOMATION",
+        href: "/services/ai-automation",
+        description: "Automate repetitive tasks and streamline your workflow",
         price: "from 1899€",
       },
       {
@@ -38,13 +38,7 @@ const navItems = [
       },
     ],
   },
-  {
-    label: "PORTFOLIO",
-    children: [
-      { label: "RECENT WORK", href: "/portfolio" },
-      { label: "CASE STUDIES", href: "/portfolio/case-studies" },
-    ],
-  },
+
   { label: "OUR PROCESS", href: "/how-it-works" },
   { label: "ABOUT", href: "/about" },
   { label: "CONTACT", href: "/contact" },
@@ -133,11 +127,11 @@ export function EnhancedNavigationBar() {
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center z-10"
+              className="flex items-center z-10 w-[120px]"
               onMouseEnter={() => setLogoHovered(true)}
               onMouseLeave={() => setLogoHovered(false)}
             >
-              <div className="relative flex items-center">
+              <div className="relative flex items-center w-full">
                 <motion.div
                   className="flex items-center font-anton text-4xl tracking-[-0.05em] relative"
                   animate={{

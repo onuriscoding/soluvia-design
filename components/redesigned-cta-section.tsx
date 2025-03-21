@@ -59,7 +59,7 @@ export function RedesignedCTASection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl font-anton tracking-wide text-ivory sm:text-4xl md:text-5xl">
+              <h2 className="text-3xl font-bold tracking-tight text-ivory sm:text-4xl md:text-5xl">
                 Ready for a website that{" "}
                 <span className="text-gradient-soluvia">stands out</span>?
               </h2>

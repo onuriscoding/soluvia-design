@@ -6,7 +6,6 @@ import { RedesignedTestimonialsSection } from "@/components/redesigned-testimoni
 import { RedesignedPricingSection } from "@/components/redesigned-pricing-section";
 import { RedesignedFAQSection } from "@/components/redesigned-faq-section";
 import { RedesignedCTASection } from "@/components/redesigned-cta-section";
-import { RedesignedContactSection } from "@/components/redesigned-contact-section";
 import { StatsCounter } from "@/components/stats-counter";
 import { ParallaxSection } from "@/components/parallax-section";
 
@@ -21,7 +20,7 @@ export default function Home() {
       <ParallaxSection speed={0.4} direction="down">
         <RedesignedProcessSection />
       </ParallaxSection>
-      <RedesignedPortfolioSection />
+
       <ParallaxSection speed={0.3}>
         <RedesignedTestimonialsSection />
       </ParallaxSection>
@@ -29,7 +28,6 @@ export default function Home() {
       <ParallaxSection speed={0.4} direction="down">
         <RedesignedFAQSection />
       </ParallaxSection>
-      <RedesignedContactSection />
       <RedesignedCTASection />
     </>
   );

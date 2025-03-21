@@ -18,22 +18,12 @@ const services = [
   {
     id: "web-design",
     icon: Palette,
-    title: "Web Design",
+    title: "Web Design & Development",
     description:
       "Sophisticated, responsive websites that captivate your audience and reflect your brand's unique identity.",
     color: "sapphire",
     image: "/placeholder.svg?height=600&width=800",
     link: "/services/web-design",
-  },
-  {
-    id: "e-commerce",
-    icon: ShoppingCart,
-    title: "E-commerce",
-    description:
-      "Powerful online stores that drive sales and provide seamless shopping experiences.",
-    color: "rose",
-    image: "/placeholder.svg?height=600&width=800",
-    link: "/services/ecommerce",
   },
   {
     id: "seo",
@@ -46,34 +36,14 @@ const services = [
     link: "/services/seo-optimization",
   },
   {
-    id: "development",
+    id: "automation",
     icon: Code,
-    title: "Web Development",
+    title: "AI Automation",
     description:
-      "Custom web applications and functionality tailored to your specific business needs.",
+      "Automate repetitive tasks and streamline your workflow with our AI automation solutions.",
     color: "sapphire",
     image: "/placeholder.svg?height=600&width=800",
-    link: "/services/web-development",
-  },
-  {
-    id: "business",
-    icon: BarChart,
-    title: "Business Growth",
-    description:
-      "Strategic digital solutions that drive conversions, increase revenue, and help your business reach new heights.",
-    color: "beige",
-    image: "/placeholder.svg?height=600&width=800",
-    link: "/services/business-growth",
-  },
-  {
-    id: "mobile",
-    icon: Smartphone,
-    title: "Mobile Apps",
-    description:
-      "Native and cross-platform mobile applications that extend your digital presence to all devices.",
-    color: "rose",
-    image: "/placeholder.svg?height=600&width=800",
-    link: "/services/mobile-apps",
+    link: "/services/ai-automation",
   },
 ];
 

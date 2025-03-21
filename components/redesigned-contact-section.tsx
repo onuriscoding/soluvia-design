@@ -95,15 +95,20 @@ export function RedesignedContactSection() {
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5 }}
+            whileHover={{ y: -5 }}
+            className="transition-all duration-500 h-full"
           >
-            <div className="relative overflow-hidden rounded-2xl border border-ivory/10 bg-charcoal/50 p-8 backdrop-blur-sm">
+            <div className="relative overflow-hidden rounded-2xl border border-ivory/10 bg-charcoal/50 p-10 backdrop-blur-sm shadow-lg hover:shadow-rose/5 transition-all duration-300 group h-full">
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-rose/5 to-sapphire/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
               {/* Background elements */}
               <div className="absolute inset-0 z-0">
                 <div className="absolute left-1/4 top-1/4 h-64 w-64 rounded-full bg-rose/5 blur-3xl"></div>
                 <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
               </div>
 
-              <div className="relative z-10">
+              <div className="relative z-10 h-full">
                 {isSubmitted ? (
                   <motion.div
                     className="flex flex-col items-center justify-center py-12 text-center"
@@ -129,7 +134,7 @@ export function RedesignedContactSection() {
                     </Button>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-8">
                     <div className="grid gap-6 sm:grid-cols-2">
                       <div className="space-y-2">
                         <Label htmlFor="name" className="text-ivory/80">
@@ -228,37 +233,52 @@ export function RedesignedContactSection() {
 
                     <Button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-rose to-sapphire hover:shadow-lg hover:shadow-rose/20"
+                      className="w-full overflow-hidden relative group mt-4"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? (
-                        <span className="flex items-center">
-                          <svg
-                            className="mr-2 h-4 w-4 animate-spin"
-                            viewBox="0 0 24 24"
-                          >
-                            <circle
-                              className="opacity-25"
-                              cx="12"
-                              cy="12"
-                              r="10"
-                              stroke="currentColor"
-                              strokeWidth="4"
-                              fill="none"
-                            />
-                            <path
-                              className="opacity-75"
-                              fill="currentColor"
-                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                            />
-                          </svg>
-                          Sending...
-                        </span>
-                      ) : (
-                        <span className="flex items-center">
-                          Send Message <Send className="ml-2 h-4 w-4" />
-                        </span>
-                      )}
+                      <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire"></span>
+                      <span className="absolute inset-0 bg-gradient-to-r from-sapphire to-rose opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                      <span className="relative z-10 flex items-center justify-center">
+                        {isSubmitting ? (
+                          <span className="flex items-center">
+                            <svg
+                              className="mr-2 h-4 w-4 animate-spin"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                                fill="none"
+                              />
+                              <path
+                                className="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                              />
+                            </svg>
+                            Sending...
+                          </span>
+                        ) : (
+                          <span className="flex items-center">
+                            Send Message
+                            <motion.div
+                              animate={{ x: [0, 5, 0] }}
+                              transition={{
+                                duration: 1.5,
+                                repeat: Number.POSITIVE_INFINITY,
+                                repeatType: "reverse",
+                              }}
+                              className="ml-2 inline-flex"
+                            >
+                              <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                            </motion.div>
+                          </span>
+                        )}
+                      </span>
                     </Button>
                   </form>
                 )}
@@ -270,12 +290,24 @@ export function RedesignedContactSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
+            className="h-full"
           >
-            <div className="space-y-8">
+            <div className="space-y-8 p-8 rounded-2xl border border-ivory/10 bg-charcoal/30 backdrop-blur-sm h-full flex flex-col justify-between">
               <div className="space-y-6">
-                <h3 className="text-2xl font-anton tracking-wide text-ivory">
+                <motion.h3
+                  className="text-2xl font-anton tracking-wide text-ivory relative inline-block"
+                  initial={{ opacity: 0 }}
+                  animate={isInView ? { opacity: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
                   Contact Information
-                </h3>
+                  <motion.div
+                    className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-rose to-sapphire"
+                    initial={{ width: 0 }}
+                    animate={isInView ? { width: "100%" } : {}}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                  />
+                </motion.h3>
                 <p className="text-ivory/70">
                   We're here to help with any questions you may have about our
                   services. Reach out to us through any of the following
@@ -320,9 +352,20 @@ export function RedesignedContactSection() {
               </div>
 
               <div className="space-y-6">
-                <h3 className="text-2xl font-anton tracking-wide text-ivory">
+                <motion.h3
+                  className="text-2xl font-anton tracking-wide text-ivory relative inline-block"
+                  initial={{ opacity: 0 }}
+                  animate={isInView ? { opacity: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
                   Business Hours
-                </h3>
+                  <motion.div
+                    className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-rose to-sapphire"
+                    initial={{ width: 0 }}
+                    animate={isInView ? { width: "100%" } : {}}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                  />
+                </motion.h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-ivory/70">Monday - Friday</span>
@@ -340,16 +383,32 @@ export function RedesignedContactSection() {
               </div>
 
               <div className="space-y-6">
-                <h3 className="text-2xl font-anton tracking-wide text-ivory">
+                <motion.h3
+                  className="text-2xl font-anton tracking-wide text-ivory relative inline-block"
+                  initial={{ opacity: 0 }}
+                  animate={isInView ? { opacity: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
                   Connect With Us
-                </h3>
+                  <motion.div
+                    className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-rose to-sapphire"
+                    initial={{ width: 0 }}
+                    animate={isInView ? { width: "100%" } : {}}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                  />
+                </motion.h3>
                 <div className="flex gap-4">
                   {["facebook", "twitter", "instagram", "linkedin"].map(
-                    (platform) => (
-                      <a
+                    (platform, index) => (
+                      <motion.a
                         key={platform}
                         href="#"
-                        className="flex h-10 w-10 items-center justify-center rounded-full bg-charcoal/70 text-ivory/70 hover:bg-rose/20 hover:text-rose transition-colors duration-300 border border-ivory/10"
+                        whileHover={{ y: -5, scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-charcoal/50 text-ivory/80 hover:text-ivory hover:shadow-md hover:shadow-rose/10 transition-all duration-300 border border-ivory/10"
                         aria-label={platform}
                       >
                         {platform === "facebook" && (
@@ -427,7 +486,7 @@ export function RedesignedContactSection() {
                             <circle cx="4" cy="4" r="2" />
                           </svg>
                         )}
-                      </a>
+                      </motion.a>
                     )
                   )}
                 </div>

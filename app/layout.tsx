@@ -6,6 +6,8 @@ import { ScrollProgress } from "@/components/scroll-progress";
 import { VideoBackground } from "@/components/video-background";
 import { PageTransition } from "@/components/page-transition";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import "@/styles/enhanced-animations.css";
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
