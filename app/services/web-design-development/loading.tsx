@@ -35,7 +35,7 @@ export default function Loading() {
             },
           }}
         >
-          Loading amazing services...
+          Loading web design & development services...
         </motion.p>
       </motion.div>
     </div>

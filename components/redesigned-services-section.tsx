@@ -22,7 +22,7 @@ const services = [
     description:
       "Sophisticated, responsive websites that captivate your audience and reflect your brand's unique identity.",
     color: "sapphire",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/soluvia.webp?height=600&width=800",
     link: "/services/web-design",
   },
   {
@@ -32,7 +32,7 @@ const services = [
     description:
       "Boost your online visibility and drive organic traffic with our comprehensive SEO strategies.",
     color: "beige",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/seo.png?height=600&width=800",
     link: "/services/seo-optimization",
   },
   {
@@ -42,7 +42,7 @@ const services = [
     description:
       "Automate repetitive tasks and streamline your workflow with our AI automation solutions.",
     color: "sapphire",
-    image: "/placeholder.svg?height=600&width=800",
+    image: "/ai.jpg?height=600&width=800",
     link: "/services/ai-automation",
   },
 ];

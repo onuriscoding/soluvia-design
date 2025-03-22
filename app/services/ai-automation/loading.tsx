@@ -22,7 +22,7 @@ export default function Loading() {
             },
           }}
         >
-          <Loader2 className="h-16 w-16 text-rose" />
+          <Loader2 className="h-16 w-16 text-beige" />
         </motion.div>
         <motion.p
           className="mt-4 text-ivory/70 text-lg"
@@ -35,7 +35,7 @@ export default function Loading() {
             },
           }}
         >
-          Loading amazing services...
+          Loading AI automation services...
         </motion.p>
       </motion.div>
     </div>
