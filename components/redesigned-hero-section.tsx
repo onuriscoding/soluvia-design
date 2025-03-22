@@ -106,10 +106,9 @@ export function RedesignedHeroSection() {
           }}
         />
       ))}
-
-      {/* Floating website examples */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Top left example */}
+      
+      {/* Floating website examples - Temporarily disabled */}
+      {/* <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.div
           className="absolute -left-20 top-20 h-64 w-80 rotate-[-8deg] overflow-hidden rounded-lg  border-ivory/10 shadow-lg md:left-10"
           initial={{ opacity: 0, y: 50 }}
@@ -125,18 +124,9 @@ export function RedesignedHeroSection() {
               height={256}
               className="object-cover"
             />
-            {/*
-            <div className="absolute left-3 top-3 flex items-center gap-2">
-              <span className="dot-indicator dot-blue"></span>
-              <span className="text-xs font-medium text-ivory/80">
-                Web Design & Development
-              </span>
-            </div>
-            */}
           </div>
         </motion.div>
 
-        {/* Top right example */}
         <motion.div
           className="absolute -right-20 top-40 h-72 w-96 rotate-[5deg] overflow-hidden rounded-lg border border-ivory/10 shadow-lg md:right-10"
           initial={{ opacity: 0, y: 50 }}
@@ -152,18 +142,9 @@ export function RedesignedHeroSection() {
               height={288}
               className="object-cover"
             />
-            {/*
-            <div className="absolute left-3 top-3 flex items-center gap-2">
-              <span className="dot-indicator dot-pink"></span>
-              <span className="text-xs font-medium text-ivory/80">
-                Ai automation
-              </span>
-            </div
-            */}
           </div>
         </motion.div>
 
-        {/* Bottom left example */}
         <motion.div
           className="absolute -bottom-10 -left-10 h-64 w-80 rotate-[10deg] overflow-hidden rounded-lg border border-ivory/10 shadow-lg md:left-20"
           initial={{ opacity: 0, y: 50 }}
@@ -179,18 +160,9 @@ export function RedesignedHeroSection() {
               height={256}
               className="object-cover"
             />
-            {/*
-            <div className="absolute left-3 top-3 flex items-center gap-2">
-              <span className="dot-indicator dot-green"></span>
-              <span className="text-xs font-medium text-ivory/80">
-                Portfolio
-              </span>
-            </div>
-            */}
           </div>
         </motion.div>
 
-        {/* Bottom right example */}
         <motion.div
           className="absolute -bottom-20 -right-20 h-72 w-96 rotate-[-6deg] overflow-hidden rounded-lg border border-ivory/10 shadow-lg md:right-10"
           initial={{ opacity: 0, y: 50 }}
@@ -206,17 +178,9 @@ export function RedesignedHeroSection() {
               height={288}
               className="object-cover"
             />
-            {/*
-            <div className="absolute left-3 top-3 flex items-center gap-2">
-              <span className="dot-indicator dot-purple"></span>
-              <span className="text-xs font-medium text-ivory/80">
-                Business
-              </span>
-            </div>
-            */}
           </div>
         </motion.div>
-      </div>
+      </div> */}
 
       <motion.div
         ref={scrollRef}

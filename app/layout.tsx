@@ -7,6 +7,7 @@ import { VideoBackground } from "@/components/video-background";
 import { PageTransition } from "@/components/page-transition";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import "@/styles/enhanced-animations.css";
+import Iridescence from "./animations/bg";
 
 import "./globals.css";
 
@@ -28,7 +29,7 @@ export default function RootLayout({
         <SmoothScroll>
           {/* Video background - positioned absolutely to cover the entire viewport */}
           <div className="fixed inset-0 w-full h-full">
-            <VideoBackground />
+            <Iridescence />
           </div>
 
           {/* Site content - positioned above video with transparent background */}
