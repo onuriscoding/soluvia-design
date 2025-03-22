@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { ArrowRight, Check, X } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
+import StarBorder from "../app/animations/star-border";
 
 const pricingPlans = [
   {
@@ -91,12 +92,11 @@ export function RedesignedPricingSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold tracking-thight sm:text-4xl md:text-5xl">
-            Transparent <span className="text-gradient-soluvia">Pricing</span>
+<h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            Simple, <span className="text-gradient-soluvia">Transparent</span> Pricing
           </h2>
-          <p className="mt-4 text-lg text-ivory/70">
-            Starting prices for projects with customized monthly maintenance
-          </p>
+          <p className="mt-4 text-lg text-ivory/70">Choose the perfect plan for your business needs</p>
+
         </motion.div>
 
         <div className="mt-16 grid gap-8 md:grid-cols-3">
@@ -108,12 +108,12 @@ export function RedesignedPricingSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className={`relative overflow-hidden rounded-2xl ${
                 plan.popular ? "border-2 border-rose" : "border border-ivory/10"
-              } bg-charcoal/50 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-rose/5 transform hover:-translate-y-1`}
+              } bg-charcoal/50 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-rose/95 transform hover:-translate-y-1`}
             >
               {plan.popular && (
                 <div className="absolute right-0 top-0">
                   <div className="relative h-20 w-20 overflow-hidden">
-                    <div className="absolute right-[-40px] top-[32px] w-[170px] rotate-45 bg-gradient-to-r font-anton from-rose to-sapphire py-1 text-center text-xs font-medium text-ivory">
+                    <div className="absolute right-[-40px] top-[32px] w-[170px] rotate-45 bg-gradient-to-r from-rose to-sapphire py-1 text-center text-xs font-medium text-ivory">
                       Most Popular
                     </div>
                   </div>
@@ -136,9 +136,7 @@ export function RedesignedPricingSection() {
                         €{plan.price.setup}
                       </span>
                     </div>
-                    <span className="ml-1 text-2xl font-anton tracking-wide text-ivory/70">
-                      setup
-                    </span>
+                    
                   </div>
                   <div className="flex items-baseline text-ivory">
                     <span className="text-base text-ivory/70 mt-2 italic">
