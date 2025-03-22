@@ -23,7 +23,7 @@ export function RedesignedFooter() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-ivory/10 bg-[#1a1c2a] py-20">
+    <footer className="relative border-t border-ivory/10 bg-[#1a1c2a]/70 py-20">
       {/* Background elements */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.div

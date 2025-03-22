@@ -118,7 +118,7 @@ export function EnhancedNavigationBar() {
         <div
           className={`${
             scrolled
-              ? "bg-charcoal/90 backdrop-blur-md shadow-lg"
+              ? "bg-charcoal/10 backdrop-blur-md shadow-lg"
               : "bg-transparent"
           } transition-all duration-300 rounded-full border border-ivory/10`}
           ref={navRef}
@@ -190,7 +190,7 @@ export function EnhancedNavigationBar() {
                       </div>
 
                       {/* Desktop Dropdown (Hover-based) */}
-                      <div className="absolute left-1/2 -translate-x-1/2 mt-2 py-6 bg-charcoal/95 backdrop-blur-md rounded-xl border border-ivory/10 shadow-xl overflow-hidden min-w-[600px] z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                      <div className="absolute left-1/2 -translate-x-1/2 mt-2 py-6 bg-charcoal/60 backdrop-blur-md rounded-xl border border-ivory/10 shadow-xl overflow-hidden min-w-[600px] z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                         <div className="absolute inset-0 bg-gradient-to-br from-rose/5 to-sapphire/5 z-0"></div>
                         <div className="grid grid-cols-2 gap-6 p-4 relative z-10">
                           {item.children.map((child) => (

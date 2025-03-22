@@ -207,9 +207,7 @@ export function RedesignedHeroSection() {
                 repeatType: "reverse",
               }}
             />
-            <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-charcoal/80 backdrop-blur-sm border border-ivory/10">
-              <MousePointer className="h-6 w-6 text-rose" />
-            </div>
+
           </motion.div>
 
           <motion.h1
