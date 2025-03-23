@@ -48,12 +48,17 @@ const services = [
 ];
 
 export function RedesignedServicesSection() {
-  const [activeService, setActiveService] = useState(services[0].id);
+  const [activeService, setActiveService] = useState<string | null>(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
-  const currentService =
-    services.find((service) => service.id === activeService) || services[0];
+  const currentService = activeService
+    ? services.find((service) => service.id === activeService)
+    : null;
+
+  const handleServiceClick = (serviceId: string) => {
+    setActiveService(activeService === serviceId ? null : serviceId);
+  };
 
   return (
     <section ref={ref} className="relative py-24 md:py-32">
@@ -83,14 +88,15 @@ export function RedesignedServicesSection() {
           {services.map((service) => (
             <motion.button
               key={service.id}
-              onClick={() => setActiveService(service.id)}
+              onClick={() => handleServiceClick(service.id)}
               className={`px-4 py-2 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 ${
                 activeService === service.id
-                  ? "bg-gradient-to-r from-rose to-sapphire text-ivory"
+                  ? "bg-gradient-to-r from-rose to-sapphire text-ivory scale-105"
                   : "bg-charcoal/50 text-ivory/70 hover:text-ivory hover:bg-charcoal/70 border border-ivory/10"
               }`}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
+              whileHover={{ scale: activeService === service.id ? 1 : 1.05 }}
               transition={{
                 duration: 0.5,
                 delay: services.findIndex((s) => s.id === service.id) * 0.1,
@@ -102,63 +108,114 @@ export function RedesignedServicesSection() {
         </div>
 
         <AnimatePresence mode="wait">
-          <motion.div
-            key={activeService}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
-          >
-            <div className="order-2 lg:order-1">
-              <div className="flex items-center mb-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-rose/20 to-sapphire/20 text-rose mr-4">
-                  {<currentService.icon className="h-6 w-6" />}
-                </div>
-                <h3 className="text-2xl font-anton tracking-wide text-ivory">
-                  {currentService.title}
-                </h3>
-              </div>
-
-              <p className="text-ivory/70 mb-6">{currentService.description}</p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
+          {currentService && (
+            <motion.div
+              key={activeService}
+              initial={{ opacity: 0, height: 0, y: 20 }}
+              animate={{ 
+                opacity: 1, 
+                height: "auto", 
+                y: 0,
+                transition: {
+                  height: { duration: 0.4 },
+                  opacity: { duration: 0.3, delay: 0.2 }
+                }
+              }}
+              exit={{ 
+                opacity: 0, 
+                height: 0, 
+                y: -20,
+                transition: {
+                  height: { duration: 0.4, delay: 0.1 },
+                  opacity: { duration: 0.3 }
+                }
+              }}
+              className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center overflow-hidden"
+            >
+              <motion.div 
+                className="order-2 lg:order-1"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Link
-                  href={currentService.link}
-                  className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-gradient-to-r from-rose to-sapphire text-ivory font-anton tracking-wide hover:shadow-lg hover:shadow-rose/20 transition-all duration-300"
+                <motion.div 
+                  className="flex items-center mb-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                  Learn More{" "}
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </motion.div>
-            </div>
-
-            <div className="order-1 lg:order-2 relative">
-              {/* Gradient border effect */}
-              <div className="absolute -inset-1 bg-gradient-to-br from-rose to-sapphire rounded-xl opacity-70 blur-sm"></div>
-
-              <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
-                <Image
-                  src={currentService.image || "/placeholder.svg"}
-                  alt={currentService.title}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-60"></div>
-                <div className="absolute bottom-4 left-4">
-                  <span
-                    className={`px-3 py-1 text-xs font-medium rounded-full bg-${currentService.color}/20 text-${currentService.color}`}
-                  >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-rose/20 to-sapphire/20 text-rose mr-4">
+                    {<currentService.icon className="h-6 w-6" />}
+                  </div>
+                  <h3 className="text-2xl font-anton tracking-wide text-ivory">
                     {currentService.title}
-                  </span>
+                  </h3>
+                </motion.div>
+
+                <motion.p 
+                  className="text-ivory/70 mb-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
+                  {currentService.description}
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                >
+                  <Link
+                    href={currentService.link}
+                    className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-gradient-to-r from-rose to-sapphire text-ivory font-anton tracking-wide hover:shadow-lg hover:shadow-rose/20 transition-all duration-300"
+                  >
+                    Learn More{" "}
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </motion.div>
+              </motion.div>
+
+              <motion.div 
+                className="order-1 lg:order-2 relative"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                {/* Gradient border effect */}
+                <motion.div 
+                  className="absolute -inset-1 bg-gradient-to-br from-rose to-sapphire rounded-xl opacity-70 blur-sm"
+                  initial={{ scale: 0.8 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                ></motion.div>
+
+                <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
+                  <Image
+                    src={currentService.image || "/placeholder.svg"}
+                    alt={currentService.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-60"></div>
+                  <motion.div 
+                    className="absolute bottom-4 left-4"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                  >
+                    <span
+                      className={`px-3 py-1 text-xs font-medium rounded-full bg-${currentService.color}/20 text-${currentService.color}`}
+                    >
+                      {currentService.title}
+                    </span>
+                  </motion.div>
                 </div>
-              </div>
-            </div>
-          </motion.div>
+              </motion.div>
+            </motion.div>
+          )}
         </AnimatePresence>
 
         <motion.div
