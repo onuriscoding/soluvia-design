@@ -45,7 +45,7 @@ export function RedesignedHeroSection() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setRotatingText((current) => (current === "Designs" ? "AI" : "Designs"));
+      setRotatingText((current) => (current === "Designs" ? "AI" : "DESIGNS"));
     }, 3000); // Switch every 3 seconds
 
     return () => clearInterval(interval);
@@ -230,7 +230,7 @@ export function RedesignedHeroSection() {
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={rotatingText}
-                    className="text-gradient-soluvia block mb-6"
+                    className="text-gradient-soluvia font-anton block mb-6"
                     initial={{
                       y: 70,
                       opacity: 0,

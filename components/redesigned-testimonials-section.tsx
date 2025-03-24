@@ -107,13 +107,13 @@ export function RedesignedTestimonialsSection() {
 
   return (
     <section ref={ref} className="relative py-24 md:py-24 overflow-hidden">
-      <div className="mt-16 flex flex-col items-center justify-center">
+      <div className="md:mt-16 flex flex-col items-center justify-center">
         <ScrollVelocity
           texts={["What our", "clients say", "about us"]}
           velocity={50}
         />
         <ScrollReveal
-          textClassName="text-4xl text-ivory/70 tracking-thight"
+          textClassName="md:text-4xl text-ivory/70 tracking-thight text-center text-4xl"
           baseOpacity={0.1}
           enableBlur={true}
           baseRotation={3}
