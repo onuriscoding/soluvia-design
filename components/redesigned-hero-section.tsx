@@ -12,6 +12,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { ArrowRight, MousePointer, ChevronDown } from "lucide-react";
+import { RotatingText } from "@/app/animations/rotating-text";
 
 export function RedesignedHeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -220,44 +221,16 @@ export function RedesignedHeroSection() {
           </motion.div>
 
           <motion.h1
-            className="mx-auto max-w-6xl text-5xl font-inter font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
+            className="mx-auto max-w-4xl text-5xl font-inter font-bold tracking-tight text-ivory sm:text-6xl md:text-7xl lg:text-8xl"
             variants={itemVariants}
           >
-            Solutions via
-            <br />
-            <div className="relative h-[1.2em] w-full overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={rotatingText}
-                    className="text-gradient-soluvia font-anton block mb-6"
-                    initial={{
-                      y: 70,
-                      opacity: 0,
-                      filter: "blur(12px)",
-                    }}
-                    animate={{
-                      y: 0,
-                      opacity: 1,
-                      filter: "blur(0px)",
-                    }}
-                    exit={{
-                      y: -70,
-                      opacity: 0,
-                      filter: "blur(12px)",
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 100,
-                      damping: 20,
-                      mass: 1,
-                    }}
-                  >
-                    {rotatingText}
-                  </motion.span>
-                </AnimatePresence>
-              </div>
-            </div>
+            <span className="block mb-0">Solutions via</span>
+            <RotatingText
+              texts={["Designs", "AI"]}
+              interval={3000}
+              textClassName="text-gradient-soluvia"
+              className="-mt-6"
+            />
           </motion.h1>
 
           <motion.p

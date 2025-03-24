@@ -92,11 +92,13 @@ export function RedesignedPricingSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-<h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Simple, <span className="text-gradient-soluvia">Transparent</span> Pricing
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            Simple, <span className="text-gradient-soluvia">Transparent</span>{" "}
+            Pricing
           </h2>
-          <p className="mt-4 text-lg text-ivory/70">Choose the perfect plan for your business needs</p>
-
+          <p className="mt-4 text-lg text-ivory/70">
+            Choose the perfect plan for your business needs
+          </p>
         </motion.div>
 
         <div className="mt-16 grid gap-8 md:grid-cols-3">
@@ -136,7 +138,6 @@ export function RedesignedPricingSection() {
                         €{plan.price.setup}
                       </span>
                     </div>
-                    
                   </div>
                   <div className="flex items-baseline text-ivory">
                     <span className="text-base text-ivory/70 mt-2 italic">
