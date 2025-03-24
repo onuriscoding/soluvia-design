@@ -234,7 +234,7 @@ export function RedesignedHeroSection() {
           </motion.h1>
 
           <motion.p
-            className="mx-auto mt-4 font-inter max-w-2xl text-lg text-ivory/70 md:text-xl"
+            className="mx-auto mt-6 font-inter max-w-2xl text-lg text-ivory/70 md:text-xl"
             variants={itemVariants}
           >
             We create sophisticated, elegant websites that drive business growth

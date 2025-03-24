@@ -1,9 +1,17 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  useInView,
+  AnimatePresence,
+  useAnimation,
+  useScroll,
+  useTransform,
+  useSpring,
+} from "framer-motion";
 import {
   ArrowRight,
   Palette,
@@ -14,6 +22,7 @@ import {
   Smartphone,
 } from "lucide-react";
 import ScrollReveal from "../app/animations/scroll-reveal";
+
 const services = [
   {
     id: "web-design",
@@ -49,8 +58,95 @@ const services = [
 
 export function RedesignedServicesSection() {
   const [activeService, setActiveService] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const scrollRef = useRef(null);
+  const isInView = useInView(scrollRef);
+  const controls = useAnimation();
+
+  // Check for mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: isMobile
+      ? ["start end", "end start"]
+      : ["start start", "end start"],
+  });
+
+  // Transform values with different configurations for mobile
+  const opacity = useTransform(
+    scrollYProgress,
+    isMobile ? [0, 0.4, 0.9] : [0, 0.5],
+    isMobile ? [1, 1, 0] : [1, 0]
+  );
+
+  const scale = useTransform(
+    scrollYProgress,
+    isMobile ? [0, 0.4, 0.9] : [0, 0.5],
+    isMobile ? [1, 1, 0.95] : [1, 0.8]
+  );
+
+  const y = useTransform(
+    scrollYProgress,
+    isMobile ? [0, 0.4, 0.9] : [0, 0.5],
+    isMobile ? [0, 0, 30] : [0, 100]
+  );
+
+  // Add smooth spring animation for mobile only
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: isMobile ? 20 : 100,
+    damping: isMobile ? 40 : 30,
+    restDelta: 0.001,
+  });
+
+  // Use different progress values based on viewport
+  const finalOpacity = useTransform(
+    isMobile ? smoothProgress : scrollYProgress,
+    isMobile ? [0, 0.4, 0.9] : [0, 0.5],
+    isMobile ? [1, 1, 0] : [1, 0]
+  );
+
+  const finalScale = useTransform(
+    isMobile ? smoothProgress : scrollYProgress,
+    isMobile ? [0, 0.4, 0.9] : [0, 0.5],
+    isMobile ? [1, 1, 0.95] : [1, 0.8]
+  );
+
+  const finalY = useTransform(
+    isMobile ? smoothProgress : scrollYProgress,
+    isMobile ? [0, 0.4, 0.9] : [0, 0.5],
+    isMobile ? [0, 0, 30] : [0, 100]
+  );
+
+  // Variants for staggered animations
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
 
   const currentService = activeService
     ? services.find((service) => service.id === activeService)
@@ -60,6 +156,12 @@ export function RedesignedServicesSection() {
     setActiveService(activeService === serviceId ? null : serviceId);
   };
 
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [isInView, controls]);
+
   return (
     <section ref={ref} className="relative py-24 md:py-32">
       {/* Background elements */}
@@ -68,16 +170,30 @@ export function RedesignedServicesSection() {
         <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-sapphire/0 blur-3xl"></div>
       </div>
 
-      <div className="container relative z-10">
+      <motion.div
+        ref={scrollRef}
+        className="container relative z-10"
+        style={{
+          opacity: finalOpacity,
+          scale: finalScale,
+          y: finalY,
+        }}
+        variants={containerVariants}
+        initial="hidden"
+        animate={controls}
+      >
         <motion.div
           className="mx-auto max-w-3xl text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          variants={containerVariants}
         >
-          <h1 className="text-3xl font-bold tracking-tight text-ivory sm:text-4xl md:text-7xl">
+          <motion.h1
+            className="text-5xl font-bold tracking-tight text-ivory sm:text-4xl md:text-7xl"
+            initial={{ opacity: 0, y: 100 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1 }}
+          >
             Our <span className="text-gradient-soluvia">Services</span>
-          </h1>
+          </motion.h1>
           <ScrollReveal
             textClassName="text-2xl mt-4 text-ivory/70"
             baseOpacity={0.1}
@@ -262,7 +378,7 @@ export function RedesignedServicesSection() {
             </motion.div>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

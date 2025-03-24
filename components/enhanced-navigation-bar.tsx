@@ -147,8 +147,8 @@ export function EnhancedNavigationBar() {
                     <motion.div
                       className="w-1.5 h-1.5 rounded-full bg-rose absolute -bottom-0.5 right-0 translate-x-0 "
                       animate={{
-                        x: logoHovered ? "calc(100% * 13.4)" : "7px",
-                        y: logoHovered ? "calc(100% * -0.5)" : "-6px",
+                        x: logoHovered ? "calc(100% * 13.5)" : "7px",
+                        y: logoHovered ? "calc(100% * -0.5)" : "-4px",
                       }}
                       transition={{ duration: 0.3, ease: "easeOut" }}
                     />
