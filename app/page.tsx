@@ -16,7 +16,7 @@ export default function Home() {
       <ParallaxSection speed={0.3}>
         <RedesignedServicesSection />
       </ParallaxSection>
-      <StatsCounter />
+      {/*<StatsCounter />*/}
       <ParallaxSection speed={0.4} direction="down">
         <RedesignedProcessSection />
       </ParallaxSection>

@@ -5,6 +5,7 @@ import type React from "react";
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Users, Award, Calendar, Globe } from "lucide-react";
+import ScrollVelocity from "../app/animations/scroll-velocity";
 
 type Stat = {
   icon: React.ReactNode;
@@ -85,6 +86,13 @@ export function StatsCounter() {
         <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full blur-3xl"></div>
       </div>
 
+      <div className="py-4">
+        <ScrollVelocity
+          texts={["What the numbers", "say", "about us", "and", "our", "work"]}
+          velocity={50}
+          className="custom-scroll-text"
+        />
+      </div>
       <div className="py-16 container relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (

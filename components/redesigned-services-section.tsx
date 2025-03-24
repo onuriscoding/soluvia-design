@@ -13,7 +13,7 @@ import {
   BarChart,
   Smartphone,
 } from "lucide-react";
-
+import ScrollReveal from "../app/animations/scroll-reveal";
 const services = [
   {
     id: "web-design",
@@ -75,13 +75,19 @@ export function RedesignedServicesSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold tracking-tight text-ivory sm:text-4xl md:text-5xl">
+          <h1 className="text-3xl font-bold tracking-tight text-ivory sm:text-4xl md:text-7xl">
             Our <span className="text-gradient-soluvia">Services</span>
-          </h2>
-          <p className="mt-4 text-lg text-ivory/70">
+          </h1>
+          <ScrollReveal
+            textClassName="text-2xl mt-4 text-ivory/70"
+            baseOpacity={0.1}
+            enableBlur={true}
+            baseRotation={3}
+            blurStrength={4}
+          >
             We offer a comprehensive range of services to help your business
             thrive in the digital landscape
-          </p>
+          </ScrollReveal>
         </motion.div>
 
         <div className="mt-12 flex flex-wrap justify-center gap-3">
@@ -112,34 +118,34 @@ export function RedesignedServicesSection() {
             <motion.div
               key={activeService}
               initial={{ opacity: 0, height: 0, y: 20 }}
-              animate={{ 
-                opacity: 1, 
-                height: "auto", 
+              animate={{
+                opacity: 1,
+                height: "auto",
                 y: 0,
                 transition: {
                   height: { duration: 0.4 },
-                  opacity: { duration: 0.3, delay: 0.2 }
-                }
+                  opacity: { duration: 0.3, delay: 0.2 },
+                },
               }}
-              exit={{ 
-                opacity: 0, 
-                height: 0, 
+              exit={{
+                opacity: 0,
+                height: 0,
                 y: -20,
                 transition: {
                   height: { duration: 0.4, delay: 0.1 },
-                  opacity: { duration: 0.3 }
-                }
+                  opacity: { duration: 0.3 },
+                },
               }}
               className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center overflow-hidden"
             >
-              <motion.div 
+              <motion.div
                 className="order-2 lg:order-1"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <motion.div 
+                <motion.div
                   className="flex items-center mb-4"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -153,7 +159,7 @@ export function RedesignedServicesSection() {
                   </h3>
                 </motion.div>
 
-                <motion.p 
+                <motion.p
                   className="text-ivory/70 mb-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -177,7 +183,7 @@ export function RedesignedServicesSection() {
                 </motion.div>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="order-1 lg:order-2 relative"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -185,7 +191,7 @@ export function RedesignedServicesSection() {
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 {/* Gradient border effect */}
-                <motion.div 
+                <motion.div
                   className="absolute -inset-1 bg-gradient-to-br from-rose to-sapphire rounded-xl opacity-70 blur-sm"
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
@@ -200,7 +206,7 @@ export function RedesignedServicesSection() {
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-60"></div>
-                  <motion.div 
+                  <motion.div
                     className="absolute bottom-4 left-4"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}

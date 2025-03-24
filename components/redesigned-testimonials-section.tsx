@@ -5,7 +5,8 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useInView } from "react-intersection-observer";
-
+import ScrollVelocity from "@/app/animations/scroll-velocity";
+import ScrollReveal from "@/app/animations/scroll-reveal";
 type Testimonial = {
   id: number;
   name: string;
@@ -106,28 +107,23 @@ export function RedesignedTestimonialsSection() {
 
   return (
     <section ref={ref} className="relative py-24 md:py-24 overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/0 blur-3xl"></div>
-        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-sapphire/0 blur-3xl"></div>
-      </div>
-
-      <div className="container relative z-10">
-        <motion.div
-          className="mx-auto max-w-3xl text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+      <div className="mt-16 flex flex-col items-center justify-center">
+        <ScrollVelocity
+          texts={["What our", "clients say", "about us"]}
+          velocity={50}
+        />
+        <ScrollReveal
+          textClassName="text-4xl text-ivory/70 tracking-thight"
+          baseOpacity={0.1}
+          enableBlur={true}
+          baseRotation={3}
+          blurStrength={4}
         >
-          <h2 className="text-3xl font-anton tracking-wide sm:text-4xl md:text-5xl">
-            What Our <span className="text-gradient-soluvia">Clients</span> Say
-          </h2>
-          <p className="mt-4 text-lg text-ivory/70">
-            Hear from businesses that have transformed their digital presence
-            with Soluvia Design
-          </p>
-        </motion.div>
-
+          Hear from businesses that have transformed their digital presence with
+          Soluvia Design
+        </ScrollReveal>
+      </div>
+      <div className="container relative z-10 py-16">
         <div className="relative mx-auto max-w-4xl">
           {/* Large quote icon */}
           <div className="absolute -top-10 -left-10 opacity-10">

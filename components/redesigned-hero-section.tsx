@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -9,6 +9,7 @@ import {
   useTransform,
   useAnimation,
   useInView,
+  AnimatePresence,
 } from "framer-motion";
 import { ArrowRight, MousePointer, ChevronDown } from "lucide-react";
 
@@ -17,6 +18,7 @@ export function RedesignedHeroSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(scrollRef);
   const controls = useAnimation();
+  const [rotatingText, setRotatingText] = useState("Designs");
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -40,6 +42,14 @@ export function RedesignedHeroSection() {
     };
     sequence();
   }, [controls]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRotatingText((current) => (current === "Designs" ? "AI" : "Designs"));
+    }, 3000); // Switch every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Animated particles
   const particles = Array.from({ length: 20 }).map((_, i) => ({
@@ -106,7 +116,7 @@ export function RedesignedHeroSection() {
           }}
         />
       ))}
-      
+
       {/* Floating website examples - Temporarily disabled */}
       {/* <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.div
@@ -207,20 +217,51 @@ export function RedesignedHeroSection() {
                 repeatType: "reverse",
               }}
             />
-
           </motion.div>
 
           <motion.h1
-            className="mx-auto max-w-4xl text-5xl font-inter font-bold tracking-tight text-ivory sm:text-6xl md:text-7xl lg:text-8xl"
+            className="mx-auto max-w-6xl text-5xl font-inter font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
             variants={itemVariants}
           >
             Solutions via
             <br />
-            <span className="text-gradient-soluvia">Designs</span>
+            <div className="relative h-[1.2em] w-full overflow-hidden">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={rotatingText}
+                    className="text-gradient-soluvia block mb-6"
+                    initial={{
+                      y: 70,
+                      opacity: 0,
+                      filter: "blur(12px)",
+                    }}
+                    animate={{
+                      y: 0,
+                      opacity: 1,
+                      filter: "blur(0px)",
+                    }}
+                    exit={{
+                      y: -70,
+                      opacity: 0,
+                      filter: "blur(12px)",
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 100,
+                      damping: 20,
+                      mass: 1,
+                    }}
+                  >
+                    {rotatingText}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+            </div>
           </motion.h1>
 
           <motion.p
-            className="mx-auto mt-6 font-inter max-w-2xl text-lg text-ivory/70 md:text-xl"
+            className="mx-auto mt-4 font-inter max-w-2xl text-lg text-ivory/70 md:text-xl"
             variants={itemVariants}
           >
             We create sophisticated, elegant websites that drive business growth
