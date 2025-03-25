@@ -238,7 +238,7 @@ export function RedesignedTestimonialsSection() {
           `}</style>
         </div>
 
-        <div className="container relative z-10 py-16">
+        <div className="container relative z-10 py-6 -mt-16">
           <div className="relative mx-auto max-w-4xl">
             <div className="relative h-[400px] overflow-hidden">
               <AnimatePresence custom={direction} mode="wait">

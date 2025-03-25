@@ -4,9 +4,8 @@ import type React from "react";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { ChevronUp, Menu, X, ArrowRight } from "lucide-react";
+import { ChevronUp, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 
 const navItems = [
   {
@@ -50,10 +49,12 @@ export function EnhancedNavigationBar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logoHovered, setLogoHovered] = useState(false);
+  const [navWidth, setNavWidth] = useState(0);
 
   // Refs
   const navRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
 
   // Handle scroll detection
   useEffect(() => {
@@ -64,6 +65,24 @@ export function EnhancedNavigationBar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Get navigation bar width for mobile menu sizing
+  useEffect(() => {
+    if (navRef.current) {
+      const updateNavWidth = () => {
+        if (navRef.current) {
+          setNavWidth(navRef.current.offsetWidth);
+        }
+      };
+
+      // Initial measurement
+      updateNavWidth();
+
+      // Update on resize
+      window.addEventListener("resize", updateNavWidth);
+      return () => window.removeEventListener("resize", updateNavWidth);
+    }
+  }, [navRef, mobileMenuOpen]);
 
   // Handle clicks outside the menu to close it
   useEffect(() => {
@@ -113,14 +132,17 @@ export function EnhancedNavigationBar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 py-2">
+    <header
+      className="fixed top-0 left-0 right-0 z-50 px-4 py-2"
+      ref={headerRef}
+    >
       <div className="mx-auto max-w-7xl">
         <div
           className={`${
-            scrolled
-              ? "bg-charcoal/10 backdrop-blur-md shadow-lg"
+            scrolled || mobileMenuOpen
+              ? "bg-charcoal/20 backdrop-blur-md shadow-lg"
               : "bg-transparent"
-          } transition-all duration-300 rounded-full border border-ivory/10`}
+          } transition-all duration-500 rounded-full border border-ivory/10`}
           ref={navRef}
         >
           <div className="flex items-center justify-between h-16 px-6">
@@ -147,8 +169,8 @@ export function EnhancedNavigationBar() {
                     <motion.div
                       className="w-1.5 h-1.5 rounded-full bg-rose absolute -bottom-0.5 right-0 translate-x-0 "
                       animate={{
-                        x: logoHovered ? "calc(100% * 13.5)" : "7px",
-                        y: logoHovered ? "calc(100% * -0.5)" : "-4px",
+                        x: logoHovered ? "calc(100% * 13.4)" : "7px",
+                        y: logoHovered ? "calc(100% * -0.5)" : "-6px",
                       }}
                       transition={{ duration: 0.3, ease: "easeOut" }}
                     />
@@ -248,363 +270,269 @@ export function EnhancedNavigationBar() {
               </Link>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - Pink dot */}
             <motion.button
               id="mobile-menu-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden flex items-center justify-center h-10 w-10 rounded-full bg-charcoal/50 text-ivory border border-ivory/10 focus:outline-none"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="lg:hidden relative w-8 h-8 flex items-center justify-center focus:outline-none"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={mobileMenuOpen ? "close" : "menu"}
-                  initial={{ opacity: 0, rotate: mobileMenuOpen ? -90 : 90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: mobileMenuOpen ? 90 : -90 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {mobileMenuOpen ? (
-                    <X className="h-5 w-5" />
-                  ) : (
-                    <Menu className="h-5 w-5" />
-                  )}
-                </motion.div>
+              {/* Pink dot */}
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center"
+                animate={{
+                  scale: mobileMenuOpen ? 0.85 : 1,
+                  opacity: mobileMenuOpen ? 0.8 : 1,
+                }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="w-3 h-3 rounded-full bg-rose shadow-md shadow-rose/20" />
+              </motion.div>
+
+              {/* X icon that appears when menu is open */}
+              <AnimatePresence>
+                {mobileMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.5 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute inset-0 flex items-center justify-center text-ivory"
+                  >
+                    <X className="h-4 w-4" />
+                  </motion.div>
+                )}
               </AnimatePresence>
             </motion.button>
           </div>
         </div>
       </div>
 
-      {/* Enhanced Mobile Navigation Menu */}
+      {/* Mobile Navigation Menu - Sized to match navigation bar */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-40 lg:hidden">
+          <>
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm pointer-events-auto lg:hidden"
               onClick={closeMobileMenu}
             />
 
-            {/* Menu panel - Updated background to match website color */}
-            <motion.div
-              ref={menuRef}
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-charcoal shadow-xl overflow-hidden flex flex-col"
-              style={{
-                background:
-                  "linear-gradient(to bottom, rgba(43, 45, 66, 0.98), rgba(43, 45, 66, 0.95))",
-              }}
-            >
-              {/* Subtle background accents */}
-              <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-0 right-0 w-full h-full opacity-5">
-                  <div className="absolute top-1/4 -left-20 h-40 w-40 rounded-full bg-rose/20 blur-3xl"></div>
-                  <div className="absolute bottom-1/4 -right-20 h-60 w-60 rounded-full bg-sapphire/20 blur-3xl"></div>
-                </div>
-              </div>
-
-              {/* Header */}
+            {/* Mobile menu sized to match navigation bar */}
+            <div className="absolute top-full left-0 right-0 z-40 flex justify-center px-4 lg:hidden">
               <motion.div
-                className="flex items-center justify-between p-6 border-b border-ivory/10 relative z-10"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
+                ref={menuRef}
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{
+                  height: {
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                  },
+                  opacity: { duration: 0.3 },
+                }}
+                className="w-full bg-charcoal/20 max-w-[calc(100%-2rem)] overflow-hidden flex flex-col pointer-events-auto rounded-2xl border border-ivory/10 origin-top mt-2"
+                style={{
+                  width: navWidth > 0 ? `${navWidth}px` : "calc(100% - 2rem)",
+
+                  backdropFilter: "blur(12px)",
+                  boxShadow:
+                    "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
+                }}
               >
-                <Link
-                  href="/"
-                  className="flex items-center"
-                  onClick={closeMobileMenu}
-                >
-                  <div className="relative h-10 w-10">
-                    <Image
-                      src="/soluvia-s-no-bg.png"
-                      alt="Soluvia Design Logo"
-                      fill
-                      className="object-contain"
-                      priority
-                    />
-                  </div>
+                {/* Close button at top right */}
+                <div className="absolute top-4 right-4 z-50">
+                  <motion.button
+                    onClick={closeMobileMenu}
+                    className="flex items-center justify-center h-8 w-8 rounded-full text-ivory/70 hover:text-ivory transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label="Close menu"
+                  >
+                    <X className="h-4 w-4" />
+                  </motion.button>
+                </div>
 
-                  {/* Full logo with slide animation */}
-                  <div className="overflow-hidden h-10 w-32">
-                    <motion.div
-                      className="relative h-full w-full"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{
-                        opacity: logoHovered ? 1 : 0,
-                        x: logoHovered ? 0 : -20,
-                      }}
-                      transition={{ duration: 0.3, ease: "easeOut" }}
-                    >
-                      <Image
-                        src="/soluvia-no-bg.png"
-                        alt="Soluvia Design"
-                        fill
-                        className="object-contain"
-                        priority
-                      />
-                    </motion.div>
-                  </div>
-                </Link>
-
-                <motion.button
-                  onClick={closeMobileMenu}
-                  className="rounded-full bg-rose/10 text-rose border border-rose/20 h-10 w-10 flex items-center justify-center"
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "rgba(183, 110, 121, 0.2)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <X className="h-5 w-5" />
-                </motion.button>
-              </motion.div>
-
-              {/* Menu items */}
-              <div className="flex-1 overflow-y-auto relative z-10">
-                <motion.nav
-                  className="p-6 space-y-6"
-                  initial="hidden"
-                  animate="visible"
-                  variants={{
-                    hidden: { opacity: 0 },
-                    visible: {
-                      opacity: 1,
-                      transition: {
-                        staggerChildren: 0.07,
-                        delayChildren: 0.2,
-                      },
-                    },
-                  }}
-                >
-                  {navItems.map((item, index) => (
-                    <motion.div
-                      key={item.label}
-                      className="border-b border-ivory/10 pb-6"
-                      variants={{
-                        hidden: { y: 20, opacity: 0 },
-                        visible: {
-                          y: 0,
-                          opacity: 1,
-                          transition: {
-                            type: "spring",
-                            stiffness: 300,
-                            damping: 24,
-                            delay: index * 0.05,
-                          },
-                        },
-                      }}
-                    >
-                      {item.children ? (
-                        <div>
-                          <motion.button
-                            onClick={(e) => toggleMobileDropdown(item.label, e)}
-                            className="flex w-full items-center justify-between text-2xl font-anton tracking-wide text-ivory relative"
-                            whileHover={{ x: 5 }}
-                            whileTap={{ scale: 0.98 }}
-                          >
-                            <span className="relative">
-                              {item.label}
-                              {/* Animated underline */}
-                              <motion.span
-                                className="absolute -bottom-1 left-0 h-0.5 bg-rose"
-                                initial={{ width: 0 }}
-                                animate={{
-                                  width:
-                                    activeMobileItem === item.label
-                                      ? "100%"
-                                      : 0,
+                {/* Menu items */}
+                <div className="flex-1 overflow-y-auto">
+                  <nav className="p-6 pt-12">
+                    <ul className="space-y-6">
+                      {navItems.map((item, index) => (
+                        <li
+                          key={item.label}
+                          className={`${
+                            index < navItems.length - 1
+                              ? "border-b border-ivory/10 pb-6"
+                              : ""
+                          }`}
+                        >
+                          {item.children ? (
+                            <div>
+                              {/* SERVICES with dropdown */}
+                              <motion.button
+                                onClick={(e) =>
+                                  toggleMobileDropdown(item.label, e)
+                                }
+                                className="flex items-center text-3xl font-anton tracking-wide text-ivory hover:text-rose transition-colors relative group w-full"
+                                whileHover={{
+                                  x: 5,
+                                  transition: { duration: 0.2 },
                                 }}
-                                transition={{ duration: 0.3 }}
-                              />
-                            </span>
+                              >
+                                {/* Text with hover underline animation */}
+                                <span className="relative inline-block">
+                                  {item.label}
+                                  <motion.span
+                                    className="absolute -bottom-1 left-0 h-0.5 bg-rose"
+                                    initial={{ width: 0 }}
+                                    whileHover={{ width: "100%" }}
+                                    transition={{ duration: 0.3 }}
+                                  />
+                                </span>
+
+                                <div className="ml-2 w-4 h-4 flex items-center justify-center">
+                                  {/* Dot that transforms to chevron, just like desktop */}
+                                  <AnimatePresence mode="wait">
+                                    {activeMobileItem === item.label ? (
+                                      <motion.div
+                                        key="chevron"
+                                        initial={{ opacity: 0, scale: 0.5 }}
+                                        animate={{
+                                          opacity: 1,
+                                          scale: 1,
+                                          rotate: 180,
+                                        }}
+                                        exit={{ opacity: 0, scale: 0.5 }}
+                                        transition={{ duration: 0.2 }}
+                                        whileHover={{ scale: 1.1 }}
+                                      >
+                                        <ChevronUp className="h-4 w-4 text-rose" />
+                                      </motion.div>
+                                    ) : (
+                                      <motion.div
+                                        key="dot"
+                                        initial={{ opacity: 0, scale: 0.5 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.5 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="w-1.5 h-1.5 rounded-full bg-rose"
+                                        whileHover={{
+                                          scale: 1.3,
+                                          boxShadow:
+                                            "0 0 8px rgba(255, 107, 107, 0.6)",
+                                        }}
+                                      />
+                                    )}
+                                  </AnimatePresence>
+                                </div>
+                              </motion.button>
+
+                              <AnimatePresence initial={false}>
+                                {activeMobileItem === item.label && (
+                                  <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{
+                                      height: {
+                                        type: "spring",
+                                        stiffness: 300,
+                                        damping: 30,
+                                      },
+                                      opacity: { duration: 0.2 },
+                                    }}
+                                    className="overflow-hidden mt-4 pl-4"
+                                  >
+                                    {/* Detailed sub-elements like desktop */}
+                                    <div className="grid grid-cols-1 gap-4">
+                                      {item.children.map((child) => (
+                                        <Link
+                                          key={child.href}
+                                          href={child.href}
+                                          onClick={closeMobileMenu}
+                                          className="p-3 rounded-lg hover:bg-ivory/5 transition-colors border border-ivory/5"
+                                        >
+                                          <div className="font-inter tracking-wide text-ivory text-xl mb-1 hover:text-rose transition-colors">
+                                            {child.label}
+                                          </div>
+                                          {"description" in child && (
+                                            <div className="text-sm font-thin text-ivory/70 mb-2">
+                                              {child.description}
+                                            </div>
+                                          )}
+                                          {"price" in child && (
+                                            <div className="text-sm font-bold font-inter tracking-wide text-rose">
+                                              <span className="opacity-70 font-normal text-sm">
+                                                from{" "}
+                                              </span>
+                                              <span className="text-lg font-inter text-ivory">
+                                                {child.price.replace(
+                                                  "from ",
+                                                  ""
+                                                )}
+                                              </span>
+                                            </div>
+                                          )}
+                                        </Link>
+                                      ))}
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
+                          ) : (
+                            // Other navigation items with consistent hover animations
                             <motion.div
-                              animate={{
-                                rotate:
-                                  activeMobileItem === item.label ? 180 : 0,
-                                color:
-                                  activeMobileItem === item.label
-                                    ? "#b76e79"
-                                    : "#f8f4f1",
-                              }}
-                              transition={{
-                                duration: 0.3,
-                                type: "spring",
-                                stiffness: 200,
+                              whileHover={{
+                                x: 5,
+                                transition: { duration: 0.2 },
                               }}
                             >
-                              <div className="ml-1 w-4 h-4 flex items-center justify-center">
-                                <div className="w-1.5 h-1.5 rounded-full bg-rose group-hover:hidden transition-all duration-300" />
-                                <ChevronUp className="h-4 w-4 hidden group-hover:block transition-all duration-300 transform group-hover:rotate-180" />
-                              </div>
-                            </motion.div>
-                          </motion.button>
-
-                          <AnimatePresence initial={false}>
-                            {activeMobileItem === item.label && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{
-                                  height: "auto",
-                                  opacity: 1,
-                                  transition: {
-                                    height: {
-                                      duration: 0.3,
-                                      type: "spring",
-                                      stiffness: 100,
-                                      damping: 20,
-                                    },
-                                    opacity: { duration: 0.2, delay: 0.1 },
-                                  },
-                                }}
-                                exit={{
-                                  height: 0,
-                                  opacity: 0,
-                                  transition: {
-                                    height: { duration: 0.3 },
-                                    opacity: { duration: 0.2 },
-                                  },
-                                }}
-                                className="overflow-hidden"
+                              <Link
+                                href={item.href!}
+                                onClick={closeMobileMenu}
+                                className="relative inline-block text-3xl font-anton tracking-wide text-ivory hover:text-rose transition-colors"
                               >
-                                <div className="mt-4 pl-4 border-l border-rose/30 space-y-4">
-                                  {item.children.map((child, childIndex) => (
-                                    <motion.div
-                                      key={child.href}
-                                      initial={{ x: -10, opacity: 0 }}
-                                      animate={{
-                                        x: 0,
-                                        opacity: 1,
-                                        transition: {
-                                          delay: childIndex * 0.05 + 0.1,
-                                          type: "spring",
-                                          stiffness: 300,
-                                          damping: 24,
-                                        },
-                                      }}
-                                    >
-                                      <Link
-                                        href={child.href}
-                                        onClick={closeMobileMenu}
-                                        className="block py-2 text-ivory/80 hover:text-rose transition-colors group"
-                                      >
-                                        <div className="flex items-center">
-                                          <motion.div
-                                            className="mr-2 opacity-0"
-                                            initial={{ x: -5, opacity: 0 }}
-                                            animate={{ x: 0, opacity: 1 }}
-                                            transition={{
-                                              delay: childIndex * 0.05 + 0.2,
-                                            }}
-                                          >
-                                            <ArrowRight className="h-4 w-4 text-rose" />
-                                          </motion.div>
-                                          <span className="text-lg relative">
-                                            {child.label}
-                                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose group-hover:w-full transition-all duration-300"></span>
-                                          </span>
-                                        </div>
-                                        {"description" in child && (
-                                          <div className="text-sm text-ivory/60 mt-1 ml-6">
-                                            {child.description}
-                                          </div>
-                                        )}
-                                        {"price" in child && (
-                                          <div className="text-sm font-bold font-inter tracking-wide text-rose mt-1 ml-6">
-                                            <span className="opacity-70 font-normal text-sm">
-                                              from{" "}
-                                            </span>
-                                            <span className="text-xl font-anton tracking-wider">
-                                              {child.price.replace("from ", "")}
-                                            </span>
-                                          </div>
-                                        )}
-                                      </Link>
-                                    </motion.div>
-                                  ))}
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      ) : (
-                        <motion.div
-                          whileHover={{ x: 5 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <Link
-                            href={item.href!}
-                            onClick={closeMobileMenu}
-                            className="block text-2xl font-anton tracking-wide text-ivory hover:text-rose transition-colors relative group"
-                          >
-                            <span className="relative">
-                              {item.label}
-                              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose group-hover:w-full transition-all duration-300"></span>
-                            </span>
-                          </Link>
-                        </motion.div>
-                      )}
-                    </motion.div>
-                  ))}
-                </motion.nav>
-              </div>
+                                <span className="relative inline-block">
+                                  {item.label}
+                                  <motion.span
+                                    className="absolute -bottom-1 left-0 h-0.5 bg-rose"
+                                    initial={{ width: 0 }}
+                                    whileHover={{ width: "100%" }}
+                                    transition={{ duration: 0.3 }}
+                                  />
+                                </span>
+                              </Link>
+                            </motion.div>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+                </div>
 
-              {/* Footer with enhanced CTA button - Removed white shine animation */}
-              <motion.div
-                className="p-6 border-t border-ivory/10 relative z-10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.3 }}
-              >
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="relative overflow-hidden rounded-full"
-                >
-                  {/* Animated glow effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-rose/30 to-sapphire/30 blur-md"
-                    animate={{
-                      scale: [1, 1.05, 1],
-                      opacity: [0.5, 0.8, 0.5],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Number.POSITIVE_INFINITY,
-                      repeatType: "reverse",
-                    }}
-                  />
-
+                {/* Footer with CTA button */}
+                <div className="p-6 border-t border-ivory/10">
                   <Link
                     href="/contact"
                     onClick={closeMobileMenu}
-                    className="flex items-center justify-center w-full rounded-full bg-gradient-to-r from-rose to-sapphire py-4 text-base font-anton tracking-wide text-ivory relative z-10 group"
+                    className="flex items-center justify-center w-full rounded-full bg-rose px-6 py-3 text-xl font-anton tracking-wide text-ivory"
                   >
                     <span className="mr-2">GET STARTED</span>
-                    <motion.div
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{
-                        duration: 1.5,
-                        repeat: Number.POSITIVE_INFINITY,
-                        repeatType: "reverse",
-                      }}
-                    >
-                      <ArrowRight className="h-4 w-4" />
-                    </motion.div>
+                    <ArrowRight className="h-5 w-5" />
                   </Link>
-                </motion.div>
+                </div>
               </motion.div>
-            </motion.div>
-          </div>
+            </div>
+          </>
         )}
       </AnimatePresence>
     </header>
