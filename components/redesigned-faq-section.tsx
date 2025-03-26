@@ -68,10 +68,17 @@ export function RedesignedFAQSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold tracking-thight sm:text-4xl md:text-6xl">
+          <h2 className="text-5xl font-bold tracking-thight sm:text-4xl md:text-6xl">
             Frequently Asked{" "}
             <GradientText
-              colors={["#3d5a80", "#b76e79", "#e0d5c0", "#3d5a80", "#b76e79", "#3d5a80"]}
+              colors={[
+                "#3d5a80",
+                "#b76e79",
+                "#e0d5c0",
+                "#3d5a80",
+                "#b76e79",
+                "#3d5a80",
+              ]}
               animationSpeed={12}
               showBorder={false}
               className="inline-block"
@@ -80,7 +87,7 @@ export function RedesignedFAQSection() {
             </GradientText>
           </h2>
           <ScrollReveal
-            textClassName="text-2xl mt-4 text-ivory/70"
+            textClassName="text-lg md:text-2xl mt-4 text-ivory/70"
             baseOpacity={0.1}
             enableBlur={true}
             baseRotation={3}

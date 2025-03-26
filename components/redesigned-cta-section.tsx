@@ -24,10 +24,11 @@ export function RedesignedCTASection() {
 
   return (
     <section ref={ref} className="py-24 md:py-32">
-      <motion.div className="container"
-      initial={{ opacity: 0.2, y: 100 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5 }}
+      <motion.div
+        className="container"
+        initial={{ opacity: 0.2, y: 100 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5 }}
       >
         <div className="relative overflow-hidden rounded-3xl p-8 md:p-16 ">
           {/* Animated particles */}
@@ -53,36 +54,46 @@ export function RedesignedCTASection() {
             />
           ))}
           <div className="absolute inset-0 z-0 text-center">
-          <h1 className="text-3xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
-                Ready for a website that{" "}
-                <GradientText
-                colors={["#3d5a80", "#b76e79", "#e0d5c0", "#3d5a80", "#b76e79", "#3d5a80"]}
+            <h1 className="text-5xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
+              Ready for a website that{" "}
+              <GradientText
+                colors={[
+                  "#3d5a80",
+                  "#b76e79",
+                  "#e0d5c0",
+                  "#3d5a80",
+                  "#b76e79",
+                  "#3d5a80",
+                ]}
                 animationSpeed={12}
                 showBorder={false}
                 className="inline-block"
-                >stands out</GradientText>?
-              </h1>
+              >
+                stands out
+              </GradientText>
+              ?
+            </h1>
           </div>
-          <div className="relative z-10">
+          <div className="relative z-10 md:mt-0 mt-28">
             <motion.div
               className="mx-auto max-w-3xl text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
             >
-              
               <ScrollReveal
-              textClassName="text-2xl mt-4 text-ivory/70"
-              baseOpacity={0.1}
-              enableBlur={true}
-              baseRotation={3}
-              blurStrength={4}
+                textClassName="text-lg md:text-2xl mt-4 text-ivory/70"
+                baseOpacity={0.1}
+                enableBlur={true}
+                baseRotation={3}
+                blurStrength={4}
               >
-                Let's create something extraordinary together. Contact us today
-                to start your journey towards digital excellence.
+                Let's create something extraordinary together.
               </ScrollReveal>
 
-              <div style={{ width: '100%', height: '600px', position: 'relative' }}>
+              <div
+                style={{ width: "100%", height: "600px", position: "relative" }}
+              >
                 <div className="absolute inset-0 z-10">
                   <Orb
                     hoverIntensity={0.5}
@@ -100,7 +111,7 @@ export function RedesignedCTASection() {
                   >
                     <Link
                       href="/contact"
-                      className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-8 py-4 text-base font-anton tracking-wide text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
+                      className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
                     >
                       <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                       <span className="relative z-10 flex items-center">

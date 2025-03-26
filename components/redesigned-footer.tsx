@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Instagram,
@@ -64,19 +65,15 @@ export function RedesignedFooter() {
               transition={{ duration: 0.6 }}
             >
               <Link href="/" className="flex items-center gap-2">
-                <div className="relative h-12 w-12 overflow-hidden rounded-full border border-ivory/20">
-                  <div className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-80"></div>
-                  <div className="absolute inset-0 flex items-center justify-center text-xl font-bold text-ivory">
-                    S
-                  </div>
-                </div>
-                <span className="text-2xl font-bold">
-                  <span className="text-rose">Soluvia</span>
-                  <span className="text-ivory">Design</span>
-                </span>
+                <Image
+                  src="/soluvia-final-no-bg.png"
+                  alt="Soluvia Design Logo"
+                  width={150}
+                  height={100}
+                />
               </Link>
 
-              <p className="mt-6 text-ivory/70 max-w-md">
+              <p className="mt-6 text-ivory/70 max-w-md translate-x-100px">
                 Creating sophisticated, elegant websites that drive business
                 growth and optimize your online presence. We specialize in
                 delivering high-quality digital solutions tailored to your
@@ -129,7 +126,7 @@ export function RedesignedFooter() {
                     href="mailto:hello@soluviadesign.com"
                     className="text-ivory/70 hover:text-rose transition-colors"
                   >
-                    hello@soluviadesign.com
+                    info@soluvia.com
                   </a>
                 </div>
                 <div className="flex items-center">
@@ -138,16 +135,8 @@ export function RedesignedFooter() {
                     href="tel:+15551234567"
                     className="text-ivory/70 hover:text-rose transition-colors"
                   >
-                    +1 (555) 123-4567
+                    +32 (499) 24 29 51
                   </a>
-                </div>
-                <div className="flex items-start">
-                  <MapPin className="h-5 w-5 text-rose mr-3 mt-1" />
-                  <span className="text-ivory/70">
-                    123 Design Street
-                    <br />
-                    Creative City, 10001
-                  </span>
                 </div>
               </div>
             </motion.div>

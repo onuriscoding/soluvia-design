@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import { useState, useRef } from "react"
-import Link from "next/link"
-import { motion, useInView } from "framer-motion"
-import { ArrowRight, Check, X } from "lucide-react"
-import ScrollReveal from "../app/animations/scroll-reveal"
-import GradientText from "../app/animations/gradient-text"
-import { RedesignedContactStepper } from "./stepper"
-import { Palette, Globe, Code } from "lucide-react"
+import { useState, useRef } from "react";
+import Link from "next/link";
+import { motion, useInView } from "framer-motion";
+import { ArrowRight, Check, X } from "lucide-react";
+import ScrollReveal from "../app/animations/scroll-reveal";
+import GradientText from "../app/animations/gradient-text";
+import { RedesignedContactStepper } from "./stepper";
+import { Palette, Globe, Code } from "lucide-react";
 
 interface Service {
-  id: string
-  icon: any
-  title: string
-  description: string
-  color: string
-  image: string
-  link: string
+  id: string;
+  icon: any;
+  title: string;
+  description: string;
+  color: string;
+  image: string;
+  link: string;
 }
 
 const services: Service[] = [
@@ -34,7 +34,8 @@ const services: Service[] = [
     id: "seo",
     icon: Globe,
     title: "SEO Optimization",
-    description: "Boost your online visibility and drive organic traffic with our comprehensive SEO strategies.",
+    description:
+      "Boost your online visibility and drive organic traffic with our comprehensive SEO strategies.",
     color: "beige",
     image: "/seo.png?height=600&width=800",
     link: "/services/seo-optimization",
@@ -43,12 +44,13 @@ const services: Service[] = [
     id: "automation",
     icon: Code,
     title: "AI Automation",
-    description: "Automate repetitive tasks and streamline your workflow with our AI automation solutions.",
+    description:
+      "Automate repetitive tasks and streamline your workflow with our AI automation solutions.",
     color: "sapphire",
     image: "/ai.jpg?height=600&width=800",
     link: "/services/ai-automation",
   },
-]
+];
 
 const pricingPlans = [
   {
@@ -114,24 +116,27 @@ const pricingPlans = [
     cta: "Get Started",
     popular: false,
   },
-]
+];
 
 export function RedesignedPricingSection() {
-  const ref = useRef(null)
+  const ref = useRef(null);
   const isInView = useInView(ref, {
     once: true,
     amount: 0.1,
     margin: "0px 0px -200px 0px",
-  })
-  const [animationComplete, setAnimationComplete] = useState(false)
+  });
+  const [animationComplete, setAnimationComplete] = useState(false);
 
   const handleContactSubmit = (data: { name: string; phone: string }) => {
-    console.log("Contact form submitted:", data)
+    console.log("Contact form submitted:", data);
     // Here you would typically send this data to your backend
-  }
+  };
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 overflow-hidden will-change-transform">
+    <section
+      ref={ref}
+      className="relative py-24 md:py-32 overflow-hidden will-change-transform"
+    >
       <div className="container relative z-10">
         <motion.div
           className="section-content"
@@ -145,10 +150,17 @@ export function RedesignedPricingSection() {
           }}
         >
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-7xl flex flex-wrap justify-center items-center gap-x-4">
+            <h2 className="text-5xl font-bold tracking-tight sm:text-4xl md:text-7xl flex flex-wrap justify-center items-center gap-x-4">
               <span>Simple,</span>
               <GradientText
-                colors={["#3d5a80", "#b76e79", "#e0d5c0", "#3d5a80", "#b76e79", "#3d5a80"]}
+                colors={[
+                  "#3d5a80",
+                  "#b76e79",
+                  "#e0d5c0",
+                  "#3d5a80",
+                  "#b76e79",
+                  "#3d5a80",
+                ]}
                 animationSpeed={12}
                 showBorder={false}
                 className="inline-block"
@@ -158,7 +170,7 @@ export function RedesignedPricingSection() {
               <span>Pricing</span>
             </h2>
             <ScrollReveal
-              textClassName="text-2xl mt-4 text-ivory/70"
+              textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
               baseOpacity={0.1}
               enableBlur={true}
               baseRotation={3}
@@ -173,18 +185,22 @@ export function RedesignedPricingSection() {
               <div
                 key={plan.name}
                 className={`relative overflow-hidden rounded-2xl ${
-                  plan.popular ? "border-2 border-rose" : "border border-ivory/10"
+                  plan.popular
+                    ? "border-2 border-rose"
+                    : "border border-ivory/10"
                 } bg-charcoal/50 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-rose/95 transform hover:-translate-y-1`}
                 style={{
                   opacity: animationComplete ? 1 : 0,
                   transform: `translateY(${animationComplete ? 0 : 20}px)`,
-                  transition: `opacity 0.5s ease ${0.2 + index * 0.1}s, transform 0.5s ease ${0.2 + index * 0.1}s`,
+                  transition: `opacity 0.5s ease ${
+                    0.2 + index * 0.1
+                  }s, transform 0.5s ease ${0.2 + index * 0.1}s`,
                 }}
               >
                 {plan.popular && (
                   <div className="absolute right-0 top-0">
                     <div className="relative h-20 w-20 overflow-hidden">
-                      <div className="absolute right-[-40px] top-[32px] w-[170px] rotate-45 bg-gradient-to-r from-rose to-sapphire py-1 text-center text-xs font-medium text-ivory">
+                      <div className="absolute right-[-40px] top-[32px] w-[170px] rotate-45 bg-gradient-to-r from-rose to-sapphire py-1 text-center text-xs font-semibold">
                         Most Popular
                       </div>
                     </div>
@@ -192,18 +208,26 @@ export function RedesignedPricingSection() {
                 )}
 
                 <div className="p-8">
-                  <h3 className="text-2xl font-anton tracking-wide text-ivory">{plan.name}</h3>
+                  <h3 className="text-2xl font-bold tracking-tight text-ivory">
+                    {plan.name}
+                  </h3>
                   <p className="mt-2 text-ivory/70">{plan.description}</p>
 
                   <div className="mt-4 flex flex-col">
                     <div className="flex items-baseline text-ivory mb-1">
                       <div className="flex items-baseline">
-                        <span className="text-sm font-medium text-ivory/70 mr-1">from</span>
-                        <span className="text-5xl font-anton tracking-wide">€{plan.price.setup}</span>
+                        <span className="text-sm font-medium text-ivory/70 mr-1">
+                          from
+                        </span>
+                        <span className="text-4xl font-bold tracking-tight">
+                          €{plan.price.setup}
+                        </span>
                       </div>
                     </div>
                     <div className="flex items-baseline text-ivory">
-                      <span className="text-base text-ivory/70 mt-2 italic">+ Custom monthly maintenance</span>
+                      <span className="text-base text-ivory/70 mt-2 italic">
+                        + Custom monthly maintenance
+                      </span>
                     </div>
                   </div>
 
@@ -215,7 +239,13 @@ export function RedesignedPricingSection() {
                         ) : (
                           <X className="mt-1 h-5 w-5 flex-shrink-0 text-ivory/30" />
                         )}
-                        <span className={feature.included ? "text-ivory/90" : "text-ivory/50"}>{feature.text}</span>
+                        <span
+                          className={
+                            feature.included ? "text-ivory/90" : "text-ivory/50"
+                          }
+                        >
+                          {feature.text}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -241,7 +271,7 @@ export function RedesignedPricingSection() {
           </div>
           <div className="mt-32 text-center">
             <ScrollReveal
-              textClassName="text-6xl mt-4 text-ivory"
+              textClassName="text-4xl md:text-6xl mt-4 text-ivory"
               baseOpacity={0.1}
               enableBlur={true}
               baseRotation={3}
@@ -250,13 +280,14 @@ export function RedesignedPricingSection() {
               Need a custom solution?
             </ScrollReveal>
             <ScrollReveal
-              textClassName="text-2xl mt-4 text-ivory/70 mb-0"
+              textClassName="text-lg md:text-2xl mt-4 text-ivory/70 mb-0"
               baseOpacity={0.1}
               enableBlur={true}
               baseRotation={3}
               blurStrength={4}
             >
-              Contact us to get a custom solution for your business within 24 hours.
+              Contact us to get a custom solution for your business within 24
+              hours.
             </ScrollReveal>
           </div>
           <div className="mt-24">
@@ -281,6 +312,5 @@ export function RedesignedPricingSection() {
         }
       `}</style>
     </section>
-  )
+  );
 }
-

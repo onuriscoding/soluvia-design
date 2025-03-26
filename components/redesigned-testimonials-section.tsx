@@ -145,7 +145,7 @@ export function RedesignedTestimonialsSection() {
         }}
       >
         <div className="flex flex-col items-center justify-center w-full">
-          <div className="w-full flex justify-center mb-4">
+          <div className="w-full flex justify-center md:mb-4 -mb-12">
             <ScrollVelocity
               texts={["What our", "clients say", "about us"]}
               velocity={50}
@@ -238,7 +238,7 @@ export function RedesignedTestimonialsSection() {
           `}</style>
         </div>
 
-        <div className="container relative z-10 py-6 -mt-16">
+        <div className="container relative z-10 py-6 md:-mt-16 ">
           <div className="relative mx-auto max-w-4xl">
             <div className="relative h-[400px] overflow-hidden">
               <AnimatePresence custom={direction} mode="wait">

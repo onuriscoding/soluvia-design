@@ -210,22 +210,32 @@ export function RedesignedProcessSection() {
           animate={isInView ? "visible" : "hidden"}
         >
           <motion.h2
-            className="text-3xl font-bold tracking-tight sm:text-4xl md:text-6xl"
+            className="text-4xl font-bold tracking-tight md:text-6xl"
             variants={itemVariants}
           >
-            How We <GradientText
-            colors={["#3d5a80", "#b76e79", "#e0d5c0", "#3d5a80", "#b76e79", "#3d5a80"]}
-            animationSpeed={12}
-            showBorder={false}
-            className="inline-block"
-            >Make It Happen</GradientText>
+            How We{" "}
+            <GradientText
+              colors={[
+                "#3d5a80",
+                "#b76e79",
+                "#e0d5c0",
+                "#3d5a80",
+                "#b76e79",
+                "#3d5a80",
+              ]}
+              animationSpeed={12}
+              showBorder={false}
+              className="inline-block"
+            >
+              Make It Happen
+            </GradientText>
           </motion.h2>
           <ScrollReveal
-              textClassName="text-2xl mt-4 text-ivory/70"
-              baseOpacity={0.1}
-              enableBlur={true}
-              baseRotation={3}
-              blurStrength={4}
+            textClassName="text-lg md:text-2xl mt-8 text-ivory/70"
+            baseOpacity={0.1}
+            enableBlur={true}
+            baseRotation={3}
+            blurStrength={4}
           >
             A structured approach to delivering exceptional digital experiences
           </ScrollReveal>
@@ -380,7 +390,7 @@ export function RedesignedProcessSection() {
                     >
                       {step.icon}
                     </motion.div>
-                    <h3 className="text-xl font-anton tracking-wide text-white">
+                    <h3 className="text-xl font-bold tracking-thight text-white">
                       {step.title}
                     </h3>
                   </div>
@@ -462,12 +472,12 @@ export function RedesignedProcessSection() {
           viewport={{ once: false, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h3 className="text-2xl font-anton tracking-wide mb-4">
+          <h3 className="text-3xl md:text-4xl font-bold tracking-thighter mb-8">
             Ready to start your journey?
           </h3>
           <Link
             href="/contact"
-            className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-anton tracking-wide text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
+            className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 font-bold tracking-thighter text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
             <span className="relative z-10 flex items-center">
