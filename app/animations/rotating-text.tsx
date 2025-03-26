@@ -4,51 +4,40 @@ import { motion, AnimatePresence } from "framer-motion";
 interface RotatingTextProps {
   texts: string[];
   interval?: number;
-  className?: string;
   textClassName?: string;
-  initialText?: string;
+  className?: string;
+  renderText?: (text: string) => React.ReactNode;
 }
 
 export function RotatingText({
   texts,
   interval = 3000,
-  className = "",
   textClassName = "",
-  initialText,
+  className = "",
+  renderText,
 }: RotatingTextProps) {
-  const [currentText, setCurrentText] = useState(initialText || texts[0]);
-  const [currentIndex, setCurrentIndex] = useState(
-    initialText ? texts.indexOf(initialText) : 0
-  );
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentIndex((prevIndex) => {
-        const nextIndex = (prevIndex + 1) % texts.length;
-        setCurrentText(texts[nextIndex]);
-        return nextIndex;
-      });
+    const timer = setInterval(() => {
+      setCurrentIndex((current) => (current + 1) % texts.length);
     }, interval);
 
-    return () => clearInterval(intervalId);
-  }, [texts, interval]);
+    return () => clearInterval(timer);
+  }, [interval, texts.length]);
 
   return (
-    <div className={`inline-block min-w-[180px] ${className}`}>
-      <AnimatePresence mode="wait" initial={false}>
+    <div className={className}>
+      <AnimatePresence mode="wait">
         <motion.div
-          key={currentText}
+          key={currentIndex}
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -20, opacity: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 30,
-            duration: 0.3,
-          }}
+          transition={{ duration: 0.3 }}
+          className={textClassName}
         >
-          <span className={textClassName}>{currentText}</span>
+          {renderText ? renderText(texts[currentIndex]) : texts[currentIndex]}
         </motion.div>
       </AnimatePresence>
     </div>

@@ -13,6 +13,7 @@ import {
 } from "framer-motion";
 import { ArrowRight, MousePointer, ChevronDown } from "lucide-react";
 import { RotatingText } from "@/app/animations/rotating-text";
+import GradientText from "@/app/animations/gradient-text";
 
 export function RedesignedHeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -224,13 +225,25 @@ export function RedesignedHeroSection() {
             className="mx-auto max-w-4xl text-5xl font-inter font-bold tracking-tight text-ivory sm:text-6xl md:text-7xl lg:text-8xl"
             variants={itemVariants}
           >
-            <span className="block mb-0">Solutions via</span>
-            <RotatingText
-              texts={["Designs", "AI"]}
-              interval={3000}
-              textClassName="text-gradient-soluvia"
-              className="-mt-6"
-            />
+            <span className="block leading-tight">Solutions via</span>
+            <div className="relative flex items-center justify-center -mt-6 py-0">
+              <RotatingText
+                texts={["Designs", "AI"]}
+                interval={3000}
+                textClassName="inline-block"
+                className="flex items-center justify-center"
+                renderText={(text) => (
+                  <GradientText
+                    colors={["#3d5a80", "#b76e79", "#e0d5c0", "#3d5a80", "#b76e79", "#3d5a80"]}
+                    animationSpeed={12}
+                    showBorder={false}
+                    className="inline-block leading-tight"
+                  >
+                    {text}
+                  </GradientText>
+                )}
+              />
+            </div>
           </motion.h1>
 
           <motion.p
