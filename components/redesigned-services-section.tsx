@@ -193,16 +193,25 @@ export function RedesignedServicesSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
           >
-            Our <GradientText
-            colors={["#3d5a80", "#b76e79", "#e0d5c0", "#3d5a80", "#b76e79", "#3d5a80"]}
-            animationSpeed={12}
-            showBorder={false}
-            className="inline-block"
+            Our{" "}
+            <GradientText
+              colors={[
+                "#3d5a80",
+                "#b76e79",
+                "#e0d5c0",
+                "#3d5a80",
+                "#b76e79",
+                "#3d5a80",
+              ]}
+              animationSpeed={12}
+              showBorder={false}
+              className="inline-block"
             >
-            Services</GradientText>
+              Services
+            </GradientText>
           </motion.h1>
           <ScrollReveal
-            textClassName="text-2xl mt-4 text-ivory/70"
+            textClassName="text-medium md:text-2xl mt-8 text-ivory/70"
             baseOpacity={0.1}
             enableBlur={true}
             baseRotation={3}
@@ -277,7 +286,7 @@ export function RedesignedServicesSection() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-rose/20 to-sapphire/20 text-rose mr-4">
                     {<currentService.icon className="h-6 w-6" />}
                   </div>
-                  <h3 className="text-2xl font-anton tracking-wide text-ivory">
+                  <h3 className="text-2xl font-bold tracking-thight text-ivory">
                     {currentService.title}
                   </h3>
                 </motion.div>
@@ -298,7 +307,7 @@ export function RedesignedServicesSection() {
                 >
                   <Link
                     href={currentService.link}
-                    className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-gradient-to-r from-rose to-sapphire text-ivory font-anton tracking-wide hover:shadow-lg hover:shadow-rose/20 transition-all duration-300"
+                    className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-gradient-to-r from-rose to-sapphire text-ivory font-bold tracking-tighter hover:shadow-lg hover:shadow-rose/20 transition-all duration-300"
                   >
                     Learn More{" "}
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -368,7 +377,7 @@ export function RedesignedServicesSection() {
                   <service.icon className="h-6 w-6" />
                 </div>
 
-                <h3 className="mb-2 text-xl font-anton tracking-wide text-ivory group-hover:text-rose transition-colors duration-300">
+                <h3 className="mb-2 text-xl font-bold trackin-thight text-ivory group-hover:text-rose transition-colors duration-300">
                   {service.title}
                 </h3>
                 <p className="mb-4 text-ivory/70">{service.description}</p>

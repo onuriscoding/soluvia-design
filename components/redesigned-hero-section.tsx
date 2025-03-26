@@ -222,11 +222,11 @@ export function RedesignedHeroSection() {
           </motion.div>
 
           <motion.h1
-            className="mx-auto max-w-4xl text-5xl font-inter font-bold tracking-tight text-ivory sm:text-6xl md:text-7xl lg:text-8xl"
+            className="mx-auto max-w-4xl text-5xl -mt-10 md:-mt-6 font-ivory font-bold tracking-tight text-ivory md:text-7xl lg:text-8xl"
             variants={itemVariants}
           >
             <span className="block leading-tight">Solutions via</span>
-            <div className="relative flex items-center justify-center -mt-6 py-0">
+            <div className="relative flex items-center justify-center md:-mt-6 py-0">
               <RotatingText
                 texts={["Designs", "AI"]}
                 interval={3000}
@@ -234,7 +234,14 @@ export function RedesignedHeroSection() {
                 className="flex items-center justify-center"
                 renderText={(text) => (
                   <GradientText
-                    colors={["#3d5a80", "#b76e79", "#e0d5c0", "#3d5a80", "#b76e79", "#3d5a80"]}
+                    colors={[
+                      "#3d5a80",
+                      "#b76e79",
+                      "#e0d5c0",
+                      "#3d5a80",
+                      "#b76e79",
+                      "#3d5a80",
+                    ]}
                     animationSpeed={12}
                     showBorder={false}
                     className="inline-block leading-tight"
@@ -247,7 +254,7 @@ export function RedesignedHeroSection() {
           </motion.h1>
 
           <motion.p
-            className="mx-auto mt-6 font-inter max-w-2xl text-lg text-ivory/70 md:text-xl"
+            className="mx-auto mt-6 font-inter max-w-2xl text-medium text-ivory/70 md:text-xl"
             variants={itemVariants}
           >
             We create sophisticated, elegant websites that drive business growth
@@ -261,7 +268,7 @@ export function RedesignedHeroSection() {
           >
             <Link
               href="/contact"
-              className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-anton tracking-wide text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
+              className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-ivory font-bold tracking-thighter shadow-lg transition-all duration-300 hover:shadow-rose/30"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
               <span className="relative z-10 flex items-center">
@@ -272,7 +279,7 @@ export function RedesignedHeroSection() {
 
             <Link
               href="/how-it-works"
-              className="inline-flex min-w-[200px] items-center justify-center rounded-full border border-ivory/30 bg-charcoal/50 px-6 py-3 text-base font-anton tracking-wide text-ivory backdrop-blur-sm transition-all duration-300 hover:bg-charcoal/70 hover:shadow-lg"
+              className="inline-flex min-w-[200px] items-center justify-center rounded-full border border-ivory/30 bg-charcoal/50 px-6 py-3 text-ivory font-bold tracking-thighter backdrop-blur-sm transition-all duration-300 hover:bg-charcoal/70 hover:shadow-lg"
             >
               OUR PROCESS
             </Link>

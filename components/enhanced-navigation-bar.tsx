@@ -133,7 +133,7 @@ export function EnhancedNavigationBar() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 px-4 py-2"
+      className="fixed top-0 left-0 right-0 z-50 px-4 py-2 md:mt-0 mt-4"
       ref={headerRef}
     >
       <div className="mx-auto max-w-7xl">
@@ -200,7 +200,7 @@ export function EnhancedNavigationBar() {
                 <div key={item.label} className="relative group">
                   {item.children ? (
                     <>
-                      <div className="flex items-center text-ivory/90 hover:text-ivory transition-colors font-inter font-semibold tracking-wide py-2 relative cursor-pointer">
+                      <div className="flex items-center text-ivory/90 hover:text-ivory transition-colors font-ivory font-semibold tracking-tight py-2 relative cursor-pointer">
                         <span className="relative inline-block">
                           {item.label}
                           <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose group-hover:w-full transition-all duration-300"></span>
@@ -221,7 +221,7 @@ export function EnhancedNavigationBar() {
                               href={child.href}
                               className="group p-4 rounded-lg hover:bg-ivory/5 transition-colors"
                             >
-                              <div className="font-inter tracking-wide text-ivory mb-1 group-hover:text-rose transition-colors">
+                              <div className="font-ivory tracking-tight text-ivory mb-1 group-hover:text-rose transition-colors">
                                 {child.label}
                               </div>
                               {"description" in child && (
@@ -263,7 +263,7 @@ export function EnhancedNavigationBar() {
             <div className="hidden lg:block">
               <Link
                 href="/contact"
-                className="group relative overflow-hidden rounded-full bg-rose px-6 py-2.5 text-sm font-anton tracking-wide text-ivory transition-all duration-300 hover:shadow-lg hover:shadow-rose/30"
+                className="group relative overflow-hidden rounded-full bg-rose px-6 py-2.5 text-sm font-bold tracking-tighter text-ivory transition-all duration-300 hover:shadow-lg hover:shadow-rose/30"
               >
                 <span className="absolute inset-0 rounded-full bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                 <span className="relative z-10">GET STARTED</span>
@@ -381,7 +381,7 @@ export function EnhancedNavigationBar() {
                                 onClick={(e) =>
                                   toggleMobileDropdown(item.label, e)
                                 }
-                                className="flex items-center text-3xl font-anton tracking-wide text-ivory hover:text-rose transition-colors relative group w-full"
+                                className="flex items-center text-3xl font-semibold tracking-thigh text-ivory hover:text-rose transition-colors relative group w-full"
                                 whileHover={{
                                   x: 5,
                                   transition: { duration: 0.2 },
@@ -460,7 +460,7 @@ export function EnhancedNavigationBar() {
                                           onClick={closeMobileMenu}
                                           className="p-3 rounded-lg hover:bg-ivory/5 transition-colors border border-ivory/5"
                                         >
-                                          <div className="font-inter tracking-wide text-ivory text-xl mb-1 hover:text-rose transition-colors">
+                                          <div className="font-ivory tracking-wide text-ivory text-xl mb-1 hover:text-rose transition-colors">
                                             {child.label}
                                           </div>
                                           {"description" in child && (
@@ -499,7 +499,7 @@ export function EnhancedNavigationBar() {
                               <Link
                                 href={item.href!}
                                 onClick={closeMobileMenu}
-                                className="relative inline-block text-3xl font-anton tracking-wide text-ivory hover:text-rose transition-colors"
+                                className="relative inline-block text-3xl font-semibold tracking-tighter text-ivory hover:text-rose transition-colors"
                               >
                                 <span className="relative inline-block">
                                   {item.label}
@@ -524,7 +524,7 @@ export function EnhancedNavigationBar() {
                   <Link
                     href="/contact"
                     onClick={closeMobileMenu}
-                    className="flex items-center justify-center w-full rounded-full bg-rose px-6 py-3 text-xl font-anton tracking-wide text-ivory"
+                    className="flex items-center justify-center w-full rounded-full bg-rose px-6 py-3 text-xl font-bold tracking-tighter text-ivory"
                   >
                     <span className="mr-2">GET STARTED</span>
                     <ArrowRight className="h-5 w-5" />
