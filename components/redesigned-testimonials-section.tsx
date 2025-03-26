@@ -283,11 +283,13 @@ export function RedesignedTestimonialsSection() {
               </AnimatePresence>
             </div>
 
-            {/* Navigation buttons */}
-            <div className="flex justify-center gap-4 mt-8">
+            {/** 
+            *
+            * Navigation buttons
+            <div className="flex justify-center gap-4 -mt-10">
               <button
                 onClick={prevTestimonial}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-charcoal/70 border border-ivory/10 text-ivory hover:bg-rose/20 hover:text-rose hover:border-rose/30 transition-colors"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-charcoal/20 border border-ivory/10 text-ivory hover:bg-rose/20 hover:text-rose hover:border-rose/30 transition-colors"
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft className="h-5 w-5" />
@@ -311,12 +313,13 @@ export function RedesignedTestimonialsSection() {
               </div>
               <button
                 onClick={nextTestimonial}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-charcoal/70 border border-ivory/10 text-ivory hover:bg-rose/20 hover:text-rose hover:border-rose/30 transition-colors"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-charcoal/20 border border-ivory/10 text-ivory hover:bg-rose/20 hover:text-rose hover:border-rose/30 transition-colors"
                 aria-label="Next testimonial"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
             </div>
+            */}
           </div>
         </div>
       </motion.div>

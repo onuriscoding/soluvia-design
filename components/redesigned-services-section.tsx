@@ -22,6 +22,7 @@ import {
   Smartphone,
 } from "lucide-react";
 import ScrollReveal from "../app/animations/scroll-reveal";
+import GradientText from "@/app/animations/gradient-text";
 
 const services = [
   {
@@ -187,12 +188,18 @@ export function RedesignedServicesSection() {
           variants={containerVariants}
         >
           <motion.h1
-            className="text-5xl font-bold tracking-tight text-ivory sm:text-4xl md:text-7xl"
-            initial={{ opacity: 0, y: 100 }}
+            className="text-5xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl"
+            initial={{ opacity: 0.2, y: 100 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.5 }}
           >
-            Our <span className="text-gradient-soluvia">Services</span>
+            Our <GradientText
+            colors={["#3d5a80", "#b76e79", "#e0d5c0", "#3d5a80", "#b76e79", "#3d5a80"]}
+            animationSpeed={12}
+            showBorder={false}
+            className="inline-block"
+            >
+            Services</GradientText>
           </motion.h1>
           <ScrollReveal
             textClassName="text-2xl mt-4 text-ivory/70"

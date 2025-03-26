@@ -3,6 +3,8 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import ScrollReveal from "@/app/animations/scroll-reveal";
+import GradientText from "@/app/animations/gradient-text";
 
 type FAQ = {
   question: string;
@@ -66,13 +68,26 @@ export function RedesignedFAQSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold tracking-thight sm:text-4xl md:text-5xl">
+          <h2 className="text-3xl font-bold tracking-thight sm:text-4xl md:text-6xl">
             Frequently Asked{" "}
-            <span className="text-gradient-soluvia">Questions</span>
+            <GradientText
+              colors={["#3d5a80", "#b76e79", "#e0d5c0", "#3d5a80", "#b76e79", "#3d5a80"]}
+              animationSpeed={12}
+              showBorder={false}
+              className="inline-block"
+            >
+              Questions
+            </GradientText>
           </h2>
-          <p className="mt-4 text-lg text-ivory/70">
+          <ScrollReveal
+            textClassName="text-2xl mt-4 text-ivory/70"
+            baseOpacity={0.1}
+            enableBlur={true}
+            baseRotation={3}
+            blurStrength={4}
+          >
             Find answers to common questions about our services and process
-          </p>
+          </ScrollReveal>
         </motion.div>
 
         <div className="mx-auto max-w-3xl">

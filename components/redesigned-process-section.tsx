@@ -22,7 +22,8 @@ import {
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-
+import GradientText from "@/app/animations/gradient-text";
+import ScrollReveal from "@/app/animations/scroll-reveal";
 const processSteps = [
   {
     icon: <Search className="h-6 w-6" />,
@@ -209,17 +210,25 @@ export function RedesignedProcessSection() {
           animate={isInView ? "visible" : "hidden"}
         >
           <motion.h2
-            className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
+            className="text-3xl font-bold tracking-tight sm:text-4xl md:text-6xl"
             variants={itemVariants}
           >
-            How We <span className="text-gradient-soluvia">Make It Happen</span>
+            How We <GradientText
+            colors={["#3d5a80", "#b76e79", "#e0d5c0", "#3d5a80", "#b76e79", "#3d5a80"]}
+            animationSpeed={12}
+            showBorder={false}
+            className="inline-block"
+            >Make It Happen</GradientText>
           </motion.h2>
-          <motion.p
-            className="mt-4 text-lg text-white/70"
-            variants={itemVariants}
+          <ScrollReveal
+              textClassName="text-2xl mt-4 text-ivory/70"
+              baseOpacity={0.1}
+              enableBlur={true}
+              baseRotation={3}
+              blurStrength={4}
           >
             A structured approach to delivering exceptional digital experiences
-          </motion.p>
+          </ScrollReveal>
         </motion.div>
 
         <div className="relative mx-auto max-w-5xl">
