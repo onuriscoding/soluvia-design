@@ -55,7 +55,7 @@ export function RedesignedCTASection() {
           ))}
           <div className="absolute inset-0 z-0 text-center">
             <h1 className="text-5xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
-              Ready for a website that{" "}
+              Ready for a solution that{" "}
               <GradientText
                 colors={[
                   "#3d5a80",

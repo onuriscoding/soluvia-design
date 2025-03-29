@@ -222,7 +222,7 @@ export function RedesignedHeroSection() {
           </motion.div>
 
           <motion.h1
-            className="mx-auto max-w-4xl text-5xl -mt-10 md:-mt-6 font-ivory font-bold tracking-tight text-ivory md:text-7xl lg:text-8xl"
+            className="mx-auto max-w-4xl text-6xl -mt-10 md:-mt-6 font-ivory font-bold tracking-tight text-ivory md:text-8xl"
             variants={itemVariants}
           >
             <span className="block leading-tight">Solutions via</span>
@@ -254,7 +254,7 @@ export function RedesignedHeroSection() {
           </motion.h1>
 
           <motion.p
-            className="mx-auto mt-6 font-inter max-w-2xl text-medium text-ivory/70 md:text-xl"
+            className="mx-auto mt-6 font-inter text-lg max-w-3xl text-medium text-ivory/70 md:text-2xl"
             variants={itemVariants}
           >
             We create sophisticated, elegant websites that drive business growth
