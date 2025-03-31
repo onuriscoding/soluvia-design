@@ -1,139 +1,331 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { motion, useInView } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { useRef, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import {
+  ArrowRight,
+  Bot,
+  Lightbulb,
+  Code,
+  Zap,
+  Brain,
+  ChevronDown,
+} from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { SectionTransition } from "@/components/section-transition"
+import { Button } from "@/components/ui/button";
+import { SectionTransition } from "@/components/section-transition";
+import GradientText from "@/app/animations/gradient-text";
+import ScrollReveal from "@/app/animations/scroll-reveal";
+import Orb from "@/components/orb";
 
 export default function AboutPageClient() {
-  const storyRef = useRef(null)
-  const whyUsRef = useRef(null)
-  const isStoryInView = useInView(storyRef, { once: true, amount: 0.2 })
-  const isWhyUsInView = useInView(whyUsRef, { once: true, amount: 0.2 })
+  const heroRef = useRef(null);
+  const storyRef = useRef(null);
+  const whyUsRef = useRef(null);
+  const ctaRef = useRef(null);
+
+  const isStoryInView = useInView(storyRef, { once: true, amount: 0.2 });
+  const isWhyUsInView = useInView(whyUsRef, { once: true, amount: 0.2 });
+  const isCtaInView = useInView(ctaRef, { once: true, amount: 0.3 });
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Direct transform without spring for consistent behavior with service pages
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
+
+  // Animated particles for hero section
+  const particles = Array.from({ length: 15 }).map((_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 4 + 1,
+    duration: Math.random() * 20 + 10,
+    delay: Math.random() * 5,
+  }));
+
+  // Animated particles for CTA section
+  const ctaParticles = Array.from({ length: 10 }).map((_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 4 + 1,
+    duration: Math.random() * 20 + 10,
+    delay: Math.random() * 5,
+  }));
+
+  // Optimized variants for staggered animations
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.2,
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
+
+  const handleScrollDown = () => {
+    const storySection = document.getElementById("story-section");
+    if (storySection) {
+      storySection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = "smooth";
+    return () => {
+      document.documentElement.style.scrollBehavior = "auto";
+    };
+  }, []);
 
   return (
     <>
       {/* Hero Section */}
-      <section className="relative py-32 md:py-40">
-        <div className="container">
-          <div className="grid gap-12 md:grid-cols-2 md:items-center">
-            <motion.div
-              className="space-y-6"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.8 }}
-              >
-                <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-                  We Create{" "}
-                  <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 bg-clip-text text-transparent">
-                    Digital Experiences
-                  </span>{" "}
-                  That Matter
-                </h1>
-              </motion.div>
-              <motion.p
-                className="text-lg text-white/70"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-              >
-                Solutions via designs is a creative agency specializing in web design, business growth, and SEO
-                optimization. We're passionate about helping businesses thrive in the digital landscape.
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-              >
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:shadow-lg hover:shadow-blue-500/20"
-                >
-                  <Link href="/contact">
-                    Get in Touch <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </motion.div>
-            </motion.div>
-            <motion.div
-              className="relative aspect-square overflow-hidden rounded-2xl md:translate-y-8"
-              initial={{ opacity: 0, scale: 0.9, x: 50 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 opacity-70 blur-lg"></div>
-              <div className="relative h-full w-full rounded-2xl">
-                <Image
-                  src="/placeholder.svg?height=800&width=800"
-                  alt="Our team collaborating"
-                  fill
-                  className="rounded-2xl object-cover"
-                />
-              </div>
-            </motion.div>
-          </div>
+      <section
+        ref={heroRef}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      >
+        {/* Animated particles */}
+        {particles.map((particle) => (
+          <motion.div
+            key={particle.id}
+            className="absolute h-1 w-1 rounded-full bg-rose/30"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+            }}
+            animate={{
+              y: [0, -100, 0],
+              opacity: [0, 0.5, 0],
+            }}
+            transition={{
+              duration: particle.duration,
+              repeat: Number.POSITIVE_INFINITY,
+              delay: particle.delay,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+
+        <div className="absolute inset-0 z-0">
+          <motion.div
+            className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute right-0 bottom-0 h-[500px] w-[500px] rounded-full"
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.5, 0.3, 0.5],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
         </div>
+
+        <motion.div
+          style={{ y, opacity }}
+          className="container relative z-10 px-4"
+        >
+          <motion.div
+            className="mx-auto max-w-4xl text-center"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.div variants={itemVariants}>
+              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-8xl">
+                About{" "}
+                <span className="inline-flex items-center relative">
+                  <GradientText
+                    colors={[
+                      "#3d5a80",
+                      "#b76e79",
+                      "#e0d5c0",
+                      "#3d5a80",
+                      "#b76e79",
+                      "#3d5a80",
+                    ]}
+                    animationSpeed={12}
+                    showBorder={false}
+                    className="font-anton lowercase text-8xl"
+                  >
+                    soluvia
+                  </GradientText>
+                  <span
+                    className="absolute w-3.5 h-3.5 bg-rose rounded-full"
+                    style={{
+                      bottom: "0.2rem",
+                      right: "-1rem",
+                    }}
+                  ></span>
+                </span>
+              </h1>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="mt-8">
+              <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
+                We blend human creativity with AI technology to create digital
+                experiences that matter.
+              </p>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-ivory/50 cursor-pointer z-20 w-16 h-16 flex items-center justify-center"
+          animate={{
+            y: [0, 10, 0],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          onClick={handleScrollDown}
+          initial={{ opacity: 0.7 }}
+          whileHover={{ opacity: 1, scale: 1.1 }}
+        >
+          <div className="relative">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-rose/30 to-sapphire/30 blur-sm"></div>
+            <ChevronDown className="relative z-10 h-8 w-8 text-ivory" />
+          </div>
+        </motion.div>
       </section>
 
       {/* Story Section */}
       <SectionTransition>
-        <div ref={storyRef} className="container">
+        <div
+          id="story-section"
+          ref={storyRef}
+          className="container relative py-32 md:py-40"
+        >
+          <div className="absolute inset-0 z-0">
+            <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
+            <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
+          </div>
+
           <motion.div
-            className="mx-auto max-w-3xl text-center"
+            className="mx-auto max-w-3xl text-center relative z-10 mb-24"
             initial={{ opacity: 0, y: 20 }}
             animate={isStoryInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
+            transition={{
+              type: "spring",
+              stiffness: 80,
+              damping: 20,
+              mass: 0.5,
+            }}
           >
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            <h2 className="text-5xl font-bold tracking-tight mb-8 md:text-6xl">
               Our{" "}
-              <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 bg-clip-text text-transparent">
+              <GradientText
+                colors={[
+                  "#3d5a80",
+                  "#b76e79",
+                  "#e0d5c0",
+                  "#3d5a80",
+                  "#b76e79",
+                  "#3d5a80",
+                ]}
+                animationSpeed={12}
+                showBorder={false}
+                className="inline-block"
+              >
                 Story
-              </span>
+              </GradientText>
             </h2>
-            <p className="mt-4 text-lg text-white/70">From humble beginnings to industry leaders</p>
+            <p className="text-xl text-ivory/70 mt-4">
+              Where human creativity meets AI innovation
+            </p>
           </motion.div>
 
-          <div className="mt-16 grid gap-12 md:grid-cols-2 md:items-center">
+          <div className="mt-4 grid gap-12 md:grid-cols-2 md:items-center">
             <motion.div
               className="order-2 space-y-6 md:order-1"
               initial={{ opacity: 0, x: -50 }}
               animate={isStoryInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{
+                type: "spring",
+                stiffness: 80,
+                damping: 20,
+                mass: 0.5,
+                delay: 0.2,
+              }}
             >
-              <p className="text-lg text-white/80">
-                Founded in 2015, Solutions via designs began with a simple mission: to create beautiful, functional
-                websites that drive real business results. What started as a small team of passionate designers and
-                developers has grown into a full-service digital agency.
+              <p className="text-lg text-ivory/80">
+                Soluvia Design was founded with a vision to bridge the gap
+                between human creativity and artificial intelligence. We believe
+                that the future of design lies in this harmony – where human
+                intuition and AI capabilities amplify each other.
               </p>
-              <p className="text-lg text-white/80">
-                Over the years, we've expanded our services to include business growth strategies and SEO optimization,
-                providing our clients with comprehensive solutions to their digital challenges.
+              <p className="text-lg text-ivory/80">
+                Our approach combines the irreplaceable human touch – empathy,
+                creativity, and strategic thinking – with the efficiency and
+                analytical power of AI technologies. This unique blend allows us
+                to deliver solutions that are both innovative and authentic.
               </p>
-              <p className="text-lg text-white/80">
-                Today, we're proud to work with clients across various industries, from startups to established
-                enterprises, helping them achieve their goals and make a lasting impact in their respective fields.
+              <p className="text-lg text-ivory/80">
+                Today, we're proud to work with clients across various
+                industries, from startups to established enterprises, helping
+                them achieve their goals through our human-driven, AI-enhanced
+                creative process.
               </p>
             </motion.div>
             <motion.div
               className="order-1 md:order-2"
               initial={{ opacity: 0, x: 50 }}
               animate={isStoryInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{
+                type: "spring",
+                stiffness: 80,
+                damping: 20,
+                mass: 0.5,
+                delay: 0.4,
+              }}
             >
               <div className="relative">
-                <div className="absolute -inset-4 rounded-2xl bg-gradient-to-r from-blue-500/20 via-indigo-500/20 to-purple-600/20 opacity-70 blur-lg"></div>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10">
-                  <Image src="/placeholder.svg?height=600&width=800" alt="Our journey" fill className="object-cover" />
+                <div className="absolute -inset-4 rounded-2xl bg-gradient-to-r from-rose/20 via-sapphire/20 to-beige/20 opacity-70 blur-lg"></div>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-ivory/10">
+                  <Image
+                    src="/placeholder.svg?height=600&width=800"
+                    alt="Our journey"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
               </div>
             </motion.div>
@@ -143,373 +335,374 @@ export default function AboutPageClient() {
 
       {/* Values Section - Enhanced version */}
       <SectionTransition>
-        <div className="container">
+        <div className="container relative py-32 md:py-40">
+          <div className="absolute inset-0 z-0">
+            <div className="absolute right-1/4 top-1/4 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
+            <div className="absolute left-1/4 bottom-1/4 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
+          </div>
+
           <motion.div
-            className="mx-auto max-w-3xl text-center"
+            className="mx-auto max-w-3xl text-center relative z-10 mb-24"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{
+              type: "spring",
+              stiffness: 80,
+              damping: 20,
+              mass: 0.5,
+            }}
           >
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            <h2 className="text-5xl font-bold tracking-tight mb-8 md:text-6xl">
               Our Core{" "}
-              <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 bg-clip-text text-transparent">
+              <GradientText
+                colors={[
+                  "#3d5a80",
+                  "#b76e79",
+                  "#e0d5c0",
+                  "#3d5a80",
+                  "#b76e79",
+                  "#3d5a80",
+                ]}
+                animationSpeed={12}
+                showBorder={false}
+                className="inline-block"
+              >
                 Values
-              </span>
+              </GradientText>
             </h2>
-            <p className="mt-4 text-lg text-white/70">The principles that guide everything we do</p>
+            <p className="text-xl text-ivory/70 mt-4">
+              The principles that guide everything we do
+            </p>
           </motion.div>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <motion.div
+            className="mt-4 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.08,
+                },
+              },
+            }}
+          >
             {[
               {
-                title: "Passion",
-                description: "We're passionate about what we do and bring enthusiasm to every project we undertake.",
-                gradient: "from-blue-500 to-indigo-600",
+                title: "Human Creativity",
+                description:
+                  "We believe in the power of human creativity, intuition, and the emotional intelligence that only people can provide.",
+                icon: <Lightbulb className="h-6 w-6" />,
+              },
+              {
+                title: "AI Augmentation",
+                description:
+                  "We leverage AI technologies to enhance human capabilities, automate repetitive tasks, and provide data-driven insights.",
+                icon: <Bot className="h-6 w-6" />,
               },
               {
                 title: "Innovation",
-                description: "We constantly explore new ideas and technologies to deliver cutting-edge solutions.",
-                gradient: "from-indigo-500 to-purple-600",
+                description:
+                  "We constantly explore new ideas, technologies, and methodologies to deliver cutting-edge solutions for our clients.",
+                icon: <Zap className="h-6 w-6" />,
               },
               {
                 title: "Collaboration",
-                description: "We believe in the power of teamwork and partnership with our clients.",
-                gradient: "from-purple-500 to-pink-600",
+                description:
+                  "We believe in the power of partnership – between humans and AI, as well as with our clients and within our team.",
+                icon: <Brain className="h-6 w-6" />,
               },
               {
                 title: "Excellence",
                 description:
                   "We strive for excellence in everything we do, from design to implementation to client service.",
-                gradient: "from-pink-500 to-red-600",
+                icon: <Code className="h-6 w-6" />,
               },
               {
-                title: "Efficiency",
+                title: "Adaptability",
                 description:
-                  "We value efficiency and effectiveness, delivering solutions that maximize results with minimal waste.",
-                gradient: "from-red-500 to-orange-600",
-              },
-              {
-                title: "Integrity",
-                description: "We operate with honesty, transparency, and ethical standards in all our interactions.",
-                gradient: "from-orange-500 to-yellow-600",
+                  "We embrace change and continuously evolve our approach to stay at the forefront of design and technology.",
+                icon: <Zap className="h-6 w-6" />,
               },
             ].map((value, index) => (
               <motion.div
                 key={value.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:shadow-lg hover:shadow-blue-500/5"
+                variants={{
+                  hidden: { opacity: 0, y: 25 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      type: "spring",
+                      stiffness: 80,
+                      damping: 20,
+                      mass: 0.5,
+                    },
+                  },
+                }}
+                className="group relative overflow-hidden rounded-xl border border-ivory/10 bg-charcoal/50 p-8 backdrop-blur-sm transition-all duration-300 hover:border-ivory/20 hover:shadow-lg hover:shadow-rose/5"
               >
-                <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-gradient-to-br from-blue-500/10 to-purple-600/10 transition-transform duration-500 group-hover:scale-150"></div>
+                <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-gradient-to-br from-rose/10 to-beige/10 transition-transform duration-500 group-hover:scale-150"></div>
 
                 <div className="relative">
-                  <div
-                    className={`mb-4 h-1 w-12 rounded-full bg-gradient-to-r ${value.gradient} transition-all duration-300 group-hover:w-20`}
-                  ></div>
-                  <h3 className="mb-3 text-xl font-bold text-white">{value.title}</h3>
-                  <p className="text-white/70">{value.description}</p>
-                </div>
-
-                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-300 group-hover:w-full"></div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </SectionTransition>
-
-      {/* Team Section - Enhanced version */}
-      <SectionTransition>
-        <div className="container">
-          <motion.div
-            className="mx-auto max-w-3xl text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Meet Our{" "}
-              <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 bg-clip-text text-transparent">
-                Team
-              </span>
-            </h2>
-            <p className="mt-4 text-lg text-white/70">The talented individuals behind our success</p>
-          </motion.div>
-
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                name: "Sarah Johnson",
-                role: "Founder & Creative Director",
-                bio: "With over 15 years of experience in design and digital marketing, Sarah leads our creative team with passion and innovation.",
-                image: "/placeholder.svg?height=400&width=400",
-              },
-              {
-                name: "Michael Chen",
-                role: "Lead Web Developer",
-                bio: "Michael brings technical expertise and creative problem-solving to every project, ensuring seamless functionality and performance.",
-                image: "/placeholder.svg?height=400&width=400",
-              },
-              {
-                name: "Emma Rodriguez",
-                role: "SEO Specialist",
-                bio: "Emma's analytical approach and deep understanding of search algorithms help our clients achieve top rankings and increased visibility.",
-                image: "/placeholder.svg?height=400&width=400",
-              },
-              {
-                name: "David Thompson",
-                role: "Business Growth Strategist",
-                bio: "David combines data-driven insights with creative thinking to develop strategies that drive measurable business results.",
-                image: "/placeholder.svg?height=400&width=400",
-              },
-            ].map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group"
-              >
-                <div className="relative mb-6 overflow-hidden rounded-2xl">
-                  <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-70"></div>
-                  <div className="relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-                    <Image
-                      src={member.image || "/placeholder.svg"}
-                      alt={member.name}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-                    <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-4 p-4 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-                      {["twitter", "linkedin", "instagram"].map((platform) => (
-                        <Link
-                          key={platform}
-                          href="#"
-                          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-colors hover:bg-blue-500 hover:text-white"
-                        >
-                          <span className="sr-only">{platform}</span>
-                          {platform === "twitter" && (
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="h-5 w-5"
-                            >
-                              <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                            </svg>
-                          )}
-                          {platform === "linkedin" && (
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="h-5 w-5"
-                            >
-                              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                              <rect width="4" height="12" x="2" y="9" />
-                              <circle cx="4" cy="4" r="2" />
-                            </svg>
-                          )}
-                          {platform === "instagram" && (
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="h-5 w-5"
-                            >
-                              <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                            </svg>
-                          )}
-                        </Link>
-                      ))}
-                    </div>
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-r from-rose/20 to-sapphire/20 text-rose transition-colors duration-300 group-hover:bg-gradient-to-r group-hover:from-rose group-hover:to-sapphire group-hover:text-ivory">
+                    {value.icon}
                   </div>
-                </div>
-                <div className="text-center">
-                  <h3 className="text-xl font-bold text-white">{member.name}</h3>
-                  <p className="mb-2 text-blue-400">{member.role}</p>
-                  <p className="text-sm text-white/70">{member.bio}</p>
+                  <h3 className="mb-3 text-xl font-bold text-ivory group-hover:text-rose transition-colors duration-300">
+                    {value.title}
+                  </h3>
+                  <p className="text-ivory/70">{value.description}</p>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </SectionTransition>
 
-      {/* Why Choose Us Section */}
+      {/* Our Approach Section */}
       <SectionTransition>
-        <div ref={whyUsRef} className="container">
+        <div ref={whyUsRef} className="container relative py-32 md:py-40">
+          <div className="absolute inset-0 z-0">
+            <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
+            <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
+          </div>
+
           <motion.div
-            className="mx-auto max-w-3xl text-center"
+            className="mx-auto max-w-3xl text-center relative z-10 mb-24"
             initial={{ opacity: 0, y: 20 }}
             animate={isWhyUsInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
+            transition={{
+              type: "spring",
+              stiffness: 80,
+              damping: 20,
+              mass: 0.5,
+            }}
           >
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Why Choose{" "}
-              <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 bg-clip-text text-transparent">
-                Us
-              </span>
-              ?
+            <h2 className="text-5xl font-bold tracking-tight mb-8 md:text-6xl">
+              Our{" "}
+              <GradientText
+                colors={[
+                  "#3d5a80",
+                  "#b76e79",
+                  "#e0d5c0",
+                  "#3d5a80",
+                  "#b76e79",
+                  "#3d5a80",
+                ]}
+                animationSpeed={12}
+                showBorder={false}
+                className="inline-block"
+              >
+                Approach
+              </GradientText>
             </h2>
-            <p className="mt-4 text-lg text-white/70">We're not just another agency. Here's what sets us apart.</p>
+            <p className="text-xl text-ivory/70 mt-4">
+              Human-driven creativity enhanced by AI technologies
+            </p>
           </motion.div>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: "Tailored Solutions",
-                description:
-                  "We don't believe in one-size-fits-all. Every solution we create is customized to meet your specific needs and goals.",
-              },
-              {
-                title: "Results-Driven Approach",
-                description:
-                  "We focus on delivering measurable results that contribute to your business growth and success.",
-              },
-              {
-                title: "Transparent Communication",
-                description:
-                  "We maintain open and honest communication throughout the project, ensuring you're always in the loop.",
-              },
-              {
-                title: "Cutting-Edge Technology",
-                description:
-                  "We stay ahead of the curve, utilizing the latest technologies and trends to give you a competitive edge.",
-              },
-              {
-                title: "Dedicated Support",
-                description:
-                  "Our relationship doesn't end at launch. We provide ongoing support to ensure your continued success.",
-              },
-              {
-                title: "Holistic Perspective",
-                description:
-                  "We look at the big picture, considering how each element of your digital presence works together to achieve your goals.",
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isWhyUsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:shadow-lg hover:shadow-blue-500/5"
+          <div className="mt-4 grid gap-12 md:grid-cols-2 md:items-center">
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: -50 }}
+              animate={isWhyUsInView ? { opacity: 1, x: 0 } : {}}
+              transition={{
+                type: "spring",
+                stiffness: 80,
+                damping: 20,
+                mass: 0.5,
+                delay: 0.2,
+              }}
+            >
+              <div className="absolute -inset-4 rounded-2xl bg-gradient-to-r from-rose/20 via-sapphire/20 to-beige/20 opacity-70 blur-lg"></div>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-ivory/10">
+                <Image
+                  src="/placeholder.svg?height=600&width=800"
+                  alt="Human-AI collaboration"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </motion.div>
+            <motion.div
+              className="space-y-6"
+              initial={{ opacity: 0, x: 50 }}
+              animate={isWhyUsInView ? { opacity: 1, x: 0 } : {}}
+              transition={{
+                type: "spring",
+                stiffness: 80,
+                damping: 20,
+                mass: 0.5,
+                delay: 0.4,
+              }}
+            >
+              <div>
+                <h3 className="text-2xl font-bold text-ivory">
+                  The Human Element
+                </h3>
+                <p className="mt-3 text-lg text-ivory/80">
+                  Our creative process begins with human insights, emotional
+                  intelligence, and strategic thinking. We listen, empathize,
+                  and understand your unique challenges before crafting
+                  solutions.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-ivory">
+                  AI Enhancement
+                </h3>
+                <p className="mt-3 text-lg text-ivory/80">
+                  We integrate AI technologies to augment our human
+                  capabilities, analyze data patterns, automate repetitive
+                  tasks, and unlock creative possibilities that wouldn't be
+                  possible otherwise.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-ivory">
+                  Balanced Harmony
+                </h3>
+                <p className="mt-3 text-lg text-ivory/80">
+                  The magic happens in the balance – where human creativity and
+                  AI capabilities enhance each other. This approach allows us to
+                  deliver solutions that are both innovative and authentic,
+                  efficient and emotive.
+                </p>
+              </div>
+              <Link
+                href="/services"
+                className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
               >
-                <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-gradient-to-br from-blue-500/10 to-purple-600/10 transition-transform duration-500 group-hover:scale-150"></div>
-
-                <div className="relative">
-                  <div className="mb-4 h-1 w-12 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-300 group-hover:w-20"></div>
-                  <h3 className="mb-3 text-xl font-bold text-white">{item.title}</h3>
-                  <p className="text-white/70">{item.description}</p>
-                </div>
-
-                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-300 group-hover:w-full"></div>
-              </motion.div>
-            ))}
+                <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                <span className="relative z-10 flex items-center">
+                  EXPLORE OUR SERVICES
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </SectionTransition>
 
-      {/* CTA Section */}
-      <SectionTransition>
-        <div className="container">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-indigo-600/20 to-purple-600/20"></div>
-
-            {/* Animated background elements */}
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute left-1/4 top-1/4 h-64 w-64 rounded-full bg-blue-500/20 blur-3xl"></div>
-              <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl"></div>
-
-              {/* Animated particles */}
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute h-2 w-2 rounded-full bg-white/30"
-                  style={{
-                    top: `${Math.random() * 100}%`,
-                    left: `${Math.random() * 100}%`,
-                  }}
-                  animate={{
-                    y: [0, -100, 0],
-                    opacity: [0, 1, 0],
-                  }}
-                  transition={{
-                    duration: 10 + Math.random() * 10,
-                    repeat: Number.POSITIVE_INFINITY,
-                    delay: Math.random() * 5,
-                  }}
-                />
-              ))}
+      {/* CTA Section - Styled like home page */}
+      <section ref={ctaRef} className="py-24 md:py-32">
+        <motion.div
+          className="container"
+          initial={{ opacity: 0.2, y: 100 }}
+          animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="relative overflow-hidden rounded-3xl p-8 md:p-16">
+            {/* Animated particles */}
+            {ctaParticles.map((particle) => (
+              <motion.div
+                key={particle.id}
+                className="absolute h-1 w-1 rounded-full bg-rose/30"
+                style={{
+                  left: `${particle.x}%`,
+                  top: `${particle.y}%`,
+                  width: `${particle.size}px`,
+                  height: `${particle.size}px`,
+                }}
+                animate={{
+                  y: [0, -100, 0],
+                  opacity: [0, 0.5, 0],
+                }}
+                transition={{
+                  duration: particle.duration,
+                  repeat: Number.POSITIVE_INFINITY,
+                  delay: particle.delay,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+            <div className="absolute inset-0 z-0 text-center">
+              <h1 className="text-5xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
+                Ready to create something{" "}
+                <GradientText
+                  colors={[
+                    "#3d5a80",
+                    "#b76e79",
+                    "#e0d5c0",
+                    "#3d5a80",
+                    "#b76e79",
+                    "#3d5a80",
+                  ]}
+                  animationSpeed={12}
+                  showBorder={false}
+                  className="inline-block"
+                >
+                  extraordinary
+                </GradientText>
+                ?
+              </h1>
             </div>
-
-            <div className="relative z-10 p-8 md:p-16">
+            <div className="relative z-10 md:mt-0 mt-28">
               <motion.div
                 className="mx-auto max-w-3xl text-center"
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5 }}
               >
-                <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
-                  Ready to Start Your{" "}
-                  <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 bg-clip-text text-transparent">
-                    Journey
-                  </span>
-                  ?
-                </h2>
-                <p className="mt-4 text-lg text-white/80 md:text-xl">
-                  Let's create something extraordinary together. Contact us today to start your journey towards digital
-                  excellence.
-                </p>
-                <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:shadow-lg hover:shadow-blue-500/20"
-                  >
-                    <Link href="/contact">
-                      Get Started <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="lg"
-                    className="border-white/20 text-white hover:border-blue-500/50 hover:text-blue-400"
-                  >
-                    <Link href="/services">Explore Our Services</Link>
-                  </Button>
+                <ScrollReveal
+                  textClassName="text-lg md:text-2xl mt-4 text-ivory/70"
+                  baseOpacity={0.1}
+                  enableBlur={true}
+                  baseRotation={3}
+                  blurStrength={4}
+                >
+                  Let's combine human creativity with AI innovation to build
+                  your digital future.
+                </ScrollReveal>
+
+                <div
+                  style={{
+                    width: "100%",
+                    height: "600px",
+                    position: "relative",
+                  }}
+                >
+                  <div className="absolute inset-0 z-10">
+                    <Orb
+                      hoverIntensity={0.5}
+                      rotateOnHover={true}
+                      hue={0}
+                      forceHoverState={false}
+                    />
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <motion.div
+                      className="flex flex-col items-center justify-center gap-4 pointer-events-auto"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                      <Link
+                        href="/contact"
+                        className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
+                      >
+                        <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                        <span className="relative z-10 flex items-center">
+                          GET STARTED
+                          <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                        </span>
+                      </Link>
+                    </motion.div>
+                  </div>
                 </div>
               </motion.div>
             </div>
           </div>
-        </div>
-      </SectionTransition>
-    </>
-  )
-}
+        </motion.div>
+      </section>
 
+      {/* Styles for the animated logo effect */}
+      <style jsx global>{`
+        /* No custom styles needed */
+      `}</style>
+    </>
+  );
+}

@@ -245,14 +245,12 @@ export default function WebDesignDevelopmentPage() {
         </motion.div>
 
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-ivory/50 cursor-pointer"
-          animate={{
-            y: [0, 10, 0],
-          }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer z-20"
+          animate={{ y: [0, 10, 0] }}
           transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
+            duration: 1.5,
+            repeat: Number.POSITIVE_INFINITY,
+            repeatType: "loop",
           }}
           onClick={() => {
             document
@@ -260,7 +258,10 @@ export default function WebDesignDevelopmentPage() {
               ?.scrollIntoView({ behavior: "smooth" });
           }}
         >
-          <ChevronDown className="h-8 w-8" />
+          <div className="relative">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-rose/30 to-sapphire/30 blur-sm"></div>
+            <ChevronDown className="relative z-10 h-8 w-8 text-ivory" />
+          </div>
         </motion.div>
       </section>
 

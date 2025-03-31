@@ -302,8 +302,10 @@ export function RedesignedHeroSection() {
             repeat: Number.POSITIVE_INFINITY,
             repeatType: "loop",
           }}
+          className="relative"
         >
-          <ChevronDown className="h-8 w-8 text-ivory/50" />
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-rose/30 to-sapphire/30 blur-sm"></div>
+          <ChevronDown className="relative z-10 h-8 w-8 text-ivory" />
         </motion.div>
       </motion.div>
     </section>

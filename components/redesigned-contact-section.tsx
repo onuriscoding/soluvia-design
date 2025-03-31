@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import GradientText from "@/app/animations/gradient-text";
 
 export function RedesignedContactSection() {
   const [formState, setFormState] = useState({
@@ -18,6 +19,8 @@ export function RedesignedContactSection() {
     phone: "",
     message: "",
     service: "web-design",
+    budget: "",
+    timeframe: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -62,12 +65,18 @@ export function RedesignedContactSection() {
         phone: "",
         message: "",
         service: "web-design",
+        budget: "",
+        timeframe: "",
       });
     }, 1500);
   };
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 overflow-hidden">
+    <section
+      ref={ref}
+      id="contact-section"
+      className="relative py-24 md:py-32 overflow-hidden"
+    >
       {/* Background elements */}
       <div className="absolute inset-0">
         <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/0 blur-3xl"></div>
@@ -81,10 +90,25 @@ export function RedesignedContactSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-anton tracking-wide sm:text-4xl md:text-5xl">
-            Get in <span className="text-gradient-soluvia">Touch</span>
+          <h2 className="text-6xl font-bold tracking-tight sm:text-4xl md:text-8xl">
+            Get in{" "}
+            <GradientText
+              colors={[
+                "#3d5a80",
+                "#b76e79",
+                "#e0d5c0",
+                "#3d5a80",
+                "#b76e79",
+                "#3d5a80",
+              ]}
+              animationSpeed={12}
+              showBorder={false}
+              className="inline-block"
+            >
+              Touch
+            </GradientText>
           </h2>
-          <p className="mt-4 text-lg text-ivory/70">
+          <p className="mt-4 text-lg md:text-2xl text-ivory/70">
             Have a project in mind? We'd love to hear from you. Fill out the
             form below and we'll get back to you as soon as possible.
           </p>
@@ -193,11 +217,146 @@ export function RedesignedContactSection() {
                           className="w-full rounded-md border border-ivory/10 bg-charcoal/50 px-3 py-2 text-ivory focus:border-rose/50 focus:outline-none"
                         >
                           <option value="web-design">Web Design</option>
-                          <option value="ecommerce">E-commerce</option>
                           <option value="seo">SEO Optimization</option>
                           <option value="development">Web Development</option>
-                          <option value="business">Business Growth</option>
+                          <option value="business">AI Automation</option>
                         </select>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="budget" className="text-ivory/80">
+                        Budget Range <span className="text-rose">*</span>
+                      </Label>
+                      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                        <div>
+                          <input
+                            type="radio"
+                            id="budget-1"
+                            name="budget"
+                            value="Under $1,000"
+                            className="sr-only peer"
+                            checked={formState.budget === "Under $1,000"}
+                            onChange={handleChange}
+                            required
+                          />
+                          <label
+                            htmlFor="budget-1"
+                            className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
+                          >
+                            Under $1,000
+                          </label>
+                        </div>
+                        <div>
+                          <input
+                            type="radio"
+                            id="budget-2"
+                            name="budget"
+                            value="$1,000 - $5,000"
+                            className="sr-only peer"
+                            checked={formState.budget === "$1,000 - $5,000"}
+                            onChange={handleChange}
+                          />
+                          <label
+                            htmlFor="budget-2"
+                            className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
+                          >
+                            $1,000 - $5,000
+                          </label>
+                        </div>
+                        <div>
+                          <input
+                            type="radio"
+                            id="budget-3"
+                            name="budget"
+                            value="$5,000 - $10,000"
+                            className="sr-only peer"
+                            checked={formState.budget === "$5,000 - $10,000"}
+                            onChange={handleChange}
+                          />
+                          <label
+                            htmlFor="budget-3"
+                            className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
+                          >
+                            $5,000 - $10,000
+                          </label>
+                        </div>
+                        <div>
+                          <input
+                            type="radio"
+                            id="budget-4"
+                            name="budget"
+                            value="Over $10,000"
+                            className="sr-only peer"
+                            checked={formState.budget === "Over $10,000"}
+                            onChange={handleChange}
+                          />
+                          <label
+                            htmlFor="budget-4"
+                            className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
+                          >
+                            Over $10,000
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="timeframe" className="text-ivory/80">
+                        Project Timeframe
+                      </Label>
+                      <div className="grid grid-cols-3 gap-4">
+                        <div>
+                          <input
+                            type="radio"
+                            id="timeframe-1"
+                            name="timeframe"
+                            value="ASAP"
+                            className="sr-only peer"
+                            checked={formState.timeframe === "ASAP"}
+                            onChange={handleChange}
+                          />
+                          <label
+                            htmlFor="timeframe-1"
+                            className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
+                          >
+                            ASAP
+                          </label>
+                        </div>
+                        <div>
+                          <input
+                            type="radio"
+                            id="timeframe-2"
+                            name="timeframe"
+                            value="1-3 Months"
+                            className="sr-only peer"
+                            checked={formState.timeframe === "1-3 Months"}
+                            onChange={handleChange}
+                          />
+                          <label
+                            htmlFor="timeframe-2"
+                            className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
+                          >
+                            1-3 Months
+                          </label>
+                        </div>
+                        <div>
+                          <input
+                            type="radio"
+                            id="timeframe-3"
+                            name="timeframe"
+                            value="3+ Months"
+                            className="sr-only peer"
+                            checked={formState.timeframe === "3+ Months"}
+                            onChange={handleChange}
+                          />
+                          <label
+                            htmlFor="timeframe-3"
+                            className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
+                          >
+                            3+ Months
+                          </label>
+                        </div>
                       </div>
                     </div>
 
@@ -295,7 +454,7 @@ export function RedesignedContactSection() {
             <div className="space-y-8 p-8 rounded-2xl border border-ivory/10 bg-charcoal/30 backdrop-blur-sm h-full flex flex-col justify-between">
               <div className="space-y-6">
                 <motion.h3
-                  className="text-2xl font-anton tracking-wide text-ivory relative inline-block"
+                  className="text-2xl font-semibold tracking-tight text-ivory relative inline-block"
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.3 }}
@@ -353,7 +512,7 @@ export function RedesignedContactSection() {
 
               <div className="space-y-6">
                 <motion.h3
-                  className="text-2xl font-anton tracking-wide text-ivory relative inline-block"
+                  className="text-2xl font-semibold tracking-tight text-ivory relative inline-block"
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.3 }}
@@ -384,7 +543,7 @@ export function RedesignedContactSection() {
 
               <div className="space-y-6">
                 <motion.h3
-                  className="text-2xl font-anton tracking-wide text-ivory relative inline-block"
+                  className="text-2xl font-semibold tracking-tight text-ivory relative inline-block"
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.3 }}
