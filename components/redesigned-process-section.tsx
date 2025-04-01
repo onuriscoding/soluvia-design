@@ -29,78 +29,90 @@ const processSteps = [
     icon: <Search className="h-6 w-6" />,
     title: "Discovery",
     description:
-      "We begin by understanding your business, goals, target audience, and competitors to establish a solid foundation for your project.",
+      "We begin by understanding your business, goals, target audience, and challenges through in-depth research to establish a solid foundation for your project.",
     color: "bg-rose text-ivory",
     details: [
       "Comprehensive market research",
-      "Competitor analysis",
       "User persona development",
+      "Competitor analysis",
       "Business goals alignment",
+      "Pain point identification",
+      "Opportunity mapping"
     ],
   },
   {
     icon: <Lightbulb className="h-6 w-6" />,
     title: "Strategy",
     description:
-      "Based on our research, we develop a comprehensive strategy that outlines the approach, features, and technologies for your website.",
+      "Using human insights enhanced by AI analysis, we develop a comprehensive strategy that outlines the approach, features, and technologies for your digital solution.",
     color: "bg-sapphire text-ivory",
     details: [
+      "Human-AI collaborative planning",
       "Technology stack selection",
       "Feature prioritization",
       "Development roadmap",
       "Success metrics definition",
+      "Resource allocation"
     ],
   },
   {
     icon: <PenTool className="h-6 w-6" />,
     title: "Design",
     description:
-      "Our designers create wireframes and visual designs that align with your brand identity and provide an exceptional user experience.",
+      "Our designers blend creativity with AI assistance to create wireframes and visual designs that align with your brand identity and provide an exceptional user experience.",
     color: "bg-beige text-charcoal",
     details: [
       "Wireframing & prototyping",
-      "UI/UX design",
+      "AI-enhanced UI/UX design",
       "Brand integration",
       "Design system creation",
+      "Accessibility compliance",
+      "Responsive layouts"
     ],
   },
   {
     icon: <Code className="h-6 w-6" />,
     title: "Development",
     description:
-      "Our development team brings the designs to life, building a responsive, high-performance website with clean, efficient code.",
+      "Our development team brings designs to life, leveraging both human expertise and AI tools to build responsive, high-performance digital solutions with clean, efficient code.",
     color: "bg-rose text-ivory",
     details: [
-      "Frontend development",
-      "Backend implementation",
+      "AI-assisted coding",
       "Responsive optimization",
       "Performance tuning",
+      "API integrations",
+      "CMS implementation",
+      "Quality assurance"
     ],
   },
   {
     icon: <Rocket className="h-6 w-6" />,
     title: "Launch",
     description:
-      "After thorough testing and your approval, we deploy your website and ensure everything is functioning perfectly.",
+      "After thorough testing and your approval, we deploy your solution and ensure everything is functioning perfectly through automated and manual verification.",
     color: "bg-sapphire text-ivory",
     details: [
-      "Quality assurance testing",
+      "Pre-launch checklist",
       "Performance optimization",
+      "Cross-platform testing",
       "Deployment preparation",
       "Go-live support",
+      "Launch monitoring"
     ],
   },
   {
     icon: <BarChart className="h-6 w-6" />,
     title: "Growth",
     description:
-      "We provide ongoing support, maintenance, and optimization to help your website evolve and continue driving business results.",
+      "We provide ongoing support, AI-powered analytics, and continuous optimization to help your digital presence evolve and continue driving business results.",
     color: "bg-beige text-charcoal",
     details: [
-      "Analytics implementation",
-      "Continuous improvement",
-      "Maintenance & updates",
+      "AI-driven analytics",
+      "Conversion optimization",
+      "Content strategy",
       "Performance monitoring",
+      "Continuous improvement",
+      "Scaling strategy"
     ],
   },
 ];
@@ -232,12 +244,13 @@ export function RedesignedProcessSection() {
           </motion.h2>
           <ScrollReveal
             textClassName="text-lg md:text-2xl mt-8 text-ivory/70"
-            baseOpacity={0.1}
+            baseOpacity={0.2}
             enableBlur={true}
-            baseRotation={3}
-            blurStrength={4}
+            baseRotation={2}
+            blurStrength={3}
+            containerClassName="max-w-3xl mx-auto"
           >
-            A structured approach to delivering exceptional digital experiences
+            A balanced approach combining human creativity with AI-enhanced precision
           </ScrollReveal>
         </motion.div>
 
@@ -342,13 +355,15 @@ export function RedesignedProcessSection() {
               >
                 <motion.div
                   className={cn(
-                    "p-6 rounded-xl border border-white/10 backdrop-blur-sm bg-charcoal/30 overflow-hidden relative group",
+                    "p-6 rounded-xl border border-white/10 bg-charcoal/30 overflow-hidden relative group",
                     expandedStep === index && "!border-white/20"
                   )}
                   whileHover={{
                     borderColor: "rgba(183, 110, 121, 0.3)",
                     boxShadow: "0 10px 25px rgba(183, 110, 121, 0.1)",
                     y: -5,
+                    scale: 1.02,
+                    transition: { duration: 0.3, ease: "easeOut" }
                   }}
                   animate={
                     activeStep === index
@@ -361,9 +376,10 @@ export function RedesignedProcessSection() {
                   }
                   layout
                 >
-                  {/* Subtle gradient background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-rose/5 to-sapphire/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
+                  {/* Simple gradient background without blur */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-rose/5 via-sapphire/10 to-beige/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Content */}
                   <div className="flex items-center mb-4 relative z-10">
                     <motion.div
                       className={`flex h-12 w-12 items-center justify-center rounded-full ${step.color} mr-4`}
@@ -390,7 +406,7 @@ export function RedesignedProcessSection() {
                     >
                       {step.icon}
                     </motion.div>
-                    <h3 className="text-xl font-bold tracking-thight text-white">
+                    <h3 className="text-xl font-bold tracking-tight text-white group-hover:text-rose transition-colors duration-300">
                       {step.title}
                     </h3>
                   </div>
@@ -399,7 +415,7 @@ export function RedesignedProcessSection() {
                     {step.description}
                   </p>
 
-                  {/* Expandable details with improved animations */}
+                  {/* Expandable details with original design */}
                   <AnimatePresence>
                     {expandedStep === index && (
                       <motion.div
@@ -434,7 +450,7 @@ export function RedesignedProcessSection() {
                     )}
                   </AnimatePresence>
 
-                  {/* Expand/collapse button with improved animations */}
+                  {/* Simplified expand/collapse button */}
                   <motion.button
                     onClick={() => toggleExpandedStep(index)}
                     className="mt-4 flex items-center text-sm font-medium text-white/60 hover:text-white transition-colors relative z-10 group"
@@ -451,12 +467,13 @@ export function RedesignedProcessSection() {
                     </motion.div>
                   </motion.button>
 
-                  {/* Bottom gradient line animation */}
+                  {/* Restored animated bottom line */}
                   <motion.div
                     className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-rose to-sapphire"
                     initial={{ width: 0 }}
-                    animate={{ width: activeStep === index ? "100%" : "0%" }}
-                    transition={{ duration: 0.5 }}
+                    whileInView={{ width: "100%" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5 }}
                   />
                 </motion.div>
               </div>
@@ -487,34 +504,6 @@ export function RedesignedProcessSection() {
           </Link>
         </motion.div>
       </div>
-
-      {/* Scroll hint with improved animations matching the hero section */}
-      <motion.div
-        className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-50 cursor-pointer"
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: isInView && activeStep === 0 ? 1 : 0,
-        }}
-        transition={{ duration: 0.3 }}
-        onClick={() => {
-          window.scrollBy({
-            top: window.innerHeight / 2,
-            behavior: "smooth",
-          });
-        }}
-      >
-        <p className="text-white/70 mb-2 text-sm">Scroll to explore</p>
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{
-            duration: 1.5,
-            repeat: Number.POSITIVE_INFINITY,
-            repeatType: "loop",
-          }}
-        >
-          <ChevronDown className="h-8 w-8 text-ivory/50" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }

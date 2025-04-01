@@ -29,7 +29,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   rotationEnd = "center center",
   wordAnimationEnd = "top center",
 }) => {
-  const containerRef = useRef<HTMLHeadingElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const splitText = useMemo(() => {
     const text = typeof children === "string" ? children : "";
@@ -44,15 +44,16 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
           style={{
             willChange: "opacity, filter, transform",
             display: "inline-block",
-            opacity: 0,
-            filter: `blur(${blurStrength}px)`,
+            opacity: baseOpacity,
+            filter: enableBlur ? `blur(${blurStrength}px)` : "none",
+            transform: "translateY(10%)",
           }}
         >
           {word}
         </span>
       );
     });
-  }, [children, blurStrength]);
+  }, [children, baseOpacity, blurStrength, enableBlur]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -63,64 +64,77 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
         ? scrollContainerRef.current
         : window;
 
-    // Container rotation animation
-    const rotationTween = gsap.fromTo(
-      el,
-      {
-        transformOrigin: "0% 50%",
-        rotate: baseRotation,
-      },
-      {
-        ease: "power2.out",
-        rotate: 0,
-        duration: 1.5,
+    // Create triggers and animations
+    const createAnimations = () => {
+      // Container rotation animation
+      const rotationTween = gsap.fromTo(
+        el,
+        {
+          transformOrigin: "0% 50%",
+          rotate: baseRotation,
+        },
+        {
+          ease: "power2.out",
+          rotate: 0,
+          duration: 1.5,
+          scrollTrigger: {
+            trigger: el,
+            scroller,
+            start: "top bottom",
+            end: rotationEnd,
+            scrub: 1,
+          },
+        }
+      );
+
+      const wordElements = el.querySelectorAll<HTMLElement>(".word");
+
+      // Create a timeline for word animations
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: el,
           scroller,
-          start: "top bottom",
-          end: rotationEnd,
+          start: "top bottom-=10%",
+          end: wordAnimationEnd,
           scrub: 1,
         },
-      }
-    );
+      });
 
-    const wordElements = el.querySelectorAll<HTMLElement>(".word");
+      // Add word animations to timeline
+      wordElements.forEach((word, index) => {
+        tl.fromTo(
+          word,
+          {
+            opacity: baseOpacity,
+            y: "10%",
+            filter: enableBlur ? `blur(${blurStrength}px)` : "none",
+          },
+          {
+            opacity: 1,
+            y: "0%",
+            filter: "blur(0px)",
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          index * 0.1
+        );
+      });
 
-    // Create a timeline for word animations
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: el,
-        scroller,
-        start: "top bottom-=10%",
-        end: wordAnimationEnd,
-        scrub: 1,
-      },
-    });
+      return { rotationTween, tl };
+    };
 
-    // Add word animations to timeline
-    wordElements.forEach((word, index) => {
-      tl.fromTo(
-        word,
-        {
-          opacity: baseOpacity,
-          y: "50%",
-          filter: `blur(${blurStrength}px)`,
-        },
-        {
-          opacity: 1,
-          y: "0%",
-          filter: "blur(0px)",
-          duration: 0.5,
-          ease: "power2.out",
-        },
-        index * 0.1
-      );
-    });
+    // Initialize animations
+    const animations = createAnimations();
 
+    // Clean up all ScrollTrigger instances and animations
     return () => {
-      rotationTween.kill();
-      tl.kill();
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      animations.rotationTween.kill();
+      animations.tl.kill();
+      
+      // Get all ScrollTrigger instances that belong to this component
+      ScrollTrigger.getAll()
+        .filter(trigger => trigger.vars.trigger === el)
+        .forEach(trigger => trigger.kill());
     };
   }, [
     scrollContainerRef,
@@ -133,13 +147,13 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   ]);
 
   return (
-    <h2 ref={containerRef} className={`relative ${containerClassName}`}>
+    <div ref={containerRef} className={`relative ${containerClassName}`}>
       <p
         className={`leading-[1.5] tracking-tight font-medium ${textClassName}`}
       >
         {splitText}
       </p>
-    </h2>
+    </div>
   );
 };
 

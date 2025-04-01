@@ -10,11 +10,12 @@ import { motion, AnimatePresence } from "framer-motion";
 const navItems = [
   {
     label: "SERVICES",
+    href: "/services",
     children: [
       {
-        label: "WEB DESIGN",
-        href: "/services/web-design",
-        description: "Custom website design tailored to your brand",
+        label: "WEB DESIGN & DEVELOPMENT",
+        href: "/services/web-design-development",
+        description: "Custom website design and development tailored to your brand",
         price: "from 1299€",
       },
       {
@@ -30,10 +31,9 @@ const navItems = [
         price: "from 899€",
       },
       {
-        label: "WEB DEVELOPMENT",
-        href: "/services/web-development",
-        description: "Custom web applications and functionality",
-        price: "from 2499€",
+        label: "ALL SERVICES",
+        href: "/services",
+        description: "Explore our complete range of digital services",
       },
     ],
   },
@@ -201,10 +201,10 @@ export function EnhancedNavigationBar() {
                   {item.children ? (
                     <>
                       <div className="flex items-center text-ivory/90 hover:text-ivory transition-colors font-ivory font-semibold tracking-tight py-2 relative cursor-pointer">
-                        <span className="relative inline-block">
+                        <Link href={item.href!} className="relative inline-block">
                           {item.label}
                           <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose group-hover:w-full transition-all duration-300"></span>
-                        </span>
+                        </Link>
                         <div className="ml-1 w-4 h-4 flex items-center justify-center">
                           <div className="w-1.5 h-1.5 rounded-full bg-rose group-hover:hidden transition-all duration-300" />
                           <ChevronUp className="h-4 w-4 hidden group-hover:block transition-all duration-300 transform group-hover:rotate-180" />
@@ -228,7 +228,7 @@ export function EnhancedNavigationBar() {
                                   {child.description}
                                 </div>
                               )}
-                              {"price" in child && (
+                              {"price" in child && child.price && (
                                 <div className="text-sm font-bold font-inter tracking-wide text-rose">
                                   <span className="opacity-70 font-normal text-sm">
                                     from{" "}
@@ -387,7 +387,7 @@ export function EnhancedNavigationBar() {
                                 }}
                               >
                                 {/* Text with hover underline animation */}
-                                <span className="relative inline-block">
+                                <Link href={item.href!} className="relative inline-block" onClick={(e) => e.stopPropagation()}>
                                   {item.label}
                                   <motion.span
                                     className="absolute -bottom-1 left-0 h-0.5 bg-rose"
@@ -395,7 +395,7 @@ export function EnhancedNavigationBar() {
                                     whileHover={{ width: "100%" }}
                                     transition={{ duration: 0.3 }}
                                   />
-                                </span>
+                                </Link>
 
                                 <div className="ml-2 w-4 h-4 flex items-center justify-center">
                                   {/* Dot that transforms to chevron, just like desktop */}
@@ -467,7 +467,7 @@ export function EnhancedNavigationBar() {
                                               {child.description}
                                             </div>
                                           )}
-                                          {"price" in child && (
+                                          {"price" in child && child.price && (
                                             <div className="text-sm font-bold font-inter tracking-wide text-rose">
                                               <span className="opacity-70 font-normal text-sm">
                                                 from{" "}
