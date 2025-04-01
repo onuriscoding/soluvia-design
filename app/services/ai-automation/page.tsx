@@ -368,10 +368,16 @@ export default function AiAutomationPage() {
                 Solutions
               </GradientText>
             </h2>
-            <p className="text-xl text-ivory/70">
+            <ScrollReveal
+              textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
+              baseOpacity={0.1}
+              enableBlur={true}
+              baseRotation={3}
+              blurStrength={4}
+            >
               Innovative AI solutions designed to transform your business
               operations
-            </p>
+            </ScrollReveal>
           </motion.div>
 
           <motion.div
@@ -449,9 +455,15 @@ export default function AiAutomationPage() {
               </GradientText>{" "}
               to your business
             </h2>
-            <p className="text-xl text-ivory/70">
+            <ScrollReveal
+              textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
+              baseOpacity={0.1}
+              enableBlur={true}
+              baseRotation={3}
+              blurStrength={4}
+            >
               Discover how AI automation can transform your business operations
-            </p>
+            </ScrollReveal>
           </motion.div>
 
           <motion.div
@@ -513,7 +525,7 @@ export default function AiAutomationPage() {
                   ?
                 </h1>
                 <ScrollReveal
-                  textClassName="text-lg md:text-2xl text-ivory/70"
+                  textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
                   baseOpacity={0.1}
                   enableBlur={true}
                   baseRotation={3}

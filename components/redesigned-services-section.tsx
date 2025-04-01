@@ -34,7 +34,7 @@ const services = [
       "Sophisticated, responsive websites that captivate your audience and reflect your brand's unique identity.",
     color: "rose",
     buttonGradient: "from-rose to-sapphire",
-    image: "/soluvia.webp?height=600&width=800",
+    image: "/soluvia.png?height=600&width=800",
     link: "/services/web-design",
     features: [
       "Custom responsive designs",
@@ -68,7 +68,7 @@ const services = [
       "Automate repetitive tasks and streamline your workflow with our AI automation solutions.",
     color: "beige",
     buttonGradient: "from-beige to-rose",
-    image: "/ai.jpg?height=600&width=800",
+    image: "/ai.png?height=600&width=800",
     link: "/services/ai-automation",
     features: [
       "Custom AI solutions",
@@ -302,7 +302,7 @@ export function RedesignedServicesSection() {
                 duration: 0.5,
               },
             }}
-            className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+            className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
           >
             <motion.div
               className="order-2 lg:order-1"

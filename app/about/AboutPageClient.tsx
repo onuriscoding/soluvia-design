@@ -287,7 +287,7 @@ export default function AboutPageClient() {
               }}
             >
               <p className="text-lg text-ivory/80">
-                Soluvia Design was founded with a vision to bridge the gap
+                Soluvia was founded with a vision to bridge the gap
                 between human creativity and artificial intelligence. We believe
                 that the future of design lies in this harmony – where human
                 intuition and AI capabilities amplify each other.
@@ -321,7 +321,7 @@ export default function AboutPageClient() {
                 <div className="absolute -inset-4 rounded-2xl bg-gradient-to-r from-rose/20 via-sapphire/20 to-beige/20 opacity-70 blur-lg"></div>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-ivory/10">
                   <Image
-                    src="/placeholder.svg?height=600&width=800"
+                    src="/our-story-2.png?height=600&width=800"
                     alt="Our journey"
                     fill
                     className="object-cover"
@@ -520,7 +520,7 @@ export default function AboutPageClient() {
               <div className="absolute -inset-4 rounded-2xl bg-gradient-to-r from-rose/20 via-sapphire/20 to-beige/20 opacity-70 blur-lg"></div>
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-ivory/10">
                 <Image
-                  src="/placeholder.svg?height=600&width=800"
+                  src="/our-approach.png?height=600&width=800"
                   alt="Human-AI collaboration"
                   fill
                   className="object-cover"

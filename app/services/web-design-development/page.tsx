@@ -60,7 +60,7 @@ export default function WebDesignDevelopmentPage() {
         "Optimized user journeys",
         "Accessibility compliance",
       ],
-      image: "/placeholder.svg?height=600&width=800",
+      image: "/web-design.png?height=600&width=800",
       gradient: "from-rose/20 to-sapphire/20",
       color: "rose",
     },
@@ -77,7 +77,7 @@ export default function WebDesignDevelopmentPage() {
         "E-commerce functionality",
         "Content management systems",
       ],
-      image: "/placeholder.svg?height=600&width=800",
+      image: "/web-development.png?height=600&width=800",
       gradient: "from-sapphire/20 to-beige/20",
       color: "sapphire",
     },
@@ -94,7 +94,7 @@ export default function WebDesignDevelopmentPage() {
         "Responsive images and media",
         "Mobile performance optimization",
       ],
-      image: "/placeholder.svg?height=600&width=800",
+      image: "/mobile.png?height=600&width=800",
       gradient: "from-beige/20 to-rose/20",
       color: "beige",
     },
@@ -390,10 +390,16 @@ export default function WebDesignDevelopmentPage() {
               </GradientText>{" "}
               to your business
             </h2>
-            <p className="text-xl text-ivory/70">
+            <ScrollReveal
+              textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
+              baseOpacity={0.1}
+              enableBlur={true}
+              baseRotation={3}
+              blurStrength={4}
+            >
               Experience the advantages of our professional web design and
               development services
-            </p>
+            </ScrollReveal>
           </motion.div>
 
           <motion.div
@@ -455,7 +461,7 @@ export default function WebDesignDevelopmentPage() {
                   ?
                 </h1>
                 <ScrollReveal
-                  textClassName="text-lg md:text-2xl mt-4 text-ivory/70"
+                  textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
                   baseOpacity={0.1}
                   enableBlur={true}
                   baseRotation={3}

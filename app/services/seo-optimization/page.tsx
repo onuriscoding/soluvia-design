@@ -104,7 +104,7 @@ export default function SeoOptimizationPage() {
         "Image optimization",
         "URL structure improvement",
       ],
-      image: "/placeholder.svg?height=600&width=800",
+      image: "/on-page-seo.png?height=600&width=800",
       gradient: "from-rose/20 to-sapphire/20",
     },
     {
@@ -120,7 +120,7 @@ export default function SeoOptimizationPage() {
         "Competitor backlink analysis",
         "Authority building",
       ],
-      image: "/placeholder.svg?height=600&width=800",
+      image: "/off-page-seo.png?height=600&width=800",
       gradient: "from-sapphire/20 to-beige/20",
     },
     {
@@ -136,7 +136,7 @@ export default function SeoOptimizationPage() {
         "Robots.txt optimization",
         "Fixing crawl errors and broken links",
       ],
-      image: "/placeholder.svg?height=600&width=800",
+      image: "/technical-seo.png?height=600&width=800",
       gradient: "from-beige/20 to-rose/20",
     },
     {
@@ -152,7 +152,7 @@ export default function SeoOptimizationPage() {
         "Local link building",
         "Local content strategy",
       ],
-      image: "/placeholder.svg?height=600&width=800",
+      image: "/local-seo.png?height=600&width=800",
       gradient: "from-rose/20 to-sapphire/20",
     },
   ];
@@ -466,9 +466,15 @@ export default function SeoOptimizationPage() {
               </GradientText>{" "}
               to your business
             </h2>
-            <p className="text-xl text-ivory/70">
+            <ScrollReveal
+              textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
+              baseOpacity={0.1}
+              enableBlur={true}
+              baseRotation={3}
+              blurStrength={4}
+            >
               Maximize your online presence with our proven SEO strategies
-            </p>
+            </ScrollReveal>
           </motion.div>
 
           <motion.div
@@ -530,7 +536,7 @@ export default function SeoOptimizationPage() {
                   ?
                 </h1>
                 <ScrollReveal
-                  textClassName="text-lg md:text-2xl mt-4 text-ivory/70"
+                  textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
                   baseOpacity={0.1}
                   enableBlur={true}
                   baseRotation={3}
