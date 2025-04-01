@@ -102,53 +102,34 @@ export function RedesignedServicesSection() {
     target: ref,
     offset: isMobile
       ? ["start end", "end start"]
-      : ["start start", "end start"],
+      : ["start -20%", "end 50%"],
   });
 
   // Transform values with different configurations for mobile
   const opacity = useTransform(
     scrollYProgress,
-    isMobile ? [0, 0.4, 0.9] : [0, 0.5],
+    isMobile ? [0, 0.5, 0.9] : [0, 0.9],
     isMobile ? [1, 1, 0] : [1, 0]
   );
 
   const scale = useTransform(
     scrollYProgress,
-    isMobile ? [0, 0.4, 0.9] : [0, 0.5],
-    isMobile ? [1, 1, 0.95] : [1, 0.8]
+    isMobile ? [0, 0.5, 0.9] : [0, 0.9],
+    isMobile ? [1, 1, 0.95] : [1, 0.95]
   );
 
   const y = useTransform(
     scrollYProgress,
-    isMobile ? [0, 0.4, 0.9] : [0, 0.5],
-    isMobile ? [0, 0, 30] : [0, 100]
+    isMobile ? [0, 0.5, 0.9] : [0, 0.9],
+    isMobile ? [0, 0, 30] : [0, 30]
   );
 
-  // Add smooth spring animation for mobile only
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: isMobile ? 20 : 100,
-    damping: isMobile ? 40 : 30,
-    restDelta: 0.001,
-  });
-
-  // Use different progress values based on viewport
-  const finalOpacity = useTransform(
-    isMobile ? smoothProgress : scrollYProgress,
-    isMobile ? [0, 0.4, 0.9] : [0, 0.5],
-    isMobile ? [1, 1, 0] : [1, 0]
-  );
-
-  const finalScale = useTransform(
-    isMobile ? smoothProgress : scrollYProgress,
-    isMobile ? [0, 0.4, 0.9] : [0, 0.5],
-    isMobile ? [1, 1, 0.95] : [1, 0.8]
-  );
-
-  const finalY = useTransform(
-    isMobile ? smoothProgress : scrollYProgress,
-    isMobile ? [0, 0.4, 0.9] : [0, 0.5],
-    isMobile ? [0, 0, 30] : [0, 100]
-  );
+  // Add useEffect to handle initial animation state
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [isInView, controls]);
 
   // Variants for staggered animations
   const containerVariants = {
@@ -179,14 +160,8 @@ export function RedesignedServicesSection() {
     setActiveService(serviceId);
   };
 
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView, controls]);
-
   return (
-    <section ref={ref} className="relative py-24 md:py-32">
+    <section ref={ref} className="relative py-32 md:py-48">
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute left-0 top-0 h-96 w-96 rounded-full bg-rose/0 blur-3xl"></div>
@@ -197,13 +172,13 @@ export function RedesignedServicesSection() {
         ref={scrollRef}
         className="container relative z-10"
         style={{
-          opacity: finalOpacity,
-          scale: finalScale,
-          y: finalY,
+          opacity,
+          scale,
+          y,
         }}
-        variants={containerVariants}
         initial="hidden"
         animate={controls}
+        variants={containerVariants}
       >
         <motion.div
           className="mx-auto max-w-3xl text-center"

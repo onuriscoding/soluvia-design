@@ -30,7 +30,6 @@ export default function Home() {
         <RedesignedFAQSection />
       </ParallaxSection>
       <RedesignedCTASection />
-      <RedesignedContactSection />
     </>
   );
 }
