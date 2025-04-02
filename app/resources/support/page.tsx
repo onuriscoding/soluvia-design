@@ -1,21 +1,14 @@
 "use client";
 
-import type React from "react";
-import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Palette, Search, Bot, ChevronDown } from "lucide-react";
-import { useInView } from "react-intersection-observer";
-
+import { ChevronDown, LifeBuoy, Clock, FileText, MessageSquare } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { RedesignedPricingSection } from "@/components/redesigned-pricing-section";
-import { RedesignedContactSection } from "@/components/redesigned-contact-section";
-import { ClientOnly } from "@/components/client-only";
 import GradientText from "@/app/animations/gradient-text";
-import ScrollReveal from "@/app/animations/scroll-reveal";
+import { RedesignedContactSection } from "@/components/redesigned-contact-section";
 
-export default function ServicesPage() {
+export default function SupportPage() {
   const [isMounted, setIsMounted] = useState(false);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -51,36 +44,34 @@ export default function ServicesPage() {
     },
   };
 
-  // Service data
-  const services = [
+  // Support options
+  const supportOptions = [
     {
-      id: "web-design",
-      title: "Web Design & Development",
-      description:
-        "Create stunning, responsive websites that captivate your audience.",
-      icon: <Palette className="h-5 w-5" />,
+      id: "faq",
+      title: "FAQ",
+      description: "Find answers to commonly asked questions.",
+      icon: <FileText className="h-5 w-5" />,
       color: "text-rose",
       buttonGradient: "from-rose to-sapphire",
-      link: "/services/web-design-development",
+      link: "/resources/faq",
     },
     {
-      id: "seo-optimization",
-      title: "SEO Optimization",
-      description: "Improve visibility and rankings in search engine results.",
-      icon: <Search className="h-5 w-5" />,
+      id: "hours",
+      title: "Business Hours",
+      description: "Check our availability for support.",
+      icon: <Clock className="h-5 w-5" />,
       color: "text-sapphire",
       buttonGradient: "from-sapphire to-beige",
-      link: "/services/seo-optimization",
+      link: "#contact-section",
     },
     {
-      id: "ai-automation",
-      title: "AI Automation",
-      description:
-        "Automate processes and enhance customer experiences with AI.",
-      icon: <Bot className="h-5 w-5" />,
+      id: "contact",
+      title: "Contact Us",
+      description: "Reach out with specific questions or concerns.",
+      icon: <MessageSquare className="h-5 w-5" />,
       color: "text-beige",
       buttonGradient: "from-beige to-rose",
-      link: "/services/ai-automation",
+      link: "#contact-section",
     },
   ];
 
@@ -130,7 +121,6 @@ export default function ServicesPage() {
           >
             <motion.div variants={itemVariants}>
               <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-8xl">
-                Our{" "}
                 <GradientText
                   colors={[
                     "#3d5a80",
@@ -144,15 +134,14 @@ export default function ServicesPage() {
                   showBorder={false}
                   className="inline-block"
                 >
-                  Services
+                  Support
                 </GradientText>
               </h1>
             </motion.div>
 
             <motion.div variants={itemVariants} className="mt-8">
               <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
-                We offer a comprehensive range of services to help your business
-                thrive in the digital landscape. Click to learn more about each service.
+                We're here to help with any questions or concerns you may have about our services.
               </p>
             </motion.div>
 
@@ -161,9 +150,9 @@ export default function ServicesPage() {
               className="mt-12 flex flex-col items-center gap-6"
             >
               <div className="flex justify-center gap-4 flex-wrap">
-                {services.map((service) => (
+                {supportOptions.map((option) => (
                   <motion.div
-                    key={service.id}
+                    key={option.id}
                     whileHover={{ scale: 1.05, y: -5 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.3 }}
@@ -172,22 +161,21 @@ export default function ServicesPage() {
                       asChild
                       className={`group relative flex items-center gap-2 px-6 py-2.5 rounded-full 
                         bg-gradient-to-r ${
-                          service.buttonGradient
+                          option.buttonGradient
                         } text-ivory hover:shadow-lg 
-                        hover:shadow-${service.color.replace(
+                        hover:shadow-${option.color.replace(
                           "text-",
                           ""
                         )}/20 cursor-pointer`}
                     >
                       <Link
-                        href={service.link}
+                        href={option.link}
                         className="flex items-center gap-2"
                       >
-                        {service.icon}
+                        {option.icon}
                         <span className="whitespace-nowrap">
-                          {service.title}
+                          {option.title}
                         </span>
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </Link>
                     </Button>
                   </motion.div>
@@ -207,7 +195,7 @@ export default function ServicesPage() {
           }}
           onClick={() => {
             document
-              .getElementById("pricing")
+              .getElementById("contact-section")
               ?.scrollIntoView({ behavior: "smooth" });
           }}
         >
@@ -218,16 +206,88 @@ export default function ServicesPage() {
         </motion.div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="relative py-32 md:py-40">
+      {/* Support Info Section */}
+      <section className="relative py-24 md:py-32">
         <div className="absolute inset-0 z-0">
           <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
           <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
         </div>
         <div className="container relative z-10">
-          <RedesignedPricingSection />
+          <div className="mx-auto max-w-4xl">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="p-8 rounded-2xl border border-ivory/10 bg-charcoal/30 backdrop-blur-sm"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-rose/10 text-rose mb-6">
+                  <FileText className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-semibold text-ivory mb-2">Documentation</h3>
+                <p className="text-ivory/70 mb-4">
+                  Browse our detailed documentation for guides, tutorials, and best practices.
+                </p>
+                <Link
+                  href="/resources/faq"
+                  className="inline-flex items-center text-rose hover:underline"
+                >
+                  Visit FAQ
+                  <ChevronDown className="ml-1 h-4 w-4 rotate-[-90deg]" />
+                </Link>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="p-8 rounded-2xl border border-ivory/10 bg-charcoal/30 backdrop-blur-sm"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sapphire/10 text-sapphire mb-6">
+                  <LifeBuoy className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-semibold text-ivory mb-2">Technical Support</h3>
+                <p className="text-ivory/70 mb-4">
+                  Need help with technical issues? Our support team is here to assist you.
+                </p>
+                <Link
+                  href="#contact-section"
+                  className="inline-flex items-center text-sapphire hover:underline"
+                >
+                  Get Support
+                  <ChevronDown className="ml-1 h-4 w-4 rotate-[-90deg]" />
+                </Link>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="p-8 rounded-2xl border border-ivory/10 bg-charcoal/30 backdrop-blur-sm"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-beige/10 text-beige mb-6">
+                  <Clock className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-semibold text-ivory mb-2">Business Hours</h3>
+                <p className="text-ivory/70 mb-4">
+                  We're available to assist you during the following hours:
+                </p>
+                <ul className="text-ivory/70 space-y-1">
+                  <li>Monday - Friday: 9:00 AM - 6:00 PM</li>
+                  <li>Saturday: 10:00 AM - 4:00 PM</li>
+                  <li>Sunday: Closed</li>
+                </ul>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* Contact Section */}
+      <RedesignedContactSection />
     </main>
   );
-}
+} 

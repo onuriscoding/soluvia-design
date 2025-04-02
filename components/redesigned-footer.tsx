@@ -24,7 +24,7 @@ export function RedesignedFooter() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-ivory/10 bg-[#1a1c2a]/70 py-20">
+    <footer className="relative border-t border-ivory/10 bg-[#1a1c2a]/70 py-20 w-full z-10 mt-auto">
       {/* Background elements */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.div
@@ -154,22 +154,14 @@ export function RedesignedFooter() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/services/web-design"
+                  href="/services/web-design-development"
                   className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
                 >
                   <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>Web Design</span>
+                  <span>Web Design & Development</span>
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/services/ecommerce"
-                  className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
-                >
-                  <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>E-commerce</span>
-                </Link>
-              </li>
+          
               <li>
                 <Link
                   href="/services/seo-optimization"
@@ -179,33 +171,17 @@ export function RedesignedFooter() {
                   <span>SEO Optimization</span>
                 </Link>
               </li>
+
               <li>
                 <Link
-                  href="/services/web-development"
+                  href="/services/ai-automation"
                   className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
                 >
                   <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>Web Development</span>
+                  <span>AI Automation</span>
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/services/branding"
-                  className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
-                >
-                  <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>Branding</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/digital-marketing"
-                  className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
-                >
-                  <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>Digital Marketing</span>
-                </Link>
-              </li>
+
             </ul>
           </motion.div>
 
@@ -228,15 +204,7 @@ export function RedesignedFooter() {
                   <span>About Us</span>
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/portfolio"
-                  className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
-                >
-                  <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>Portfolio</span>
-                </Link>
-              </li>
+
               <li>
                 <Link
                   href="/how-it-works"
@@ -255,24 +223,7 @@ export function RedesignedFooter() {
                   <span>Contact</span>
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/careers"
-                  className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
-                >
-                  <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>Careers</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
-                >
-                  <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>Blog</span>
-                </Link>
-              </li>
+
             </ul>
           </motion.div>
 
@@ -286,24 +237,7 @@ export function RedesignedFooter() {
           >
             <h3 className="text-lg font-semibold text-ivory">Resources</h3>
             <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/resources/guides"
-                  className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
-                >
-                  <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>Design Guides</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/resources/case-studies"
-                  className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
-                >
-                  <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>Case Studies</span>
-                </Link>
-              </li>
+
               <li>
                 <Link
                   href="/resources/faq"
@@ -315,15 +249,6 @@ export function RedesignedFooter() {
               </li>
               <li>
                 <Link
-                  href="/resources/testimonials"
-                  className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
-                >
-                  <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>Testimonials</span>
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/resources/support"
                   className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
                 >
@@ -331,6 +256,7 @@ export function RedesignedFooter() {
                   <span>Support</span>
                 </Link>
               </li>
+
             </ul>
           </motion.div>
         </div>

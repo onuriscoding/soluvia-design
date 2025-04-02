@@ -37,14 +37,15 @@ export default function RootLayout({
             {/* Scroll progress indicator */}
             <ScrollProgress />
 
-            <div className="flex min-h-screen flex-col">
+            <div className="flex min-h-screen flex-col justify-between">
               <EnhancedNavigationBar />
               <PageTransition>
                 <main className="flex-1">{children}</main>
               </PageTransition>
-              <RedesignedFooter />
+              
             </div>
           </div>
+          <RedesignedFooter />
         </SmoothScroll>
       </body>
     </html>

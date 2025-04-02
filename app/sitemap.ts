@@ -43,6 +43,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...routes, ...portfolioItems, ...servicePages]
+  // Resource pages
+  const resourcePages = [
+    "faq",
+    "support",
+  ].map((slug) => ({
+    url: `${baseUrl}/resources/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }))
+
+  return [...routes, ...portfolioItems, ...servicePages, ...resourcePages]
 }
 

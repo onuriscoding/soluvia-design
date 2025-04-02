@@ -91,7 +91,7 @@ export function RedesignedContactSection() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-6xl font-bold tracking-tight sm:text-4xl md:text-8xl">
-            Get in{" "}
+            
             <GradientText
               colors={[
                 "#3d5a80",
@@ -105,8 +105,9 @@ export function RedesignedContactSection() {
               showBorder={false}
               className="inline-block"
             >
-              Touch
+              Contact
             </GradientText>
+            {" "} us
           </h2>
           <p className="mt-4 text-lg md:text-2xl text-ivory/70">
             Have a project in mind? We'd love to hear from you. Fill out the
@@ -484,10 +485,10 @@ export function RedesignedContactSection() {
                       Email Us
                     </h4>
                     <a
-                      href="mailto:hello@soluviadesign.com"
+                      href="mailto:info@soluvia.co"
                       className="text-ivory/70 hover:text-rose transition-colors"
                     >
-                      hello@soluviadesign.com
+                      info@soluvia.co
                     </a>
                   </div>
                 </div>
@@ -501,10 +502,10 @@ export function RedesignedContactSection() {
                       Call Us
                     </h4>
                     <a
-                      href="tel:+15551234567"
+                      href="tel:+32499242951"
                       className="text-ivory/70 hover:text-sapphire transition-colors"
                     >
-                      +1 (555) 123-4567
+                      +32 499 24 29 51
                     </a>
                   </div>
                 </div>

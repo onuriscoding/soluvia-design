@@ -16,19 +16,19 @@ const navItems = [
         label: "WEB DESIGN & DEVELOPMENT",
         href: "/services/web-design-development",
         description: "Custom website design and development tailored to your brand",
-        price: "from 1299€",
+        price: "from 699€",
       },
       {
         label: "AI AUTOMATION",
         href: "/services/ai-automation",
         description: "Automate repetitive tasks and streamline your workflow",
-        price: "from 1899€",
+        price: "from 1499€",
       },
       {
         label: "SEO OPTIMIZATION",
         href: "/services/seo-optimization",
         description: "Improve your visibility in search engines",
-        price: "from 899€",
+        price: "from 499€",
       },
       {
         label: "ALL SERVICES",
@@ -38,7 +38,7 @@ const navItems = [
     ],
   },
 
-  { label: "OUR PROCESS", href: "/how-it-works" },
+  { label: "HOW IT WORKS", href: "/how-it-works" },
   { label: "ABOUT", href: "/about" },
   { label: "CONTACT", href: "/contact" },
 ];

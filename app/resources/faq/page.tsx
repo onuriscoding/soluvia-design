@@ -1,21 +1,12 @@
 "use client";
 
-import type React from "react";
-import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Palette, Search, Bot, ChevronDown } from "lucide-react";
-import { useInView } from "react-intersection-observer";
-
-import { Button } from "@/components/ui/button";
-import { RedesignedPricingSection } from "@/components/redesigned-pricing-section";
-import { RedesignedContactSection } from "@/components/redesigned-contact-section";
-import { ClientOnly } from "@/components/client-only";
+import { ChevronDown } from "lucide-react";
 import GradientText from "@/app/animations/gradient-text";
-import ScrollReveal from "@/app/animations/scroll-reveal";
+import { RedesignedFAQSection } from "@/components/redesigned-faq-section";
 
-export default function ServicesPage() {
+export default function FAQPage() {
   const [isMounted, setIsMounted] = useState(false);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -50,39 +41,6 @@ export default function ServicesPage() {
       },
     },
   };
-
-  // Service data
-  const services = [
-    {
-      id: "web-design",
-      title: "Web Design & Development",
-      description:
-        "Create stunning, responsive websites that captivate your audience.",
-      icon: <Palette className="h-5 w-5" />,
-      color: "text-rose",
-      buttonGradient: "from-rose to-sapphire",
-      link: "/services/web-design-development",
-    },
-    {
-      id: "seo-optimization",
-      title: "SEO Optimization",
-      description: "Improve visibility and rankings in search engine results.",
-      icon: <Search className="h-5 w-5" />,
-      color: "text-sapphire",
-      buttonGradient: "from-sapphire to-beige",
-      link: "/services/seo-optimization",
-    },
-    {
-      id: "ai-automation",
-      title: "AI Automation",
-      description:
-        "Automate processes and enhance customer experiences with AI.",
-      icon: <Bot className="h-5 w-5" />,
-      color: "text-beige",
-      buttonGradient: "from-beige to-rose",
-      link: "/services/ai-automation",
-    },
-  ];
 
   return (
     <main className="flex min-h-screen flex-col">
@@ -130,7 +88,6 @@ export default function ServicesPage() {
           >
             <motion.div variants={itemVariants}>
               <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-8xl">
-                Our{" "}
                 <GradientText
                   colors={[
                     "#3d5a80",
@@ -144,55 +101,15 @@ export default function ServicesPage() {
                   showBorder={false}
                   className="inline-block"
                 >
-                  Services
+                  FAQ
                 </GradientText>
               </h1>
             </motion.div>
 
             <motion.div variants={itemVariants} className="mt-8">
               <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
-                We offer a comprehensive range of services to help your business
-                thrive in the digital landscape. Click to learn more about each service.
+                Find answers to commonly asked questions about our services, process, and approach.
               </p>
-            </motion.div>
-
-            <motion.div
-              variants={itemVariants}
-              className="mt-12 flex flex-col items-center gap-6"
-            >
-              <div className="flex justify-center gap-4 flex-wrap">
-                {services.map((service) => (
-                  <motion.div
-                    key={service.id}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Button
-                      asChild
-                      className={`group relative flex items-center gap-2 px-6 py-2.5 rounded-full 
-                        bg-gradient-to-r ${
-                          service.buttonGradient
-                        } text-ivory hover:shadow-lg 
-                        hover:shadow-${service.color.replace(
-                          "text-",
-                          ""
-                        )}/20 cursor-pointer`}
-                    >
-                      <Link
-                        href={service.link}
-                        className="flex items-center gap-2"
-                      >
-                        {service.icon}
-                        <span className="whitespace-nowrap">
-                          {service.title}
-                        </span>
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    </Button>
-                  </motion.div>
-                ))}
-              </div>
             </motion.div>
           </motion.div>
         </motion.div>
@@ -207,7 +124,7 @@ export default function ServicesPage() {
           }}
           onClick={() => {
             document
-              .getElementById("pricing")
+              .getElementById("faq-section")
               ?.scrollIntoView({ behavior: "smooth" });
           }}
         >
@@ -218,16 +135,16 @@ export default function ServicesPage() {
         </motion.div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="relative py-32 md:py-40">
+      {/* FAQ Section */}
+      <section id="faq-section" className="relative py-32 md:py-40">
         <div className="absolute inset-0 z-0">
           <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
           <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
         </div>
         <div className="container relative z-10">
-          <RedesignedPricingSection />
+          <RedesignedFAQSection />
         </div>
       </section>
     </main>
   );
-}
+} 

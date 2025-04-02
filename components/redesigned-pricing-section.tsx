@@ -64,7 +64,6 @@ const pricingPlans = [
     features: [
       { included: true, text: "Custom website design" },
       { included: true, text: "Responsive design" },
-      { included: true, text: "Content management system" },
       { included: true, text: "Basic SEO setup" },
       { included: false, text: "Advanced SEO optimization" },
       { included: false, text: "E-commerce functionality" },
@@ -78,14 +77,13 @@ const pricingPlans = [
     name: "Professional",
     description: "Ideal for growing businesses looking to expand",
     price: {
-      setup: 1899,
+      setup: 1999,
       monthly: 149,
       yearly: 129,
     },
     features: [
       { included: true, text: "Custom website design" },
       { included: true, text: "Responsive design" },
-      { included: true, text: "Content management system" },
       { included: true, text: "Basic SEO setup" },
       { included: true, text: "Advanced SEO optimization" },
       { included: true, text: "E-commerce functionality" },
@@ -106,7 +104,6 @@ const pricingPlans = [
     features: [
       { included: true, text: "Custom website design" },
       { included: true, text: "Responsive design" },
-      { included: true, text: "Content management system" },
       { included: true, text: "Basic SEO setup" },
       { included: true, text: "Advanced SEO optimization" },
       { included: true, text: "E-commerce functionality" },
@@ -127,9 +124,15 @@ export function RedesignedPricingSection() {
   });
   const [animationComplete, setAnimationComplete] = useState(false);
 
-  const handleContactSubmit = (data: { name: string; phone: string }) => {
+  const handleContactSubmit = (data: { 
+    name: string; 
+    contactPreference: string; 
+    phone?: string;
+    email?: string;
+    description: string 
+  }) => {
     console.log("Contact form submitted:", data);
-    // Here you would typically send this data to your backend
+    // The form submission is now handled directly in the stepper component
   };
 
   return (
@@ -184,11 +187,11 @@ export function RedesignedPricingSection() {
             {pricingPlans.map((plan, index) => (
               <div
                 key={plan.name}
-                className={`relative overflow-hidden rounded-2xl ${
+                className={`pricing-card relative overflow-hidden rounded-2xl ${
                   plan.popular
                     ? "border-2 border-rose"
                     : "border border-ivory/10"
-                } bg-charcoal/50 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-rose/95 transform hover:-translate-y-1`}
+                } bg-charcoal/50 backdrop-blur-sm`}
                 style={{
                   opacity: animationComplete ? 1 : 0,
                   transform: `translateY(${animationComplete ? 0 : 20}px)`,
@@ -255,7 +258,7 @@ export function RedesignedPricingSection() {
                       href="/contact"
                       className={`group relative inline-flex w-full items-center justify-center rounded-full px-6 py-3 font-medium transition-all duration-300 ${
                         plan.popular
-                          ? "bg-gradient-to-r from-rose to-sapphire text-ivory hover:shadow-lg hover:shadow-rose/20"
+                          ? "bg-gradient-to-r from-rose to-sapphire text-ivory hover:shadow-4xl hover:shadow-rose/90"
                           : "bg-charcoal/70 border border-ivory/10 text-ivory hover:bg-charcoal/90 hover:border-rose/30"
                       }`}
                     >
@@ -310,7 +313,20 @@ export function RedesignedPricingSection() {
             transform: translateX(5px);
           }
         }
+        
+        .pricing-card {
+          position: relative;
+          transition: transform 0.5s ease, box-shadow 0.5s ease;
+          z-index: 1;
+          box-shadow: 0 0 0 0 rgba(183, 110, 121, 0);
+        }
+        
+        .pricing-card:hover {
+          transform: translateY(-10px) !important;
+          box-shadow: 0 30px 30px -10px rgba(183, 110, 121, 0.3);
+        }
       `}</style>
     </section>
   );
 }
+
