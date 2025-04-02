@@ -24,6 +24,8 @@
     --input: 0 0% 20%;
     --ring: 0 0% 100%;
     --radius: 0.5rem;
+    --scrollbar-thumb-color: rgba(183, 110, 121, 0.2);
+    --scrollbar-thumb-hover-color: rgba(183, 110, 121, 0.4);
   }
 }
 
@@ -32,15 +34,83 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   height: 100%;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  /* Ensure scroll events propagate properly */
-  overflow-y: auto !important;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(183, 110, 121, 0.4) transparent; /* Firefox */
+  /* Only auto for scroll events, not important to allow overrides */
+  overflow-y: auto;
 }
 
-/* Hide scrollbar while preserving functionality */
-html::-webkit-scrollbar {
-  display: none; /* Better than width: 0 for scroll event compatibility */
+/* Desktop scrollbar - ultra minimal */
+@media (min-width: 769px) {
+  /* The scrollbar width needs to be extremely thin */
+  html::-webkit-scrollbar {
+    width: 2px !important;
+    height: 0 !important;
+    background-color: transparent !important;
+  }
+  
+  /* Override any and all track styles */
+  html::-webkit-scrollbar-track,
+  html::-webkit-scrollbar-track-piece {
+    background: transparent !important;
+    opacity: 0 !important;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    visibility: hidden !important;
+  }
+  
+  /* Ultra-subtle thumb */
+  html::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-color) !important;
+    border-radius: 10px !important;
+    min-height: 50px !important;
+    width: 2px !important;
+    border: none !important;
+  }
+  
+  html::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover-color) !important;
+  }
+  
+  /* Hide all auxiliary scrollbar elements */
+  html::-webkit-scrollbar-button,
+  html::-webkit-scrollbar-corner,
+  html::-webkit-resizer,
+  html::-webkit-scrollbar-button:start,
+  html::-webkit-scrollbar-button:end {
+    display: none !important;
+    background: transparent !important;
+    height: 0 !important;
+    width: 0 !important;
+  }
+  
+  /* Firefox scrollbar */
+  html {
+    scrollbar-width: thin !important;
+    scrollbar-color: var(--scrollbar-thumb-color) transparent !important;
+  }
+  
+  /* Edge/IE */
+  html {
+    -ms-overflow-style: -ms-autohiding-scrollbar !important;
+  }
+}
+
+/* Hide scrollbar on mobile */
+@media (max-width: 768px) {
+  html::-webkit-scrollbar {
+    display: none;
+  }
+  
+  html {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
 
 /* Base styles */
@@ -48,15 +118,60 @@ body {
   font-feature-settings: "rlig" 1, "calt" 1;
   overflow-x: hidden;
   width: 100%;
+  max-width: 100vw;
   color: white;
-  background: transparent;
+  background: transparent !important; /* Ensure body background stays transparent */
   min-height: 100vh;
   /* Fix for mobile height issues and white space */
   position: relative;
   height: auto;
+  margin: 0;
+  padding: 0;
   /* Ensure scrolling works on mobile */
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent scrollbar reappearing on resize */
+body > div, 
+main, 
+section, 
+.smooth-scroll-container {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Make sure container elements don't override scrollbar */
+#__next,
+.smooth-scroll-container {
+  overflow-y: visible !important;
+}
+
+/* Custom mobile scroll progress indicator */
+.mobile-scroll-indicator {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.mobile-scroll-indicator.visible {
+  opacity: 0.6;
+}
+
+.mobile-scroll-indicator-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(183, 110, 121, 0.7), rgba(61, 90, 128, 0.7));
+  height: 0%;
+  transition: height 0.1s ease;
 }
 
 /* Section styling */
@@ -79,29 +194,20 @@ section {
   @apply backdrop-blur-sm bg-black/20;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* Legacy scrollbar styles - remove completely */
+::-webkit-scrollbar,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-corner {
+  /* All handled by the specific media queries above */
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* For Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+/* For Firefox - already handled above */
+*:not(html) {
+  scrollbar-width: none;
 }
 
 /* Text selection */
@@ -493,6 +599,11 @@ section {
   section {
     width: 100%;
     overflow-x: hidden;
+  }
+  
+  /* Fix any background color leaking */
+  html, body, .smooth-scroll-container, main, section {
+    background-color: transparent !important;
   }
   
   /* Make sure reveal animations respond to scroll */

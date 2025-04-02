@@ -15,32 +15,45 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     setViewportHeight();
     window.addEventListener('resize', setViewportHeight);
     
-    // Only fix horizontal overflow, don't touch vertical scroll
-    const fixWhitespace = () => {
-      // Only fix overflow-x but don't touch overflow-y to ensure scroll detection works
+    // Fix the white space issue aggressively
+    const fixWhiteSpace = () => {
+      // Fix html and body
+      document.documentElement.style.width = '100%';
+      document.documentElement.style.maxWidth = '100%';
       document.documentElement.style.overflowX = 'hidden';
+      
+      document.body.style.width = '100%';
+      document.body.style.maxWidth = '100vw';
       document.body.style.overflowX = 'hidden';
+      document.body.style.margin = '0';
+      document.body.style.padding = '0';
       
-      // Reset any properties that might interfere with scroll detection
-      document.documentElement.style.position = '';
-      document.body.style.position = 'relative';
-      
-      // Fix for iOS Safari and other mobile browsers
+      // Fix for mobile
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Ensure body takes up full height but scrolls normally
-        document.body.style.minHeight = '100vh';
-        document.body.style.height = 'auto';
-        
-        // Force repaint to ensure scroll works properly
-        setTimeout(() => {
-          window.scrollTo(0, window.scrollY + 1);
-          window.scrollTo(0, window.scrollY - 1);
-        }, 0);
+        // Check if there's white space
+        const isOverflowing = document.body.offsetWidth > window.innerWidth;
+        if (isOverflowing) {
+          document.body.style.width = window.innerWidth + 'px';
+          document.documentElement.style.width = window.innerWidth + 'px';
+        }
       }
     };
     
-    fixWhitespace();
-    window.addEventListener('resize', fixWhitespace);
+    // Apply fix immediately and on resize
+    fixWhiteSpace();
+    window.addEventListener('resize', fixWhiteSpace);
+    
+    // Use MutationObserver to catch any dynamically added content that might cause overflow
+    const observer = new MutationObserver(() => {
+      fixWhiteSpace();
+    });
+    
+    observer.observe(document.body, { 
+      childList: true, 
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style', 'class']
+    });
 
     // Simple smooth scrolling for anchor links
     const handleClick = (e: MouseEvent) => {
@@ -67,10 +80,11 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     return () => {
       document.removeEventListener("click", handleClick)
       window.removeEventListener('resize', setViewportHeight);
-      window.removeEventListener('resize', fixWhitespace);
+      window.removeEventListener('resize', fixWhiteSpace);
+      observer.disconnect();
     }
   }, [])
 
-  return <div className="smooth-scroll-container overflow-x-hidden">{children}</div>
+  return <div className="smooth-scroll-container overflow-x-hidden w-full">{children}</div>
 }
 

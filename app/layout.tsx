@@ -6,6 +6,7 @@ import { ScrollProgress } from "@/components/scroll-progress";
 import { VideoBackground } from "@/components/video-background";
 import { PageTransition } from "@/components/page-transition";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { MobileScrollIndicator } from "@/components/mobile-scroll-indicator";
 import "@/styles/enhanced-animations.css";
 import Iridescence from "./animations/bg";
 
@@ -28,22 +29,25 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
       </head>
-      <body className="relative min-h-screen">
+      <body className="relative min-h-screen overflow-x-hidden">
         <SmoothScroll>
           {/* Video background - positioned absolutely to cover the entire viewport */}
-          <div className="fixed inset-0 w-full h-full">
+          <div className="fixed inset-0 w-full h-full overflow-hidden">
             <Iridescence />
           </div>
 
+          {/* Mobile scroll indicator - visible only on mobile */}
+          <MobileScrollIndicator />
+
           {/* Site content - positioned above video with transparent background */}
-          <div className="relative z-10">
+          <div className="relative z-10 w-full overflow-hidden">
             {/* Scroll progress indicator */}
             <ScrollProgress />
 
-            <div className="flex min-h-screen flex-col justify-between">
+            <div className="flex min-h-screen flex-col justify-between w-full">
               <EnhancedNavigationBar />
               <PageTransition>
-                <main className="flex-1">{children}</main>
+                <main className="flex-1 w-full">{children}</main>
               </PageTransition>
               <RedesignedFooter />
             </div>
