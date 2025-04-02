@@ -15,17 +15,35 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     setViewportHeight();
     window.addEventListener('resize', setViewportHeight);
     
-    // Fix for horizontal white space on mobile
+    // Fix for horizontal white space on mobile - more aggressive approach
     const fixWhitespace = () => {
+      // Apply to html and body
       document.documentElement.style.overflowX = 'hidden';
       document.body.style.overflowX = 'hidden';
       document.body.style.width = '100%';
       document.body.style.position = 'relative';
       document.documentElement.style.maxWidth = '100vw';
+      document.body.style.maxWidth = '100vw';
+      
+      // Also apply to main container elements
+      const containers = document.querySelectorAll('.smooth-scroll-container, main, #__next');
+      containers.forEach(container => {
+        if (container instanceof HTMLElement) {
+          container.style.overflowX = 'hidden';
+          container.style.width = '100%';
+          container.style.maxWidth = '100vw';
+        }
+      });
     };
     
+    // Apply fix on various events
     fixWhitespace();
     window.addEventListener('resize', fixWhitespace);
+    window.addEventListener('scroll', fixWhitespace);
+    window.addEventListener('orientationchange', fixWhitespace);
+    
+    // Also set a timeout to ensure it's applied after all content loads
+    const timeoutId = setTimeout(fixWhitespace, 500);
 
     // Simple smooth scrolling for anchor links
     const handleClick = (e: MouseEvent) => {
@@ -53,9 +71,12 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       document.removeEventListener("click", handleClick)
       window.removeEventListener('resize', setViewportHeight);
       window.removeEventListener('resize', fixWhitespace);
+      window.removeEventListener('scroll', fixWhitespace);
+      window.removeEventListener('orientationchange', fixWhitespace);
+      clearTimeout(timeoutId);
     }
   }, [])
 
-  return <div className="smooth-scroll-container w-full overflow-x-hidden">{children}</div>
+  return <div className="smooth-scroll-container w-full overflow-x-hidden max-w-[100vw]">{children}</div>
 }
 

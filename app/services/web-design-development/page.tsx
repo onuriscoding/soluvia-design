@@ -438,9 +438,8 @@ export default function WebDesignDevelopmentPage() {
       {/* CTA Section */}
       <section className="py-24 md:py-32">
         <motion.div className="container">
-          <div className="relative overflow-hidden rounded-4xl p-8 md:p-16">
             <div className="relative z-10 md:mt-0">
-              <motion.div className="mx-auto max-w-5xl text-center">
+              <motion.div className="mx-auto max-w-6xl text-center">
                 <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
                   Ready for a website that{" "}
                   <GradientText
@@ -461,7 +460,7 @@ export default function WebDesignDevelopmentPage() {
                   ?
                 </h1>
                 <ScrollReveal
-                  textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70 max-w-5xl"
+                  textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70 max-w-6xl"
                   baseOpacity={0.1}
                   enableBlur={true}
                   baseRotation={3}
@@ -503,7 +502,6 @@ export default function WebDesignDevelopmentPage() {
                 </div>
               </motion.div>
             </div>
-          </div>
         </motion.div>
       </section>
     </main>
