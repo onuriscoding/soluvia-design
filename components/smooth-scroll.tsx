@@ -15,13 +15,17 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     setViewportHeight();
     window.addEventListener('resize', setViewportHeight);
     
-    // Basic fix for horizontal white space
+    // Fix for horizontal white space on mobile
     const fixWhitespace = () => {
       document.documentElement.style.overflowX = 'hidden';
       document.body.style.overflowX = 'hidden';
+      document.body.style.width = '100%';
+      document.body.style.position = 'relative';
+      document.documentElement.style.maxWidth = '100vw';
     };
     
     fixWhitespace();
+    window.addEventListener('resize', fixWhitespace);
 
     // Simple smooth scrolling for anchor links
     const handleClick = (e: MouseEvent) => {
@@ -48,9 +52,10 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     return () => {
       document.removeEventListener("click", handleClick)
       window.removeEventListener('resize', setViewportHeight);
+      window.removeEventListener('resize', fixWhitespace);
     }
   }, [])
 
-  return <div className="smooth-scroll-container">{children}</div>
+  return <div className="smooth-scroll-container w-full overflow-x-hidden">{children}</div>
 }
 
