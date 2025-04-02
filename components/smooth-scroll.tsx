@@ -14,6 +14,19 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     // Run on mount and resize
     setViewportHeight();
     window.addEventListener('resize', setViewportHeight);
+    
+    // Fix white space without breaking scroll detection
+    const fixWhitespace = () => {
+      document.documentElement.style.overflowX = 'hidden';
+      document.body.style.overflowX = 'hidden';
+      
+      // Clean up any hard-set widths that might interfere with layout
+      document.body.style.width = '';
+      document.body.style.maxWidth = '';
+    };
+    
+    fixWhitespace();
+    window.addEventListener('resize', fixWhitespace);
 
     // Simple smooth scrolling for anchor links
     const handleClick = (e: MouseEvent) => {
@@ -40,6 +53,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     return () => {
       document.removeEventListener("click", handleClick)
       window.removeEventListener('resize', setViewportHeight);
+      window.removeEventListener('resize', fixWhitespace);
     }
   }, [])
 

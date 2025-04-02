@@ -92,9 +92,9 @@ export function RedesignedCTASection() {
               </ScrollReveal>
 
               <div
-                style={{ width: "100%", height: "800px", position: "relative" }}
+                style={{ width: "100%", height: "600px", position: "relative" }}
               >
-                <div className="absolute inset-0 z-10">
+                <div className="absolute inset-0 z-10 -mt-12">
                   <Orb
                     hoverIntensity={0.5}
                     rotateOnHover={true}
@@ -111,12 +111,12 @@ export function RedesignedCTASection() {
                   >
                     <Link
                       href="/contact"
-                      className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
+                      className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-4 py-2 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
                     >
                       <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                       <span className="relative z-10 flex items-center">
                         GET STARTED
-                        <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </span>
                     </Link>
                   </motion.div>

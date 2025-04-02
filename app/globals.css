@@ -34,6 +34,11 @@ html {
   height: 100%;
 }
 
+/* Hide scrollbar while preserving functionality */
+html::-webkit-scrollbar {
+  width: 0px; /* For Chrome, Safari, and Opera */
+}
+
 /* Base styles */
 body {
   font-feature-settings: "rlig" 1, "calt" 1;

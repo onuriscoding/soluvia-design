@@ -25,6 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.className} ${anton.variable}`}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+      </head>
       <body className="relative min-h-screen">
         <SmoothScroll>
           {/* Video background - positioned absolutely to cover the entire viewport */}
