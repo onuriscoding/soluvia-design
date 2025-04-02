@@ -59,11 +59,34 @@ export function EnhancedNavigationBar() {
   // Handle scroll detection
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      // Force check with the raw value
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      setScrolled(scrollY > 10);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Initial check on mount
+    handleScroll();
+
+    // More frequent checks with passive event for better performance
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    
+    // Fallback with requestAnimationFrame for mobile
+    let rafId: number;
+    
+    const pollScrollPosition = () => {
+      handleScroll();
+      rafId = requestAnimationFrame(pollScrollPosition);
+    };
+    
+    // Start polling on mobile devices
+    if (window.innerWidth < 768) {
+      rafId = requestAnimationFrame(pollScrollPosition);
+    }
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   // Get navigation bar width for mobile menu sizing

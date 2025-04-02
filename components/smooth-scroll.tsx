@@ -15,14 +15,28 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     setViewportHeight();
     window.addEventListener('resize', setViewportHeight);
     
-    // Fix white space without breaking scroll detection
+    // Only fix horizontal overflow, don't touch vertical scroll
     const fixWhitespace = () => {
+      // Only fix overflow-x but don't touch overflow-y to ensure scroll detection works
       document.documentElement.style.overflowX = 'hidden';
       document.body.style.overflowX = 'hidden';
       
-      // Clean up any hard-set widths that might interfere with layout
-      document.body.style.width = '';
-      document.body.style.maxWidth = '';
+      // Reset any properties that might interfere with scroll detection
+      document.documentElement.style.position = '';
+      document.body.style.position = 'relative';
+      
+      // Fix for iOS Safari and other mobile browsers
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Ensure body takes up full height but scrolls normally
+        document.body.style.minHeight = '100vh';
+        document.body.style.height = 'auto';
+        
+        // Force repaint to ensure scroll works properly
+        setTimeout(() => {
+          window.scrollTo(0, window.scrollY + 1);
+          window.scrollTo(0, window.scrollY - 1);
+        }, 0);
+      }
     };
     
     fixWhitespace();
@@ -57,6 +71,6 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  return <div className="smooth-scroll-container">{children}</div>
+  return <div className="smooth-scroll-container overflow-x-hidden">{children}</div>
 }
 

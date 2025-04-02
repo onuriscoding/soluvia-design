@@ -32,11 +32,15 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   height: 100%;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  /* Ensure scroll events propagate properly */
+  overflow-y: auto !important;
 }
 
 /* Hide scrollbar while preserving functionality */
 html::-webkit-scrollbar {
-  width: 0px; /* For Chrome, Safari, and Opera */
+  display: none; /* Better than width: 0 for scroll event compatibility */
 }
 
 /* Base styles */
@@ -49,7 +53,10 @@ body {
   min-height: 100vh;
   /* Fix for mobile height issues and white space */
   position: relative;
-  height: 100%;
+  height: auto;
+  /* Ensure scrolling works on mobile */
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Section styling */
@@ -478,11 +485,21 @@ section {
     overflow-x: hidden;
     position: relative;
     width: 100%;
+    /* Crucial for mobile scroll detection */
+    overflow-y: auto !important;
+    height: auto !important;
   }
   
   section {
     width: 100%;
     overflow-x: hidden;
+  }
+  
+  /* Make sure reveal animations respond to scroll */
+  .reveal-bottom,
+  .reveal-left,
+  .reveal-right {
+    will-change: opacity, transform;
   }
 }
 
