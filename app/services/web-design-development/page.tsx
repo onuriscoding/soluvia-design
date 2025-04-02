@@ -216,7 +216,7 @@ export default function WebDesignDevelopmentPage() {
             variants={containerVariants}
           >
             <motion.div variants={itemVariants}>
-              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem]">
+              <h1 className="text-5xl font-bold tracking-tight text-ivory md:text-[9rem]">
                 Web Design &{" "}
                 <GradientText
                   colors={[
@@ -440,7 +440,7 @@ export default function WebDesignDevelopmentPage() {
         <motion.div className="container">
           <div className="relative overflow-hidden rounded-3xl p-8 md:p-16">
             <div className="relative z-10 md:mt-0">
-              <motion.div className="mx-auto max-w-3xl text-center">
+              <motion.div className="mx-auto max-w-4xl text-center">
                 <h1 className="text-5xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
                   Ready for a website that{" "}
                   <GradientText
@@ -471,7 +471,7 @@ export default function WebDesignDevelopmentPage() {
                   online presence with a stunning, high-performance website.
                 </ScrollReveal>
                 <div
-                  className="md:mt-0 -mt-12"
+                  className="md:mt-0 -mt-18"
                   style={{
                     width: "100%",
                     height: "600px",
