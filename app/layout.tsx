@@ -6,7 +6,7 @@ import { ScrollProgress } from "@/components/scroll-progress";
 import { VideoBackground } from "@/components/video-background";
 import { PageTransition } from "@/components/page-transition";
 import { SmoothScroll } from "@/components/smooth-scroll";
-import { MobileScrollIndicator } from "@/components/mobile-scroll-indicator";
+import { FixedScrollIndicator } from "@/components/fixed-scroll-indicator";
 import "@/styles/enhanced-animations.css";
 import Iridescence from "./animations/bg";
 
@@ -27,38 +27,36 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.className} ${anton.variable}`}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className="relative min-h-screen overflow-x-hidden">
+      <body className="relative min-h-screen">
         <SmoothScroll>
           {/* Video background - positioned absolutely to cover the entire viewport */}
-          <div className="fixed inset-0 w-full h-full overflow-hidden">
+          <div className="fixed inset-0 w-full h-full">
             <Iridescence />
           </div>
 
-          {/* Mobile scroll indicator - visible only on mobile */}
-          <MobileScrollIndicator />
-
           {/* Site content - positioned above video with transparent background */}
-          <div className="relative z-10 w-full overflow-hidden">
+          <div className="relative z-10">
             {/* Scroll progress indicator */}
             <ScrollProgress />
 
-            <div className="flex min-h-screen flex-col justify-between w-full">
+            <div className="flex min-h-screen flex-col justify-between">
               <EnhancedNavigationBar />
               <PageTransition>
-                <main className="flex-1 w-full">{children}</main>
+                <main className="flex-1">{children}</main>
               </PageTransition>
               <RedesignedFooter />
             </div>
           </div>
+          
+          {/* Simple fixed scroll indicator - client component */}
+          <FixedScrollIndicator />
         </SmoothScroll>
       </body>
     </html>
   );
 }
-
-import "./globals.css";
 
 export const metadata = {
   generator: "v0.dev",

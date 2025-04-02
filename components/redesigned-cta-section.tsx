@@ -82,7 +82,7 @@ export function RedesignedCTASection() {
               transition={{ duration: 0.5 }}
             >
               <ScrollReveal
-                textClassName="text-lg md:text-2xl md:mt-4 text-ivory/70"
+                textClassName="text-lg md:text-2xl md:mt-4 mt-12 text-ivory/70"
                 baseOpacity={0.1}
                 enableBlur={true}
                 baseRotation={3}
@@ -112,7 +112,7 @@ export function RedesignedCTASection() {
                   >
                     <Link
                       href="/contact"
-                      className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-4 py-2 md:px-6 md:py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
+                      className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-3 py-2 md:px-6 md:py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
                     >
                       <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                       <span className="relative z-10 flex items-center">

@@ -226,7 +226,7 @@ export default function ContactPageClient() {
               <Hand className="h-10 w-10 text-ivory" />
             </div>
             <motion.p
-              className="absolute -bottom-10 whitespace-nowrap text-center text-base font-medium text-ivory/90"
+              className="absolute -bottom-18 md:-bottom-10 whitespace-nowrap text-center text-base font-medium text-ivory/90"
               animate={{
                 y: [0, 3, 0],
                 opacity: [0.8, 1, 0.8],
