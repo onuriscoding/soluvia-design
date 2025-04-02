@@ -30,7 +30,6 @@ export function RedesignedCTASection() {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5 }}
       >
-        <div className="relative overflow-hidden rounded-3xl p-8 md:p-16 ">
           {/* Animated particles */}
           {particles.map((particle) => (
             <motion.div
@@ -82,7 +81,7 @@ export function RedesignedCTASection() {
               transition={{ duration: 0.5 }}
             >
               <ScrollReveal
-                textClassName="text-lg md:text-2xl md:mt-4 text-ivory/70"
+                textClassName="text-lg md:text-2xl md:-mt-4 text-ivory/70"
                 baseOpacity={0.1}
                 enableBlur={true}
                 baseRotation={3}
@@ -125,7 +124,6 @@ export function RedesignedCTASection() {
               </div>
             </motion.div>
           </div>
-        </div>
       </motion.div>
     </section>
   );

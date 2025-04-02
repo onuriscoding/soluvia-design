@@ -514,8 +514,8 @@ export default function SeoOptimizationPage() {
       <section className="py-24 md:py-32">
         <motion.div className="container">
             <div className="relative z-10 md:mt-0">
-              <motion.div className="mx-auto max-w-3xl text-center">
-                <h1 className="text-5xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
+              <motion.div className="mx-auto max-w-6xl text-center">
+                <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
                   Ready to boost your{" "}
                   <GradientText
                     colors={[
@@ -535,7 +535,7 @@ export default function SeoOptimizationPage() {
                   ?
                 </h1>
                 <ScrollReveal
-                  textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
+                  textClassName="text-lg md:text-2xl mt-4 -mb-18 text-ivory/70 max-w-6xl"
                   baseOpacity={0.1}
                   enableBlur={true}
                   baseRotation={3}
@@ -545,14 +545,13 @@ export default function SeoOptimizationPage() {
                   more organic traffic to your business.
                 </ScrollReveal>
                 <div
-                className="md:mt-0 -mt-12"
                   style={{
                     width: "100%",
                     height: "600px",
                     position: "relative",
                   }}
                 >
-                  <div className="absolute inset-0 z-10">
+                  <div className="absolute inset-0 z-10 md:mt-0 -mt-52">
                     <Orb
                       hoverIntensity={0.5}
                       rotateOnHover={true}
@@ -560,7 +559,7 @@ export default function SeoOptimizationPage() {
                       forceHoverState={false}
                     />
                   </div>
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:mt-0 -mt-52">
                     <motion.div className="flex flex-col items-center justify-center gap-4 pointer-events-auto">
                       <Link
                         href="/contact"

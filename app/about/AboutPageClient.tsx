@@ -595,7 +595,6 @@ export default function AboutPageClient() {
           animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="relative overflow-hidden rounded-3xl p-8 md:p-16">
             {/* Animated particles */}
             {ctaParticles.map((particle) => (
               <motion.div
@@ -620,7 +619,7 @@ export default function AboutPageClient() {
               />
             ))}
             <div className="absolute inset-0 z-0 text-center">
-              <h1 className="text-5xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
+              <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
                 Ready to create something{" "}
                 <GradientText
                   colors={[
@@ -648,7 +647,7 @@ export default function AboutPageClient() {
                 transition={{ duration: 0.5 }}
               >
                 <ScrollReveal
-                  textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
+                  textClassName="text-lg md:text-2xl -mt-12 -mb-4 text-ivory/70"
                   baseOpacity={0.1}
                   enableBlur={true}
                   baseRotation={3}
@@ -659,14 +658,14 @@ export default function AboutPageClient() {
                 </ScrollReveal>
 
                 <div
-                className="md:mt-0 -mt-12"
+
                   style={{
                     width: "100%",
                     height: "600px",
                     position: "relative",
                   }}
                 >
-                  <div className="absolute inset-0 z-10">
+                  <div className="absolute inset-0 z-10 md:mt-0 -mt-52">
                     <Orb
                       hoverIntensity={0.5}
                       rotateOnHover={true}
@@ -674,7 +673,7 @@ export default function AboutPageClient() {
                       forceHoverState={false}
                     />
                   </div>
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:mt-0 -mt-52">
                     <motion.div
                       className="flex flex-col items-center justify-center gap-4 pointer-events-auto"
                       initial={{ opacity: 0, y: 20 }}
@@ -696,7 +695,6 @@ export default function AboutPageClient() {
                 </div>
               </motion.div>
             </div>
-          </div>
         </motion.div>
       </section>
 

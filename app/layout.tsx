@@ -2,14 +2,15 @@ import type React from "react";
 import { Inter, Anton } from "next/font/google";
 import { EnhancedNavigationBar } from "@/components/enhanced-navigation-bar";
 import { RedesignedFooter } from "@/components/redesigned-footer";
+import { ScrollProgress } from "@/components/scroll-progress";
+import { VideoBackground } from "@/components/video-background";
 import { PageTransition } from "@/components/page-transition";
+import { SmoothScroll } from "@/components/smooth-scroll";
 import ScrollIndicator from "@/components/scroll-indicator";
-import FullPageWrapper from "@/components/full-page-wrapper";
-import GlobalConstraint from "@/components/global-constraint";
+import "@/styles/enhanced-animations.css";
 import Iridescence from "./animations/bg";
 
 import "./globals.css";
-import "./mobile-fix.css";
 
 const inter = Inter({ subsets: ["latin"] });
 const anton = Anton({
@@ -26,29 +27,35 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.className} ${anton.variable}`}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <style dangerouslySetInnerHTML={{ __html: `
+          html, body {
+            overflow-x: hidden !important;
+          }
+        `}} />
       </head>
-      <body>
-        {/* Global constraint to prevent white space */}
-        <GlobalConstraint />
-        
+      <body className="relative min-h-screen">
+        {/* Scroll Indicator - Outside of SmoothScroll to work correctly */}
         <ScrollIndicator />
         
-        <FullPageWrapper>
-          {/* Background */}
-          <div className="fixed inset-0 overflow-hidden">
+        <SmoothScroll>
+          {/* Video background - positioned absolutely to cover the entire viewport */}
+          <div className="fixed inset-0 w-full h-full">
             <Iridescence />
           </div>
-          
-          {/* Content */}
+
+          {/* Site content - positioned above video with transparent background */}
           <div className="relative z-10">
-            <EnhancedNavigationBar />
-            <PageTransition>
-              <main className="overflow-x-hidden">{children}</main>
-            </PageTransition>
-            <RedesignedFooter />
+            <div className="flex min-h-screen flex-col justify-between">
+              <EnhancedNavigationBar />
+              <PageTransition>
+                <main className="flex-1">{children}</main>
+              </PageTransition>
+              <RedesignedFooter />
+            </div>
           </div>
-        </FullPageWrapper>
+          
+        </SmoothScroll>
       </body>
     </html>
   );

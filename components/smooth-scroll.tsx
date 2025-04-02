@@ -15,35 +15,42 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     setViewportHeight();
     window.addEventListener('resize', setViewportHeight);
     
-    // Fix for horizontal white space on mobile - more aggressive approach
-    const fixWhitespace = () => {
-      // Apply to html and body
-      document.documentElement.style.overflowX = 'hidden';
-      document.body.style.overflowX = 'hidden';
-      document.body.style.width = '100%';
-      document.body.style.position = 'relative';
-      document.documentElement.style.maxWidth = '100vw';
-      document.body.style.maxWidth = '100vw';
+    // Track scroll position to fix white space only during downward scrolling
+    let lastScrollTop = 0;
+    let scrollingDown = false;
+    let ticking = false;
+
+    // Fix for white space when scrolling down
+    const fixWhitespaceOnScroll = () => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      scrollingDown = currentScroll > lastScrollTop;
       
-      // Also apply to main container elements
-      const containers = document.querySelectorAll('.smooth-scroll-container, main, #__next');
-      containers.forEach(container => {
-        if (container instanceof HTMLElement) {
-          container.style.overflowX = 'hidden';
-          container.style.width = '100%';
-          container.style.maxWidth = '100vw';
-        }
-      });
+      if (scrollingDown && !ticking) {
+        ticking = true;
+        
+        window.requestAnimationFrame(() => {
+          // Very minimal fix that won't affect the background
+          document.documentElement.style.overflowX = 'hidden';
+          document.body.style.overflowX = 'hidden';
+          
+          ticking = false;
+        });
+      }
+      
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     };
     
-    // Apply fix on various events
+    // Basic fix for mobile
+    const fixWhitespace = () => {
+      document.documentElement.style.overflowX = 'hidden';
+      document.body.style.overflowX = 'hidden';
+    };
+    
+    // Apply fixes
     fixWhitespace();
     window.addEventListener('resize', fixWhitespace);
-    window.addEventListener('scroll', fixWhitespace);
+    window.addEventListener('scroll', fixWhitespaceOnScroll, { passive: true });
     window.addEventListener('orientationchange', fixWhitespace);
-    
-    // Also set a timeout to ensure it's applied after all content loads
-    const timeoutId = setTimeout(fixWhitespace, 500);
 
     // Simple smooth scrolling for anchor links
     const handleClick = (e: MouseEvent) => {
@@ -71,12 +78,11 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       document.removeEventListener("click", handleClick)
       window.removeEventListener('resize', setViewportHeight);
       window.removeEventListener('resize', fixWhitespace);
-      window.removeEventListener('scroll', fixWhitespace);
+      window.removeEventListener('scroll', fixWhitespaceOnScroll);
       window.removeEventListener('orientationchange', fixWhitespace);
-      clearTimeout(timeoutId);
     }
   }, [])
 
-  return <div className="smooth-scroll-container w-full overflow-x-hidden max-w-[100vw]">{children}</div>
+  return <div className="smooth-scroll-container w-full overflow-x-hidden">{children}</div>
 }
 

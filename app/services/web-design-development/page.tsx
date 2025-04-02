@@ -485,7 +485,7 @@ export default function WebDesignDevelopmentPage() {
                       forceHoverState={false}
                     />
                   </div>
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none -mt-52">
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:mt-0   -mt-52">
                     <motion.div className="flex flex-col items-center justify-center gap-4 pointer-events-auto">
                       <Link
                         href="/contact"
