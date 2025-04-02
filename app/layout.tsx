@@ -7,6 +7,7 @@ import { VideoBackground } from "@/components/video-background";
 import { PageTransition } from "@/components/page-transition";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import ScrollIndicator from "@/components/scroll-indicator";
+import ViewportFix from "@/components/viewport-fix";
 import "@/styles/enhanced-animations.css";
 import Iridescence from "./animations/bg";
 
@@ -25,11 +26,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.className} ${anton.variable}`}>
+    <html lang="en" className={`${inter.className} ${anton.variable} overflow-x-hidden`}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </head>
-      <body className="relative min-h-screen">
+      <body className="relative min-h-screen overflow-x-hidden w-full">
+        {/* ViewportFix component to eliminate white space on mobile */}
+        <ViewportFix />
+        
         {/* Scroll Indicator - Outside of SmoothScroll to work correctly */}
         <ScrollIndicator />
         
@@ -40,11 +44,11 @@ export default function RootLayout({
           </div>
 
           {/* Site content - positioned above video with transparent background */}
-          <div className="relative z-10">
-            <div className="flex min-h-screen flex-col justify-between">
+          <div className="relative z-10 w-full overflow-hidden">
+            <div className="flex min-h-screen flex-col justify-between w-full">
               <EnhancedNavigationBar />
               <PageTransition>
-                <main className="flex-1">{children}</main>
+                <main className="flex-1 w-full">{children}</main>
               </PageTransition>
               <RedesignedFooter />
             </div>
