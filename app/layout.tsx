@@ -30,16 +30,28 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style>{`
           html, body {
-            overflow-x: hidden;
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+            width: 100% !important;
+            position: relative !important;
+          }
+          
+          /* This specifically targets the background container to prevent white space */
+          .fixed.inset-0 {
+            overflow: hidden !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
           }
         `}</style>
       </head>
-      <body className="relative min-h-screen">
+      <body className="relative min-h-screen overflow-x-hidden">
         <ScrollIndicator />
         
         <SmoothScroll>
           {/* Video background - positioned absolutely to cover the entire viewport */}
-          <div className="fixed inset-0 w-full h-full">
+          <div className="fixed inset-0 w-full h-full overflow-hidden">
             <Iridescence />
           </div>
 

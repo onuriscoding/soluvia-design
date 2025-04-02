@@ -73,6 +73,7 @@ export default function Iridescence({
     gl.clearColor(1, 1, 1, 1);
 
     let program: Program | null = null;
+    let updateCanvasBounds: () => void; 
 
     function resize() {
       const scale = 1;
@@ -97,7 +98,20 @@ export default function Iridescence({
       gl.canvas.style.left = '0';
       gl.canvas.style.top = '0';
       gl.canvas.style.overflow = 'hidden';
-      gl.canvas.style.maxWidth = '100vw';
+      gl.canvas.style.maxWidth = '100%';
+      gl.canvas.style.margin = '0';
+      gl.canvas.style.padding = '0';
+      
+      // Set explicit bounds to prevent overflow
+      updateCanvasBounds = () => {
+        const viewportWidth = document.documentElement.clientWidth;
+        gl.canvas.style.maxWidth = viewportWidth + 'px';
+        gl.canvas.style.width = viewportWidth + 'px';
+      };
+      
+      // Run initially and on resize
+      updateCanvasBounds();
+      window.addEventListener('resize', updateCanvasBounds);
     }
 
     const geometry = new Triangle(gl);
@@ -153,6 +167,8 @@ export default function Iridescence({
       if (mouseReact) {
         ctn.removeEventListener("mousemove", handleMouseMove);
       }
+      // Clean up the updateCanvasBounds listener
+      window.removeEventListener('resize', updateCanvasBounds);
       ctn.removeChild(gl.canvas);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
@@ -163,7 +179,13 @@ export default function Iridescence({
     <div
       ref={ctnDom}
       className="w-full h-full overflow-hidden"
-      style={{ maxWidth: '100vw', position: 'relative' }}
+      style={{ 
+        maxWidth: '100vw', 
+        position: 'relative',
+        overflow: 'hidden',
+        left: 0,
+        right: 0
+      }}
       {...rest}
     />
   );
