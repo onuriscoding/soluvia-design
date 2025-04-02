@@ -471,14 +471,14 @@ export default function WebDesignDevelopmentPage() {
                   online presence with a stunning, high-performance website.
                 </ScrollReveal>
                 <div
-                  className="md:mt-0 -mt-18"
+          
                   style={{
                     width: "100%",
                     height: "600px",
                     position: "relative",
                   }}
                 >
-                  <div className="absolute inset-0 z-10">
+                  <div className="absolute inset-0 z-10 md:mt-0 -mt-24">
                     <Orb
                       hoverIntensity={0.5}
                       rotateOnHover={true}
