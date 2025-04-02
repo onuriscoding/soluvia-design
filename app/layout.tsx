@@ -7,6 +7,7 @@ import { VideoBackground } from "@/components/video-background";
 import { PageTransition } from "@/components/page-transition";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import ScrollIndicator from "@/components/scroll-indicator";
+import BrowserFixes from "@/components/browser-fixes";
 import "@/styles/enhanced-animations.css";
 import Iridescence from "./animations/bg";
 
@@ -27,15 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.className} ${anton.variable}`}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
-        <style dangerouslySetInnerHTML={{ __html: `
-          html, body {
-            overflow-x: hidden !important;
-          }
-        `}} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className="relative min-h-screen">
-        {/* Scroll Indicator - Outside of SmoothScroll to work correctly */}
+        <BrowserFixes />
         <ScrollIndicator />
         
         <SmoothScroll>
@@ -54,7 +50,6 @@ export default function RootLayout({
               <RedesignedFooter />
             </div>
           </div>
-          
         </SmoothScroll>
       </body>
     </html>
