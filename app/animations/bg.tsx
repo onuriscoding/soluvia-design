@@ -96,7 +96,7 @@ export default function Iridescence({
       gl.canvas.style.position = 'absolute';
       gl.canvas.style.left = '0';
       gl.canvas.style.top = '0';
-      gl.canvas.style.overflow = 'clip';
+      gl.canvas.style.overflow = 'hidden';
       gl.canvas.style.maxWidth = '100vw';
     }
 
@@ -162,7 +162,7 @@ export default function Iridescence({
   return (
     <div
       ref={ctnDom}
-      className="w-full h-full overflow-clip"
+      className="w-full h-full overflow-hidden"
       style={{ maxWidth: '100vw', position: 'relative' }}
       {...rest}
     />

@@ -504,7 +504,7 @@ export default function AiAutomationPage() {
         <motion.div className="container">
             <div className="relative z-10 md:mt-0">
               <motion.div className="mx-auto max-w-3xl text-center">
-                <h1 className="text-5xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
+                <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
                   Ready to automate your{" "}
                   <GradientText
                     colors={[

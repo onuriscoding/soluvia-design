@@ -27,15 +27,6 @@ export default function RootLayout({
     <html lang="en" className={`${inter.className} ${anton.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <style>
-          {`
-            html, body { 
-              overflow-x: clip !important; 
-              width: 100% !important; 
-              max-width: 100vw !important;
-            }
-          `}
-        </style>
       </head>
       <body>
         {/* Global constraint to prevent white space */}
@@ -45,7 +36,7 @@ export default function RootLayout({
         
         <FullPageWrapper>
           {/* Background */}
-          <div className="fixed inset-0">
+          <div className="fixed inset-0 overflow-hidden">
             <Iridescence />
           </div>
           
@@ -53,7 +44,7 @@ export default function RootLayout({
           <div className="relative z-10">
             <EnhancedNavigationBar />
             <PageTransition>
-              <main>{children}</main>
+              <main className="overflow-x-hidden">{children}</main>
             </PageTransition>
             <RedesignedFooter />
           </div>

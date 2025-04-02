@@ -13,14 +13,12 @@ export default function FullPageWrapper({
     const preventOverflow = () => {
       // Force HTML and body to be contained
       document.documentElement.style.width = '100%';
-      document.documentElement.style.overflowX = 'clip';
+      document.documentElement.style.overflowX = 'hidden';
       document.body.style.width = '100%';
-      document.body.style.overflowX = 'clip';
+      document.body.style.overflowX = 'hidden';
       
       // Touch events handling for mobile
       document.body.style.touchAction = 'pan-y';
-      
-      // When using 'clip' instead of 'hidden', it's more aggressive at preventing overflow
     };
     
     preventOverflow();
@@ -39,7 +37,7 @@ export default function FullPageWrapper({
       style={{
         width: '100%',
         maxWidth: '100vw',
-        overflowX: 'clip',
+        overflowX: 'hidden',
         position: 'relative',
         margin: 0,
         padding: 0
