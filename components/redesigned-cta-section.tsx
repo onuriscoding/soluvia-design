@@ -74,7 +74,7 @@ export function RedesignedCTASection() {
               ?
             </h1>
           </div>
-          <div className="relative z-10 md:mt-0 mt-28">
+          <div className="relative z-10 md:mt-0 mt-12">
             <motion.div
               className="mx-auto max-w-3xl text-center"
               initial={{ opacity: 0, y: 20 }}
@@ -82,7 +82,7 @@ export function RedesignedCTASection() {
               transition={{ duration: 0.5 }}
             >
               <ScrollReveal
-                textClassName="text-lg md:text-2xl mt-4 text-ivory/70"
+                textClassName="text-lg md:text-2xl text-ivory/70"
                 baseOpacity={0.1}
                 enableBlur={true}
                 baseRotation={3}
@@ -92,7 +92,7 @@ export function RedesignedCTASection() {
               </ScrollReveal>
 
               <div
-                style={{ width: "100%", height: "600px", position: "relative" }}
+                style={{ width: "100%", height: "800px", position: "relative" }}
               >
                 <div className="absolute inset-0 z-10">
                   <Orb

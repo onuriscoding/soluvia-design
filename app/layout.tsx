@@ -42,10 +42,9 @@ export default function RootLayout({
               <PageTransition>
                 <main className="flex-1">{children}</main>
               </PageTransition>
-              
+              <RedesignedFooter />
             </div>
           </div>
-          <RedesignedFooter />
         </SmoothScroll>
       </body>
     </html>

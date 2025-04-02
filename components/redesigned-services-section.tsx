@@ -101,7 +101,7 @@ export function RedesignedServicesSection() {
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: isMobile
-      ? ["start end", "end start"]
+      ? ["start 20%", "end start"]
       : ["start -20%", "end 50%"],
   });
 

@@ -5,6 +5,16 @@ import { useEffect } from "react"
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
+    // Set initial viewport height for mobile browsers
+    const setViewportHeight = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    // Run on mount and resize
+    setViewportHeight();
+    window.addEventListener('resize', setViewportHeight);
+
     // Simple smooth scrolling for anchor links
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement
@@ -27,9 +37,12 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     }
 
     document.addEventListener("click", handleClick)
-    return () => document.removeEventListener("click", handleClick)
+    return () => {
+      document.removeEventListener("click", handleClick)
+      window.removeEventListener('resize', setViewportHeight);
+    }
   }, [])
 
-  return <>{children}</>
+  return <div className="smooth-scroll-container">{children}</div>
 }
 

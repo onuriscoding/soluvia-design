@@ -148,7 +148,7 @@ export function RedesignedTestimonialsSection() {
           <div className="w-full flex justify-center md:mb-4 -mb-12">
             <ScrollVelocity
               texts={["What our", "clients say", "about us"]}
-              className="text-[6.8rem] h-[6.5rem]"
+              className="md:text-[6.8rem] md:h-[6.5rem]"
               velocity={50}
             />
           </div>
