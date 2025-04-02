@@ -182,7 +182,7 @@ export default function AboutPageClient() {
                     ]}
                     animationSpeed={12}
                     showBorder={false}
-                    className="font-anton lowercase text-[8.5rem]"
+                    className="font-anton lowercase text-6xl md:text-[8.5rem]"
                   >
                     soluvia
                   </GradientText>

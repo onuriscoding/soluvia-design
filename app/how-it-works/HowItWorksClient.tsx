@@ -145,7 +145,7 @@ export default function HowItWorksClient() {
                   ]}
                   animationSpeed={12}
                   showBorder={false}
-                  className="font-bold text-[9rem]"
+                  className="font-bold text-6xl md:text-[9rem]"
                 >
                   Works
                 </GradientText>
