@@ -24,13 +24,6 @@ export function initSafariFix() {
       position: relative !important;
     }
     
-    /* Force hardware acceleration for smoother scrolling */
-    body {
-      -webkit-transform: translateZ(0);
-      -webkit-perspective: 1000;
-      -webkit-backface-visibility: hidden;
-    }
-    
     /* Fix Safari's tendency to show white space on momentum scroll */
     .fixed.inset-0 {
       top: 0 !important;
@@ -52,11 +45,8 @@ export function initSafariFix() {
     
     // Detect downward scrolling - where white space typically appears
     if (currentScroll > lastScrollTop) {
-      document.documentElement.style.overflow = 'hidden';
-      // Release after a brief delay 
-      setTimeout(() => {
-        document.documentElement.style.overflow = '';
-      }, 10);
+      document.documentElement.style.overflowX = 'hidden';
+      // No need to restore - just keep it hidden
     }
     
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;

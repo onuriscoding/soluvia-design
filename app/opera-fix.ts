@@ -19,28 +19,17 @@ export function initOperaFix() {
   operaStyle.textContent = `
     /* Opera-specific fix to ensure scrolling works properly */
     html, body {
-      position: static !important;
-      overflow: auto !important;
-      height: auto !important;
-      touch-action: auto !important;
-    }
-    
-    /* Ensure Opera can scroll properly */
-    .smooth-scroll-container {
-      overflow: visible !important;
+      overflow-y: auto !important;
       height: auto !important;
     }
   `;
   
   document.head.appendChild(operaStyle);
 
-  // Important: Remove any position:fixed or overflow:hidden styles that might be blocking scrolling
+  // Minimal fix for Opera - just remove overflow constraints
   const fixOperaScrolling = () => {
-    document.body.style.removeProperty('position');
-    document.body.style.removeProperty('overflow');
-    document.body.style.removeProperty('height');
-    document.body.style.removeProperty('top');
     document.documentElement.style.removeProperty('overflow');
+    document.body.style.removeProperty('overflow');
   };
   
   // Apply fixes

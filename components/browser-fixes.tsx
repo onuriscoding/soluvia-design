@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { setupOverflowFix } from '@/app/overflow-fix';
 import { initSafariFix } from '@/app/safari-fix';
 import { initOperaFix } from '@/app/opera-fix';
+import PreserveBackground from './preserve-background';
 
 export default function BrowserFixes() {
   useEffect(() => {
@@ -23,5 +24,5 @@ export default function BrowserFixes() {
     };
   }, []);
   
-  return null;
+  return <PreserveBackground />;
 } 
