@@ -7,7 +7,6 @@ import { VideoBackground } from "@/components/video-background";
 import { PageTransition } from "@/components/page-transition";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import ScrollIndicator from "@/components/scroll-indicator";
-import BrowserFixes from "@/components/browser-fixes";
 import "@/styles/enhanced-animations.css";
 import Iridescence from "./animations/bg";
 
@@ -29,9 +28,13 @@ export default function RootLayout({
     <html lang="en" className={`${inter.className} ${anton.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>{`
+          html, body {
+            overflow-x: hidden;
+          }
+        `}</style>
       </head>
       <body className="relative min-h-screen">
-        <BrowserFixes />
         <ScrollIndicator />
         
         <SmoothScroll>
