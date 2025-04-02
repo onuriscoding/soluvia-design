@@ -280,7 +280,7 @@ export default function AiAutomationPage() {
             variants={containerVariants}
           >
             <motion.div variants={itemVariants}>
-              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-8xl">
+              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem]">
                 AI &{" "}
                 <GradientText
                   colors={[
@@ -535,6 +535,7 @@ export default function AiAutomationPage() {
                   drive efficiency and growth.
                 </ScrollReveal>
                 <div
+                className="md:mt-0 -mt-12"
                   style={{
                     width: "100%",
                     height: "600px",

@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, contactPreference, phone, email, description } = body;
+    const { name, contactPreference, phone, email, description, service, budget, timeframe } = body;
 
     // Validate the required fields
     if (!name || !description || !contactPreference) {
@@ -43,6 +43,17 @@ export async function POST(request: Request) {
       ? `Phone: ${phone}` 
       : `Email: ${email}`;
 
+    // Include additional fields if they exist
+    const additionalFields = [];
+    if (service) additionalFields.push(`<p><strong>Service:</strong> ${service}</p>`);
+    if (budget) additionalFields.push(`<p><strong>Budget:</strong> ${budget}</p>`);
+    if (timeframe) additionalFields.push(`<p><strong>Timeframe:</strong> ${timeframe}</p>`);
+    
+    const additionalFieldsText = [];
+    if (service) additionalFieldsText.push(`Service: ${service}`);
+    if (budget) additionalFieldsText.push(`Budget: ${budget}`);
+    if (timeframe) additionalFieldsText.push(`Timeframe: ${timeframe}`);
+
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_RECIPIENT || process.env.EMAIL_USER,
@@ -51,6 +62,7 @@ export async function POST(request: Request) {
         Name: ${name}
         Contact Preference: ${contactPreference}
         ${contactMethod}
+        ${additionalFieldsText.join('\n')}
         
         Project Description:
         ${description}
@@ -60,6 +72,7 @@ export async function POST(request: Request) {
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Contact Preference:</strong> ${contactPreference}</p>
         <p><strong>${contactPreference === 'phone' ? 'Phone' : 'Email'}:</strong> ${contactPreference === 'phone' ? phone : email}</p>
+        ${additionalFields.join('\n')}
         
         <h3>Project Description:</h3>
         <p>${description}</p>

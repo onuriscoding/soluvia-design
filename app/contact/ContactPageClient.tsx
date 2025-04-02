@@ -133,7 +133,7 @@ export default function ContactPageClient() {
             variants={containerVariants}
           >
             <motion.div variants={itemVariants}>
-              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-8xl">
+              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem]">
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -187,7 +187,7 @@ export default function ContactPageClient() {
 
         {/* Touch Icon Animation - Centered */}
         <motion.div
-          className="absolute left-1/2 top-[75%] right-[50%] transform -translate-x-1/2 z-20 cursor-pointer"
+          className="absolute -mt-20 left-1/2 top-[75%] right-[50%] transform -translate-x-1/2 z-20 cursor-pointer"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{
@@ -226,7 +226,7 @@ export default function ContactPageClient() {
               <Hand className="h-10 w-10 text-ivory" />
             </div>
             <motion.p
-              className="absolute -bottom-18 md:-bottom-10 whitespace-nowrap text-center text-base font-medium text-ivory/90"
+              className="absolute -bottom-10 whitespace-nowrap text-center text-base font-medium text-ivory/90"
               animate={{
                 y: [0, 3, 0],
                 opacity: [0.8, 1, 0.8],

@@ -85,92 +85,7 @@ export default function HowItWorksClient() {
     };
   }, []);
 
-  // Fix for hydration errors - don't render motion effects until client-side
-  if (!isMounted) {
-    // Simple non-animated version for SSR
-    return (
-      <>
-        {/* Hero Section - Static version for SSR */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          <div className="container relative z-10 px-4">
-            <div className="mx-auto max-w-4xl text-center">
-              <div>
-                <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-8xl">
-                  How It Works
-                </h1>
-              </div>
-              <div className="mt-8">
-                <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
-                  A thoughtful journey from concept to completion, blending human creativity with AI-enhanced precision.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Static content for Process Section */}
-        <section id="process-section" className="py-24 md:py-32">
-          <div className="container">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold tracking-tight md:text-6xl">
-                Our Process
-              </h2>
-              <p className="text-lg md:text-xl mt-4 text-ivory/70">
-                A structured approach to delivering exceptional digital experiences
-              </p>
-            </div>
-          </div>
-        </section>
-        
-        {/* Static content for Approach Section */}
-        <section className="py-24 md:py-32">
-          <div className="container">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold tracking-tight md:text-6xl">
-                Our Approach
-              </h2>
-              <p className="text-lg md:text-xl mt-4 text-ivory/70">
-                What makes our process unique and effective
-              </p>
-            </div>
-            
-            <div className="grid gap-16 md:grid-cols-2">
-              <div className="space-y-6">
-                {/* Static approach content */}
-                <div className="p-4">Human-Centered Design</div>
-                <div className="p-4">AI-Enhanced Solutions</div>
-                <div className="p-4">Collaborative Process</div>
-                <div className="p-4">Iterative Approach</div>
-              </div>
-              <div className="relative aspect-[4/3] bg-charcoal/30">
-                {/* Image placeholder */}
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Static content for CTA Section */}
-        <section className="py-24 md:py-32">
-          <div className="container">
-            <div className="rounded-3xl p-8 md:p-16 bg-charcoal/30 text-center">
-              <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-                Ready to start your digital journey?
-              </h2>
-              <p className="text-lg md:text-xl mt-4 text-ivory/70 mb-8">
-                Let's work together to bring your vision to life.
-              </p>
-              <Link 
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-full bg-rose px-6 py-3 text-base font-bold text-ivory"
-              >
-                GET STARTED
-              </Link>
-            </div>
-          </div>
-        </section>
-      </>
-    );
-  }
+  
 
   return (
     <>
@@ -217,7 +132,7 @@ export default function HowItWorksClient() {
             variants={containerVariants}
           >
             <motion.div variants={itemVariants}>
-              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-8xl">
+              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem]">
                 How It{" "}
                 <GradientText
                   colors={[
@@ -230,7 +145,7 @@ export default function HowItWorksClient() {
                   ]}
                   animationSpeed={12}
                   showBorder={false}
-                  className="font-bold text-8xl"
+                  className="font-bold text-[9rem]"
                 >
                   Works
                 </GradientText>

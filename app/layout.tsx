@@ -6,7 +6,7 @@ import { ScrollProgress } from "@/components/scroll-progress";
 import { VideoBackground } from "@/components/video-background";
 import { PageTransition } from "@/components/page-transition";
 import { SmoothScroll } from "@/components/smooth-scroll";
-import { FixedScrollIndicator } from "@/components/fixed-scroll-indicator";
+import ScrollIndicator from "@/components/scroll-indicator";
 import "@/styles/enhanced-animations.css";
 import Iridescence from "./animations/bg";
 
@@ -30,6 +30,9 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className="relative min-h-screen">
+        {/* Scroll Indicator - Outside of SmoothScroll to work correctly */}
+        <ScrollIndicator />
+        
         <SmoothScroll>
           {/* Video background - positioned absolutely to cover the entire viewport */}
           <div className="fixed inset-0 w-full h-full">
@@ -38,9 +41,6 @@ export default function RootLayout({
 
           {/* Site content - positioned above video with transparent background */}
           <div className="relative z-10">
-            {/* Scroll progress indicator */}
-            <ScrollProgress />
-
             <div className="flex min-h-screen flex-col justify-between">
               <EnhancedNavigationBar />
               <PageTransition>
@@ -50,8 +50,6 @@ export default function RootLayout({
             </div>
           </div>
           
-          {/* Simple fixed scroll indicator - client component */}
-          <FixedScrollIndicator />
         </SmoothScroll>
       </body>
     </html>

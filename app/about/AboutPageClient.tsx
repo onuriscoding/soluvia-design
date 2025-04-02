@@ -168,7 +168,7 @@ export default function AboutPageClient() {
             variants={containerVariants}
           >
             <motion.div variants={itemVariants}>
-              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-8xl">
+              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem]">
                 About{" "}
                 <span className="inline-flex items-center relative">
                   <GradientText
@@ -182,7 +182,7 @@ export default function AboutPageClient() {
                     ]}
                     animationSpeed={12}
                     showBorder={false}
-                    className="font-anton lowercase text-8xl"
+                    className="font-anton lowercase text-[8.5rem]"
                   >
                     soluvia
                   </GradientText>
@@ -648,7 +648,7 @@ export default function AboutPageClient() {
                 transition={{ duration: 0.5 }}
               >
                 <ScrollReveal
-                  textClassName="text-lg md:text-2xl mt-4 text-ivory/70"
+                  textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
                   baseOpacity={0.1}
                   enableBlur={true}
                   baseRotation={3}
@@ -659,6 +659,7 @@ export default function AboutPageClient() {
                 </ScrollReveal>
 
                 <div
+                className="md:mt-0 -mt-12"
                   style={{
                     width: "100%",
                     height: "600px",

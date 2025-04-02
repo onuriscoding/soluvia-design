@@ -129,7 +129,7 @@ export default function ServicesPage() {
             variants={containerVariants}
           >
             <motion.div variants={itemVariants}>
-              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-8xl">
+              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem]">
                 Our{" "}
                 <GradientText
                   colors={[

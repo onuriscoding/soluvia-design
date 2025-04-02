@@ -32,6 +32,21 @@ export function RedesignedContactSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
+  const resetForm = () => {
+    setIsSubmitted(false);
+    setStatus("idle");
+    setMessage("");
+    setFormState({
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+      service: "web-design",
+      budget: "",
+      timeframe: "",
+    });
+  };
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -41,7 +56,7 @@ export function RedesignedContactSection() {
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formState.name || !formState.email || !formState.message) {
@@ -53,9 +68,35 @@ export function RedesignedContactSection() {
     setIsSubmitting(true);
     setStatus("loading");
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // Prepare data format to match the API expectations
+      const apiData = {
+        name: formState.name,
+        contactPreference: formState.phone ? "phone" : "email", // Set based on whether phone is provided
+        email: formState.email,
+        phone: formState.phone,
+        description: formState.message,
+        // Additional fields from the contact form
+        service: formState.service,
+        budget: formState.budget,
+        timeframe: formState.timeframe
+      };
+
+      // Call the API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(apiData),
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong. Please try again.');
+      }
+      
       setIsSubmitted(true);
       setStatus("success");
       setMessage("Thank you for your message! We'll get back to you soon.");
@@ -68,7 +109,13 @@ export function RedesignedContactSection() {
         budget: "",
         timeframe: "",
       });
-    }, 1500);
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      setStatus("error");
+      setMessage(err instanceof Error ? err.message : 'Failed to send your message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -152,7 +199,7 @@ export function RedesignedContactSection() {
                       as possible.
                     </p>
                     <Button
-                      onClick={() => setIsSubmitted(false)}
+                      onClick={() => resetForm()}
                       className="bg-gradient-to-r from-rose to-sapphire hover:shadow-lg hover:shadow-rose/20"
                     >
                       Send Another Message
