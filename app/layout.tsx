@@ -2,13 +2,10 @@ import type React from "react";
 import { Inter, Anton } from "next/font/google";
 import { EnhancedNavigationBar } from "@/components/enhanced-navigation-bar";
 import { RedesignedFooter } from "@/components/redesigned-footer";
-import { ScrollProgress } from "@/components/scroll-progress";
-import { VideoBackground } from "@/components/video-background";
 import { PageTransition } from "@/components/page-transition";
-import { SmoothScroll } from "@/components/smooth-scroll";
 import ScrollIndicator from "@/components/scroll-indicator";
-import ViewportFix from "@/components/viewport-fix";
-import "@/styles/enhanced-animations.css";
+import FullPageWrapper from "@/components/full-page-wrapper";
+import GlobalConstraint from "@/components/global-constraint";
 import Iridescence from "./animations/bg";
 
 import "./globals.css";
@@ -27,47 +24,40 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.className} ${anton.variable} overflow-x-hidden`}>
+    <html lang="en" className={`${inter.className} ${anton.variable}`}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <style dangerouslySetInnerHTML={{
-          __html: `
-            html, body {
-              overflow-x: hidden !important;
-              width: 100% !important;
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+          {`
+            html, body { 
+              overflow-x: clip !important; 
+              width: 100% !important; 
               max-width: 100vw !important;
-              margin: 0 !important;
-              padding: 0 !important;
             }
-          `
-        }} />
+          `}
+        </style>
       </head>
-      <body className="relative min-h-screen overflow-x-hidden w-full max-w-[100vw]">
-        {/* ViewportFix component to eliminate white space on mobile */}
-        <ViewportFix />
+      <body>
+        {/* Global constraint to prevent white space */}
+        <GlobalConstraint />
         
-        {/* Scroll Indicator - Outside of SmoothScroll to work correctly */}
         <ScrollIndicator />
         
-        <div className="overflow-hidden max-w-[100vw] w-full">
-          <SmoothScroll>
-            {/* Video background - positioned absolutely to cover the entire viewport */}
-            <div className="fixed inset-0 w-full h-full overflow-hidden">
-              <Iridescence />
-            </div>
-
-            {/* Site content - positioned above video with transparent background */}
-            <div className="relative z-10 w-full overflow-hidden max-w-[100vw]">
-              <div className="flex min-h-screen flex-col justify-between w-full max-w-[100vw] overflow-hidden">
-                <EnhancedNavigationBar />
-                <PageTransition>
-                  <main className="flex-1 w-full max-w-[100vw] overflow-hidden">{children}</main>
-                </PageTransition>
-                <RedesignedFooter />
-              </div>
-            </div>
-          </SmoothScroll>
-        </div>
+        <FullPageWrapper>
+          {/* Background */}
+          <div className="fixed inset-0">
+            <Iridescence />
+          </div>
+          
+          {/* Content */}
+          <div className="relative z-10">
+            <EnhancedNavigationBar />
+            <PageTransition>
+              <main>{children}</main>
+            </PageTransition>
+            <RedesignedFooter />
+          </div>
+        </FullPageWrapper>
       </body>
     </html>
   );

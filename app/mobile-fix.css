@@ -2,7 +2,7 @@
 
 /* Base fixes for all devices */
 html, body {
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
   width: 100% !important;
   max-width: 100vw !important;
   margin: 0 !important;
@@ -11,38 +11,32 @@ html, body {
 }
 
 /* Container fixes */
-#__next, main, .smooth-scroll-container, [class*="section"], [class*="Section"] {
-  overflow-x: hidden !important;
+#__next, main, [class*="section"], [class*="Section"] {
+  overflow-x: clip !important;
   width: 100% !important;
   max-width: 100vw !important;
 }
 
 /* Fix for background elements */
 .fixed, [class*="background"], [class*="Background"] {
-  overflow: hidden !important;
+  overflow: clip !important;
   max-width: 100vw !important;
 }
 
 /* Extra fixes specifically for mobile devices */
 @media (max-width: 768px) {
   html, body {
-    touch-action: manipulation;
+    touch-action: pan-y;
     -webkit-overflow-scrolling: touch;
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     width: 100% !important;
     max-width: 100vw !important;
-  }
-  
-  .smooth-scroll-container {
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
   }
   
   main, section, [class*="section"], [class*="Section"] {
     width: 100% !important;
     max-width: 100vw !important;
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
   }
   
   /* Prevent horizontal scroll */

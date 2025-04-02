@@ -460,7 +460,7 @@ export default function WebDesignDevelopmentPage() {
                   ?
                 </h1>
                 <ScrollReveal
-                  textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70 max-w-6xl"
+                  textClassName="text-lg md:text-2xl mt-4 -mb-18 text-ivory/70 max-w-6xl"
                   baseOpacity={0.1}
                   enableBlur={true}
                   baseRotation={3}
@@ -477,7 +477,7 @@ export default function WebDesignDevelopmentPage() {
                     position: "relative",
                   }}
                 >
-                  <div className="absolute inset-0 z-10 md:mt-0 -mt-42">
+                  <div className="absolute inset-0 z-10 md:mt-0 -mt-52">
                     <Orb
                       hoverIntensity={0.5}
                       rotateOnHover={true}
@@ -485,7 +485,7 @@ export default function WebDesignDevelopmentPage() {
                       forceHoverState={false}
                     />
                   </div>
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none -mt-42">
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none -mt-52">
                     <motion.div className="flex flex-col items-center justify-center gap-4 pointer-events-auto">
                       <Link
                         href="/contact"

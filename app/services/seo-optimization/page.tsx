@@ -513,7 +513,6 @@ export default function SeoOptimizationPage() {
       {/* CTA Section */}
       <section className="py-24 md:py-32">
         <motion.div className="container">
-          <div className="relative overflow-hidden rounded-3xl p-8 md:p-16">
             <div className="relative z-10 md:mt-0">
               <motion.div className="mx-auto max-w-3xl text-center">
                 <h1 className="text-5xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
@@ -578,7 +577,6 @@ export default function SeoOptimizationPage() {
                 </div>
               </motion.div>
             </div>
-          </div>
         </motion.div>
       </section>
     </main>

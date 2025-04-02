@@ -88,6 +88,18 @@ export default function Iridescence({
     window.addEventListener("resize", resize, false);
     resize();
 
+    // Ensure canvas is contained
+    if (gl.canvas instanceof HTMLCanvasElement) {
+      gl.canvas.style.width = '100%';
+      gl.canvas.style.height = '100%';
+      gl.canvas.style.display = 'block';
+      gl.canvas.style.position = 'absolute';
+      gl.canvas.style.left = '0';
+      gl.canvas.style.top = '0';
+      gl.canvas.style.overflow = 'clip';
+      gl.canvas.style.maxWidth = '100vw';
+    }
+
     const geometry = new Triangle(gl);
     program = new Program(gl, {
       vertex: vertexShader,
@@ -150,7 +162,8 @@ export default function Iridescence({
   return (
     <div
       ref={ctnDom}
-      className="w-full h-full"
+      className="w-full h-full overflow-clip"
+      style={{ maxWidth: '100vw', position: 'relative' }}
       {...rest}
     />
   );
