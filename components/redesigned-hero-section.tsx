@@ -21,37 +21,38 @@ export function RedesignedHeroSection() {
   const isInView = useInView(scrollRef);
   const controls = useAnimation();
   const [rotatingText, setRotatingText] = useState("Designs");
-  const [scrollOpacity, setScrollOpacity] = useState(1);
-  const [scrollScale, setScrollScale] = useState(1);
-  const [scrollY, setScrollY] = useState(0);
 
-  // Handle scroll events
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
+
+  // Parallax effect for floating elements
+  const parallax1 = useTransform(scrollYProgress, [0, 1], [0, -550]);
+  const parallax2 = useTransform(scrollYProgress, [0, 1], [0, -400]);
+  const parallax3 = useTransform(scrollYProgress, [0, 1], [0, -600]);
+  const parallax4 = useTransform(scrollYProgress, [0, 1], [0, -520]);
+
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      
-      const scrollY = window.pageYOffset;
-      const sectionHeight = containerRef.current.offsetHeight;
-      const fadePoint = sectionHeight * 0.5;
-      
-      // Calculate scroll progress (0 to 1)
-      const progress = Math.min(Math.max(scrollY / fadePoint, 0), 1);
-      
-      // Update animation values
-      setScrollOpacity(1 - progress);
-      setScrollScale(1 - (progress * 0.2));
-      setScrollY(progress * 100);
+    // For Safari iOS - ensures scroll animations work
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) || 
+        /^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+      // Force a refresh of the scroll position to update animations
+      window.addEventListener('scroll', () => {
+        window.dispatchEvent(new CustomEvent('resize'));
+      }, { passive: true });
+    }
+    
+    // Staggered animation sequence
+    const sequence = async () => {
+      await controls.start("visible");
     };
-    
-    // Initial calculation
-    handleScroll();
-    
-    // Add scroll listener
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Cleanup
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    sequence();
+  }, [controls]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,13 +61,6 @@ export function RedesignedHeroSection() {
 
     return () => clearInterval(interval);
   }, []);
-
-  // Staggered animation sequence
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView, controls]);
 
   // Animated particles
   const particles = Array.from({ length: 20 }).map((_, i) => ({
@@ -209,15 +203,10 @@ export function RedesignedHeroSection() {
         </motion.div>
       </div> */}
 
-      {/* Main content with scroll-based animations */}
       <motion.div
         ref={scrollRef}
         className="container relative z-10 flex min-h-[calc(100vh-5rem)] flex-col items-center justify-center py-20"
-        style={{
-          opacity: scrollOpacity,
-          scale: scrollScale,
-          y: scrollY,
-        }}
+        style={{ opacity, scale, y }}
         variants={containerVariants}
         initial="hidden"
         animate={controls}

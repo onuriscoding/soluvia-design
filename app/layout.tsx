@@ -68,38 +68,32 @@ export default function RootLayout({
                 document.documentElement.classList.add('safari-fix');
                 document.body.classList.add('safari-fix');
                 
-                // Ensure animations work properly with scrolling
-                var lastScrollTime = 0;
-                var scrollThrottle = 10; // ms
-
-                function throttledScroll() {
-                  var now = Date.now();
-                  if (now - lastScrollTime > scrollThrottle) {
-                    lastScrollTime = now;
-                    window.dispatchEvent(new CustomEvent('scroll:throttled'));
-                  }
-                }
-                
-                // Safari scrolling fixes
-                window.addEventListener('scroll', throttledScroll, { passive: true });
-                                
-                // Prevent bounce only at bottom of page
-                var touchStartY = 0;
-                window.addEventListener('touchstart', function(e) {
-                  touchStartY = e.touches[0].clientY;
-                }, { passive: true });
-                
-                window.addEventListener('touchmove', function(e) {
+                // More effective solution that doesn't break animations
+                var preventBounce = function(e) {
+                  // Prevent only if at the boundary
                   var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                  var touchY = e.touches[0].clientY;
-                  var direction = touchStartY - touchY;
-                  var isAtBottom = (window.innerHeight + scrollTop) >= document.body.offsetHeight - 5;
+                  var isAtTop = scrollTop <= 0;
+                  var isAtBottom = (window.innerHeight + scrollTop) >= document.body.offsetHeight;
                   
-                  // Only prevent scrolling down when at the bottom of the page
-                  if (isAtBottom && direction > 0) {
+                  if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
                     e.preventDefault();
                   }
-                }, { passive: false });
+                };
+                
+                // Add the event listener with passive: false to allow preventDefault
+                window.addEventListener('wheel', preventBounce, { passive: false });
+                window.addEventListener('touchmove', function(e) {
+                  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                  var isAtBottom = (window.innerHeight + scrollTop) >= document.body.offsetHeight - 5;
+                  
+                  if (isAtBottom) {
+                    // Add a tiny bit of padding at the bottom when at the end
+                    document.body.style.paddingBottom = '1px';
+                    setTimeout(function() {
+                      document.body.style.paddingBottom = '0px';
+                    }, 300);
+                  }
+                }, { passive: true });
               }
             })();
           `

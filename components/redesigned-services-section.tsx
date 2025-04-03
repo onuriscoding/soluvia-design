@@ -82,15 +82,10 @@ const services = [
 export function RedesignedServicesSection() {
   const [activeService, setActiveService] = useState<string>(services[0].id);
   const [isMobile, setIsMobile] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
+  const scrollRef = useRef(null);
   const isInView = useInView(scrollRef);
   const controls = useAnimation();
-  
-  // Use state for animation values instead of refs
-  const [scrollOpacity, setScrollOpacity] = useState(1);
-  const [scrollScale, setScrollScale] = useState(1);
-  const [scrollY, setScrollY] = useState(0);
 
   // Check for mobile viewport
   useEffect(() => {
@@ -103,59 +98,31 @@ export function RedesignedServicesSection() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Handle scroll events for animations
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!ref.current) return;
-      
-      // Get section position relative to viewport
-      const rect = ref.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const sectionPosition = rect.top;
-      const sectionHeight = rect.height;
-      
-      if (isMobile) {
-        // Mobile calculation
-        const startFade = viewportHeight * 0.5;
-        const scrollProgress = Math.min(
-          Math.max((startFade - sectionPosition) / (sectionHeight * 0.7), 0),
-          1
-        );
-        
-        // Mobile animation: Keep visible longer, then fade quickly
-        if (scrollProgress > 0.5) {
-          setScrollOpacity(scrollProgress > 0.9 ? 0 : 1);
-          setScrollScale(scrollProgress > 0.9 ? 0.95 : 1);
-          setScrollY(scrollProgress > 0.9 ? 30 : 0);
-        } else {
-          setScrollOpacity(1);
-          setScrollScale(1);
-          setScrollY(0);
-        }
-      } else {
-        // Desktop calculation
-        const startFade = viewportHeight * 0.2;
-        const scrollProgress = Math.min(
-          Math.max((startFade - sectionPosition) / sectionHeight, 0),
-          1
-        );
-        
-        // Desktop animation: Smooth fade out
-        setScrollOpacity(1 - scrollProgress);
-        setScrollScale(1 - scrollProgress * 0.05);
-        setScrollY(scrollProgress * 30);
-      }
-    };
-    
-    // Initial calculation
-    handleScroll();
-    
-    // Add scroll listener
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Cleanup
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobile]);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: isMobile
+      ? ["start 20%", "end start"]
+      : ["start -20%", "end 50%"],
+  });
+
+  // Transform values with different configurations for mobile
+  const opacity = useTransform(
+    scrollYProgress,
+    isMobile ? [0, 0.5, 0.9] : [0, 0.9],
+    isMobile ? [1, 1, 0] : [1, 0]
+  );
+
+  const scale = useTransform(
+    scrollYProgress,
+    isMobile ? [0, 0.5, 0.9] : [0, 0.9],
+    isMobile ? [1, 1, 0.95] : [1, 0.95]
+  );
+
+  const y = useTransform(
+    scrollYProgress,
+    isMobile ? [0, 0.5, 0.9] : [0, 0.9],
+    isMobile ? [0, 0, 30] : [0, 30]
+  );
 
   // Add useEffect to handle initial animation state
   useEffect(() => {
@@ -205,9 +172,9 @@ export function RedesignedServicesSection() {
         ref={scrollRef}
         className="container relative z-10"
         style={{
-          opacity: scrollOpacity,
-          scale: scrollScale,
-          y: scrollY,
+          opacity,
+          scale,
+          y,
         }}
         initial="hidden"
         animate={controls}

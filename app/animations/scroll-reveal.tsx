@@ -90,7 +90,6 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
             // Improve performance on Safari
             fastScrollEnd: isSafari,
             preventOverlaps: true,
-            invalidateOnRefresh: true,
           },
         }
       );
@@ -108,7 +107,6 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
           // Improve performance on Safari
           fastScrollEnd: isSafari,
           preventOverlaps: true,
-          invalidateOnRefresh: true,
         },
       });
 
@@ -132,29 +130,25 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
         );
       });
 
-      // Force refresh on scroll (especially for Safari)
-      const refreshScrollTrigger = () => {
-        ScrollTrigger.refresh();
-      };
-      
-      // Listen for standard scroll and our custom throttled scroll event
-      window.addEventListener('scroll:throttled', refreshScrollTrigger, { passive: true });
-      
-      // For Safari: add additional refresh trigger for resize events
+      // For Safari: Add a refresh trigger on scroll events
       if (isSafari) {
-        window.addEventListener('resize', refreshScrollTrigger, { passive: true });
+        let refreshTimeout: any;
+        const refreshHandler = () => {
+          clearTimeout(refreshTimeout);
+          refreshTimeout = setTimeout(() => {
+            ScrollTrigger.refresh();
+          }, 200);
+        };
+        
+        window.addEventListener('scroll', refreshHandler, { passive: true });
+        return { 
+          rotationTween, 
+          tl,
+          cleanup: () => window.removeEventListener('scroll', refreshHandler)
+        };
       }
-      
-      return { 
-        rotationTween, 
-        tl,
-        cleanup: () => {
-          window.removeEventListener('scroll:throttled', refreshScrollTrigger);
-          if (isSafari) {
-            window.removeEventListener('resize', refreshScrollTrigger);
-          }
-        }
-      };
+
+      return { rotationTween, tl, cleanup: () => {} };
     };
 
     // Initialize animations
