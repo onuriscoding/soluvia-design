@@ -25,11 +25,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.className} ${anton.variable}`} style={{overflowX: "hidden", overflowY: "auto"}}>
+    <html lang="en" className={`${inter.className} ${anton.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>{`
+          html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+          }
+        `}</style>
       </head>
-      <body className="relative min-h-screen -webkit-overflow-scrolling: auto;" style={{overflowX: "hidden", overflowY: "auto"}}>
+      <body className="relative min-h-screen">
         <ScrollIndicator />
         
         <SmoothScroll>
