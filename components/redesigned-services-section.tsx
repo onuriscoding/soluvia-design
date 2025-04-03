@@ -82,10 +82,21 @@ const services = [
 export function RedesignedServicesSection() {
   const [activeService, setActiveService] = useState<string>(services[0].id);
   const [isMobile, setIsMobile] = useState(false);
-  const ref = useRef(null);
-  const scrollRef = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(scrollRef);
   const controls = useAnimation();
+  
+  // Use ref for animation values instead of state for better performance
+  const animationRef = useRef({
+    scrollY: 0,
+    opacity: 1,
+    scale: 1,
+    yOffset: 0,
+    sectionTop: 0,
+    sectionHeight: 0,
+    rafId: 0
+  });
 
   // Check for mobile viewport
   useEffect(() => {
@@ -98,31 +109,84 @@ export function RedesignedServicesSection() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: isMobile
-      ? ["start 20%", "end start"]
-      : ["start -20%", "end 50%"],
-  });
-
-  // Transform values with different configurations for mobile
-  const opacity = useTransform(
-    scrollYProgress,
-    isMobile ? [0, 0.5, 0.9] : [0, 0.9],
-    isMobile ? [1, 1, 0] : [1, 0]
-  );
-
-  const scale = useTransform(
-    scrollYProgress,
-    isMobile ? [0, 0.5, 0.9] : [0, 0.9],
-    isMobile ? [1, 1, 0.95] : [1, 0.95]
-  );
-
-  const y = useTransform(
-    scrollYProgress,
-    isMobile ? [0, 0.5, 0.9] : [0, 0.9],
-    isMobile ? [0, 0, 30] : [0, 30]
-  );
+  // Set up animation with requestAnimationFrame for smoother performance
+  useEffect(() => {
+    const section = ref.current;
+    const content = scrollRef.current;
+    if (!section || !content) return;
+    
+    // Initial measurements
+    const updateMeasurements = () => {
+      const rect = section.getBoundingClientRect();
+      animationRef.current.sectionTop = rect.top + window.scrollY;
+      animationRef.current.sectionHeight = rect.height;
+    };
+    
+    updateMeasurements();
+    
+    // Animation function that runs every frame
+    const animate = () => {
+      animationRef.current.scrollY = window.scrollY;
+      const { scrollY, sectionTop, sectionHeight } = animationRef.current;
+      
+      // Section position relative to viewport
+      const sectionPosition = sectionTop - scrollY;
+      const viewportHeight = window.innerHeight;
+      
+      if (isMobile) {
+        // Mobile animation logic
+        const startFade = viewportHeight * 0.5;
+        const scrollProgress = Math.min(
+          Math.max((startFade - sectionPosition) / (sectionHeight * 0.7), 0),
+          1
+        );
+        
+        // Mobile animation: Keep visible longer, then fade quickly
+        if (scrollProgress > 0.5) {
+          animationRef.current.opacity = scrollProgress > 0.9 ? 0 : 1;
+          animationRef.current.scale = scrollProgress > 0.9 ? 0.95 : 1;
+          animationRef.current.yOffset = scrollProgress > 0.9 ? 30 : 0;
+        } else {
+          animationRef.current.opacity = 1;
+          animationRef.current.scale = 1;
+          animationRef.current.yOffset = 0;
+        }
+      } else {
+        // Desktop animation logic
+        const startFade = viewportHeight * 0.2;
+        const scrollProgress = Math.min(
+          Math.max((startFade - sectionPosition) / sectionHeight, 0),
+          1
+        );
+        
+        // Desktop animation: Smooth fade out as we scroll
+        animationRef.current.opacity = 1 - scrollProgress;
+        animationRef.current.scale = 1 - scrollProgress * 0.05;
+        animationRef.current.yOffset = scrollProgress * 30;
+      }
+      
+      // Apply styles directly to the DOM element for better performance
+      if (content) {
+        content.style.opacity = animationRef.current.opacity.toString();
+        content.style.transform = `scale(${animationRef.current.scale}) translateY(${animationRef.current.yOffset}px)`;
+      }
+      
+      // Continue animation loop
+      animationRef.current.rafId = requestAnimationFrame(animate);
+    };
+    
+    // Start animation loop
+    animationRef.current.rafId = requestAnimationFrame(animate);
+    
+    // Update measurements on resize
+    window.addEventListener('resize', updateMeasurements);
+    
+    // Cleanup
+    return () => {
+      cancelAnimationFrame(animationRef.current.rafId);
+      window.removeEventListener('resize', updateMeasurements);
+    };
+  }, [isMobile]);
 
   // Add useEffect to handle initial animation state
   useEffect(() => {
@@ -171,11 +235,6 @@ export function RedesignedServicesSection() {
       <motion.div
         ref={scrollRef}
         className="container relative z-10"
-        style={{
-          opacity,
-          scale,
-          y,
-        }}
         initial="hidden"
         animate={controls}
         variants={containerVariants}

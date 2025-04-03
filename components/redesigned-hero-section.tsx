@@ -21,38 +21,67 @@ export function RedesignedHeroSection() {
   const isInView = useInView(scrollRef);
   const controls = useAnimation();
   const [rotatingText, setRotatingText] = useState("Designs");
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
+  
+  // Use refs for animation values instead of state for better performance
+  const animationRef = useRef({
+    scrollY: 0,
+    opacity: 1,
+    scale: 1,
+    yOffset: 0,
+    sectionHeight: 0,
+    rafId: 0
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
-  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
-
-  // Parallax effect for floating elements
-  const parallax1 = useTransform(scrollYProgress, [0, 1], [0, -550]);
-  const parallax2 = useTransform(scrollYProgress, [0, 1], [0, -400]);
-  const parallax3 = useTransform(scrollYProgress, [0, 1], [0, -600]);
-  const parallax4 = useTransform(scrollYProgress, [0, 1], [0, -520]);
-
+  // Setup scroll animation with requestAnimationFrame for smoother performance
   useEffect(() => {
-    // For Safari iOS - ensures scroll animations work
-    if (/iPad|iPhone|iPod/.test(navigator.userAgent) || 
-        /^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-      // Force a refresh of the scroll position to update animations
-      window.addEventListener('scroll', () => {
-        window.dispatchEvent(new CustomEvent('resize'));
-      }, { passive: true });
-    }
+    const container = containerRef.current;
+    if (!container) return;
     
-    // Staggered animation sequence
-    const sequence = async () => {
-      await controls.start("visible");
+    // Measure section height once
+    animationRef.current.sectionHeight = container.offsetHeight;
+    
+    // Animation function that runs every frame
+    const animate = () => {
+      const scrollY = window.scrollY;
+      const sectionHeight = animationRef.current.sectionHeight;
+      
+      // Calculate how far we've scrolled into the section (0 to 1)
+      const endFade = sectionHeight * 0.5; // Fade out by 50% of section height
+      const scrollProgress = Math.min(Math.max(scrollY / endFade, 0), 1);
+      
+      // Update animation values
+      animationRef.current.opacity = 1 - scrollProgress;
+      animationRef.current.scale = 1 - scrollProgress * 0.2;
+      animationRef.current.yOffset = scrollProgress * 100;
+      
+      // Apply styles directly to the DOM element for better performance
+      if (scrollRef.current) {
+        scrollRef.current.style.opacity = animationRef.current.opacity.toString();
+        scrollRef.current.style.transform = `scale(${animationRef.current.scale}) translateY(${animationRef.current.yOffset}px)`;
+      }
+      
+      // Continue animation loop
+      animationRef.current.rafId = requestAnimationFrame(animate);
     };
-    sequence();
-  }, [controls]);
+    
+    // Start animation loop
+    animationRef.current.rafId = requestAnimationFrame(animate);
+    
+    // Handle resize
+    const handleResize = () => {
+      if (container) {
+        animationRef.current.sectionHeight = container.offsetHeight;
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup
+    return () => {
+      cancelAnimationFrame(animationRef.current.rafId);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -61,6 +90,13 @@ export function RedesignedHeroSection() {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Staggered animation sequence for initial load
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [isInView, controls]);
 
   // Animated particles
   const particles = Array.from({ length: 20 }).map((_, i) => ({
@@ -203,10 +239,10 @@ export function RedesignedHeroSection() {
         </motion.div>
       </div> */}
 
+      {/* Main content with scroll-based animations */}
       <motion.div
         ref={scrollRef}
         className="container relative z-10 flex min-h-[calc(100vh-5rem)] flex-col items-center justify-center py-20"
-        style={{ opacity, scale, y }}
         variants={containerVariants}
         initial="hidden"
         animate={controls}
