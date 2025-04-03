@@ -32,11 +32,11 @@ export default function RootLayout({
           html, body {
             overflow-x: hidden;
             width: 100%;
-            position: relative;
+            position: absolute;
           }
         `}</style>
       </head>
-      <body className="relative min-h-screen">
+      <body className="absolute min-h-screen w-full">
         <ScrollIndicator />
         
         <SmoothScroll>
@@ -46,7 +46,7 @@ export default function RootLayout({
           </div>
 
           {/* Site content - positioned above video with transparent background */}
-          <div className="relative z-10">
+          <div className="absolute z-10 w-full">
             <div className="flex min-h-screen flex-col justify-between">
               <EnhancedNavigationBar />
               <PageTransition>
