@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.className} ${anton.variable}`}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         <style>{`
           /* Base styles for all browsers */
           html, body {
@@ -36,41 +36,91 @@ export default function RootLayout({
             position: relative;
           }
           
-          /* Safari-only fix */
+          /* Safari iOS fix - extremely aggressive */
           @supports (-webkit-touch-callout: none) {
-            html, body {
+            html {
               position: relative !important;
+              width: 100vw !important;
+              overflow-x: hidden !important;
             }
             
-            /* This class is added via JS only on Safari */
-            .safari-fix {
-              position: absolute !important;
-              width: 100% !important;
+            body {
+              width: 100vw !important;
+              position: relative !important;
               overflow-x: hidden !important;
+              margin: 0 !important;
+              left: 0 !important;
+              right: 0 !important;
+            }
+            
+            /* Hide horizontal scrollbar on Safari */
+            ::-webkit-scrollbar {
+              display: none !important;
+            }
+            
+            /* Force all containers to stay within viewport */
+            div, main, section, nav, header, footer {
+              max-width: 100vw !important;
+              overflow-x: hidden !important;
+            }
+            
+            /* Fix for fixed background */
+            .fixed.inset-0 {
+              width: 100vw !important;
+              left: 0 !important;
+              right: 0 !important;
             }
           }
         `}</style>
         <script dangerouslySetInnerHTML={{
           __html: `
-            // Safari detection and fix
+            // iOS Safari detection and super aggressive fix
             (function() {
-              var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-              if (isSafari) {
-                document.documentElement.classList.add('safari-fix');
-                document.body.classList.add('safari-fix');
+              var ua = window.navigator.userAgent;
+              var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+              var webkit = !!ua.match(/WebKit/i);
+              var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
+              
+              if (iOSSafari) {
+                // Apply viewport width to ROOT container
+                document.documentElement.style.width = window.innerWidth + 'px';
                 
-                // Monitor scroll position to prevent white space during momentum scrolling
+                // Lock body width
+                document.body.style.width = window.innerWidth + 'px';
+                document.body.style.overflowX = 'hidden';
+                
+                // Apply to ALL direct children of body to ensure no overflow
+                var bodyChildren = document.body.children;
+                for (var i = 0; i < bodyChildren.length; i++) {
+                  bodyChildren[i].style.maxWidth = window.innerWidth + 'px';
+                  bodyChildren[i].style.overflowX = 'hidden';
+                }
+                
+                // Apply additional constraints during scroll
                 var lastScrollTop = 0;
                 window.addEventListener('scroll', function() {
+                  document.documentElement.style.width = window.innerWidth + 'px';
+                  document.body.style.width = window.innerWidth + 'px';
+                  document.body.style.overflowX = 'hidden';
+                  
                   var st = window.pageYOffset || document.documentElement.scrollTop;
                   if (st > lastScrollTop) {
-                    // Scrolling DOWN - apply more aggressive constraints
-                    document.documentElement.style.overflow = 'hidden';
-                    setTimeout(function() {
-                      document.documentElement.style.overflow = '';
-                    }, 10);
+                    // Scrolling DOWN - brief overflow lock
+                    document.documentElement.style.overflowX = 'hidden';
                   }
                   lastScrollTop = (st <= 0) ? 0 : st;
+                }, {passive: true});
+                
+                // Handle resize
+                window.addEventListener('resize', function() {
+                  document.documentElement.style.width = window.innerWidth + 'px';
+                  document.body.style.width = window.innerWidth + 'px';
+                }, {passive: true});
+                
+                // Handle orientation change
+                window.addEventListener('orientationchange', function() {
+                  document.documentElement.style.width = window.innerWidth + 'px';
+                  document.body.style.width = window.innerWidth + 'px';
                 }, {passive: true});
               }
             })();
