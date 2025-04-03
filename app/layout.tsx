@@ -34,27 +34,6 @@ export default function RootLayout({
             overflow-x: hidden;
             width: 100%;
             position: relative;
-            height: 100%;
-            -webkit-overflow-scrolling: touch;
-          }
-          
-          /* Safari-only fix */
-          @supports (-webkit-touch-callout: none) {
-            html, body {
-              position: relative !important;
-              height: -webkit-fill-available;
-            }
-            
-            /* This class is added via JS only on Safari */
-            .safari-fix {
-              -webkit-overflow-scrolling: touch;
-              overscroll-behavior: none;
-            }
-            
-            /* Prevent overscroll glow effect */
-            body {
-              overscroll-behavior-y: none;
-            }
           }
         `}</style>
         <script dangerouslySetInnerHTML={{
@@ -99,7 +78,7 @@ export default function RootLayout({
           `
         }} />
       </head>
-      <body className="relative min-h-screen bg-charcoal">
+      <body className="relative min-h-screen">
         <ScrollIndicator />
         
         <SmoothScroll>
@@ -109,7 +88,7 @@ export default function RootLayout({
           </div>
 
           {/* Site content - positioned above video with transparent background */}
-          <div className="relative z-10 w-full">
+          <div className="relative z-10">
             <div className="flex min-h-screen flex-col justify-between">
               <EnhancedNavigationBar />
               <PageTransition>
