@@ -29,7 +29,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className="relative min-h-screen" style={{overflowX: "hidden", overflowY: "auto"}}>
+      <body className="relative min-h-screen -webkit-overflow-scrolling: auto;" style={{overflowX: "hidden", overflowY: "auto"}}>
         <ScrollIndicator />
         
         <SmoothScroll>
