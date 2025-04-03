@@ -29,14 +29,55 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style>{`
+          /* Base styles for all browsers */
           html, body {
             overflow-x: hidden;
             width: 100%;
-            position: absolute;
+            position: relative;
+          }
+          
+          /* Safari-only fix */
+          @supports (-webkit-touch-callout: none) {
+            html, body {
+              position: relative !important;
+            }
+            
+            /* This class is added via JS only on Safari */
+            .safari-fix {
+              position: absolute !important;
+              width: 100% !important;
+              overflow-x: hidden !important;
+            }
           }
         `}</style>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            // Safari detection and fix
+            (function() {
+              var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+              if (isSafari) {
+                document.documentElement.classList.add('safari-fix');
+                document.body.classList.add('safari-fix');
+                
+                // Monitor scroll position to prevent white space during momentum scrolling
+                var lastScrollTop = 0;
+                window.addEventListener('scroll', function() {
+                  var st = window.pageYOffset || document.documentElement.scrollTop;
+                  if (st > lastScrollTop) {
+                    // Scrolling DOWN - apply more aggressive constraints
+                    document.documentElement.style.overflow = 'hidden';
+                    setTimeout(function() {
+                      document.documentElement.style.overflow = '';
+                    }, 10);
+                  }
+                  lastScrollTop = (st <= 0) ? 0 : st;
+                }, {passive: true});
+              }
+            })();
+          `
+        }} />
       </head>
-      <body className="absolute min-h-screen w-full">
+      <body className="relative min-h-screen">
         <ScrollIndicator />
         
         <SmoothScroll>
@@ -46,7 +87,7 @@ export default function RootLayout({
           </div>
 
           {/* Site content - positioned above video with transparent background */}
-          <div className="absolute z-10 w-full">
+          <div className="relative z-10">
             <div className="flex min-h-screen flex-col justify-between">
               <EnhancedNavigationBar />
               <PageTransition>
