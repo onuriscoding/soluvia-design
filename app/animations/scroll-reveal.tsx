@@ -64,6 +64,10 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
         ? scrollContainerRef.current
         : window;
 
+    // Special handling for Safari
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || 
+                     /iPad|iPhone|iPod/.test(navigator.userAgent);
+    
     // Create triggers and animations
     const createAnimations = () => {
       // Container rotation animation
@@ -83,6 +87,9 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
             start: "top bottom",
             end: rotationEnd,
             scrub: 1,
+            // Improve performance on Safari
+            fastScrollEnd: isSafari,
+            preventOverlaps: true,
           },
         }
       );
@@ -97,6 +104,9 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
           start: "top bottom-=10%",
           end: wordAnimationEnd,
           scrub: 1,
+          // Improve performance on Safari
+          fastScrollEnd: isSafari,
+          preventOverlaps: true,
         },
       });
 
@@ -120,7 +130,25 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
         );
       });
 
-      return { rotationTween, tl };
+      // For Safari: Add a refresh trigger on scroll events
+      if (isSafari) {
+        let refreshTimeout: any;
+        const refreshHandler = () => {
+          clearTimeout(refreshTimeout);
+          refreshTimeout = setTimeout(() => {
+            ScrollTrigger.refresh();
+          }, 200);
+        };
+        
+        window.addEventListener('scroll', refreshHandler, { passive: true });
+        return { 
+          rotationTween, 
+          tl,
+          cleanup: () => window.removeEventListener('scroll', refreshHandler)
+        };
+      }
+
+      return { rotationTween, tl, cleanup: () => {} };
     };
 
     // Initialize animations
@@ -130,6 +158,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     return () => {
       animations.rotationTween.kill();
       animations.tl.kill();
+      animations.cleanup();
       
       // Get all ScrollTrigger instances that belong to this component
       ScrollTrigger.getAll()

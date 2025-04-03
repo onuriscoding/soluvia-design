@@ -27,117 +27,89 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.className} ${anton.variable}`}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style>{`
           /* Base styles for all browsers */
           html, body {
             overflow-x: hidden;
             width: 100%;
             position: relative;
+            height: 100%;
+            -webkit-overflow-scrolling: touch;
           }
           
-          /* Safari iOS fix - extremely aggressive */
+          /* Safari-only fix */
           @supports (-webkit-touch-callout: none) {
-            html {
+            html, body {
               position: relative !important;
-              width: 100vw !important;
-              overflow-x: hidden !important;
+              height: -webkit-fill-available;
             }
             
+            /* This class is added via JS only on Safari */
+            .safari-fix {
+              -webkit-overflow-scrolling: touch;
+              overscroll-behavior: none;
+            }
+            
+            /* Prevent overscroll glow effect */
             body {
-              width: 100vw !important;
-              position: relative !important;
-              overflow-x: hidden !important;
-              margin: 0 !important;
-              left: 0 !important;
-              right: 0 !important;
-            }
-            
-            /* Hide horizontal scrollbar on Safari */
-            ::-webkit-scrollbar {
-              display: none !important;
-            }
-            
-            /* Force all containers to stay within viewport */
-            div, main, section, nav, header, footer {
-              max-width: 100vw !important;
-              overflow-x: hidden !important;
-            }
-            
-            /* Fix for fixed background */
-            .fixed.inset-0 {
-              width: 100vw !important;
-              left: 0 !important;
-              right: 0 !important;
+              overscroll-behavior-y: none;
             }
           }
         `}</style>
         <script dangerouslySetInnerHTML={{
           __html: `
-            // iOS Safari detection and super aggressive fix
+            // Safari detection and fix
             (function() {
-              var ua = window.navigator.userAgent;
-              var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
-              var webkit = !!ua.match(/WebKit/i);
-              var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
+              var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || 
+                             /iPad|iPhone|iPod/.test(navigator.userAgent);
               
-              if (iOSSafari) {
-                // Apply viewport width to ROOT container
-                document.documentElement.style.width = window.innerWidth + 'px';
+              if (isSafari) {
+                document.documentElement.classList.add('safari-fix');
+                document.body.classList.add('safari-fix');
                 
-                // Lock body width
-                document.body.style.width = window.innerWidth + 'px';
-                document.body.style.overflowX = 'hidden';
-                
-                // Apply to ALL direct children of body to ensure no overflow
-                var bodyChildren = document.body.children;
-                for (var i = 0; i < bodyChildren.length; i++) {
-                  bodyChildren[i].style.maxWidth = window.innerWidth + 'px';
-                  bodyChildren[i].style.overflowX = 'hidden';
-                }
-                
-                // Apply additional constraints during scroll
-                var lastScrollTop = 0;
-                window.addEventListener('scroll', function() {
-                  document.documentElement.style.width = window.innerWidth + 'px';
-                  document.body.style.width = window.innerWidth + 'px';
-                  document.body.style.overflowX = 'hidden';
+                // More effective solution that doesn't break animations
+                var preventBounce = function(e) {
+                  // Prevent only if at the boundary
+                  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                  var isAtTop = scrollTop <= 0;
+                  var isAtBottom = (window.innerHeight + scrollTop) >= document.body.offsetHeight;
                   
-                  var st = window.pageYOffset || document.documentElement.scrollTop;
-                  if (st > lastScrollTop) {
-                    // Scrolling DOWN - brief overflow lock
-                    document.documentElement.style.overflowX = 'hidden';
+                  if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
+                    e.preventDefault();
                   }
-                  lastScrollTop = (st <= 0) ? 0 : st;
-                }, {passive: true});
+                };
                 
-                // Handle resize
-                window.addEventListener('resize', function() {
-                  document.documentElement.style.width = window.innerWidth + 'px';
-                  document.body.style.width = window.innerWidth + 'px';
-                }, {passive: true});
-                
-                // Handle orientation change
-                window.addEventListener('orientationchange', function() {
-                  document.documentElement.style.width = window.innerWidth + 'px';
-                  document.body.style.width = window.innerWidth + 'px';
-                }, {passive: true});
+                // Add the event listener with passive: false to allow preventDefault
+                window.addEventListener('wheel', preventBounce, { passive: false });
+                window.addEventListener('touchmove', function(e) {
+                  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                  var isAtBottom = (window.innerHeight + scrollTop) >= document.body.offsetHeight - 5;
+                  
+                  if (isAtBottom) {
+                    // Add a tiny bit of padding at the bottom when at the end
+                    document.body.style.paddingBottom = '1px';
+                    setTimeout(function() {
+                      document.body.style.paddingBottom = '0px';
+                    }, 300);
+                  }
+                }, { passive: true });
               }
             })();
           `
         }} />
       </head>
-      <body className="relative min-h-screen">
+      <body className="relative min-h-screen bg-charcoal">
         <ScrollIndicator />
         
         <SmoothScroll>
-          {/* Video background - positioned absolutely to cover the entire viewport */}
+          {/* Video background - positioned fixed to cover the entire viewport */}
           <div className="fixed inset-0 w-full h-full">
             <Iridescence />
           </div>
 
           {/* Site content - positioned above video with transparent background */}
-          <div className="relative z-10">
+          <div className="relative z-10 w-full">
             <div className="flex min-h-screen flex-col justify-between">
               <EnhancedNavigationBar />
               <PageTransition>

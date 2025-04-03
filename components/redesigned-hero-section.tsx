@@ -10,7 +10,6 @@ import {
   useAnimation,
   useInView,
   AnimatePresence,
-  useSpring,
 } from "framer-motion";
 import { ArrowRight, MousePointer, ChevronDown } from "lucide-react";
 import { RotatingText } from "@/app/animations/rotating-text";
@@ -26,21 +25,11 @@ export function RedesignedHeroSection() {
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
-    // More stable scroll configuration for Safari
-    layoutEffect: false
   });
 
-  // Add a custom damped scroll value for smoother animations
-  const dampedScroll = useSpring(scrollYProgress, { 
-    stiffness: 100, 
-    damping: 30,
-    restDelta: 0.001
-  });
-
-  // Use the dampedScroll for transforms
-  const opacity = useTransform(dampedScroll, [0, 0.5], [1, 0]);
-  const scale = useTransform(dampedScroll, [0, 0.5], [1, 0.95]);
-  const y = useTransform(dampedScroll, [0, 0.5], [0, 30]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
 
   // Parallax effect for floating elements
   const parallax1 = useTransform(scrollYProgress, [0, 1], [0, -550]);
@@ -49,6 +38,15 @@ export function RedesignedHeroSection() {
   const parallax4 = useTransform(scrollYProgress, [0, 1], [0, -520]);
 
   useEffect(() => {
+    // For Safari iOS - ensures scroll animations work
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) || 
+        /^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+      // Force a refresh of the scroll position to update animations
+      window.addEventListener('scroll', () => {
+        window.dispatchEvent(new CustomEvent('resize'));
+      }, { passive: true });
+    }
+    
     // Staggered animation sequence
     const sequence = async () => {
       await controls.start("visible");
@@ -105,37 +103,30 @@ export function RedesignedHeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ maxWidth: '100vw', overflowX: 'hidden' }}
+      className="relative min-h-screen overflow-hidden pt-20"
     >
-      {/* Particles */}
-      <div className="absolute inset-0 w-full overflow-hidden pointer-events-none">
-        {particles.map((particle) => (
-          <motion.div
-            key={particle.id}
-            className="absolute rounded-full bg-rose/30"
-            style={{
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-              willChange: "transform",
-              transform: "translate3d(0,0,0)",
-            }}
-            animate={{
-              y: [0, -50, 0],
-              opacity: [0, 0.5, 0],
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: particle.delay,
-              ease: [0.4, 0, 0.2, 1], // Custom easing that's more Safari-friendly
-              type: "tween",
-            }}
-          />
-        ))}
-      </div>
+      {/* Animated particles */}
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          className="absolute h-1 w-1 rounded-full bg-rose/30"
+          style={{
+            left: `${particle.x}%`,
+            top: `${particle.y}%`,
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+          }}
+          animate={{
+            y: [0, -100, 0],
+            opacity: [0, 0.5, 0],
+          }}
+          transition={{
+            duration: particle.duration,
+            repeat: Number.POSITIVE_INFINITY,
+            delay: particle.delay,
+          }}
+        />
+      ))}
 
       {/* Floating website examples - Temporarily disabled */}
       {/* <div className="absolute inset-0 z-0 overflow-hidden">
@@ -214,36 +205,37 @@ export function RedesignedHeroSection() {
 
       <motion.div
         ref={scrollRef}
-        className="container relative z-10 flex flex-col items-center justify-center min-h-screen"
-        style={{
-          opacity,
-          scale,
-          y,
-          maxWidth: '100vw',
-          overflow: 'hidden',
-          // Add Safari-specific properties for better handling of inertia
-          WebkitOverflowScrolling: 'touch',
-          transform: 'translate3d(0,0,0)', // Force GPU acceleration
-          backfaceVisibility: 'hidden', // Prevent artifacts
-          paddingTop: '0',
-          paddingBottom: '0',
-          // Ensure vertical centering
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100vh',
-        }}
+        className="container relative z-10 flex min-h-[calc(100vh-5rem)] flex-col items-center justify-center py-20"
+        style={{ opacity, scale, y }}
         variants={containerVariants}
         initial="hidden"
         animate={controls}
       >
-        <motion.div className="text-center px-4">
+        <motion.div className="text-center">
+          <motion.div
+            className="relative mb-6 inline-block"
+            variants={itemVariants}
+          >
+            <motion.div
+              className="absolute -inset-1 rounded-full bg-gradient-to-r from-rose via-sapphire to-rose opacity-75 blur-lg"
+              animate={{
+                scale: [1, 1.05, 1],
+                opacity: [0.7, 0.9, 0.7],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "reverse",
+              }}
+            />
+          </motion.div>
+
           <motion.h1
-            className="mx-auto max-w-4xl text-5xl font-ivory font-bold tracking-tight text-ivory md:text-[9rem]"
+            className="mx-auto max-w-4xl text-5xl -mt-10 md:-mt-6 font-ivory font-bold tracking-tight text-ivory md:text-[9rem]"
             variants={itemVariants}
           >
             <span className="block leading-tight">Solutions via</span>
-            <div className="relative flex items-center justify-center py-0">
+            <div className="relative flex items-center justify-center md:-mt-6 py-0">
               <RotatingText
                 texts={["Designs", "AI"]}
                 interval={3000}
@@ -311,7 +303,6 @@ export function RedesignedHeroSection() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 1.2 }}
         onClick={handleScrollDown}
-        style={{ zIndex: 20 }}
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
