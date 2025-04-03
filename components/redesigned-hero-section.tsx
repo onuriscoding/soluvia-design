@@ -21,66 +21,36 @@ export function RedesignedHeroSection() {
   const isInView = useInView(scrollRef);
   const controls = useAnimation();
   const [rotatingText, setRotatingText] = useState("Designs");
-  
-  // Use refs for animation values instead of state for better performance
-  const animationRef = useRef({
-    scrollY: 0,
-    opacity: 1,
-    scale: 1,
-    yOffset: 0,
-    sectionHeight: 0,
-    rafId: 0
-  });
+  const [scrollOpacity, setScrollOpacity] = useState(1);
+  const [scrollScale, setScrollScale] = useState(1);
+  const [scrollY, setScrollY] = useState(0);
 
-  // Setup scroll animation with requestAnimationFrame for smoother performance
+  // Handle scroll events
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    
-    // Measure section height once
-    animationRef.current.sectionHeight = container.offsetHeight;
-    
-    // Animation function that runs every frame
-    const animate = () => {
-      const scrollY = window.scrollY;
-      const sectionHeight = animationRef.current.sectionHeight;
+    const handleScroll = () => {
+      if (!containerRef.current) return;
       
-      // Calculate how far we've scrolled into the section (0 to 1)
-      const endFade = sectionHeight * 0.5; // Fade out by 50% of section height
-      const scrollProgress = Math.min(Math.max(scrollY / endFade, 0), 1);
+      const scrollY = window.pageYOffset;
+      const sectionHeight = containerRef.current.offsetHeight;
+      const fadePoint = sectionHeight * 0.5;
+      
+      // Calculate scroll progress (0 to 1)
+      const progress = Math.min(Math.max(scrollY / fadePoint, 0), 1);
       
       // Update animation values
-      animationRef.current.opacity = 1 - scrollProgress;
-      animationRef.current.scale = 1 - scrollProgress * 0.2;
-      animationRef.current.yOffset = scrollProgress * 100;
-      
-      // Apply styles directly to the DOM element for better performance
-      if (scrollRef.current) {
-        scrollRef.current.style.opacity = animationRef.current.opacity.toString();
-        scrollRef.current.style.transform = `scale(${animationRef.current.scale}) translateY(${animationRef.current.yOffset}px)`;
-      }
-      
-      // Continue animation loop
-      animationRef.current.rafId = requestAnimationFrame(animate);
+      setScrollOpacity(1 - progress);
+      setScrollScale(1 - (progress * 0.2));
+      setScrollY(progress * 100);
     };
     
-    // Start animation loop
-    animationRef.current.rafId = requestAnimationFrame(animate);
+    // Initial calculation
+    handleScroll();
     
-    // Handle resize
-    const handleResize = () => {
-      if (container) {
-        animationRef.current.sectionHeight = container.offsetHeight;
-      }
-    };
-    
-    window.addEventListener('resize', handleResize);
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     // Cleanup
-    return () => {
-      cancelAnimationFrame(animationRef.current.rafId);
-      window.removeEventListener('resize', handleResize);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -91,7 +61,7 @@ export function RedesignedHeroSection() {
     return () => clearInterval(interval);
   }, []);
 
-  // Staggered animation sequence for initial load
+  // Staggered animation sequence
   useEffect(() => {
     if (isInView) {
       controls.start("visible");
@@ -243,6 +213,11 @@ export function RedesignedHeroSection() {
       <motion.div
         ref={scrollRef}
         className="container relative z-10 flex min-h-[calc(100vh-5rem)] flex-col items-center justify-center py-20"
+        style={{
+          opacity: scrollOpacity,
+          scale: scrollScale,
+          y: scrollY,
+        }}
         variants={containerVariants}
         initial="hidden"
         animate={controls}
