@@ -10,6 +10,8 @@ import {
   useAnimation,
   useInView,
   AnimatePresence,
+  useSpring,
+  useReducedMotion,
 } from "framer-motion";
 import { ArrowRight, MousePointer, ChevronDown } from "lucide-react";
 import { RotatingText } from "@/app/animations/rotating-text";
@@ -21,37 +23,86 @@ export function RedesignedHeroSection() {
   const isInView = useInView(scrollRef);
   const controls = useAnimation();
   const [rotatingText, setRotatingText] = useState("Designs");
+  const [isMobile, setIsMobile] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  // Check for mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"],
+    offset: isMobile ? ["start 5%", "end start"] : ["start start", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
-  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
+  // Transform values with different configurations for mobile
+  const rawOpacity = useTransform(
+    scrollYProgress,
+    isMobile ? [0, 0.4, 0.7] : [0, 0.4, 0.6],
+    isMobile ? [1, 1, 0] : [1, 0.6, 0]
+  );
 
-  // Parallax effect for floating elements
-  const parallax1 = useTransform(scrollYProgress, [0, 1], [0, -550]);
-  const parallax2 = useTransform(scrollYProgress, [0, 1], [0, -400]);
-  const parallax3 = useTransform(scrollYProgress, [0, 1], [0, -600]);
-  const parallax4 = useTransform(scrollYProgress, [0, 1], [0, -520]);
+  const rawScale = useTransform(
+    scrollYProgress,
+    isMobile ? [0, 0.4, 0.7] : [0, 0.4, 0.6],
+    isMobile ? [1, 0.95, 0.9] : [1, 0.9, 0.85]
+  );
+
+  const rawY = useTransform(
+    scrollYProgress,
+    isMobile ? [0, 0.4, 0.7] : [0, 0.4, 0.6],
+    isMobile ? [0, 20, 40] : [0, 30, 60]
+  );
+
+  // Apply spring physics for smoother animations
+  const opacity = useSpring(rawOpacity, {
+    stiffness: isMobile ? 50 : 80,
+    damping: isMobile ? 15 : 20,
+    mass: 0.8,
+  });
+
+  const scale = useSpring(rawScale, {
+    stiffness: isMobile ? 50 : 80,
+    damping: isMobile ? 15 : 20,
+    mass: 0.8,
+  });
+
+  const y = useSpring(rawY, {
+    stiffness: isMobile ? 50 : 80,
+    damping: isMobile ? 15 : 20,
+    mass: 0.8,
+  });
+
+  // Parallax effect for floating elements with improved dynamics
+  const parallax1 = useTransform(scrollYProgress, [0, 1], [0, -450]);
+  const parallax2 = useTransform(scrollYProgress, [0, 1], [0, -350]);
+  const parallax3 = useTransform(scrollYProgress, [0, 1], [0, -500]);
+  const parallax4 = useTransform(scrollYProgress, [0, 1], [0, -400]);
 
   useEffect(() => {
-    // For Safari iOS - ensures scroll animations work
-    if (/iPad|iPhone|iPod/.test(navigator.userAgent) || 
-        /^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-      // Force a refresh of the scroll position to update animations
-      window.addEventListener('scroll', () => {
-        window.dispatchEvent(new CustomEvent('resize'));
-      }, { passive: true });
+    // For Safari iOS - ensures scroll animations work with passive listeners
+    if (
+      /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+    ) {
+      window.addEventListener(
+        "scroll",
+        () => {
+          window.dispatchEvent(new CustomEvent("resize"));
+        },
+        { passive: true }
+      );
     }
-    
+
     // Staggered animation sequence
-    const sequence = async () => {
-      await controls.start("visible");
-    };
-    sequence();
+    controls.start("visible");
   }, [controls]);
 
   useEffect(() => {
@@ -62,16 +113,6 @@ export function RedesignedHeroSection() {
     return () => clearInterval(interval);
   }, []);
 
-  // Animated particles
-  const particles = Array.from({ length: 20 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 4 + 1,
-    duration: Math.random() * 20 + 10,
-    delay: Math.random() * 5,
-  }));
-
   const handleScrollDown = () => {
     const nextSection = document.querySelector("section:nth-of-type(2)");
     if (nextSection) {
@@ -79,24 +120,28 @@ export function RedesignedHeroSection() {
     }
   };
 
-  // Variants for staggered animations
+  // Optimized animation variants with adaptive timings based on device
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
+        staggerChildren: isMobile ? 0.08 : 0.1,
+        delayChildren: isMobile ? 0.2 : 0.3,
+        when: "beforeChildren",
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: isMobile ? 15 : 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+      transition: {
+        duration: isMobile ? 0.5 : 0.6,
+        ease: [0.22, 1, 0.36, 1],
+      },
     },
   };
 
@@ -105,29 +150,6 @@ export function RedesignedHeroSection() {
       ref={containerRef}
       className="relative min-h-screen overflow-hidden pt-20"
     >
-      {/* Animated particles */}
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute h-1 w-1 rounded-full bg-rose/30"
-          style={{
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-          }}
-          animate={{
-            y: [0, -100, 0],
-            opacity: [0, 0.5, 0],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Number.POSITIVE_INFINITY,
-            delay: particle.delay,
-          }}
-        />
-      ))}
-
       {/* Floating website examples - Temporarily disabled */}
       {/* <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.div
@@ -206,7 +228,12 @@ export function RedesignedHeroSection() {
       <motion.div
         ref={scrollRef}
         className="container relative z-10 flex min-h-[calc(100vh-5rem)] flex-col items-center justify-center py-20"
-        style={{ opacity, scale, y }}
+        style={{
+          opacity,
+          scale,
+          y,
+          willChange: "transform, opacity",
+        }}
         variants={containerVariants}
         initial="hidden"
         animate={controls}
@@ -219,13 +246,14 @@ export function RedesignedHeroSection() {
             <motion.div
               className="absolute -inset-1 rounded-full bg-gradient-to-r from-rose via-sapphire to-rose opacity-75 blur-lg"
               animate={{
-                scale: [1, 1.05, 1],
-                opacity: [0.7, 0.9, 0.7],
+                scale: [1, 1.03, 1],
+                opacity: [0.7, 0.85, 0.7],
               }}
               transition={{
-                duration: 3,
+                duration: 2.5,
                 repeat: Number.POSITIVE_INFINITY,
                 repeatType: "reverse",
+                ease: "easeInOut",
               }}
             />
           </motion.div>
@@ -267,8 +295,8 @@ export function RedesignedHeroSection() {
             variants={itemVariants}
           >
             We create sophisticated, elegant websites that drive business growth
-            and optimize your online presence. Experience luxury digital
-            solutions tailored to your brand.
+            and optimize your online presence. Experience digital solutions
+            tailored to your brand.
           </motion.p>
 
           <motion.div
@@ -282,13 +310,13 @@ export function RedesignedHeroSection() {
               <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
               <span className="relative z-10 flex items-center">
                 GET STARTED
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </span>
             </Link>
 
             <Link
               href="/how-it-works"
-              className="inline-flex min-w-[200px] items-center justify-center rounded-full border border-ivory/30 bg-charcoal/50 px-6 py-3 text-ivory font-bold tracking-thighter backdrop-blur-sm transition-all duration-300 hover:bg-charcoal/70 hover:shadow-lg"
+              className="inline-flex min-w-[200px] items-center justify-center rounded-full border border-ivory/30 bg-transparent px-6 py-3 text-ivory font-bold tracking-thighter transition-all duration-300 hover:bg-ivory/10"
             >
               OUR PROCESS
             </Link>
@@ -301,15 +329,16 @@ export function RedesignedHeroSection() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 1.2 }}
+        transition={{ duration: 0.5, delay: 1 }}
         onClick={handleScrollDown}
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
+          animate={{ y: [0, 8, 0] }}
           transition={{
-            duration: 1.5,
+            duration: 1.2,
             repeat: Number.POSITIVE_INFINITY,
             repeatType: "loop",
+            ease: "easeInOut",
           }}
           className="relative"
         >

@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import type { ReactNode } from "react"
-import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import type { ReactNode } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 interface ServicePageLayoutProps {
-  children: ReactNode
-  title: string
-  subtitle: string
-  ctaText?: string
-  ctaLink?: string
+  children: ReactNode;
+  title: string;
+  subtitle: string;
+  ctaText?: string;
+  ctaLink?: string;
 }
 
 export function ServicePageLayout({
@@ -51,48 +51,6 @@ export function ServicePageLayout({
               repeatType: "reverse",
             }}
           />
-
-          {/* Animated particles */}
-          {[...Array(15)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute h-1 w-1 rounded-full bg-rose/30"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -100, 0],
-                opacity: [0, 1, 0],
-                scale: [0, 1.5, 0],
-              }}
-              transition={{
-                duration: 10 + Math.random() * 10,
-                repeat: Number.POSITIVE_INFINITY,
-                delay: Math.random() * 5,
-              }}
-            />
-          ))}
-          {[...Array(15)].map((_, i) => (
-            <motion.div
-              key={i + 15}
-              className="absolute h-1 w-1 rounded-full bg-sapphire/30"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, 100, 0],
-                opacity: [0, 1, 0],
-                scale: [0, 1.5, 0],
-              }}
-              transition={{
-                duration: 10 + Math.random() * 10,
-                repeat: Number.POSITIVE_INFINITY,
-                delay: Math.random() * 5,
-              }}
-            />
-          ))}
         </div>
 
         <motion.div
@@ -146,7 +104,10 @@ export function ServicePageLayout({
               transition={{ duration: 0.8, delay: 0.6 }}
               className="mt-8 flex flex-wrap justify-center gap-4"
             >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   asChild
                   size="lg"
@@ -163,7 +124,10 @@ export function ServicePageLayout({
                   </Link>
                 </Button>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   asChild
                   variant="outline"
@@ -230,7 +194,8 @@ export function ServicePageLayout({
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              Contact us today to discuss your project and how we can help you achieve your goals.
+              Contact us today to discuss your project and how we can help you
+              achieve your goals.
             </motion.p>
 
             <motion.div
@@ -240,7 +205,10 @@ export function ServicePageLayout({
               transition={{ duration: 0.5, delay: 0.4 }}
               className="mt-8 flex justify-center"
             >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   asChild
                   size="lg"
@@ -262,6 +230,5 @@ export function ServicePageLayout({
         </div>
       </section>
     </div>
-  )
+  );
 }
-

@@ -2,7 +2,13 @@
 
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown, LifeBuoy, Clock, FileText, MessageSquare } from "lucide-react";
+import {
+  ChevronDown,
+  LifeBuoy,
+  Clock,
+  FileText,
+  MessageSquare,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import GradientText from "@/app/animations/gradient-text";
@@ -141,7 +147,8 @@ export default function SupportPage() {
 
             <motion.div variants={itemVariants} className="mt-8">
               <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
-                We're here to help with any questions or concerns you may have about our services.
+                We're here to help with any questions or concerns you may have
+                about our services.
               </p>
             </motion.div>
 
@@ -186,7 +193,7 @@ export default function SupportPage() {
         </motion.div>
 
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer z-20"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20"
           animate={{ y: [0, 10, 0] }}
           transition={{
             duration: 1.5,
@@ -199,7 +206,7 @@ export default function SupportPage() {
               ?.scrollIntoView({ behavior: "smooth" });
           }}
         >
-          <div className="relative">
+          <div className="relative flex items-center justify-center">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-rose/30 to-sapphire/30 blur-sm"></div>
             <ChevronDown className="relative z-10 h-8 w-8 text-ivory" />
           </div>
@@ -225,9 +232,12 @@ export default function SupportPage() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-rose/10 text-rose mb-6">
                   <FileText className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-semibold text-ivory mb-2">Documentation</h3>
+                <h3 className="text-xl font-semibold text-ivory mb-2">
+                  Documentation
+                </h3>
                 <p className="text-ivory/70 mb-4">
-                  Browse our detailed documentation for guides, tutorials, and best practices.
+                  Browse our detailed documentation for guides, tutorials, and
+                  best practices.
                 </p>
                 <Link
                   href="/resources/faq"
@@ -248,9 +258,12 @@ export default function SupportPage() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sapphire/10 text-sapphire mb-6">
                   <LifeBuoy className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-semibold text-ivory mb-2">Technical Support</h3>
+                <h3 className="text-xl font-semibold text-ivory mb-2">
+                  Technical Support
+                </h3>
                 <p className="text-ivory/70 mb-4">
-                  Need help with technical issues? Our support team is here to assist you.
+                  Need help with technical issues? Our support team is here to
+                  assist you.
                 </p>
                 <Link
                   href="#contact-section"
@@ -271,7 +284,9 @@ export default function SupportPage() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-beige/10 text-beige mb-6">
                   <Clock className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-semibold text-ivory mb-2">Business Hours</h3>
+                <h3 className="text-xl font-semibold text-ivory mb-2">
+                  Business Hours
+                </h3>
                 <p className="text-ivory/70 mb-4">
                   We're available to assist you during the following hours:
                 </p>
@@ -290,4 +305,4 @@ export default function SupportPage() {
       <RedesignedContactSection />
     </main>
   );
-} 
+}

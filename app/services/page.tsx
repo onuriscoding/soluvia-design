@@ -152,7 +152,8 @@ export default function ServicesPage() {
             <motion.div variants={itemVariants} className="mt-8">
               <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
                 We offer a comprehensive range of services to help your business
-                thrive in the digital landscape. Click to learn more about each service.
+                thrive in the digital landscape. Click to learn more about each
+                service.
               </p>
             </motion.div>
 
@@ -198,7 +199,7 @@ export default function ServicesPage() {
         </motion.div>
 
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer z-20"
+          className="absolute bottom-10 -translate-x-1/2 cursor-pointer z-20"
           animate={{ y: [0, 10, 0] }}
           transition={{
             duration: 1.5,
@@ -211,9 +212,9 @@ export default function ServicesPage() {
               ?.scrollIntoView({ behavior: "smooth" });
           }}
         >
-          <div className="relative">
+          <div className="relative flex items-center justify-center">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-rose/30 to-sapphire/30 blur-sm"></div>
-            <ChevronDown className="relative z-10 h-8 w-8 text-ivory" />
+            <ChevronDown className="relative z-10 h-8 w-8 text-ivory mx-auto" />
           </div>
         </motion.div>
       </section>
@@ -224,7 +225,7 @@ export default function ServicesPage() {
           <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
           <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
         </div>
-        <div className="container relative z-10">
+        <div className="container relative z-10 max-w-7xl mx-auto px-0 sm:px-0 lg:px-8">
           <RedesignedPricingSection />
         </div>
       </section>

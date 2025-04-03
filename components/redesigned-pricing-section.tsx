@@ -124,12 +124,12 @@ export function RedesignedPricingSection() {
   });
   const [animationComplete, setAnimationComplete] = useState(false);
 
-  const handleContactSubmit = (data: { 
-    name: string; 
-    contactPreference: string; 
+  const handleContactSubmit = (data: {
+    name: string;
+    contactPreference: string;
     phone?: string;
     email?: string;
-    description: string 
+    description: string;
   }) => {
     console.log("Contact form submitted:", data);
     // The form submission is now handled directly in the stepper component
@@ -313,14 +313,14 @@ export function RedesignedPricingSection() {
             transform: translateX(5px);
           }
         }
-        
+
         .pricing-card {
           position: relative;
           transition: transform 0.5s ease, box-shadow 0.5s ease;
           z-index: 1;
           box-shadow: 0 0 0 0 rgba(183, 110, 121, 0);
         }
-        
+
         .pricing-card:hover {
           transform: translateY(-10px) !important;
           box-shadow: 0 30px 30px -10px rgba(183, 110, 121, 0.3);
@@ -329,4 +329,3 @@ export function RedesignedPricingSection() {
     </section>
   );
 }
-

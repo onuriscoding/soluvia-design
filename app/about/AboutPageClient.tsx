@@ -39,26 +39,6 @@ export default function AboutPageClient() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
 
-  // Animated particles for hero section
-  const particles = Array.from({ length: 15 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 4 + 1,
-    duration: Math.random() * 20 + 10,
-    delay: Math.random() * 5,
-  }));
-
-  // Animated particles for CTA section
-  const ctaParticles = Array.from({ length: 10 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 4 + 1,
-    duration: Math.random() * 20 + 10,
-    delay: Math.random() * 5,
-  }));
-
   // Optimized variants for staggered animations
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -106,30 +86,6 @@ export default function AboutPageClient() {
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Animated particles */}
-        {particles.map((particle) => (
-          <motion.div
-            key={particle.id}
-            className="absolute h-1 w-1 rounded-full bg-rose/30"
-            style={{
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-            }}
-            animate={{
-              y: [0, -100, 0],
-              opacity: [0, 0.5, 0],
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: particle.delay,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-
         <div className="absolute inset-0 z-0">
           <motion.div
             className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full"
@@ -159,7 +115,7 @@ export default function AboutPageClient() {
 
         <motion.div
           style={{ y, opacity }}
-          className="container relative z-10 px-4"
+          className="container relative z-10 px-4 -mt-24"
         >
           <motion.div
             className="mx-auto max-w-4xl text-center"
@@ -207,22 +163,20 @@ export default function AboutPageClient() {
         </motion.div>
 
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-ivory/50 cursor-pointer z-20 w-16 h-16 flex items-center justify-center"
-          animate={{
-            y: [0, 10, 0],
-          }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 -mt-24"
+          animate={{ y: [0, 10, 0] }}
           transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
+            duration: 1.5,
+            repeat: Number.POSITIVE_INFINITY,
+            repeatType: "loop",
           }}
           onClick={handleScrollDown}
           initial={{ opacity: 0.7 }}
           whileHover={{ opacity: 1, scale: 1.1 }}
         >
-          <div className="relative">
+          <div className="relative flex items-center justify-center -left-1/2 -mt-32">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-rose/30 to-sapphire/30 blur-sm"></div>
-            <ChevronDown className="relative z-10 h-8 w-8 text-ivory" />
+            <ChevronDown className="relative z-10 h-8 w-8 text-ivory " />
           </div>
         </motion.div>
       </section>
@@ -287,9 +241,9 @@ export default function AboutPageClient() {
               }}
             >
               <p className="text-lg text-ivory/80">
-                Soluvia was founded with a vision to bridge the gap
-                between human creativity and artificial intelligence. We believe
-                that the future of design lies in this harmony – where human
+                Soluvia was founded with a vision to bridge the gap between
+                human creativity and artificial intelligence. We believe that
+                the future of design lies in this harmony – where human
                 intuition and AI capabilities amplify each other.
               </p>
               <p className="text-lg text-ivory/80">
@@ -595,106 +549,82 @@ export default function AboutPageClient() {
           animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-            {/* Animated particles */}
-            {ctaParticles.map((particle) => (
-              <motion.div
-                key={particle.id}
-                className="absolute h-1 w-1 rounded-full bg-rose/30"
-                style={{
-                  left: `${particle.x}%`,
-                  top: `${particle.y}%`,
-                  width: `${particle.size}px`,
-                  height: `${particle.size}px`,
-                }}
-                animate={{
-                  y: [0, -100, 0],
-                  opacity: [0, 0.5, 0],
-                }}
-                transition={{
-                  duration: particle.duration,
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: particle.delay,
-                  ease: "easeInOut",
-                }}
-              />
-            ))}
-            <div className="absolute inset-0 z-0 text-center">
-              <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
-                Ready to create something{" "}
-                <GradientText
-                  colors={[
-                    "#3d5a80",
-                    "#b76e79",
-                    "#e0d5c0",
-                    "#3d5a80",
-                    "#b76e79",
-                    "#3d5a80",
-                  ]}
-                  animationSpeed={12}
-                  showBorder={false}
-                  className="inline-block"
-                >
-                  extraordinary
-                </GradientText>
-                ?
-              </h1>
-            </div>
-            <div className="relative z-10 md:mt-0 mt-28">
-              <motion.div
-                className="mx-auto max-w-3xl text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5 }}
+          <div className="absolute inset-0 z-0 text-center">
+            <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
+              Ready to create something{" "}
+              <GradientText
+                colors={[
+                  "#3d5a80",
+                  "#b76e79",
+                  "#e0d5c0",
+                  "#3d5a80",
+                  "#b76e79",
+                  "#3d5a80",
+                ]}
+                animationSpeed={12}
+                showBorder={false}
+                className="inline-block"
               >
-                <ScrollReveal
-                  textClassName="text-lg md:text-2xl -mt-12 -mb-4 text-ivory/70"
-                  baseOpacity={0.1}
-                  enableBlur={true}
-                  baseRotation={3}
-                  blurStrength={4}
-                >
-                  Let's combine human creativity with AI innovation to build
-                  your digital future.
-                </ScrollReveal>
+                extraordinary
+              </GradientText>
+              ?
+            </h1>
+          </div>
+          <div className="relative z-10 md:mt-0 mt-28">
+            <motion.div
+              className="mx-auto max-w-3xl text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+            >
+              <ScrollReveal
+                textClassName="text-lg md:text-2xl -mt-12 -mb-4 text-ivory/70"
+                baseOpacity={0.1}
+                enableBlur={true}
+                baseRotation={3}
+                blurStrength={4}
+              >
+                Let's combine human creativity with AI innovation to build your
+                digital future.
+              </ScrollReveal>
 
-                <div
-
-                  style={{
-                    width: "100%",
-                    height: "600px",
-                    position: "relative",
-                  }}
-                >
-                  <div className="absolute inset-0 z-10 md:mt-0 -mt-52">
-                    <Orb
-                      hoverIntensity={0.5}
-                      rotateOnHover={true}
-                      hue={0}
-                      forceHoverState={false}
-                    />
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:mt-0 -mt-52">
-                    <motion.div
-                      className="flex flex-col items-center justify-center gap-4 pointer-events-auto"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.5, delay: 0.2 }}
-                    >
-                      <Link
-                        href="/contact"
-                        className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
-                      >
-                        <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
-                        <span className="relative z-10 flex items-center">
-                          GET STARTED
-                          <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                        </span>
-                      </Link>
-                    </motion.div>
-                  </div>
+              <div
+                style={{
+                  width: "100%",
+                  height: "600px",
+                  position: "relative",
+                }}
+              >
+                <div className="absolute inset-0 z-10 md:mt-0 -mt-52">
+                  <Orb
+                    hoverIntensity={0.5}
+                    rotateOnHover={true}
+                    hue={0}
+                    forceHoverState={false}
+                  />
                 </div>
-              </motion.div>
-            </div>
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:mt-0 -mt-52">
+                  <motion.div
+                    className="flex flex-col items-center justify-center gap-4 pointer-events-auto"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
+                    <Link
+                      href="/contact"
+                      className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
+                    >
+                      <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                      <span className="relative z-10 flex items-center">
+                        GET STARTED
+                        <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </Link>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
       </section>
 

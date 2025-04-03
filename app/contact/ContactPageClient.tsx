@@ -61,16 +61,6 @@ export default function ContactPageClient() {
     },
   };
 
-  // Animated particles for hero section
-  const particles = Array.from({ length: 15 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 4 + 1,
-    duration: Math.random() * 20 + 10,
-    delay: Math.random() * 5,
-  }));
-
   const handleScrollToContact = () => {
     const contactSection = document.getElementById("contact-section");
     if (contactSection) {
@@ -92,42 +82,12 @@ export default function ContactPageClient() {
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        {/* Enhanced animated particles with more variety */}
-        {particles.map((particle) => (
-          <motion.div
-            key={particle.id}
-            className={`absolute h-1 w-1 rounded-full ${
-              particle.id % 3 === 0
-                ? "bg-rose/40"
-                : particle.id % 3 === 1
-                ? "bg-sapphire/40"
-                : "bg-ivory/30"
-            }`}
-            style={{
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-            }}
-            animate={{
-              y: [0, -100, 0],
-              opacity: [0, 0.7, 0],
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: particle.delay,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-
         <motion.div
           style={{ y, opacity }}
           className="container relative z-10 px-4"
         >
           <motion.div
-            className="mx-auto max-w-4xl text-center"
+            className="mx-auto max-w-4xl -mt-24 text-center"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -187,7 +147,7 @@ export default function ContactPageClient() {
 
         {/* Touch Icon Animation - Centered */}
         <motion.div
-          className="absolute -mt-20 left-1/2 top-[75%] right-[50%] transform -translate-x-1/2 z-20 cursor-pointer"
+          className="absolute -mt-24 top-3/4 -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{

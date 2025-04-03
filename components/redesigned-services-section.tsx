@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -11,6 +11,7 @@ import {
   useScroll,
   useTransform,
   useSpring,
+  useReducedMotion,
 } from "framer-motion";
 import {
   ArrowRight,
@@ -35,7 +36,7 @@ const services = [
     color: "rose",
     buttonGradient: "from-rose to-sapphire",
     image: "/soluvia.png?height=600&width=800",
-    link: "/services/web-design",
+    link: "/services/web-design-development",
     features: [
       "Custom responsive designs",
       "Interactive UI/UX",
@@ -82,10 +83,12 @@ const services = [
 export function RedesignedServicesSection() {
   const [activeService, setActiveService] = useState<string>(services[0].id);
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const ref = useRef(null);
   const scrollRef = useRef(null);
   const isInView = useInView(scrollRef);
   const controls = useAnimation();
+  const prefersReducedMotion = useReducedMotion();
 
   // Check for mobile viewport
   useEffect(() => {
@@ -98,31 +101,56 @@ export function RedesignedServicesSection() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Mark component as loaded after initial animations
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: isMobile
-      ? ["start 20%", "end start"]
-      : ["start -20%", "end 50%"],
+    offset: isMobile ? ["start 20%", "end start"] : ["start -20%", "end 50%"],
   });
 
   // Transform values with different configurations for mobile
-  const opacity = useTransform(
+  const rawOpacity = useTransform(
     scrollYProgress,
     isMobile ? [0, 0.5, 0.9] : [0, 0.9],
     isMobile ? [1, 1, 0] : [1, 0]
   );
 
-  const scale = useTransform(
+  const rawScale = useTransform(
     scrollYProgress,
     isMobile ? [0, 0.5, 0.9] : [0, 0.9],
     isMobile ? [1, 1, 0.95] : [1, 0.95]
   );
 
-  const y = useTransform(
+  const rawY = useTransform(
     scrollYProgress,
     isMobile ? [0, 0.5, 0.9] : [0, 0.9],
     isMobile ? [0, 0, 30] : [0, 30]
   );
+
+  // Apply spring physics for smoother animations
+  const opacity = useSpring(rawOpacity, {
+    stiffness: isMobile ? 80 : 100,
+    damping: isMobile ? 25 : 30,
+    mass: isMobile ? 0.8 : 1,
+  });
+
+  const scale = useSpring(rawScale, {
+    stiffness: isMobile ? 80 : 100,
+    damping: isMobile ? 25 : 30,
+    mass: isMobile ? 0.8 : 1,
+  });
+
+  const y = useSpring(rawY, {
+    stiffness: isMobile ? 80 : 100,
+    damping: isMobile ? 25 : 30,
+    mass: isMobile ? 0.8 : 1,
+  });
 
   // Add useEffect to handle initial animation state
   useEffect(() => {
@@ -156,9 +184,34 @@ export function RedesignedServicesSection() {
     (service) => service.id === activeService
   )!;
 
-  const handleServiceClick = (serviceId: string) => {
+  // Memoize the service selection handler to prevent unnecessary re-renders
+  const handleServiceClick = useCallback((serviceId: string) => {
     setActiveService(serviceId);
+  }, []);
+
+  // Adjust animation properties based on device and preferences
+  const getTransitionProps = (delay = 0) => {
+    if (prefersReducedMotion) {
+      return {
+        type: "tween",
+        duration: 0.2,
+        delay: delay * 0.5,
+      };
+    }
+
+    return {
+      type: "spring",
+      stiffness: isMobile ? 70 : 100,
+      damping: isMobile ? 15 : 20,
+      mass: isMobile ? 0.6 : 0.5,
+      duration: isMobile ? 0.4 : 0.5,
+      delay: delay,
+    };
   };
+
+  // Precompute transition properties to avoid recalculation during animation
+  const contentTransition = getTransitionProps(0.1);
+  const imageTransition = getTransitionProps(0.2);
 
   return (
     <section ref={ref} className="relative py-32 md:py-48">
@@ -251,66 +304,47 @@ export function RedesignedServicesSection() {
           ))}
         </div>
 
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={activeService}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{
               opacity: 1,
               y: 0,
-              transition: {
-                type: "spring",
-                stiffness: 100,
-                damping: 20,
-                mass: 0.5,
-                duration: 0.5,
-              },
+              transition: contentTransition,
             }}
             exit={{
               opacity: 0,
-              y: -20,
+              y: -10,
               transition: {
-                type: "spring",
-                stiffness: 100,
-                damping: 20,
-                mass: 0.5,
-                duration: 0.5,
+                ...contentTransition,
+                duration: isMobile ? 0.2 : 0.3,
               },
             }}
             className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
           >
             <motion.div
               className="order-2 lg:order-1"
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: isMobile ? -10 : -20 }}
               animate={{
                 opacity: 1,
                 x: 0,
-                transition: {
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 20,
-                  mass: 0.5,
-                  duration: 0.5,
-                  delay: 0.1,
-                },
+                transition: contentTransition,
               }}
               exit={{
                 opacity: 0,
-                x: -20,
+                x: isMobile ? -5 : -20,
                 transition: {
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 20,
-                  mass: 0.5,
-                  duration: 0.5,
+                  ...contentTransition,
+                  duration: isMobile ? 0.15 : 0.3,
                 },
               }}
             >
               <motion.div
                 className="flex items-center mb-4"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
+                transition={{ duration: isMobile ? 0.3 : 0.5, delay: 0.2 }}
               >
                 <div
                   className={`flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-${currentService.color}/20 to-${currentService.color}-light/20 text-${currentService.color} mr-4`}
@@ -324,26 +358,30 @@ export function RedesignedServicesSection() {
 
               <motion.p
                 className="text-ivory/70 mb-6"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                transition={{ duration: isMobile ? 0.3 : 0.5, delay: 0.25 }}
               >
                 {currentService.description}
               </motion.p>
-              {/* New feature list */}
+
+              {/* Feature list with optimized animations */}
               <motion.div
                 className="mb-8 space-y-3"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
+                transition={{ duration: 0.3, delay: 0.3 }}
               >
                 {currentService.features.map((feature, index) => (
                   <motion.div
                     key={index}
                     className="flex items-center gap-2"
-                    initial={{ opacity: 0, x: -10 }}
+                    initial={{ opacity: 0, x: -5 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
+                    transition={{
+                      duration: 0.2,
+                      delay: 0.35 + index * (isMobile ? 0.05 : 0.1),
+                    }}
                   >
                     <CheckCircle2
                       className={`h-5 w-5 text-${currentService.color}`}
@@ -352,10 +390,11 @@ export function RedesignedServicesSection() {
                   </motion.div>
                 ))}
               </motion.div>
+
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+                transition={{ delay: 0.4, duration: 0.3 }}
               >
                 <Link
                   href={currentService.link}
@@ -369,17 +408,22 @@ export function RedesignedServicesSection() {
 
             <motion.div
               className="order-1 lg:order-2 relative"
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: isMobile ? 10 : 20 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              exit={{ opacity: 0, x: isMobile ? 5 : 20 }}
+              transition={imageTransition}
+              layout={!isMobile && !isLoading}
             >
-              {/* Gradient border effect */}
+              {/* Gradient border effect with smoother animation */}
               <motion.div
                 className={`absolute -inset-1 bg-gradient-to-br from-${currentService.color} to-${currentService.color}-light rounded-xl opacity-70 blur-sm`}
-                initial={{ scale: 0.8 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
+                initial={{ scale: 0.95, opacity: 0.5 }}
+                animate={{ scale: 1, opacity: 0.7 }}
+                transition={{
+                  duration: isMobile ? 0.3 : 0.5,
+                  delay: 0.2,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
               ></motion.div>
 
               <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
@@ -388,13 +432,18 @@ export function RedesignedServicesSection() {
                   alt={currentService.title}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority={!isLoading}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-60"></div>
                 <motion.div
                   className="absolute bottom-4 left-4"
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
+                  transition={{
+                    duration: isMobile ? 0.2 : 0.4,
+                    delay: isMobile ? 0.3 : 0.5,
+                  }}
                 >
                   <span
                     className={`px-3 py-1 text-xs font-medium rounded-full bg-${currentService.color}/20 text-${currentService.color}`}

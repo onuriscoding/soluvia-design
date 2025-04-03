@@ -108,14 +108,15 @@ export default function FAQPage() {
 
             <motion.div variants={itemVariants} className="mt-8">
               <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
-                Find answers to commonly asked questions about our services, process, and approach.
+                Find answers to commonly asked questions about our services,
+                process, and approach.
               </p>
             </motion.div>
           </motion.div>
         </motion.div>
 
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer z-20"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20"
           animate={{ y: [0, 10, 0] }}
           transition={{
             duration: 1.5,
@@ -128,7 +129,7 @@ export default function FAQPage() {
               ?.scrollIntoView({ behavior: "smooth" });
           }}
         >
-          <div className="relative">
+          <div className="relative flex items-center justify-center">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-rose/30 to-sapphire/30 blur-sm"></div>
             <ChevronDown className="relative z-10 h-8 w-8 text-ivory" />
           </div>
@@ -147,4 +148,4 @@ export default function FAQPage() {
       </section>
     </main>
   );
-} 
+}

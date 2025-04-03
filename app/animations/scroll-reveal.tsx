@@ -65,9 +65,10 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
         : window;
 
     // Special handling for Safari
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || 
-                     /iPad|iPhone|iPod/.test(navigator.userAgent);
-    
+    const isSafari =
+      /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ||
+      /iPad|iPhone|iPod/.test(navigator.userAgent);
+
     // Create triggers and animations
     const createAnimations = () => {
       // Container rotation animation
@@ -139,12 +140,12 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
             ScrollTrigger.refresh();
           }, 200);
         };
-        
-        window.addEventListener('scroll', refreshHandler, { passive: true });
-        return { 
-          rotationTween, 
+
+        window.addEventListener("scroll", refreshHandler, { passive: true });
+        return {
+          rotationTween,
           tl,
-          cleanup: () => window.removeEventListener('scroll', refreshHandler)
+          cleanup: () => window.removeEventListener("scroll", refreshHandler),
         };
       }
 
@@ -159,11 +160,11 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
       animations.rotationTween.kill();
       animations.tl.kill();
       animations.cleanup();
-      
+
       // Get all ScrollTrigger instances that belong to this component
       ScrollTrigger.getAll()
-        .filter(trigger => trigger.vars.trigger === el)
-        .forEach(trigger => trigger.kill());
+        .filter((trigger) => trigger.vars.trigger === el)
+        .forEach((trigger) => trigger.kill());
     };
   }, [
     scrollContainerRef,

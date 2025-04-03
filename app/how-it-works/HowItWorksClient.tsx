@@ -24,7 +24,7 @@ export default function HowItWorksClient() {
   const heroRef = useRef(null);
   const approachRef = useRef(null);
   const ctaRef = useRef(null);
-  
+
   const [isMounted, setIsMounted] = useState(false);
 
   const isApproachInView = useInView(approachRef, { once: true, amount: 0.2 });
@@ -76,16 +76,14 @@ export default function HowItWorksClient() {
     // Set mounted flag to true
     setIsMounted(true);
     document.documentElement.style.scrollBehavior = "smooth";
-    
+
     // Log that component has mounted (for debugging)
     console.log("HowItWorksClient has mounted");
-    
+
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
     };
   }, []);
-
-  
 
   return (
     <>
@@ -123,7 +121,7 @@ export default function HowItWorksClient() {
 
         <motion.div
           style={{ y, opacity }}
-          className="container relative z-10 px-4"
+          className="container relative z-10 px-4 -mt-24"
         >
           <motion.div
             className="mx-auto max-w-4xl text-center"
@@ -154,37 +152,35 @@ export default function HowItWorksClient() {
 
             <motion.div variants={itemVariants} className="mt-8">
               <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
-                A thoughtful journey from concept to completion, blending human creativity with AI-enhanced precision.
+                A thoughtful journey from concept to completion, blending human
+                creativity with AI-enhanced precision.
               </p>
             </motion.div>
           </motion.div>
         </motion.div>
 
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-ivory/50 cursor-pointer z-20 w-16 h-16 flex items-center justify-center"
-          animate={{
-            y: [0, 10, 0],
-          }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20"
+          animate={{ y: [0, 10, 0] }}
           transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
+            duration: 1.5,
+            repeat: Number.POSITIVE_INFINITY,
+            repeatType: "loop",
           }}
           onClick={handleScrollDown}
           initial={{ opacity: 0.7 }}
           whileHover={{ opacity: 1, scale: 1.1 }}
         >
-          <div className="relative">
+          <div className="relative flex items-center justify-center -left-1/2 -mt-32">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-rose/30 to-sapphire/30 blur-sm"></div>
             <ChevronDown className="relative z-10 h-8 w-8 text-ivory" />
           </div>
         </motion.div>
       </section>
-      
 
       {/* Our Approach Section */}
-      <section 
-        className="relative py-32 md:py-40" 
+      <section
+        className="relative py-32 md:py-40"
         ref={approachRef}
         id="approach-section"
       >
@@ -223,7 +219,6 @@ export default function HowItWorksClient() {
               What makes our process unique and effective
             </ScrollReveal>
           </div>
-          
 
           <div className="grid gap-16 md:grid-cols-2 md:items-center">
             <motion.div
@@ -244,9 +239,13 @@ export default function HowItWorksClient() {
                     <CheckCircle2 className="h-6 w-6 text-rose" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-ivory">Human-Centered</h3>
+                    <h3 className="text-2xl font-bold text-ivory">
+                      Human-Centered
+                    </h3>
                     <p className="mt-2 text-ivory/70">
-                      We prioritize human needs and experiences in every project. Our approach begins with empathy and understanding of your audience.
+                      We prioritize human needs and experiences in every
+                      project. Our approach begins with empathy and
+                      understanding of your audience.
                     </p>
                   </div>
                 </div>
@@ -256,9 +255,13 @@ export default function HowItWorksClient() {
                     <CheckCircle2 className="h-6 w-6 text-sapphire" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-ivory">AI-Enhanced</h3>
+                    <h3 className="text-2xl font-bold text-ivory">
+                      AI-Enhanced
+                    </h3>
                     <p className="mt-2 text-ivory/70">
-                      We leverage cutting-edge AI tools to enhance efficiency, accuracy, and innovation without replacing the human creative touch.
+                      We leverage cutting-edge AI tools to enhance efficiency,
+                      accuracy, and innovation without replacing the human
+                      creative touch.
                     </p>
                   </div>
                 </div>
@@ -268,9 +271,13 @@ export default function HowItWorksClient() {
                     <CheckCircle2 className="h-6 w-6 text-beige" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-ivory">Collaborative</h3>
+                    <h3 className="text-2xl font-bold text-ivory">
+                      Collaborative
+                    </h3>
                     <p className="mt-2 text-ivory/70">
-                      We work closely with you throughout the process, ensuring your vision is reflected in every aspect of the final product.
+                      We work closely with you throughout the process, ensuring
+                      your vision is reflected in every aspect of the final
+                      product.
                     </p>
                   </div>
                 </div>
@@ -282,7 +289,9 @@ export default function HowItWorksClient() {
                   <div>
                     <h3 className="text-2xl font-bold text-ivory">Iterative</h3>
                     <p className="mt-2 text-ivory/70">
-                      We believe in constant refinement. Our process includes regular feedback loops and iterations to perfect the outcome.
+                      We believe in constant refinement. Our process includes
+                      regular feedback loops and iterations to perfect the
+                      outcome.
                     </p>
                   </div>
                 </div>
@@ -317,7 +326,6 @@ export default function HowItWorksClient() {
         </div>
       </section>
       <RedesignedProcessSection />
-     
     </>
   );
-} 
+}

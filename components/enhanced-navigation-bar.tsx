@@ -15,7 +15,8 @@ const navItems = [
       {
         label: "WEB DESIGN & DEVELOPMENT",
         href: "/services/web-design-development",
-        description: "Custom website design and development tailored to your brand",
+        description:
+          "Custom website design and development tailored to your brand",
         price: "from 699€",
       },
       {
@@ -60,7 +61,11 @@ export function EnhancedNavigationBar() {
   useEffect(() => {
     const handleScroll = () => {
       // Force check with the raw value
-      const scrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      const scrollY =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
       setScrolled(scrollY > 10);
     };
 
@@ -69,20 +74,20 @@ export function EnhancedNavigationBar() {
 
     // More frequent checks with passive event for better performance
     window.addEventListener("scroll", handleScroll, { passive: true });
-    
+
     // Fallback with requestAnimationFrame for mobile
     let rafId: number;
-    
+
     const pollScrollPosition = () => {
       handleScroll();
       rafId = requestAnimationFrame(pollScrollPosition);
     };
-    
+
     // Start polling on mobile devices
     if (window.innerWidth < 768) {
       rafId = requestAnimationFrame(pollScrollPosition);
     }
-    
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       if (rafId) cancelAnimationFrame(rafId);
@@ -224,7 +229,10 @@ export function EnhancedNavigationBar() {
                   {item.children ? (
                     <>
                       <div className="flex items-center text-ivory/90 hover:text-ivory transition-colors font-ivory font-semibold tracking-tight py-2 relative cursor-pointer">
-                        <Link href={item.href!} className="relative inline-block">
+                        <Link
+                          href={item.href!}
+                          className="relative inline-block"
+                        >
                           {item.label}
                           <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose group-hover:w-full transition-all duration-300"></span>
                         </Link>
@@ -361,7 +369,7 @@ export function EnhancedNavigationBar() {
                   },
                   opacity: { duration: 0.3 },
                 }}
-                className="w-full bg-charcoal/20 max-w-[calc(100%-2rem)] overflow-hidden flex flex-col pointer-events-auto rounded-2xl border border-ivory/10 origin-top mt-2"
+                className="w-full bg-charcoal/20 max-w-[calc(100%-2rem)] overflow-hidden flex flex-col pointer-events-auto rounded-2xl border border-ivory/10 origin-top mt-2 max-h-[80vh]"
                 style={{
                   width: navWidth > 0 ? `${navWidth}px` : "calc(100% - 2rem)",
 
@@ -384,7 +392,7 @@ export function EnhancedNavigationBar() {
                 </div>
 
                 {/* Menu items */}
-                <div className="flex-1 overflow-y-auto">
+                <div className="flex-1 overflow-y-auto overscroll-contain">
                   <nav className="p-6 pt-12">
                     <ul className="space-y-6">
                       {navItems.map((item, index) => (
@@ -410,7 +418,11 @@ export function EnhancedNavigationBar() {
                                 }}
                               >
                                 {/* Text with hover underline animation */}
-                                <Link href={item.href!} className="relative inline-block" onClick={(e) => e.stopPropagation()}>
+                                <Link
+                                  href={item.href!}
+                                  className="relative inline-block"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
                                   {item.label}
                                   <motion.span
                                     className="absolute -bottom-1 left-0 h-0.5 bg-rose"
@@ -471,7 +483,7 @@ export function EnhancedNavigationBar() {
                                       },
                                       opacity: { duration: 0.2 },
                                     }}
-                                    className="overflow-hidden mt-4 pl-4"
+                                    className="overflow-visible mt-4 pl-4"
                                   >
                                     {/* Detailed sub-elements like desktop */}
                                     <div className="grid grid-cols-1 gap-4">

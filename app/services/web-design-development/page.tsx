@@ -207,7 +207,7 @@ export default function WebDesignDevelopmentPage() {
 
         <motion.div
           style={{ y, opacity }}
-          className="container relative z-10 px-4"
+          className="container relative z-10 px-4 -mt-24"
         >
           <motion.div
             className="mx-auto max-w-4xl text-center"
@@ -245,7 +245,7 @@ export default function WebDesignDevelopmentPage() {
         </motion.div>
 
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer z-20"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20"
           animate={{ y: [0, 10, 0] }}
           transition={{
             duration: 1.5,
@@ -258,7 +258,7 @@ export default function WebDesignDevelopmentPage() {
               ?.scrollIntoView({ behavior: "smooth" });
           }}
         >
-          <div className="relative">
+          <div className="relative flex -left-1/2 items-center justify-center -mt-32">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-rose/30 to-sapphire/30 blur-sm"></div>
             <ChevronDown className="relative z-10 h-8 w-8 text-ivory" />
           </div>
@@ -438,70 +438,69 @@ export default function WebDesignDevelopmentPage() {
       {/* CTA Section */}
       <section className="py-24 md:py-32">
         <motion.div className="container">
-            <div className="relative z-10 md:mt-0">
-              <motion.div className="mx-auto max-w-6xl text-center">
-                <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
-                  Ready for a website that{" "}
-                  <GradientText
-                    colors={[
-                      "#3d5a80",
-                      "#b76e79",
-                      "#e0d5c0",
-                      "#3d5a80",
-                      "#b76e79",
-                      "#3d5a80",
-                    ]}
-                    animationSpeed={12}
-                    showBorder={false}
-                    className="inline-block"
-                  >
-                    stands out
-                  </GradientText>
-                  ?
-                </h1>
-                <ScrollReveal
-                  textClassName="text-lg md:text-2xl mt-4 -mb-18 text-ivory/70 max-w-6xl"
-                  baseOpacity={0.1}
-                  enableBlur={true}
-                  baseRotation={3}
-                  blurStrength={4}
+          <div className="relative z-10 md:mt-0">
+            <motion.div className="mx-auto max-w-6xl text-center">
+              <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
+                Ready for a website that{" "}
+                <GradientText
+                  colors={[
+                    "#3d5a80",
+                    "#b76e79",
+                    "#e0d5c0",
+                    "#3d5a80",
+                    "#b76e79",
+                    "#3d5a80",
+                  ]}
+                  animationSpeed={12}
+                  showBorder={false}
+                  className="inline-block"
                 >
-                  Let's create something extraordinary together. Transform your
-                  online presence with a stunning, high-performance website.
-                </ScrollReveal>
-                <div
-          
-                  style={{
-                    width: "100%",
-                    height: "600px",
-                    position: "relative",
-                  }}
-                >
-                  <div className="absolute inset-0 z-10 md:mt-0 -mt-52">
-                    <Orb
-                      hoverIntensity={0.5}
-                      rotateOnHover={true}
-                      hue={0}
-                      forceHoverState={false}
-                    />
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:mt-0   -mt-52">
-                    <motion.div className="flex flex-col items-center justify-center gap-4 pointer-events-auto">
-                      <Link
-                        href="/contact"
-                        className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
-                      >
-                        <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
-                        <span className="relative z-10 flex items-center">
-                          GET STARTED
-                          <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                        </span>
-                      </Link>
-                    </motion.div>
-                  </div>
+                  stands out
+                </GradientText>
+                ?
+              </h1>
+              <ScrollReveal
+                textClassName="text-lg md:text-2xl mt-4 -mb-18 text-ivory/70 max-w-6xl"
+                baseOpacity={0.1}
+                enableBlur={true}
+                baseRotation={3}
+                blurStrength={4}
+              >
+                Let's create something extraordinary together. Transform your
+                online presence with a stunning, high-performance website.
+              </ScrollReveal>
+              <div
+                style={{
+                  width: "100%",
+                  height: "600px",
+                  position: "relative",
+                }}
+              >
+                <div className="absolute inset-0 z-10 md:mt-0 -mt-52">
+                  <Orb
+                    hoverIntensity={0.5}
+                    rotateOnHover={true}
+                    hue={0}
+                    forceHoverState={false}
+                  />
                 </div>
-              </motion.div>
-            </div>
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:mt-0   -mt-52">
+                  <motion.div className="flex flex-col items-center justify-center gap-4 pointer-events-auto">
+                    <Link
+                      href="/contact"
+                      className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
+                    >
+                      <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                      <span className="relative z-10 flex items-center">
+                        GET STARTED
+                        <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </Link>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
       </section>
     </main>
