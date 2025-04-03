@@ -126,7 +126,7 @@ export function RedesignedFooter() {
                     href="mailto:hello@soluviadesign.com"
                     className="text-ivory/70 hover:text-rose transition-colors"
                   >
-                    info@soluvia.com
+                    info@soluvia.co
                   </a>
                 </div>
                 <div className="flex items-center">
@@ -261,51 +261,7 @@ export function RedesignedFooter() {
           </motion.div>
         </div>
 
-        {/* Business Hours */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="mt-16 p-6 rounded-xl border border-ivory/10 bg-[#252736]"
-        >
-          <div className="grid md:grid-cols-4 gap-6">
-            <div className="md:col-span-1">
-              <h3 className="text-lg font-semibold text-ivory mb-2">
-                Business Hours
-              </h3>
-              <p className="text-ivory/70">
-                We're available to help during these hours
-              </p>
-            </div>
-            <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="p-4 rounded-lg border border-ivory/10 bg-charcoal/30">
-                <div className="flex items-center mb-2">
-                  <Clock className="h-5 w-5 text-rose mr-2" />
-                  <h4 className="font-medium text-ivory">Weekdays</h4>
-                </div>
-                <p className="text-ivory/70">Monday - Friday</p>
-                <p className="text-ivory">9:00 AM - 6:00 PM</p>
-              </div>
-              <div className="p-4 rounded-lg border border-ivory/10 bg-charcoal/30">
-                <div className="flex items-center mb-2">
-                  <Clock className="h-5 w-5 text-rose mr-2" />
-                  <h4 className="font-medium text-ivory">Saturday</h4>
-                </div>
-                <p className="text-ivory/70">Weekend</p>
-                <p className="text-ivory">10:00 AM - 4:00 PM</p>
-              </div>
-              <div className="p-4 rounded-lg border border-ivory/10 bg-charcoal/30">
-                <div className="flex items-center mb-2">
-                  <Clock className="h-5 w-5 text-rose mr-2" />
-                  <h4 className="font-medium text-ivory">Sunday</h4>
-                </div>
-                <p className="text-ivory/70">Weekend</p>
-                <p className="text-ivory">Closed</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+       
 
         {/* Bottom Section */}
         <motion.div
@@ -340,12 +296,12 @@ export function RedesignedFooter() {
             >
               Terms of Service
             </Link>
-            <Link
+            {/* <Link
               href="/cookies-policy"
               className="text-ivory/50 hover:text-rose transition-colors"
             >
               Cookies Policy
-            </Link>
+            </Link> */}
             <Link
               href="/sitemap"
               className="text-ivory/50 hover:text-rose transition-colors"

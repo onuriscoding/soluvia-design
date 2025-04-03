@@ -549,25 +549,20 @@ export default function AiAutomationPage() {
                     />
                   </div>
                   {/* Get Started Button */}
-                  <motion.div className="absolute inset-0 flex items-center justify-center pointer-events-none md:mt-0 -mt-52">
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:mt-0   -mt-52">
                     <motion.div className="flex flex-col items-center justify-center gap-4 pointer-events-auto">
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                      <Link
+                        href="/contact"
+                        className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
                       >
-                        <Link
-                          href="/contact"
-                          className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
-                        >
-                          <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
-                          <span className="relative z-10 flex items-center">
-                            GET STARTED
-                            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                          </span>
-                        </Link>
-                      </motion.div>
+                        <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                        <span className="relative z-10 flex items-center">
+                          GET STARTED
+                          <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                        </span>
+                      </Link>
                     </motion.div>
-                  </motion.div>
+                  </div>
                 </div>
               </motion.div>
             </div>

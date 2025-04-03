@@ -14,7 +14,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     // Run on mount and resize
     setViewportHeight();
     window.addEventListener('resize', setViewportHeight);
-    
+
     // Simple smooth scrolling for anchor links
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement

@@ -590,3 +590,21 @@ html {
   animation: none;
 }
 
+/* Prevent negative margins from causing white space */
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+/* Fix width issues pointed out in the comments */
+.form-control, .btn-submit {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Make sure no element exceeds viewport width */
+div, main, section, aside, canvas {
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
