@@ -35,6 +35,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { RedesignedCTASection } from "@/components/redesigned-cta-section";
 import Orb from "@/components/orb";
+import { Metadata } from "next";
+import { ServiceStructuredData, FAQStructuredData } from "@/components/structured-data";
+import { seoServices } from "@/lib/seo-services";
 
 interface Benefit {
   title: string;
@@ -42,7 +45,61 @@ interface Benefit {
   icon: LucideIcon;
 }
 
-export default function SeoOptimizationPage() {
+export async function generateMetadata({ params: paramsPromise }: { params: Promise<{ lang: string }> | { lang: string } }): Promise<Metadata> {
+  // Ensure we await the params
+  const params = await Promise.resolve(paramsPromise);
+  
+  // Ensure we have a string for the language
+  const lang = params.lang || "en";
+  
+  return {
+    title: lang === "fr" 
+      ? "Optimisation SEO | Soluvia" 
+      : "SEO Optimization | Soluvia",
+    description: lang === "fr"
+      ? "Améliorez votre visibilité en ligne et augmentez votre trafic organique avec nos stratégies SEO complètes. Services d'experts en référencement pour propulser votre entreprise."
+      : "Boost your online visibility and drive organic traffic with our comprehensive SEO strategies. Expert search engine optimization services to propel your business forward.",
+    keywords: [
+      "SEO", "search engine optimization", "keyword research", 
+      "on-page SEO", "off-page SEO", "technical SEO", 
+      "local SEO", "SEO strategy", "SEO services",
+      "Google rankings", "search rankings", "SEO agency"
+    ],
+    alternates: {
+      canonical: `https://soluvia.com/${lang}/services/seo-optimization`,
+    },
+    openGraph: {
+      type: "website",
+      locale: lang === "fr" ? "fr_FR" : "en_US",
+      url: `https://soluvia.com/${lang}/services/seo-optimization`,
+      siteName: "Soluvia",
+      title: lang === "fr" ? "Optimisation SEO | Soluvia" : "SEO Optimization | Soluvia",
+      description: lang === "fr"
+        ? "Améliorez votre visibilité en ligne avec nos services SEO experts."
+        : "Boost your online visibility with our expert SEO services.",
+      images: [
+        {
+          url: "/seo.png",
+          width: 1200,
+          height: 630,
+          alt: "Soluvia SEO Optimization Services",
+        },
+      ],
+    },
+  };
+}
+
+export default function Page() {
+  return (
+    <>
+      <ServiceStructuredData service="SEO Optimization" />
+      <FAQStructuredData faqs={seoServices.faqs} />
+      <SeoOptimizationPage />
+    </>
+  );
+}
+
+function SeoOptimizationPage() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,

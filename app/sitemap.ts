@@ -1,59 +1,40 @@
-import type { MetadataRoute } from "next"
+import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://soluviadesign.com"
+  // Base URL for the site
+  const baseUrl = 'https://soluvia.com';
+  
+  // Languages supported
+  const languages = ['en', 'fr'];
+  
+  // Common routes for both languages
+  const routes = [
+    '',
+    '/services',
+    '/services/web-design-development',
+    '/services/seo-optimization',
+    '/services/ai-automation',
+    '/how-it-works',
+    '/about',
+    '/contact',
+  ];
 
-  // Main pages
-  const routes = ["", "/about", "/services", "/portfolio", "/contact", "/how-it-works"].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: route === "" ? 1 : 0.8,
-  }))
-
-  // Portfolio items
-  const portfolioItems = [
-    "luxury-brand",
-    "ecommerce-platform",
-    "tech-startup",
-    "seo-campaign",
-    "restaurant-website",
-    "digital-marketing",
-    "local-business-seo",
-    "mobile-app",
-  ].map((slug) => ({
-    url: `${baseUrl}/portfolio/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }))
-
-  // Service pages
-  const servicePages = [
-    "web-design",
-    "ecommerce",
-    "seo-optimization",
-    "web-development",
-    "business-growth",
-    "mobile-apps",
-  ].map((slug) => ({
-    url: `${baseUrl}/services/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }))
-
-  // Resource pages
-  const resourcePages = [
-    "faq",
-    "support",
-  ].map((slug) => ({
-    url: `${baseUrl}/resources/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }))
-
-  return [...routes, ...portfolioItems, ...servicePages, ...resourcePages]
+  // Generate sitemap entries
+  const sitemap: MetadataRoute.Sitemap = [];
+  
+  // Add entries for each language and route
+  languages.forEach(lang => {
+    routes.forEach(route => {
+      const path = route === '' ? `/${lang}` : `/${lang}${route}`;
+      sitemap.push({
+        url: `${baseUrl}${path}`,
+        lastModified: new Date(),
+        changeFrequency: route === '' ? 'weekly' : 'monthly',
+        priority: route === '' ? 1.0 : 0.8,
+      });
+    });
+  });
+  
+  return sitemap;
 }
 

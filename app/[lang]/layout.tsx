@@ -4,6 +4,7 @@ import { EnhancedNavigationBar } from "@/components/enhanced-navigation-bar";
 import { RedesignedFooter } from "@/components/redesigned-footer";
 import { PageTransition } from "@/components/page-transition";
 import { I18nProvider } from "@/lib/i18n/i18nContext";
+import { OrganizationStructuredData, WebsiteStructuredData } from "@/components/structured-data";
 import "@/styles/enhanced-animations.css";
 import Iridescence from "../animations/bg";
 
@@ -37,6 +38,11 @@ export default async function RootLayout({
     <html lang={lang} className={`${inter.className} ${anton.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="canonical" href={`https://soluvia.com/${lang}`} />
+        <meta name="google-site-verification" content="your-verification-code" />
+        {/* Structured Data for SEO */}
+        <OrganizationStructuredData />
+        <WebsiteStructuredData />
       </head>
       <body>
         {/* Background */}
@@ -64,5 +70,42 @@ export default async function RootLayout({
 }
 
 export const metadata = {
+  title: "Soluvia | Creative Digital Solutions",
+  description: "Soluvia provides expert web design, development, SEO optimization, and AI solutions to help businesses thrive in the digital world. Elevate your online presence with our creative digital solutions.",
   generator: "v0.dev",
+  keywords: ["web design", "web development", "SEO", "AI solutions", "digital marketing", "Soluvia"],
+  openGraph: {
+    title: "Soluvia | Creative Digital Solutions",
+    description: "Expert web design, development, SEO optimization, and AI solutions to help your business thrive online.",
+    url: "https://soluvia.com",
+    siteName: "Soluvia",
+    images: [
+      {
+        url: "/soluvia.png",
+        width: 1200,
+        height: 630,
+        alt: "Soluvia Design",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Soluvia | Creative Digital Solutions",
+    description: "Expert web design, development, SEO optimization, and AI solutions to help your business thrive online.",
+    images: ["/soluvia.png"],
+    creator: "@SoluviaDesign",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-video-preview': -1,
+      'max-snippet': -1,
+    },
+  },
 };
