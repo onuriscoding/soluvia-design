@@ -2,14 +2,26 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/app/animations/scroll-reveal";
 import GradientText from "@/app/animations/gradient-text";
+import Link from "next/link";
+import { useI18n } from "@/lib/i18n/i18nContext";
 
 type FAQ = {
   question: string;
   answer: string;
 };
+
+interface FAQDictionary {
+  faq?: {
+    sectionTitle?: string;
+    sectionSubtitle?: string;
+    stillHaveQuestions?: string;
+    contactUs?: string;
+    questions?: FAQ[];
+  };
+}
 
 const faqs: FAQ[] = [
   {
@@ -42,12 +54,40 @@ const faqs: FAQ[] = [
     answer:
       "Yes, we collaborate effectively with clients globally using our digital workflow and communication tools. We schedule meetings at convenient times across different time zones to ensure smooth communication throughout your project.",
   },
+  {
+    question: "Do you offer ongoing support after the website launch?",
+    answer:
+      "Absolutely! We provide comprehensive ongoing support through our monthly maintenance plans. These include regular updates, security patches, performance monitoring, content updates, and technical support to ensure your website remains secure, up-to-date, and performing optimally.",
+  },
 ];
 
-export function RedesignedFAQSection() {
+// Helper hook to localize URLs
+const useLocalizedUrl = () => {
+  const { language } = useI18n();
+
+  return (path: string) => {
+    // Handle root path
+    if (path === "/") {
+      return `/${language}`;
+    }
+
+    // Handle other paths
+    return `/${language}${path}`;
+  };
+};
+
+export function RedesignedFAQSection({
+  dictionary,
+}: {
+  dictionary?: FAQDictionary;
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const localizeUrl = useLocalizedUrl();
+
+  // Use FAQ questions and answers from dictionary if available, otherwise use default ones
+  const faqItems: FAQ[] = dictionary?.faq?.questions || faqs;
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -69,7 +109,7 @@ export function RedesignedFAQSection() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-5xl font-bold tracking-thight sm:text-4xl md:text-6xl">
-            Frequently Asked{" "}
+            {dictionary?.faq?.sectionTitle || "Frequently Asked"}{" "}
             <GradientText
               colors={[
                 "#3d5a80",
@@ -93,12 +133,13 @@ export function RedesignedFAQSection() {
             baseRotation={3}
             blurStrength={4}
           >
-            Find answers to common questions about our services and process
+            {dictionary?.faq?.sectionSubtitle ||
+              "Find answers to common questions about our services and process"}
           </ScrollReveal>
         </motion.div>
 
         <div className="mx-auto max-w-3xl">
-          {faqs.map((faq, index) => (
+          {faqItems.map((faq: FAQ, index: number) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
@@ -141,6 +182,22 @@ export function RedesignedFAQSection() {
               </AnimatePresence>
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <p className="text-lg text-ivory/70 mb-4">
+            {dictionary?.faq?.stillHaveQuestions || "Still have questions?"}
+          </p>
+          <Link
+            href={localizeUrl("/contact")}
+            className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-5 py-3 font-bold tracking-thighter text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30 mb-16"
+          >
+            <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+            <span className="relative z-10 flex items-center">
+              {dictionary?.faq?.contactUs || "CONTACT US"}
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </span>
+          </Link>
         </div>
       </div>
     </section>

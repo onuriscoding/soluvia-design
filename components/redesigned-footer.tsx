@@ -19,8 +19,11 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useI18n } from "@/lib/i18n/i18nContext";
+import { LanguageSwitcher } from "./language-switcher";
 
 export function RedesignedFooter() {
+  const { t } = useI18n();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -74,10 +77,7 @@ export function RedesignedFooter() {
               </Link>
 
               <p className="mt-6 text-ivory/70 max-w-md translate-x-100px">
-                Creating sophisticated, elegant websites that drive business
-                growth and optimize your online presence. We specialize in
-                delivering high-quality digital solutions tailored to your
-                brand.
+                {t("footer.description")}
               </p>
 
               <div className="mt-8 flex gap-4">
@@ -150,7 +150,9 @@ export function RedesignedFooter() {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="space-y-5"
           >
-            <h3 className="text-lg font-semibold text-ivory">Services</h3>
+            <h3 className="ml-5 text-lg font-semibold text-ivory">
+              {t("services.allServices")}
+            </h3>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -158,17 +160,17 @@ export function RedesignedFooter() {
                   className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
                 >
                   <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>Web Design & Development</span>
+                  <span>{t("services.web-design")}</span>
                 </Link>
               </li>
-          
+
               <li>
                 <Link
                   href="/services/seo-optimization"
                   className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
                 >
                   <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>SEO Optimization</span>
+                  <span>{t("services.seo")}</span>
                 </Link>
               </li>
 
@@ -178,10 +180,9 @@ export function RedesignedFooter() {
                   className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
                 >
                   <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>AI Automation</span>
+                  <span>{t("services.automation")}</span>
                 </Link>
               </li>
-
             </ul>
           </motion.div>
 
@@ -193,7 +194,9 @@ export function RedesignedFooter() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="space-y-5"
           >
-            <h3 className="text-lg font-semibold text-ivory">Company</h3>
+            <h3 className="ml-5 text-lg font-semibold text-ivory">
+              {t("footer.company")}
+            </h3>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -201,7 +204,7 @@ export function RedesignedFooter() {
                   className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
                 >
                   <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>About Us</span>
+                  <span>{t("footer.about")}</span>
                 </Link>
               </li>
 
@@ -211,7 +214,7 @@ export function RedesignedFooter() {
                   className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
                 >
                   <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>Our Process</span>
+                  <span>{t("footer.how-it-works")}</span>
                 </Link>
               </li>
               <li>
@@ -220,10 +223,9 @@ export function RedesignedFooter() {
                   className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
                 >
                   <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-                  <span>Contact</span>
+                  <span>{t("footer.contact")}</span>
                 </Link>
               </li>
-
             </ul>
           </motion.div>
 
@@ -235,9 +237,10 @@ export function RedesignedFooter() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="space-y-5"
           >
-            <h3 className="text-lg font-semibold text-ivory">Resources</h3>
+            <h3 className="ml-5 text-lg font-semibold text-ivory">
+              {t("footer.resources")}
+            </h3>
             <ul className="space-y-3">
-
               <li>
                 <Link
                   href="/resources/faq"
@@ -256,12 +259,9 @@ export function RedesignedFooter() {
                   <span>Support</span>
                 </Link>
               </li>
-
             </ul>
           </motion.div>
         </div>
-
-       
 
         {/* Bottom Section */}
         <motion.div
@@ -272,29 +272,20 @@ export function RedesignedFooter() {
           className="mt-16 flex flex-col items-center justify-between space-y-6 border-t border-ivory/10 pt-8 text-sm text-ivory/50 md:flex-row md:space-y-0"
         >
           <div className="flex flex-col sm:flex-row items-center gap-4">
-            <p>© {currentYear} Soluvia Design. All rights reserved.</p>
-            <div className="flex items-center">
-              <Globe className="h-4 w-4 mr-1" />
-              <select className="bg-transparent text-ivory/50 border-none focus:outline-none text-sm">
-                <option value="en">English</option>
-                <option value="fr">Français</option>
-                <option value="es">Español</option>
-                <option value="de">Deutsch</option>
-              </select>
-            </div>
+            <p>{t("footer.copyright")}</p>
           </div>
           <div className="flex flex-wrap justify-center gap-6">
             <Link
               href="/privacy-policy"
               className="text-ivory/50 hover:text-rose transition-colors"
             >
-              Privacy Policy
+              {t("footer.privacyPolicy")}
             </Link>
             <Link
               href="/terms-of-service"
               className="text-ivory/50 hover:text-rose transition-colors"
             >
-              Terms of Service
+              {t("footer.termsOfService")}
             </Link>
             {/* <Link
               href="/cookies-policy"
@@ -302,12 +293,14 @@ export function RedesignedFooter() {
             >
               Cookies Policy
             </Link> */}
+            {/*
             <Link
               href="/sitemap"
               className="text-ivory/50 hover:text-rose transition-colors"
             >
-              Sitemap
+              {t("footer.sitemap")}
             </Link>
+            */}
           </div>
         </motion.div>
       </div>

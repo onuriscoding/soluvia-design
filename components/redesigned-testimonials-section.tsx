@@ -13,6 +13,7 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 import ScrollVelocity from "@/app/animations/scroll-velocity";
 import ScrollReveal from "@/app/animations/scroll-reveal";
+
 type Testimonial = {
   id: number;
   name: string;
@@ -61,7 +62,11 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-export function RedesignedTestimonialsSection() {
+export function RedesignedTestimonialsSection({
+  dictionary,
+}: {
+  dictionary: any;
+}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -71,6 +76,9 @@ export function RedesignedTestimonialsSection() {
     triggerOnce: true,
     threshold: 0.2,
   });
+
+  // Use testimonials from dictionary if available, otherwise use the default ones
+  const testimonialsToUse = dictionary?.testimonials?.clients || testimonials;
 
   // Scroll tracking
   const { scrollYProgress } = useScroll({
@@ -92,13 +100,14 @@ export function RedesignedTestimonialsSection() {
 
   const nextTestimonial = () => {
     setDirection(1);
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonialsToUse.length);
   };
 
   const prevTestimonial = () => {
     setDirection(-1);
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length
+      (prevIndex) =>
+        (prevIndex - 1 + testimonialsToUse.length) % testimonialsToUse.length
     );
   };
 
@@ -147,7 +156,11 @@ export function RedesignedTestimonialsSection() {
         <div className="flex flex-col items-center justify-center w-full">
           <div className="w-full flex justify-center md:mb-4 -mb-12">
             <ScrollVelocity
-              texts={["What our", "clients say", "about us"]}
+              texts={[
+                dictionary?.testimonials?.sectionTitle1 || "What our",
+                dictionary?.testimonials?.sectionTitle2 || "clients say",
+                dictionary?.testimonials?.sectionTitle3 || "about us",
+              ]}
               className="md:text-[6.8rem] md:h-[6.5rem]"
               velocity={50}
             />
@@ -160,8 +173,8 @@ export function RedesignedTestimonialsSection() {
               baseRotation={1}
               blurStrength={2}
             >
-              Hear from businesses that have transformed their digital presence
-              with
+              {dictionary?.testimonials?.subheading ||
+                "Hear from businesses that have transformed their digital presence with"}
             </ScrollReveal>
           </div>
 
@@ -255,27 +268,31 @@ export function RedesignedTestimonialsSection() {
                 >
                   <div className="mb-8 text-center">
                     <p className="text-xl text-ivory/90 italic mb-8">
-                      "{testimonials[currentIndex].content}"
+                      "
+                      {testimonialsToUse[currentIndex].testimonial ||
+                        testimonialsToUse[currentIndex].content}
+                      "
                     </p>
                     <div className="flex items-center justify-center">
                       <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-rose mr-4">
                         <Image
                           src={
-                            testimonials[currentIndex].avatar ||
+                            testimonialsToUse[currentIndex].avatar ||
                             "/placeholder.svg"
                           }
-                          alt={testimonials[currentIndex].name}
+                          alt={testimonialsToUse[currentIndex].name}
                           fill
                           className="object-cover"
                         />
                       </div>
                       <div className="text-left">
                         <h4 className="font-bold text-ivory">
-                          {testimonials[currentIndex].name}
+                          {testimonialsToUse[currentIndex].name}
                         </h4>
                         <p className="text-ivory/70">
-                          {testimonials[currentIndex].role},{" "}
-                          {testimonials[currentIndex].company}
+                          {testimonialsToUse[currentIndex].role ||
+                            testimonialsToUse[currentIndex].position}
+                          , {testimonialsToUse[currentIndex].company}
                         </p>
                       </div>
                     </div>
@@ -296,7 +313,7 @@ export function RedesignedTestimonialsSection() {
                 <ChevronLeft className="h-5 w-5" />
               </button>
               <div className="flex items-center gap-2">
-                {testimonials.map((_, index) => (
+                {testimonialsToUse.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => {

@@ -1,0 +1,317 @@
+{
+  "navigation": {
+    "services": "SERVICES",
+    "howItWorks": "HOW IT WORKS",
+    "about": "ABOUT",
+    "contact": "CONTACT",
+    "getStarted": "GET STARTED",
+    "ourProcess": "OUR PROCESS",
+    "learnMore": "Learn More",
+    "webDesign": "WEB DESIGN & DEVELOPMENT",
+    "webDesignDescription": "Custom website design and development tailored to your brand.",
+    "aiAutomation": "AI AUTOMATION",
+    "aiAutomationDescription": "Automate repetitive tasks and streamline your workflow",
+    "seoOptimization": "SEO OPTIMIZATION",
+    "seoOptimizationDescription": "Improve your visibility in search engines",
+    "allServices": "ALL SERVICES",
+    "allServicesDescription": "Explore our complete range of digital services",
+    "continue": "Continue", 
+    "back": "Back",
+    "submit": "Submit",
+    "submitting": "Submitting..."
+  },
+  "services": {
+    "allServices": "Our Services",
+    "sectionTitle": "Our",
+    "sectionSubtitle": "From strategy to execution, we deliver digital services that elevate your business and amplify your presence online.",
+    "web-design": "Web Design & Development",
+    "web-design-description": "Sophisticated, responsive websites that captivate your audience and reflect your brand's unique identity.",
+    "web-design-features": [
+      "Custom responsive designs",
+      "Interactive UI/UX",
+      "Performance optimization"
+    ],
+    "automation": "AI Automation",
+    "automation-description": "Automate repetitive tasks and streamline your workflow with our AI automation solutions.",
+    "automation-features": [
+      "Custom AI solutions",
+      "Workflow automation",
+      "AI Chatbots"
+    ],
+    "seo": "SEO Optimization",
+    "seo-description": "Boost your online visibility and drive organic traffic with our comprehensive SEO strategies.",
+    "seo-features": [
+      "Keyword research & analysis",
+      "On-page optimization",
+      "Content strategy"
+    ]
+  },
+  "process": {
+    "sectionTitle1": "How We",
+    "sectionTitle2": "Make It Happen",
+    "sectionSubtitle": "A balanced approach combining human creativity with AI-enhanced precision",
+    "steps": [
+      {
+        "title": "Discovery",
+        "description": "We begin by understanding your business, goals, target audience, and challenges through in-depth research to establish a solid foundation for your project.",
+        "activities": [
+          {
+            "activity1":"Comprehensive market research",
+            "activity2":"User persona development",
+            "activity3":"Competitor analysis",
+            "activity4":"Business goals alignment",
+            "activity5":"Pain point identification",
+            "activity6":"Oppotunity mapping"
+          }
+        ]
+      
+      },
+      {
+        "title": "Strategy",
+        "description": " Using human insights enhanced by AI analysis, we develop a comprehensive strategy that outlines the approach, features, and technologies for your digital solution.",
+        "activities":[
+          {
+            "activity1":"Human-AI collaborative planning",
+            "activity2":"Technology stack selection",
+            "activity3":"Feature prioritization",
+            "activity4":"Development roadmap",
+            "activity5":"Succes metrics definition",
+            "activity6":"Ressource allocation"
+          }
+        ]
+      },
+      {
+        "title": "Design",
+        "description": "Our designers blend creativity with AI assistance to create wireframes and visual designs that align with your brand identity and provide an exceptional user experience.",
+        "activities":[
+          {
+            "activity1":"Wireframing & prototyping",
+            "activity2":"AI-enhanced UI/UX design",
+            "activity3":"Feature prioritization",
+            "activity4":"Design system creation",
+            "activity5":"Accessibility compliance",
+            "activity6":"Responsive layouts"
+          }
+        ]
+      },
+      {
+        "title": "Development",
+        "description": "Our development team brings designs to life, leveraging both human expertise and AI tools to build responsive, high-performance digital solutions with clean, efficient code.",
+        "activities":[
+          {
+            "activity1":"AI-assisted coding",
+            "activity2":"Responsive optimization",
+            "activity3":"Performance tuning",
+            "activity4":"API integrations",
+            "activity5":"CMS implementation",
+            "activity6":"Quality assurance"
+          }
+        ]
+      },
+      {
+        "title": "Launch",
+        "description": "After thorough testing and your approval, we deploy your solution and ensure everything is functioning perfectly through automated and manual verification.",
+        "activities":[
+          {
+            "activity1":"Pre-launch checklist",
+            "activity2":"Performance optimization",
+            "activity3":"Cross-platform testing",
+            "activity4":"Deployment preparation",
+            "activity5":"Go-live support",
+            "activity6":"Launch monitoring"
+          }
+        ]
+      },
+      {
+        "title": "Growth",
+        "description": "We provide ongoing support and continuous optimization to help your digital presence evolve and continue driving business results.",
+        "activities":[
+          {
+            "activity1":"AI-driven analytics",
+            "activity2":"Conversion optimization",
+            "activity3":"Content strategy",
+            "activity4":"Performance monitoring",
+            "activity5":"Continuous improvement",
+            "activity6":"Scaling strategy"
+          }
+        ]
+      }
+    ],
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "readyToStart": "Ready to start your journey?",
+    "getStarted": "GET STARTED",
+    "cta": "Ready to start your journey?"
+  },
+  "testimonials": {
+    "sectionTitle1": "What our",
+    "sectionTitle2": "clients say",
+    "sectionTitle3": "about us",
+    "subheading": "Hear from businesses that have transformed their digital presence with",
+    "sectionSubtitle": "Don't just take our word for it. Here's what our clients have to say about working with us.",
+    "clients": [
+      {
+        "name": "Elise Van den Broeck",
+        "position": "Marketing Director, NovaTex Brussels",
+        "testimonial": "Soluvia completely redefined our online presence. Their blend of creativity and technical precision truly exceeded our expectations."
+      },
+      {
+        "name": "Quentin Venturo",
+        "position": "Founder, Atelier Venturo",
+        "testimonial": "Soluvia truly understood the essence of our brand. The website they delivered is elegant, intuitive, and perfectly aligned with our vision."
+      },
+      {
+        "name": "Anke De Smet",
+        "position": "Communications Manager, Boutique Co",
+        "testimonial": "Working with Soluvia was a great decision. Their professionalism and ability to listen helped us launch a modern, high-performing website that attracts more prospects."
+      }
+    ]
+  },
+  "pricing": {
+    "sectionTitle": "Pricing",
+    "sectionSimple": "Simple",
+    "sectionAdjective": "Transparent",
+    "sectionSubtitle": "Choose the perfect plan for your business needs",
+    "from": "from",
+    "monthly": "+ Custom monthly maintenance",
+    "getaQuote": "Get a Quote",
+    "plans": [
+      {
+        "name": "Essential",
+        "price": "999",
+        "description": "Perfect for small businesses just getting started",
+        "features": [
+          {"included": true, "text": "Custom website design"},
+          {"included": true, "text": "Responsive design"},
+          {"included": true, "text": "Basic SEO setup"},
+          {"included": false, "text": "Advanced SEO setup"},
+          {"included": false, "text": "E-commerce functionality" },
+          {"included": false, "text": "AI automation tools" },
+          {"included": false, "text": "Custom functionality"}
+        ],
+        "popular": false
+      },
+      {
+        "name": "Professional",
+        "price": "1999",
+        "description": "Ideal for growing businesses looking to expand",
+        "features": [
+          {"included": true, "text": "Custom website design"},
+          {"included": true, "text": "Responsive design"},
+          {"included": true, "text": "Basic SEO setup"},
+          {"included": true, "text": "Advanced SEO setup"},
+          {"included": true, "text": "E-commerce functionality" },
+          {"included": false, "text": "AI automation tools" },
+          {"included": false, "text": "Custom functionality"}
+        ],
+        "popular": true,
+        "popularText": "Most Popular"
+      },
+      {
+        "name": "Enterprise",
+        "price": "2499",
+        "description": "Comprehensive solution for established businesses",
+        "features": [
+          {"included": true, "text": "Custom website design"},
+          {"included": true, "text": "Responsive design"},
+          {"included": true, "text": "Basic SEO setup"},
+          {"included": true, "text": "Advanced SEO setup"},
+          {"included": true, "text": "E-commerce functionality" },
+          {"included": true, "text": "AI automation tools" },
+          {"included": true, "text": "Custom functionality"}
+        ],
+        "popular": false
+      }
+    ],
+    "custom":{
+      "title": "Need a custom solution ?",
+      "subtitle": "Contact us to get a custom solution for your business within 24 hours"
+    },
+    "form":{
+      "name": "What's your name ?",
+      "nameText": "Enter your full name",
+      "nameDescription": "We'll use your name to personalize our communication with you.",
+      "contact": "How would you like to be contacted ?",
+      "contactOption1":"Phone",
+      "contactOption2":"Email",
+      "contactDescription":"Select your preferred method of communication for discussing your project.",
+      "phone": "What's your phone number ?",
+      "phoneText":"Enter your phone number",
+      "phoneDescription":"We'll call you within 24 hours to discuss your project needs.",
+      "email": "What's your email address ?",
+      "emailText": "Enter your email address",
+      "emailDescription": "We'll email you within 24 hours to discuss your project needs.",
+      "tellUs": "Tell us about your project",
+      "tellUsText": "Briefly describe your project",
+      "tellUsDescription": "This helps us prepare for our conversation with you.",
+      "confirmationThanks": "Thank you!",
+      "confirmationDescription": "We've received your information and will contact you within 24 hours to discuss your project.",
+      "anotherMessage": "Send another message",
+      "errorTitle": "Failed to send message"
+
+    }
+  },
+  "faq": {
+    "sectionTitle": "Frequently Asked ",
+    "sectionSubtitle": "Find answers to common questions about our services and process",
+    "questions": [
+      {"question": "What services does Soluvia offer ? ",
+        "answer": "Soluvia offers a comprehensive range of digital services including web design, web development, AI automation, SEO optimization, content management systems, and e-commerce solutions. We create sophisticated, elegant websites that drive business growth and optimize your online presence."
+      },
+      {
+        "question": "How does your pricing work ?",
+        "answer": "Our pricing is completely transparent. It includes a one-time setup fee (starting from €999 for essential projects), along with a custom monthly maintenance fee tailored to your specific needs. The final cost depends on several factors, such as the number of pages, required features, and level of customization. Each package is built to ensure you only pay for what your business truly needs."
+      },
+      {
+        "question": "What is your design and development process ?",
+        "answer": "Our process begins with a discovery phase where we learn about your business, goals, and target audience. We then create wireframes and prototypes, followed by visual design. After your approval, we proceed to development, testing, and launch. Throughout the process, we maintain open communication and seek your feedback at key milestones."
+      },
+      {
+        "question": "How can AI automation benefit my business ?",
+        "answer": "Our AI automation solutions can streamline your workflow by automating repetitive tasks, enhancing customer interactions, analyzing data patterns, and providing valuable business insights. This leads to improved efficiency, reduced operational costs, and the ability to focus your team's efforts on strategic growth initiatives."
+      },
+      {
+        "question": "How long does it take to complete a website project ?",
+        "answer": "The timeline depends on your project's complexity and scope. A standard website typically takes 3-5 weeks, while more complex projects with custom functionality or e-commerce integration may take 8-12 weeks. During our initial consultation, we'll provide a more accurate timeline based on your specific requirements."
+      },
+      {
+        "question": "What is your payment process?",
+        "answer": "We require a 50% deposit to begin work, with the remaining balance due upon project completion. For larger projects, we can arrange a payment schedule with milestones."
+      },
+      {
+        "question": "Do you work with clients remotely ?",
+        "answer": "Yes, we collaborate effectively with clients globally using our digital workflow and communication tools. We schedule meetings at convenient times across different time zones to ensure smooth communication throughout your project."
+      }
+    ],
+    "stillHaveQuestions": "Still have questions?",
+    "contactUs": "CONTACT US"
+  },
+  "hero": {
+    "title": "Solutions via",
+    "rotatingText1": "Designs",
+    "rotatingText2": "AI",
+    "description": "We create elegant, high-impact websites designed to elevate your brand. Empower your business with a unique online presence through tailored digital solutions"
+  },
+  "cta": {
+    "heading": "Ready for a solution that",
+    "highlight": "stands out",
+    "subheading": "Let's create something extraordinary together.",
+    "getStarted": "GET STARTED"
+  },
+  "footer": {
+    "company": "Company",
+    "about": "About us",
+    "how-it-works": "How it works",
+    "contact": "Contact",
+    "resources":"Resources",
+    "description": "Creating sophisticated, elegant websites that drive business growth and optimize your online presence. We specialize in delivering high-quality digital solutions tailored to your brand.",
+    "copyright": "© {year} Soluvia Design. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "sitemap": "Sitemap"
+  },
+  "language": {
+    "en": "English",
+    "fr": "Français"
+  }
+} 

@@ -24,6 +24,23 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import GradientText from "@/app/animations/gradient-text";
 import ScrollReveal from "@/app/animations/scroll-reveal";
+import { useI18n } from "@/lib/i18n/i18nContext";
+
+// Helper hook to localize URLs
+const useLocalizedUrl = () => {
+  const { language } = useI18n();
+
+  return (path: string) => {
+    // Handle root path
+    if (path === "/") {
+      return `/${language}`;
+    }
+
+    // Handle other paths
+    return `/${language}${path}`;
+  };
+};
+
 const processSteps = [
   {
     icon: <Search className="h-6 w-6" />,
@@ -37,7 +54,7 @@ const processSteps = [
       "Competitor analysis",
       "Business goals alignment",
       "Pain point identification",
-      "Opportunity mapping"
+      "Opportunity mapping",
     ],
   },
   {
@@ -52,7 +69,7 @@ const processSteps = [
       "Feature prioritization",
       "Development roadmap",
       "Success metrics definition",
-      "Resource allocation"
+      "Resource allocation",
     ],
   },
   {
@@ -67,7 +84,7 @@ const processSteps = [
       "Brand integration",
       "Design system creation",
       "Accessibility compliance",
-      "Responsive layouts"
+      "Responsive layouts",
     ],
   },
   {
@@ -82,7 +99,7 @@ const processSteps = [
       "Performance tuning",
       "API integrations",
       "CMS implementation",
-      "Quality assurance"
+      "Quality assurance",
     ],
   },
   {
@@ -97,7 +114,7 @@ const processSteps = [
       "Cross-platform testing",
       "Deployment preparation",
       "Go-live support",
-      "Launch monitoring"
+      "Launch monitoring",
     ],
   },
   {
@@ -112,18 +129,20 @@ const processSteps = [
       "Content strategy",
       "Performance monitoring",
       "Continuous improvement",
-      "Scaling strategy"
+      "Scaling strategy",
     ],
   },
 ];
 
-export function RedesignedProcessSection() {
+export function RedesignedProcessSection({ dictionary }: { dictionary: any }) {
+  const { t } = useI18n();
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [expandedStep, setExpandedStep] = useState<number | null>(null);
   const isMobile = useIsMobile();
   const isInView = useInView(containerRef, { once: false, amount: 0.1 });
+  const localizeUrl = useLocalizedUrl();
 
   // Scroll tracking
   const { scrollYProgress } = useScroll({
@@ -225,7 +244,7 @@ export function RedesignedProcessSection() {
             className="text-4xl font-bold tracking-tight md:text-6xl"
             variants={itemVariants}
           >
-            How We{" "}
+            {t("process.sectionTitle1")}{" "}
             <GradientText
               colors={[
                 "#3d5a80",
@@ -239,7 +258,7 @@ export function RedesignedProcessSection() {
               showBorder={false}
               className="inline-block"
             >
-              Make It Happen
+              {t("process.sectionTitle2")}
             </GradientText>
           </motion.h2>
           <ScrollReveal
@@ -250,7 +269,7 @@ export function RedesignedProcessSection() {
             blurStrength={3}
             containerClassName="max-w-3xl mx-auto"
           >
-            A balanced approach combining human creativity with AI-enhanced precision
+            {t("process.sectionSubtitle")}
           </ScrollReveal>
         </motion.div>
 
@@ -363,7 +382,7 @@ export function RedesignedProcessSection() {
                     boxShadow: "0 10px 25px rgba(183, 110, 121, 0.1)",
                     y: -5,
                     scale: 1.02,
-                    transition: { duration: 0.3, ease: "easeOut" }
+                    transition: { duration: 0.3, ease: "easeOut" },
                   }}
                   animate={
                     activeStep === index
@@ -378,7 +397,7 @@ export function RedesignedProcessSection() {
                 >
                   {/* Simple gradient background without blur */}
                   <div className="absolute inset-0 bg-gradient-to-br from-rose/5 via-sapphire/10 to-beige/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
+
                   {/* Content */}
                   <div className="flex items-center mb-4 relative z-10">
                     <motion.div
@@ -407,12 +426,13 @@ export function RedesignedProcessSection() {
                       {step.icon}
                     </motion.div>
                     <h3 className="text-xl font-bold tracking-tight text-white group-hover:text-rose transition-colors duration-300">
-                      {step.title}
+                      {dictionary?.process?.steps?.[index]?.title || step.title}
                     </h3>
                   </div>
 
                   <p className="text-white/70 relative z-10">
-                    {step.description}
+                    {dictionary?.process?.steps?.[index]?.description ||
+                      step.description}
                   </p>
 
                   {/* Expandable details with original design */}
@@ -429,22 +449,43 @@ export function RedesignedProcessSection() {
                           Key Activities:
                         </h4>
                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                          {step.details.map((detail, i) => (
-                            <motion.li
-                              key={i}
-                              className="flex items-center text-white/70 text-sm"
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: i * 0.1 }}
-                            >
-                              <div
-                                className={`w-1.5 h-1.5 rounded-full ${
-                                  step.color.split(" ")[0]
-                                } mr-2`}
-                              />
-                              {detail}
-                            </motion.li>
-                          ))}
+                          {dictionary?.process?.steps?.[index]
+                            ?.activities?.[0] &&
+                            Object.values(
+                              dictionary.process.steps[index].activities[0]
+                            ).map((activity, i) => (
+                              <motion.li
+                                key={i}
+                                className="flex items-center text-white/70 text-sm"
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: i * 0.1 }}
+                              >
+                                <div
+                                  className={`w-1.5 h-1.5 rounded-full ${
+                                    step.color.split(" ")[0]
+                                  } mr-2`}
+                                />
+                                {activity as string}
+                              </motion.li>
+                            ))}
+                          {!dictionary?.process?.steps?.[index]?.activities &&
+                            step.details.map((detail, i) => (
+                              <motion.li
+                                key={i}
+                                className="flex items-center text-white/70 text-sm"
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: i * 0.1 }}
+                              >
+                                <div
+                                  className={`w-1.5 h-1.5 rounded-full ${
+                                    step.color.split(" ")[0]
+                                  } mr-2`}
+                                />
+                                {detail}
+                              </motion.li>
+                            ))}
                         </ul>
                       </motion.div>
                     )}
@@ -457,7 +498,9 @@ export function RedesignedProcessSection() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    {expandedStep === index ? "Show less" : "Show more"}
+                    {expandedStep === index
+                      ? dictionary?.process?.showLess || "Show less"
+                      : dictionary?.process?.showMore || "Show more"}
                     <motion.div
                       animate={{ rotate: expandedStep === index ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
@@ -490,15 +533,15 @@ export function RedesignedProcessSection() {
           transition={{ duration: 0.6 }}
         >
           <h3 className="text-3xl md:text-4xl font-bold tracking-thighter mb-8">
-            Ready to start your journey?
+            {dictionary?.process?.cta || "Ready to start your journey?"}
           </h3>
           <Link
-            href="/contact"
+            href={localizeUrl("/contact")}
             className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 font-bold tracking-thighter text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
             <span className="relative z-10 flex items-center">
-              GET STARTED
+              {dictionary?.navigation?.getStarted || "GET STARTED"}
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           </Link>

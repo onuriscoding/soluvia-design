@@ -6,42 +6,59 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ChevronUp, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useI18n } from "@/lib/i18n/i18nContext";
+import { LanguageSwitcher } from "./language-switcher";
+import { usePathname } from "next/navigation";
+
+// Helper hook to localize URLs
+const useLocalizedUrl = () => {
+  const { language } = useI18n();
+
+  return (path: string) => {
+    // Handle root path
+    if (path === "/") {
+      return `/${language}`;
+    }
+
+    // Handle other paths
+    return `/${language}${path}`;
+  };
+};
 
 const navItems = [
   {
-    label: "SERVICES",
+    labelKey: "navigation.services",
     href: "/services",
     children: [
       {
-        label: "WEB DESIGN & DEVELOPMENT",
+        labelKey: "navigation.webDesign",
         href: "/services/web-design-development",
-        description:
-          "Custom website design and development tailored to your brand",
+        descriptionKey: "navigation.webDesignDescription",
         price: "from 699€",
       },
       {
-        label: "AI AUTOMATION",
+        labelKey: "navigation.aiAutomation",
         href: "/services/ai-automation",
-        description: "Automate repetitive tasks and streamline your workflow",
+        descriptionKey: "navigation.aiAutomationDescription",
         price: "from 1499€",
       },
       {
-        label: "SEO OPTIMIZATION",
+        labelKey: "navigation.seoOptimization",
         href: "/services/seo-optimization",
-        description: "Improve your visibility in search engines",
+        descriptionKey: "navigation.seoOptimizationDescription",
         price: "from 499€",
       },
       {
-        label: "ALL SERVICES",
+        labelKey: "navigation.allServices",
         href: "/services",
-        description: "Explore our complete range of digital services",
+        descriptionKey: "navigation.allServicesDescription",
       },
     ],
   },
 
-  { label: "HOW IT WORKS", href: "/how-it-works" },
-  { label: "ABOUT", href: "/about" },
-  { label: "CONTACT", href: "/contact" },
+  { labelKey: "navigation.howItWorks", href: "/how-it-works" },
+  { labelKey: "navigation.about", href: "/about" },
+  { labelKey: "navigation.contact", href: "/contact" },
 ];
 
 export function EnhancedNavigationBar() {
@@ -51,6 +68,8 @@ export function EnhancedNavigationBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logoHovered, setLogoHovered] = useState(false);
   const [navWidth, setNavWidth] = useState(0);
+  const { t } = useI18n();
+  const localizeUrl = useLocalizedUrl();
 
   // Refs
   const navRef = useRef<HTMLDivElement>(null);
@@ -176,7 +195,7 @@ export function EnhancedNavigationBar() {
           <div className="flex items-center justify-between h-16 px-6">
             {/* Logo */}
             <Link
-              href="/"
+              href={localizeUrl("/")}
               className="flex items-center z-10 w-[120px]"
               onMouseEnter={() => setLogoHovered(true)}
               onMouseLeave={() => setLogoHovered(false)}
@@ -225,15 +244,15 @@ export function EnhancedNavigationBar() {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-8">
               {navItems.map((item) => (
-                <div key={item.label} className="relative group">
+                <div key={item.labelKey} className="relative group">
                   {item.children ? (
                     <>
                       <div className="flex items-center text-ivory/90 hover:text-ivory transition-colors font-ivory font-semibold tracking-tight py-2 relative cursor-pointer">
                         <Link
-                          href={item.href!}
+                          href={localizeUrl(item.href!)}
                           className="relative inline-block"
                         >
-                          {item.label}
+                          {t(item.labelKey)}
                           <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose group-hover:w-full transition-all duration-300"></span>
                         </Link>
                         <div className="ml-1 w-4 h-4 flex items-center justify-center">
@@ -248,15 +267,15 @@ export function EnhancedNavigationBar() {
                           {item.children.map((child) => (
                             <Link
                               key={child.href}
-                              href={child.href}
+                              href={localizeUrl(child.href)}
                               className="group p-4 rounded-lg hover:bg-ivory/5 transition-colors"
                             >
                               <div className="font-ivory tracking-tight text-ivory mb-1 group-hover:text-rose transition-colors">
-                                {child.label}
+                                {t(child.labelKey)}
                               </div>
-                              {"description" in child && (
+                              {"descriptionKey" in child && (
                                 <div className="text-sm font-thin text-ivory/70 mb-2">
-                                  {child.description}
+                                  {t(child.descriptionKey)}
                                 </div>
                               )}
                               {"price" in child && child.price && (
@@ -276,11 +295,11 @@ export function EnhancedNavigationBar() {
                     </>
                   ) : (
                     <Link
-                      href={item.href!}
+                      href={localizeUrl(item.href!)}
                       className="text-ivory/90 hover:text-ivory transition-colors font-inter font-semibold tracking-wide py-2 relative group"
                     >
                       <span className="relative inline-block">
-                        {item.label}
+                        {t(item.labelKey)}
                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose group-hover:w-full transition-all duration-300"></span>
                       </span>
                     </Link>
@@ -290,13 +309,16 @@ export function EnhancedNavigationBar() {
             </nav>
 
             {/* CTA Button (Desktop) */}
-            <div className="hidden lg:block">
+            <div className="hidden lg:flex items-center space-x-4">
+              <LanguageSwitcher variant="minimal" className="mr-2" />
               <Link
-                href="/contact"
+                href={localizeUrl("/contact")}
                 className="group relative overflow-hidden rounded-full bg-rose px-6 py-2.5 text-sm font-bold tracking-tighter text-ivory transition-all duration-300 hover:shadow-lg hover:shadow-rose/30"
               >
                 <span className="absolute inset-0 rounded-full bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
-                <span className="relative z-10">GET STARTED</span>
+                <span className="relative z-10">
+                  {t("navigation.getStarted")}
+                </span>
               </Link>
             </div>
 
@@ -382,7 +404,7 @@ export function EnhancedNavigationBar() {
                 <div className="absolute top-4 right-4 z-50">
                   <motion.button
                     onClick={closeMobileMenu}
-                    className="flex items-center justify-center h-8 w-8 rounded-full text-ivory/70 hover:text-ivory transition-colors"
+                    className="flex items-center justify-center h-8 w-8 rounded-full bg-transparent text-ivory/70 hover:text-ivory transition-colors"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     aria-label="Close menu"
@@ -391,13 +413,18 @@ export function EnhancedNavigationBar() {
                   </motion.button>
                 </div>
 
+                {/* Mobile Language Switcher - centered at top */}
+                <div className="w-full flex justify-center py-4 border-b border-ivory/10 bg-transparent">
+                  <LanguageSwitcher variant="pill" className="shadow-lg" />
+                </div>
+
                 {/* Menu items */}
                 <div className="flex-1 overflow-y-auto overscroll-contain">
-                  <nav className="p-6 pt-12">
+                  <nav className="p-6 pt-6">
                     <ul className="space-y-6">
                       {navItems.map((item, index) => (
                         <li
-                          key={item.label}
+                          key={item.labelKey}
                           className={`${
                             index < navItems.length - 1
                               ? "border-b border-ivory/10 pb-6"
@@ -409,7 +436,7 @@ export function EnhancedNavigationBar() {
                               {/* SERVICES with dropdown */}
                               <motion.button
                                 onClick={(e) =>
-                                  toggleMobileDropdown(item.label, e)
+                                  toggleMobileDropdown(item.labelKey, e)
                                 }
                                 className="flex items-center text-3xl font-semibold tracking-thigh text-ivory hover:text-rose transition-colors relative group w-full"
                                 whileHover={{
@@ -419,11 +446,11 @@ export function EnhancedNavigationBar() {
                               >
                                 {/* Text with hover underline animation */}
                                 <Link
-                                  href={item.href!}
+                                  href={localizeUrl(item.href!)}
                                   className="relative inline-block"
                                   onClick={(e) => e.stopPropagation()}
                                 >
-                                  {item.label}
+                                  {t(item.labelKey)}
                                   <motion.span
                                     className="absolute -bottom-1 left-0 h-0.5 bg-rose"
                                     initial={{ width: 0 }}
@@ -435,7 +462,7 @@ export function EnhancedNavigationBar() {
                                 <div className="ml-2 w-4 h-4 flex items-center justify-center">
                                   {/* Dot that transforms to chevron, just like desktop */}
                                   <AnimatePresence mode="wait">
-                                    {activeMobileItem === item.label ? (
+                                    {activeMobileItem === item.labelKey ? (
                                       <motion.div
                                         key="chevron"
                                         initial={{ opacity: 0, scale: 0.5 }}
@@ -470,7 +497,7 @@ export function EnhancedNavigationBar() {
                               </motion.button>
 
                               <AnimatePresence initial={false}>
-                                {activeMobileItem === item.label && (
+                                {activeMobileItem === item.labelKey && (
                                   <motion.div
                                     initial={{ height: 0, opacity: 0 }}
                                     animate={{ height: "auto", opacity: 1 }}
@@ -490,16 +517,16 @@ export function EnhancedNavigationBar() {
                                       {item.children.map((child) => (
                                         <Link
                                           key={child.href}
-                                          href={child.href}
+                                          href={localizeUrl(child.href)}
                                           onClick={closeMobileMenu}
                                           className="p-3 rounded-lg hover:bg-ivory/5 transition-colors border border-ivory/5"
                                         >
                                           <div className="font-ivory tracking-wide text-ivory text-xl mb-1 hover:text-rose transition-colors">
-                                            {child.label}
+                                            {t(child.labelKey)}
                                           </div>
-                                          {"description" in child && (
+                                          {"descriptionKey" in child && (
                                             <div className="text-sm font-thin text-ivory/70 mb-2">
-                                              {child.description}
+                                              {t(child.descriptionKey)}
                                             </div>
                                           )}
                                           {"price" in child && child.price && (
@@ -531,12 +558,12 @@ export function EnhancedNavigationBar() {
                               }}
                             >
                               <Link
-                                href={item.href!}
+                                href={localizeUrl(item.href!)}
                                 onClick={closeMobileMenu}
                                 className="relative inline-block text-3xl font-semibold tracking-tighter text-ivory hover:text-rose transition-colors"
                               >
                                 <span className="relative inline-block">
-                                  {item.label}
+                                  {t(item.labelKey)}
                                   <motion.span
                                     className="absolute -bottom-1 left-0 h-0.5 bg-rose"
                                     initial={{ width: 0 }}
@@ -556,11 +583,11 @@ export function EnhancedNavigationBar() {
                 {/* Footer with CTA button */}
                 <div className="p-6 border-t border-ivory/10">
                   <Link
-                    href="/contact"
+                    href={localizeUrl("/contact")}
                     onClick={closeMobileMenu}
                     className="flex items-center justify-center w-full rounded-full bg-rose px-6 py-3 text-xl font-bold tracking-tighter text-ivory"
                   >
-                    <span className="mr-2">GET STARTED</span>
+                    <span className="mr-2">{t("navigation.getStarted")}</span>
                     <ArrowRight className="h-5 w-5" />
                   </Link>
                 </div>

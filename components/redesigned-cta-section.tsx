@@ -7,10 +7,40 @@ import { ArrowRight } from "lucide-react";
 import Orb from "@/components/orb";
 import GradientText from "@/app/animations/gradient-text";
 import ScrollReveal from "@/app/animations/scroll-reveal";
+import { useI18n } from "@/lib/i18n/i18nContext";
 
-export function RedesignedCTASection() {
+// Helper hook to localize URLs
+const useLocalizedUrl = () => {
+  const { language } = useI18n();
+
+  return (path: string) => {
+    // Handle root path
+    if (path === "/") {
+      return `/${language}`;
+    }
+
+    // Handle other paths
+    return `/${language}${path}`;
+  };
+};
+
+interface CTADictionary {
+  cta?: {
+    heading?: string;
+    highlight?: string;
+    subheading?: string;
+    getStarted?: string;
+  };
+}
+
+export function RedesignedCTASection({
+  dictionary,
+}: {
+  dictionary?: CTADictionary;
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const localizeUrl = useLocalizedUrl();
 
   return (
     <section ref={ref} className="py-24 md:py-32">
@@ -22,7 +52,7 @@ export function RedesignedCTASection() {
           transition={{ duration: 0.7 }}
         >
           <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
-            Ready for a solution that{" "}
+            {dictionary?.cta?.heading || "Ready for a solution that"}{" "}
             <GradientText
               colors={[
                 "#3d5a80",
@@ -36,7 +66,7 @@ export function RedesignedCTASection() {
               showBorder={false}
               className="inline-block"
             >
-              stands out
+              {dictionary?.cta?.highlight || "stands out"}
             </GradientText>
             ?
           </h1>
@@ -55,7 +85,8 @@ export function RedesignedCTASection() {
               baseRotation={3}
               blurStrength={4}
             >
-              Let's create something extraordinary together.
+              {dictionary?.cta?.subheading ||
+                "Let's create something extraordinary together."}
             </ScrollReveal>
 
             <div
@@ -70,7 +101,7 @@ export function RedesignedCTASection() {
                   forceHoverState={false}
                 />
               </div>
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none  md:mt-0 -mt-16">
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:mt-0 -mt-16">
                 <motion.div
                   className="flex flex-col items-center justify-center gap-4 pointer-events-auto"
                   initial={{ opacity: 0, y: 20 }}
@@ -78,13 +109,13 @@ export function RedesignedCTASection() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
                   <Link
-                    href="/contact"
+                    href={localizeUrl("/contact")}
                     className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-3 py-2 md:px-6 md:py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
                   >
                     <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                     <span className="relative z-10 flex items-center">
-                      GET STARTED
-                      <ArrowRight className="ml-2 md:h-5 md:w-5 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      {dictionary?.cta?.getStarted || "GET STARTED"}
+                      <ArrowRight className="ml-2 md:h-5 md:w-5 h-4 w-3 transition-transform group-hover:translate-x-1" />
                     </span>
                   </Link>
                 </motion.div>

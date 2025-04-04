@@ -1,0 +1,319 @@
+{
+  "navigation": {
+    "services": "SERVICES",
+    "howItWorks": "COMMENT ÇA MARCHE",
+    "about": "À PROPOS",
+    "contact": "CONTACT",
+    "getStarted": "COMMENCER",
+    "ourProcess": "NOTRE PROCESSUS",
+    "learnMore": "En savoir plus",
+    "webDesign": "DESIGN & DÉVELOPPEMENT WEB",
+    "webDesignDescription": "Conception et développement de sites web personnalisés adaptés à votre marque",
+    "aiAutomation": "AUTOMATISATION IA",
+    "aiAutomationDescription": "Automatisez les tâches répétitives et simplifiez votre flux de travail",
+    "seoOptimization": "OPTIMISATION SEO",
+    "seoOptimizationDescription": "Améliorez votre visibilité dans les moteurs de recherche",
+    "allServices": "TOUS LES SERVICES",
+    "allServicesDescription": "Explorez notre gamme complète de services numériques",
+    "continue": "Continuer", 
+    "back": "Retour",
+    "submit": "Envoyer",
+    "submitting": "Envoi en cours..."
+  },
+  "services": {
+    "allServices": "Nos Services",
+    "sectionTitle": "Nos",
+    "sectionSubtitle": "Nous offrons des services digitaux qui élèvent votre entreprise et amplifient votre présence en ligne",
+    "web-design": "Design & Développement Web",
+    "web-design-description": "Des sites web sophistiqués et adaptatifs qui captivent votre audience et reflètent l'identité unique de votre marque.",
+    "web-design-features": [
+      "Designs personnalisés",
+      "UI/UX interactifs",
+      "Optimisation des performances"
+    ],
+    "automation": "Automatisation AI",
+    "automation-description": "Automatisez les tâches répétitives et optimisez votre flux de travail grâce à nos solutions d'automatisation par intelligence artificielle.",
+    "automation-features": [
+      "Solutions IA personnalisées",
+      "Automatisation des flux de travail",
+      "Chatbots IA"
+    ],
+    "seo": "Optimisation SEO",
+    "seo-description": "Améliorez votre visibilité en ligne et générez du trafic organique grâce à nos stratégies SEO complètes",
+    "seo-features": [
+      "Recherche de mots-clés et analyse",
+      "Optimisation sur page",
+      "Stratégie de contenu"
+    ]
+  },
+  "process": {
+    "sectionTitle1": "Notre",
+    "sectionTitle2": "Savoir-Faire",
+    "sectionSubtitle": "Une approche équilibrée alliant la créativité humaine à la précision renforcée par l'IA",
+    "steps": [
+      {
+        "title": "Découverte",
+        "description": "Nous commençons par comprendre votre entreprise, vos objectifs, votre public cible et vos défis grâce à une recherche approfondie, afin d'établir une base solide pour votre projet.",
+        "activities": [
+          {
+            "activity1": "Recherche de marché approfondie",
+            "activity2": "Développement de personas utilisateurs",
+            "activity3": "Analyse de la concurrence",
+            "activity4": "Alignement sur les objectifs commerciaux",
+            "activity5": "Identification des points de friction",
+            "activity6": "Cartographie des opportunités"
+          }
+        ]
+      },
+      {
+        "title": "Stratégie",
+        "description": "Sur la base de nos découvertes avec l'analyse assistée par l'IA, nous développons une stratégie complète adaptée à vos besoins et objectifs spécifiques.",
+        "activities": [
+  {
+    "activity1": "Planification collaborative humain-IA",
+    "activity2": "Choix des technologies",
+    "activity3": "Priorisation des fonctionnalités",
+    "activity4": "Plan de développement",
+    "activity5": "Définition des indicateurs de succès",
+    "activity6": "Répartition des ressources"
+  }
+]
+
+      },
+      {
+        "title": "Conception",
+        "description": "Nos designers associent créativité et l'IA pour concevoir des maquettes fonctionnelles et des designs visuels en harmonie avec l'identité de votre marque, tout en garantissant une expérience utilisateur exceptionnelle.",
+        "activities": [
+  {
+    "activity1": "Création de maquettes et prototypes",
+    "activity2": "Conception UI/UX optimisée par l'IA",
+    "activity3": "Priorisation des fonctionnalités",
+    "activity4": "Création d'un design system",
+    "activity5": "Conformité aux normes d'accessibilité",
+    "activity6": "Mises en page responsives"
+  }
+]
+
+      },
+      {
+        "title": "Développement",
+        "description": "Notre équipe de développement donne vie aux designs en s'appuyant sur l'expertise humaine et des outils d'IA, afin de créer des solutions digitales performantes, responsives, avec un code propre et efficace.",
+        "activities": [
+  {
+    "activity1": "Programmation assistée par l'IA",
+    "activity2": "Optimisation responsive",
+    "activity3": "Ajustement des performances",
+    "activity4": "Intégrations d'API",
+    "activity5": "Mise en place d'un CMS",
+    "activity6": "Assurance qualité"
+  }
+]
+
+      },
+      {
+        "title": "Lancement",
+        "description": "Après une phase de tests rigoureux et votre validation, nous déployons votre solution et vérifions son bon fonctionnement grâce à des contrôles automatisés et manuels.",
+        "activities": [
+  {
+    "activity1": "Liste de vérification pré-lancement",
+    "activity2": "Optimisation des performances",
+    "activity3": "Tests multiplateformes",
+    "activity4": "Préparation au déploiement",
+    "activity5": "Support lors de la mise en ligne",
+    "activity6": "Suivi du lancement"
+  }
+]
+
+      },
+      {
+        "title": "Croissance",
+        "description": "Nous assurons un accompagnement continu et veillons à ce que tout fonctionne correctement.",
+        "activities": [
+  {
+    "activity1": "Analytique pilotée par l'IA",
+    "activity2": "Optimisation des conversions",
+    "activity3": "Stratégie de contenu",
+    "activity4": "Suivi des performances",
+    "activity5": "Amélioration continue",
+    "activity6": "Stratégie de croissance"
+  }
+]
+
+      }
+    ],
+    "showMore": "Voir plus",
+    "showLess": "Voir moins",
+    "cta": "Prêt à donner vie à votre vision ?"
+  },
+  "testimonials": {
+    "sectionTitle1": "Découvez Ce",
+    "sectionTitle2": "Que Disent",
+    "sectionTitle3": "Nos Clients",
+    "subheading": "Écoutez les entreprises qui ont transformé leur présence numérique avec",
+    "sectionSubtitle": "Ne vous fiez pas seulement à nos paroles. Voici ce que nos clients disent de leur collaboration avec nous.",
+    "clients": [
+      {
+        "name": "Elise Van den Broeck",
+        "position": "Directrice Marketing, NovaTex Brussels",
+        "testimonial": "Soluvia a complètement redéfini notre présence en ligne. Leur mélange de créativité et de rigueur technique a largement dépassé nos attentes."
+      },
+      {
+        "name": "Quentin Venturo",
+        "position": "Fondateur, Atelier Venturo",
+        "testimonial": "Soluvia a vraiment compris l'essence de notre marque. Le site qu'ils ont livré est élégant, intuitif et parfaitement en accord avec notre vision."
+      },
+      {
+        "name": "Anke De Smet",
+        "position": "Communications Manager, Boutique Co",
+        "testimonial": "Travailler avec Soluvia a été une excellente décision. Leur professionnalisme et leur capacité d'écoute nous ont permis de lancer un site moderne et performant qui attire plus de prospects."
+      }
+    ]
+  },
+  "pricing": {
+    "sectionTitle": "Tarification",
+    "sectionSimple": "Simple",
+    "sectionAdjective": "Transparente",
+    "sectionSubtitle": "Choisissez l’offre qui convient le mieux à votre entreprise",
+    "from": "à partir de",
+    "monthly": "+ Maintenance mensuelle personnalisée",
+    "getaQuote": "Obtenir un devis",
+    "plans": [
+      {
+        "name": "Essentiel",
+        "price": "999",
+        "description": "Parfait pour les petites entreprises qui se lancent",
+        "features": [
+          {"included": true, "text": "Conception de site web sur mesure"},
+          {"included": true, "text": "Design responsive"},
+          {"included": true, "text": "Configuration SEO de base"},
+          {"included": false, "text": "Optimisation SEO avancée"},
+          {"included": false, "text": "Fonctionnalités e-commerce" },
+          {"included": false, "text": "Outils d’automatisation IA" },
+          {"included": false, "text": "Fonctionnalités personnalisées"}
+        ],
+        "popular": false
+      },
+      {
+        "name": "Professionnel",
+        "price": "1999",
+        "description": "Idéal pour les entreprises en croissance qui souhaitent se développer",
+        "features": [
+          {"included": true, "text": "Conception de site web sur mesure"},
+          {"included": true, "text": "Design responsive"},
+          {"included": true, "text": "Configuration SEO de base"},
+          {"included": true, "text": "Optimisation SEO avancée"},
+          {"included": true, "text": "Fonctionnalités e-commerce" },
+          {"included": false, "text": "Outils d’automatisation IA" },
+          {"included": false, "text": "Fonctionnalités personnalisées"}
+        ],
+        "popular": true,
+        "popularText": "Coup de coeur"
+      },
+      {
+        "name": "Entreprise",
+        "price": "2499",
+        "period": "/mois",
+        "description": "Solution complète pour les entreprises établies souhaitant renforcer leur présence en ligne",
+        "features": [
+          {"included": true, "text": "Conception de site web sur mesure"},
+          {"included": true, "text": "Design responsive"},
+          {"included": true, "text": "Configuration SEO de base"},
+          {"included": true, "text": "Optimisation SEO avancée"},
+          {"included": true, "text": "Fonctionnalités e-commerce" },
+          {"included": true, "text": "Outils d’automatisation IA" },
+          {"included": true, "text": "Fonctionnalités personnalisées"}
+        ],
+        "popular": false
+      }
+    ],
+    "custom":{
+      "title": "Besoin d’une solution sur mesure ?",
+      "subtitle": "Contactez-nous pour obtenir une solution personnalisée pour votre entreprise sous 24 heures"
+    }
+  },
+  "form":{
+      "name": "Quel est votre nom ?",
+      "nameText": "Entrez votre nom complet",
+      "nameDescription": "Nous utiliserons votre prénom pour personnaliser notre communication avec vous.",
+      "contact": "Comment souhaitez-vous être contacté ?",
+      "contactOption1":"Télephone",
+      "contactOption2":"Email",
+      "contactDescription":"Sélectionnez votre méthode de communication préférée pour discuter de votre projet.",
+      "phone": "Quel est votre numéro de téléphone ?",
+      "phoneText":"Entrez votre numéro de téléphone",
+      "phoneDescription":"Nous vous appellerons dans les 24 heures pour discuter de votre projet.",
+      "email": "Quelle est votre adresse e-mail ?",
+      "emailText": "Entrez votre adresse e-mail",
+      "emailDescription": "Nous vous enverrons un e-mail dans les 24 heures pour discuter de votre projet.",
+      "tellUs": "Parlez-nous de votre projet",
+      "tellUsText": "Décrivez brièvement votre projet",
+      "tellUsDescription": "Cela nous aide à préparer notre échange avec vous.",
+      "confirmationThanks": "Merci!",
+      "confirmationDescription": "Nous avons bien reçu vos informations et nous vous contacterons dans les 24 heures pour discuter de votre projet.",
+      "anotherMessage": "Envoyer un autre message",
+      "errorTitle": "Erreur lors de l'envoi du message"
+    },
+  "faq": {
+    "sectionTitle": "Foire Aux ",
+    "sectionSubtitle": "Trouvez des réponses aux questions courantes sur nos services et notre processus.",
+    "questions": [
+      {"question": "Quels services propose Soluvia ?",
+        "answer": "Soluvia propose une gamme complète de services digitaux, incluant la conception de sites web, le développement web, l’automatisation par intelligence artificielle, l’optimisation SEO, les systèmes de gestion de contenu (CMS), ainsi que des solutions e-commerce. Nous créons des sites web élégants et sophistiqués qui favorisent la croissance de votre entreprise et optimisent votre présence en ligne."
+      },
+      {
+        "question": "Comment fonctionne votre tarification ?",
+        "answer": "Notre tarification est totalement transparente. Elle comprend des frais de mise en place uniques (à partir de 999 € pour les projets essentiels), ainsi qu’un forfait mensuel de maintenance personnalisé, établi en fonction de vos besoins spécifiques. Le coût final dépendra de plusieurs facteurs comme le nombre de pages, les fonctionnalités demandées, ou encore le niveau de personnalisation. Chaque offre est conçue sur mesure pour vous garantir de ne payer que pour ce dont votre entreprise a réellement besoin"
+      },
+      {
+        "question": "Quel est votre processus de design et de développement ?",
+        "answer": "Notre processus commence par une phase de découverte durant laquelle nous apprenons à connaître votre entreprise, vos objectifs et votre audience cible. Nous passons ensuite à la création de maquettes fonctionnelles (wireframes) et de prototypes, suivie du design visuel. Une fois votre validation obtenue, nous lançons le développement, les tests, puis la mise en ligne. Tout au long du projet, nous assurons une communication ouverte et recherchons votre feedback à chaque étape clé."
+      },
+      {
+        "question": "Comment l’automatisation par IA peut-elle bénéficier à mon entreprise ?",
+        "answer": "Nos solutions d’automatisation par intelligence artificielle permettent de rationaliser votre flux de travail en automatisant les tâches répétitives, en améliorant les interactions avec les clients, en analysant les données et en fournissant des insights précieux pour votre activité. Résultat : une efficacité accrue, une réduction des coûts opérationnels et une meilleure concentration de votre équipe sur les initiatives stratégiques de croissance."
+      },
+      {
+        "question": "Combien de temps faut-il pour réaliser un site web ?",
+        "answer": "Le délai dépend de la complexité et de l’envergure de votre projet. Un site standard prend généralement entre 3 et 5 semaines, tandis que les projets plus complexes avec des fonctionnalités personnalisées ou une intégration e-commerce peuvent prendre entre 8 et 12 semaines. Lors de notre consultation initiale, nous vous fournirons un délai plus précis en fonction de vos besoins spécifiques."
+      },
+      {
+        "question": "Quel est votre processus de paiement ?",
+        "answer": "Nous demandons un acompte de 50 % pour démarrer le projet, le solde étant dû à la livraison. Pour les projets plus importants, nous pouvons mettre en place un calendrier de paiements avec des étapes définies."
+      },
+      {
+        "question": "Travaillez-vous à distance avec des clients ?",
+        "answer": "Oui, nous collaborons efficacement avec des clients du monde entier grâce à nos outils digitaux et à notre processus de communication fluide. Nous planifions les réunions selon vos disponibilités, même entre différents fuseaux horaires, pour assurer un suivi clair et régulier tout au long du projet."
+      }
+    ],
+    "stillHaveQuestions": "Vous avez encore des questions?",
+    "contactUs": "CONTACTEZ-NOUS"
+  },
+  "hero": {
+    "title": "Solutions via",
+    "rotatingText1": "Designs",
+    "rotatingText2": "IA",
+    "description": "Nous créons des sites web élégants et puissants, pensés pour faire grandir votre activité. Offrez à votre marque une présence en ligne unique grâce à des solutions digitales sur mesure"
+  },
+  "cta": {
+    "heading": "Prêt pour une solution qui",
+    "highlight": "se démarque",
+    "subheading": "Créons ensemble quelque chose d'extraordinaire.",
+    "getStarted": "COMMENCER"
+  },
+  "footer": {
+    "company": "Entreprise",
+    "about": "À propos",
+    "how-it-works": "Comment ça marche",
+    "contact": "Contact",
+    "resources":"Ressources",
+    "description": "Nous créons des sites web sophistiqués et élégants qui favorisent la croissance de votre entreprise et optimisent votre présence en ligne. Nous sommes spécialisés dans la création de solutions digitales de haute qualité, conçues sur mesure pour votre marque.",
+    "copyright": "© {year} Soluvia. Tous droits réservés.",
+    "privacyPolicy": "Politique de confidentialité",
+    "termsOfService": "Conditions d'utilisation",
+    "sitemap": "Plan du site"
+  },
+  "language": {
+    "en": "English",
+    "fr": "Français"
+  }
+} 

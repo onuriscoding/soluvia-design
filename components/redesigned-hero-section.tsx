@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { useI18n } from "@/lib/i18n/i18nContext";
 import {
   motion,
   useScroll,
@@ -17,7 +17,22 @@ import { ArrowRight, MousePointer, ChevronDown } from "lucide-react";
 import { RotatingText } from "@/app/animations/rotating-text";
 import GradientText from "@/app/animations/gradient-text";
 
-export function RedesignedHeroSection() {
+// Helper hook to localize URLs
+const useLocalizedUrl = () => {
+  const { language } = useI18n();
+
+  return (path: string) => {
+    // Handle root path
+    if (path === "/") {
+      return `/${language}`;
+    }
+
+    // Handle other paths
+    return `/${language}${path}`;
+  };
+};
+
+export function RedesignedHeroSection({ dictionary }: { dictionary: any }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(scrollRef);
@@ -25,7 +40,8 @@ export function RedesignedHeroSection() {
   const [rotatingText, setRotatingText] = useState("Designs");
   const [isMobile, setIsMobile] = useState(false);
   const prefersReducedMotion = useReducedMotion();
-
+  const { t } = useI18n();
+  const localizeUrl = useLocalizedUrl();
   // Check for mobile viewport
   useEffect(() => {
     const checkMobile = () => {
@@ -265,7 +281,7 @@ export function RedesignedHeroSection() {
             <span className="block leading-tight">Solutions via</span>
             <div className="relative flex items-center justify-center md:-mt-6 py-0">
               <RotatingText
-                texts={["Designs", "AI"]}
+                texts={["Designs", dictionary.hero.rotatingText2]}
                 interval={3000}
                 textClassName="inline-block"
                 className="flex items-center justify-center"
@@ -294,9 +310,7 @@ export function RedesignedHeroSection() {
             className="mx-auto mt-6 font-inter text-lg max-w-3xl text-medium text-ivory/70 md:text-2xl"
             variants={itemVariants}
           >
-            We create sophisticated, elegant websites that drive business growth
-            and optimize your online presence. Experience digital solutions
-            tailored to your brand.
+            {t("hero.description")}
           </motion.p>
 
           <motion.div
@@ -304,21 +318,21 @@ export function RedesignedHeroSection() {
             variants={itemVariants}
           >
             <Link
-              href="/contact"
+              href={localizeUrl("/contact")}
               className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-ivory font-bold tracking-thighter shadow-lg transition-all duration-300 hover:shadow-rose/30"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
               <span className="relative z-10 flex items-center">
-                GET STARTED
+                {dictionary.navigation.getStarted}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </span>
             </Link>
 
             <Link
-              href="/how-it-works"
+              href={localizeUrl("/how-it-works")}
               className="inline-flex min-w-[200px] items-center justify-center rounded-full border border-ivory/30 bg-transparent px-6 py-3 text-ivory font-bold tracking-thighter transition-all duration-300 hover:bg-ivory/10"
             >
-              OUR PROCESS
+              {dictionary.navigation.ourProcess}
             </Link>
           </motion.div>
         </motion.div>

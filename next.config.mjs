@@ -21,6 +21,7 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  // App Router with middleware handles i18n, so we don't need the built-in config
 }
 
 mergeConfig(nextConfig, userConfig)

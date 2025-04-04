@@ -9,27 +9,39 @@ import { RedesignedCTASection } from "@/components/redesigned-cta-section";
 import { RedesignedContactSection } from "@/components/redesigned-contact-section";
 import { StatsCounter } from "@/components/stats-counter";
 import { ParallaxSection } from "@/components/parallax-section";
+import { getDictionary } from "./dictionaries";
 
-export default function Home() {
+type Props = {
+  params: Promise<{ lang: string }> | { lang: string };
+};
+
+export default async function Home({ params: paramsPromise }: Props) {
+  // Ensure we await the params
+  const params = await Promise.resolve(paramsPromise);
+
+  // Ensure we have a string for the language
+  const lang = params.lang || "en";
+  const dict = await getDictionary(lang);
+
   return (
     <>
-      <RedesignedHeroSection />
+      <RedesignedHeroSection dictionary={dict} />
       <ParallaxSection speed={0.3}>
         <RedesignedServicesSection />
       </ParallaxSection>
       {/*<StatsCounter />*/}
       <ParallaxSection speed={0.4} direction="down">
-        <RedesignedProcessSection />
+        <RedesignedProcessSection dictionary={dict} />
       </ParallaxSection>
 
       <ParallaxSection speed={0.3}>
-        <RedesignedTestimonialsSection />
+        <RedesignedTestimonialsSection dictionary={dict} />
       </ParallaxSection>
-      <RedesignedPricingSection />
+      <RedesignedPricingSection dictionary={dict} />
       <ParallaxSection speed={0.4} direction="down">
-        <RedesignedFAQSection />
+        <RedesignedFAQSection dictionary={dict} />
       </ParallaxSection>
-      <RedesignedCTASection />
+      <RedesignedCTASection dictionary={dict} />
     </>
   );
 }

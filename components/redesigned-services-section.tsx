@@ -25,6 +25,22 @@ import {
 } from "lucide-react";
 import ScrollReveal from "../app/animations/scroll-reveal";
 import GradientText from "@/app/animations/gradient-text";
+import { useI18n } from "@/lib/i18n/i18nContext";
+
+// Helper hook to localize URLs
+const useLocalizedUrl = () => {
+  const { language } = useI18n();
+
+  return (path: string) => {
+    // Handle root path
+    if (path === "/") {
+      return `/${language}`;
+    }
+
+    // Handle other paths
+    return `/${language}${path}`;
+  };
+};
 
 const services = [
   {
@@ -41,7 +57,6 @@ const services = [
       "Custom responsive designs",
       "Interactive UI/UX",
       "Performance optimization",
-      "CMS integration",
     ],
   },
   {
@@ -58,7 +73,6 @@ const services = [
       "Keyword research & analysis",
       "On-page optimization",
       "Content strategy",
-      "Performance tracking",
     ],
   },
   {
@@ -71,12 +85,7 @@ const services = [
     buttonGradient: "from-beige to-rose",
     image: "/ai.png?height=600&width=800",
     link: "/services/ai-automation",
-    features: [
-      "Custom AI solutions",
-      "Workflow automation",
-      "AI Chatbots",
-      "Integration with existing systems",
-    ],
+    features: ["Custom AI solutions", "Workflow automation", "AI Chatbots"],
   },
 ];
 
@@ -89,6 +98,8 @@ export function RedesignedServicesSection() {
   const isInView = useInView(scrollRef);
   const controls = useAnimation();
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useI18n();
+  const localizeUrl = useLocalizedUrl();
 
   // Check for mobile viewport
   useEffect(() => {
@@ -243,7 +254,7 @@ export function RedesignedServicesSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
           >
-            Our{" "}
+            {t("services.sectionTitle")}{" "}
             <GradientText
               colors={[
                 "#3d5a80",
@@ -267,8 +278,7 @@ export function RedesignedServicesSection() {
             baseRotation={3}
             blurStrength={4}
           >
-            We offer a comprehensive range of services to help your business
-            thrive in the digital landscape
+            {t("services.sectionSubtitle")}
           </ScrollReveal>
         </motion.div>
 
@@ -299,7 +309,7 @@ export function RedesignedServicesSection() {
               }}
             >
               <service.icon className="h-4 w-4" />
-              {service.title}
+              {t(`services.${service.id}`)}
             </motion.button>
           ))}
         </div>
@@ -352,7 +362,7 @@ export function RedesignedServicesSection() {
                   {<currentService.icon className="h-6 w-6" />}
                 </div>
                 <h3 className="text-2xl font-bold tracking-thight text-ivory">
-                  {currentService.title}
+                  {t(`services.${currentService.id}`)}
                 </h3>
               </motion.div>
 
@@ -362,7 +372,7 @@ export function RedesignedServicesSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: isMobile ? 0.3 : 0.5, delay: 0.25 }}
               >
-                {currentService.description}
+                {t(`services.${currentService.id}-description`)}
               </motion.p>
 
               {/* Feature list with optimized animations */}
@@ -386,7 +396,9 @@ export function RedesignedServicesSection() {
                     <CheckCircle2
                       className={`h-5 w-5 text-${currentService.color}`}
                     />
-                    <span className="text-ivory/80">{feature}</span>
+                    <span className="text-ivory/80">
+                      {t(`services.${currentService.id}-features.${index}`)}
+                    </span>
                   </motion.div>
                 ))}
               </motion.div>
@@ -397,10 +409,10 @@ export function RedesignedServicesSection() {
                 transition={{ delay: 0.4, duration: 0.3 }}
               >
                 <Link
-                  href={currentService.link}
+                  href={localizeUrl(currentService.link)}
                   className={`inline-flex items-center justify-center px-8 py-3 rounded-full bg-gradient-to-r from-${currentService.color} to-${currentService.color}-light text-ivory font-bold tracking-tighter hover:shadow-lg hover:shadow-${currentService.color}/20 transition-all duration-300`}
                 >
-                  Learn More{" "}
+                  {t("navigation.learnMore")}
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </motion.div>
@@ -429,7 +441,7 @@ export function RedesignedServicesSection() {
               <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
                 <Image
                   src={currentService.image || "/placeholder.svg"}
-                  alt={currentService.title}
+                  alt={t(`services.${currentService.id}`)}
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -448,7 +460,7 @@ export function RedesignedServicesSection() {
                   <span
                     className={`px-3 py-1 text-xs font-medium rounded-full bg-${currentService.color}/20 text-${currentService.color}`}
                   >
-                    {currentService.title}
+                    {t(`services.${currentService.id}`)}
                   </span>
                 </motion.div>
               </div>

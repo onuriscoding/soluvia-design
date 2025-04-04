@@ -8,6 +8,22 @@ import ScrollReveal from "../app/animations/scroll-reveal";
 import GradientText from "../app/animations/gradient-text";
 import { RedesignedContactStepper } from "./stepper";
 import { Palette, Globe, Code } from "lucide-react";
+import { useI18n } from "@/lib/i18n/i18nContext";
+
+// Helper hook to localize URLs
+const useLocalizedUrl = () => {
+  const { language } = useI18n();
+
+  return (path: string) => {
+    // Handle root path
+    if (path === "/") {
+      return `/${language}`;
+    }
+
+    // Handle other paths
+    return `/${language}${path}`;
+  };
+};
 
 interface Service {
   id: string;
@@ -115,7 +131,7 @@ const pricingPlans = [
   },
 ];
 
-export function RedesignedPricingSection() {
+export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
   const ref = useRef(null);
   const isInView = useInView(ref, {
     once: true,
@@ -123,6 +139,11 @@ export function RedesignedPricingSection() {
     margin: "0px 0px -200px 0px",
   });
   const [animationComplete, setAnimationComplete] = useState(false);
+  const localizeUrl = useLocalizedUrl();
+
+  // Better way to determine current language
+  // If the dictionary has French pricing title "Tarification", we're in French
+  const isEnglish = dictionary?.pricing?.sectionTitle !== "Tarification";
 
   const handleContactSubmit = (data: {
     name: string;
@@ -153,25 +174,52 @@ export function RedesignedPricingSection() {
           }}
         >
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-5xl font-bold tracking-tight sm:text-4xl md:text-7xl flex flex-wrap justify-center items-center gap-x-4">
-              <span>Simple,</span>
-              <GradientText
-                colors={[
-                  "#3d5a80",
-                  "#b76e79",
-                  "#e0d5c0",
-                  "#3d5a80",
-                  "#b76e79",
-                  "#3d5a80",
-                ]}
-                animationSpeed={12}
-                showBorder={false}
-                className="inline-block"
-              >
-                Transparent
-              </GradientText>
-              <span>Pricing</span>
-            </h2>
+            {/* Conditional rendering based on language */}
+            {isEnglish ? (
+              // English version: "Simple, Transparent Pricing"
+              <h2 className="text-5xl font-bold tracking-tight sm:text-4xl md:text-7xl flex flex-wrap justify-center items-center gap-x-4">
+                <span>{dictionary?.pricing?.sectionSimple || "Simple"}, </span>
+                <GradientText
+                  colors={[
+                    "#3d5a80",
+                    "#b76e79",
+                    "#e0d5c0",
+                    "#3d5a80",
+                    "#b76e79",
+                    "#3d5a80",
+                  ]}
+                  animationSpeed={12}
+                  showBorder={false}
+                  className="inline-block"
+                >
+                  {dictionary?.pricing?.sectionAdjective || "Transparent"}
+                </GradientText>
+                <span> {dictionary?.pricing?.sectionTitle || "Pricing"}</span>
+              </h2>
+            ) : (
+              // French version: "Tarification simple, transparente"
+              <h2 className="text-5xl font-bold tracking-tight sm:text-4xl md:text-7xl flex flex-wrap justify-center items-center gap-x-4">
+                <span>
+                  {dictionary?.pricing?.sectionTitle || "Tarification"}{" "}
+                </span>
+                <span>{dictionary?.pricing?.sectionSimple || "simple"}, </span>
+                <GradientText
+                  colors={[
+                    "#3d5a80",
+                    "#b76e79",
+                    "#e0d5c0",
+                    "#3d5a80",
+                    "#b76e79",
+                    "#3d5a80",
+                  ]}
+                  animationSpeed={12}
+                  showBorder={false}
+                  className="inline-block"
+                >
+                  {dictionary?.pricing?.sectionAdjective || "transparente"}
+                </GradientText>
+              </h2>
+            )}
             <ScrollReveal
               textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
               baseOpacity={0.1}
@@ -179,7 +227,8 @@ export function RedesignedPricingSection() {
               baseRotation={3}
               blurStrength={4}
             >
-              Choose the perfect plan for your business needs
+              {dictionary?.pricing?.sectionSubtitle ||
+                "Choose the perfect plan for your business needs"}
             </ScrollReveal>
           </div>
 
@@ -204,7 +253,8 @@ export function RedesignedPricingSection() {
                   <div className="absolute right-0 top-0">
                     <div className="relative h-20 w-20 overflow-hidden">
                       <div className="absolute right-[-40px] top-[32px] w-[170px] rotate-45 bg-gradient-to-r from-rose to-sapphire py-1 text-center text-xs font-semibold">
-                        Most Popular
+                        {dictionary?.pricing?.plans?.[index]?.popularText ||
+                          "Most Popular"}
                       </div>
                     </div>
                   </div>
@@ -212,15 +262,18 @@ export function RedesignedPricingSection() {
 
                 <div className="p-8">
                   <h3 className="text-2xl font-bold tracking-tight text-ivory">
-                    {plan.name}
+                    {dictionary?.pricing?.plans?.[index]?.name || plan.name}
                   </h3>
-                  <p className="mt-2 text-ivory/70">{plan.description}</p>
+                  <p className="mt-2 text-ivory/70">
+                    {dictionary?.pricing?.plans?.[index]?.description ||
+                      plan.description}
+                  </p>
 
                   <div className="mt-4 flex flex-col">
                     <div className="flex items-baseline text-ivory mb-1">
                       <div className="flex items-baseline">
                         <span className="text-sm font-medium text-ivory/70 mr-1">
-                          from
+                          {dictionary?.pricing?.from || "from"}
                         </span>
                         <span className="text-4xl font-bold tracking-tight">
                           €{plan.price.setup}
@@ -229,7 +282,8 @@ export function RedesignedPricingSection() {
                     </div>
                     <div className="flex items-baseline text-ivory">
                       <span className="text-base text-ivory/70 mt-2 italic">
-                        + Custom monthly maintenance
+                        {dictionary?.pricing?.monthly ||
+                          "+ Custom monthly maintenance"}
                       </span>
                     </div>
                   </div>
@@ -247,7 +301,8 @@ export function RedesignedPricingSection() {
                             feature.included ? "text-ivory/90" : "text-ivory/50"
                           }
                         >
-                          {feature.text}
+                          {dictionary?.pricing?.plans?.[index]?.features?.[i]
+                            ?.text || feature.text}
                         </span>
                       </li>
                     ))}
@@ -255,14 +310,14 @@ export function RedesignedPricingSection() {
 
                   <div className="mt-8">
                     <Link
-                      href="/contact"
+                      href={localizeUrl("/contact")}
                       className={`group relative inline-flex w-full items-center justify-center rounded-full px-6 py-3 font-medium transition-all duration-300 ${
                         plan.popular
                           ? "bg-gradient-to-r from-rose to-sapphire text-ivory hover:shadow-4xl hover:shadow-rose/90"
                           : "bg-charcoal/70 border border-ivory/10 text-ivory hover:bg-charcoal/90 hover:border-rose/30"
                       }`}
                     >
-                      Get a Quote{" "}
+                      {dictionary?.pricing?.getaQuote || "Get a Quote"}{" "}
                       <div className="ml-2 inline-flex arrow-animation">
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </div>
@@ -280,7 +335,7 @@ export function RedesignedPricingSection() {
               baseRotation={3}
               blurStrength={4}
             >
-              Need a custom solution?
+              {dictionary?.pricing?.custom?.title || "Need a custom solution?"}
             </ScrollReveal>
             <ScrollReveal
               textClassName="text-lg md:text-2xl mt-4 text-ivory/70 mb-0"
@@ -289,13 +344,16 @@ export function RedesignedPricingSection() {
               baseRotation={3}
               blurStrength={4}
             >
-              Contact us to get a custom solution for your business within 24
-              hours.
+              {dictionary?.pricing?.custom?.subtitle ||
+                "Contact us to get a custom solution for your business within 24 hours."}
             </ScrollReveal>
           </div>
           <div className="mt-24">
             {/* Redesigned Contact Stepper */}
-            <RedesignedContactStepper onSubmit={handleContactSubmit} />
+            <RedesignedContactStepper
+              onSubmit={handleContactSubmit}
+              dictionary={dictionary}
+            />
           </div>
         </motion.div>
       </div>

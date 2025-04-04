@@ -79,24 +79,26 @@ export function RedesignedContactSection() {
         // Additional fields from the contact form
         service: formState.service,
         budget: formState.budget,
-        timeframe: formState.timeframe
+        timeframe: formState.timeframe,
       };
 
       // Call the API
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(apiData),
       });
-      
+
       const data = await response.json();
-      
+
       if (!response.ok) {
-        throw new Error(data.error || 'Something went wrong. Please try again.');
+        throw new Error(
+          data.error || "Something went wrong. Please try again."
+        );
       }
-      
+
       setIsSubmitted(true);
       setStatus("success");
       setMessage("Thank you for your message! We'll get back to you soon.");
@@ -110,9 +112,13 @@ export function RedesignedContactSection() {
         timeframe: "",
       });
     } catch (err) {
-      console.error('Error submitting form:', err);
+      console.error("Error submitting form:", err);
       setStatus("error");
-      setMessage(err instanceof Error ? err.message : 'Failed to send your message. Please try again.');
+      setMessage(
+        err instanceof Error
+          ? err.message
+          : "Failed to send your message. Please try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -138,7 +144,6 @@ export function RedesignedContactSection() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-6xl font-bold tracking-tight sm:text-4xl md:text-8xl">
-            
             <GradientText
               colors={[
                 "#3d5a80",
@@ -153,8 +158,8 @@ export function RedesignedContactSection() {
               className="inline-block"
             >
               Contact
-            </GradientText>
-            {" "} us
+            </GradientText>{" "}
+            us
           </h2>
           <p className="mt-4 text-lg md:text-2xl text-ivory/70">
             Have a project in mind? We'd love to hear from you. Fill out the
@@ -164,7 +169,7 @@ export function RedesignedContactSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 1, x: 0 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5 }}
             whileHover={{ y: -5 }}
