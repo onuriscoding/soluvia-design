@@ -32,9 +32,6 @@ function getLocale(request: NextRequest): string {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
-  // Debug: Log all requests coming through middleware
-  console.log(`Middleware processing: ${pathname}`);
-  
   // Skip middleware for static files and special routes
   if (
     pathname.includes('.') ||  // files with extensions (images, css, js)
@@ -42,7 +39,6 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/api') || 
     pathname.includes('favicon')
   ) {
-    console.log(`Skipping middleware for: ${pathname}`);
     return;
   }
   
@@ -50,25 +46,20 @@ export function middleware(request: NextRequest) {
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
-  
-  console.log(`Path ${pathname} has locale: ${pathnameHasLocale}`);
 
   // If URL already has locale, don't redirect
   if (pathnameHasLocale) {
-    console.log(`URL already has locale: ${pathname}`);
     // Allow the request to continue to the destination
     return NextResponse.next();
   }
 
   // Redirect to the appropriate locale path
   const locale = getLocale(request);
-  console.log(`Redirecting to locale: ${locale}`);
   
   // Build the new URL with locale
   const newPath = pathname === '/' ? `/${locale}` : `/${locale}${pathname}`;
   request.nextUrl.pathname = newPath;
   
-  console.log(`Redirecting to: ${request.nextUrl.toString()}`);
   return NextResponse.redirect(request.nextUrl);
 }
 
@@ -84,4 +75,4 @@ export const config = {
      */
     '/((?!api|_next/static|_next/image|static|.*\\..*|favicon.ico).*)',
   ],
-};
+}; 
