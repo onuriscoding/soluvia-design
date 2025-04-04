@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface StructuredDataProps {
-  type: 'Organization' | 'WebSite' | 'LocalBusiness' | 'Service' | 'FAQPage';
+  type: 'Organization' | 'WebSite' | 'LocalBusiness' | 'Service' | 'FAQPage' | 'BreadcrumbList' | 'Article';
   data: Record<string, any>;
 }
 
@@ -29,7 +29,7 @@ export function OrganizationStructuredData() {
   const data = {
     name: 'Soluvia',
     url: 'https://soluvia.com',
-    logo: 'https://soluvia.com/soluvia-no-bg.png',
+    logo: 'https://soluvia.com/soluvia-s-no-bg.png',
     sameAs: [
       'https://twitter.com/SoluviaDesign',
       'https://www.linkedin.com/company/soluvia',
@@ -60,7 +60,8 @@ export function WebsiteStructuredData() {
       '@type': 'SearchAction',
       target: 'https://soluvia.com/search?q={search_term_string}',
       'query-input': 'required name=search_term_string'
-    }
+    },
+    inLanguage: ['en', 'fr']
   };
 
   return <StructuredData type="WebSite" data={data} />;
@@ -79,32 +80,61 @@ export function ServiceStructuredData({ service }: { service: string }) {
 
   // Customize based on service type
   switch (service) {
-    case 'Web Design':
+    case 'Web Design & Development':
       data = {
         ...data,
-        description: 'Professional web design services for businesses looking to enhance their online presence with beautiful, responsive websites.',
+        description: 'Professional web design and development services for businesses looking to enhance their online presence with beautiful, responsive websites and web applications.',
         areaServed: 'Worldwide',
-      };
-      break;
-    case 'Web Development':
-      data = {
-        ...data,
-        description: 'Expert web development services using the latest technologies to build fast, scalable, and secure websites and web applications.',
-        areaServed: 'Worldwide',
+        serviceType: 'Web Development',
+        offers: {
+          '@type': 'Offer',
+          price: '999',
+          priceCurrency: 'EUR',
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: '999',
+            priceCurrency: 'EUR',
+            unitText: 'Project'
+          }
+        }
       };
       break;
     case 'SEO Optimization':
       data = {
         ...data,
-        description: 'Comprehensive SEO optimization services to improve your website visibility and ranking in search engine results.',
+        description: 'Comprehensive SEO optimization services to improve your website visibility and ranking in search engine results, driving more organic traffic to your business.',
         areaServed: 'Worldwide',
+        serviceType: 'Search Engine Optimization',
+        offers: {
+          '@type': 'Offer',
+          price: '499',
+          priceCurrency: 'EUR',
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: '499',
+            priceCurrency: 'EUR',
+            unitText: 'Project'
+          }
+        }
       };
       break;
     case 'AI Automation':
       data = {
         ...data,
-        description: 'Advanced AI automation solutions to streamline business processes and improve efficiency.',
+        description: 'Advanced AI automation solutions to streamline business processes, enhance customer experiences, and improve efficiency while reducing operational costs.',
         areaServed: 'Worldwide',
+        serviceType: 'Business Automation',
+        offers: {
+          '@type': 'Offer',
+          price: '799',
+          priceCurrency: 'EUR',
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: '799',
+            priceCurrency: 'EUR',
+            unitText: 'Project'
+          }
+        }
       };
       break;
     default:
@@ -132,4 +162,58 @@ export function FAQStructuredData({ faqs }: { faqs: Array<{ question: string; an
   };
 
   return <StructuredData type="FAQPage" data={data} />;
+}
+
+// Breadcrumb structured data
+export function BreadcrumbStructuredData({ items }: { items: Array<{ name: string; url: string }> }) {
+  const itemListElement = items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    item: item.url
+  }));
+
+  return <StructuredData 
+    type="BreadcrumbList" 
+    data={{ itemListElement }} 
+  />;
+}
+
+// Article structured data
+export function ArticleStructuredData({ 
+  headline, 
+  description, 
+  authorName, 
+  publishDate, 
+  modifiedDate,
+  imageUrl
+}: { 
+  headline: string;
+  description: string;
+  authorName: string;
+  publishDate: string;
+  modifiedDate: string;
+  imageUrl: string;
+}) {
+  const data = {
+    headline,
+    description,
+    author: {
+      '@type': 'Person',
+      name: authorName
+    },
+    image: imageUrl,
+    datePublished: publishDate,
+    dateModified: modifiedDate,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Soluvia',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://soluvia.com/soluvia-s-no-bg.png'
+      }
+    }
+  };
+
+  return <StructuredData type="Article" data={data} />;
 } 

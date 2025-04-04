@@ -1,40 +1,44 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Base URL for the site
   const baseUrl = 'https://soluvia.com';
   
-  // Languages supported
-  const languages = ['en', 'fr'];
-  
-  // Common routes for both languages
-  const routes = [
+  // Define shared pathnames for both languages
+  const pathnames = [
     '',
+    '/about',
     '/services',
     '/services/web-design-development',
     '/services/seo-optimization',
     '/services/ai-automation',
-    '/how-it-works',
-    '/about',
     '/contact',
+    '/how-it-works',
   ];
 
-  // Generate sitemap entries
-  const sitemap: MetadataRoute.Sitemap = [];
-  
-  // Add entries for each language and route
-  languages.forEach(lang => {
-    routes.forEach(route => {
-      const path = route === '' ? `/${lang}` : `/${lang}${route}`;
-      sitemap.push({
-        url: `${baseUrl}${path}`,
-        lastModified: new Date(),
-        changeFrequency: route === '' ? 'weekly' : 'monthly',
-        priority: route === '' ? 1.0 : 0.8,
-      });
-    });
-  });
-  
-  return sitemap;
+  // Generate entries for English language
+  const enEntries = pathnames.map(pathname => ({
+    url: `${baseUrl}/en${pathname}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: pathname === '' ? 1 : 0.8,
+  }));
+
+  // Generate entries for French language
+  const frEntries = pathnames.map(pathname => ({
+    url: `${baseUrl}/fr${pathname}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: pathname === '' ? 0.9 : 0.7,
+  }));
+
+  // Add the root URL with a redirect notice
+  const rootEntry = {
+    url: baseUrl,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const, 
+    priority: 1,
+  };
+
+  return [rootEntry, ...enEntries, ...frEntries];
 }
 

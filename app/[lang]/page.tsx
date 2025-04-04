@@ -30,6 +30,7 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
     description: lang === "fr"
       ? "Soluvia fournit des services experts en conception web, développement, optimisation SEO et solutions IA pour aider les entreprises à prospérer dans le monde numérique."
       : "Soluvia provides expert web design, development, SEO optimization, and AI solutions to help businesses thrive in the digital world. Transform your online presence with our innovative approach.",
+    metadataBase: new URL("https://soluvia.com"),
     keywords: [
       "web design", "web development", "SEO", "AI solutions", 
       "digital marketing", "Soluvia", "creative agency",

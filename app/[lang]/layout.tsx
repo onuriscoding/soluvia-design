@@ -40,6 +40,9 @@ export default async function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="canonical" href={`https://soluvia.com/${lang}`} />
         <meta name="google-site-verification" content="your-verification-code" />
+        <link rel="icon" href="/soluvia-s-no-bg.png" />
+        <link rel="apple-touch-icon" href="/soluvia-s-no-bg.png" />
+        <link rel="manifest" href="/manifest.json" />
         {/* Structured Data for SEO */}
         <OrganizationStructuredData />
         <WebsiteStructuredData />
@@ -73,6 +76,7 @@ export const metadata = {
   title: "Soluvia | Creative Digital Solutions",
   description: "Soluvia provides expert web design, development, SEO optimization, and AI solutions to help businesses thrive in the digital world. Elevate your online presence with our creative digital solutions.",
   generator: "v0.dev",
+  metadataBase: new URL("https://soluvia.com"),
   keywords: ["web design", "web development", "SEO", "AI solutions", "digital marketing", "Soluvia"],
   openGraph: {
     title: "Soluvia | Creative Digital Solutions",

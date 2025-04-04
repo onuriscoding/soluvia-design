@@ -5,9 +5,10 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/private/', '/admin/'],
+      disallow: ['/admin/', '/private/'],
     },
     sitemap: 'https://soluvia.com/sitemap.xml',
+    host: 'https://soluvia.com',
   }
 }
 
