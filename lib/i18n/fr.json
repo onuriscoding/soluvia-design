@@ -231,6 +231,116 @@
       "subtitle": "Contactez-nous pour obtenir une solution personnalisée pour votre entreprise sous 24 heures"
     }
   },
+  "web-design-development":{
+    "development": "Développement",
+    "subTitle": "Nous créons des sites web époustouflants et responsives qui captivent votre audience et reflètent l’identité unique de votre marque",
+    "OurSolutions": "Nos",
+    "SolutionsSubTitle": "Solutions web complètes conçues pour améliorer votre présence en ligne",
+      "solutions": [
+        {
+          "title": "Design de site web personnalisé",
+          "description": "Des designs sur mesure qui correspondent à l'identité et à l'expérience utilisateur de votre marque",
+          "features": [
+            {
+            "title": "Design Responsive",
+            "description": "Des designs mobiles qui garantissent l'accessibilité et l'engagement de l'utilisateur sur tous les appareils",
+            "list": [
+              {"text": "Design responsive pour tous les appareils"},
+              {"text": "Design UI/UX optimisé par l'IA"},
+              {"text": "Éléments visuels alignés sur la marque"},
+              {"text": "Navigation intuitive"},
+              {"text": "Optimisation des parcours utilisateur"},
+              {"text": "Conformité aux normes d'accessibilité"}
+            ]
+            },
+            {
+              "title": "Développement Web",
+              "description": "Notre équipe de développement construit des sites web et applications web robustes, performants et fonctionnels en utilisant les technologies de pointe",
+              "list": [
+                {"text": "Développement front-end (React, Next.js)"},
+                {"text": "Développement back-end (Node.js, Python)"},
+                {"text": "Conception et implémentation de base de données"},
+                {"text": "Développement et intégration d'API"},
+                {"text": "Fonctionnalités e-commerce"},
+                {"text": "Systèmes de gestion de contenu"}
+              ]
+            },
+            {
+              "title": "Approche Mobile-First",
+              "description": "Nous privilégions les expériences mobiles, garantissant que votre site web fonctionne sans faille sur tous les appareils tout en maintenant un design élégant et fonctionnel.",
+              "list": [
+                {"text": "Layouts optimisés pour les mobiles"},
+                {"text": "Interfaces touch-friendly"},
+                {"text": "Chargement rapide sur les réseaux mobiles"},
+                {"text": "Capacités de Progressive Web App"},
+                {"text": "Images et médias responsives"},
+                {"text": "Optimisation des performances mobiles"}
+              ]
+            }
+          ]
+        }
+      ],
+      "benefitsTitle1": "Nos",
+      "benefitsTitle2": "Avantages",
+      "benefitsTitle3": "pour votre entreprise",
+      "benefitsSubTitle": "Découvrez les bénéfices de nos services professionnels de design et de développement web",
+      "benefits": [
+        {"title": "Expérience utilisateur améliorée", "description": "Nous créons des interfaces intuitives et engageantes qui retiennent l’attention des visiteurs et les guident vers la conversion."},
+        {"title": "Optimisation des performances", "description": "Nous créons des sites rapides et optimisés offrant une expérience fluide et un meilleur classement dans les résultats de recherche."},
+        {"title": "Solutions évolutives", "description": "Nous créons des sites web durables qui grandissent avec votre entreprise et s’adaptent aux évolutions technologiques et à vos besoins."},
+        {"title": "Structure optimisée pour le SEO", "description": "Nous réalisons une optimisation pour les moteurs de recherche afin d’améliorer votre positionnement et attirer plus de trafic organique."},
+        {"title": "Design orienté conversion", "description": "Nous créons des mises en page stratégiques et des éléments conçus pour encourager les visiteurs à passer à l’action."},
+        {"title": "Sécurité renforcée", "description": "Nous mettons en place des mesures de sécurité robustes pour protéger votre site web et les données de vos utilisateurs contre les menaces."}
+      ],
+      "ctaTitle1": "Prêt pour un site web qui",
+      "ctaTitle2": "se démarque",
+      "ctaSubTitle": "Créons ensemble quelque chose d’extraordinaire. Transformez votre présence en ligne avec un site web performant et spectaculaire.",
+      "ctaButton": "COMMENCER"
+  },
+  "automation": {
+      "ai": "IA",
+      "subTitle": "We automate processes and enhance customer experiences with cutting-edge AI solutions",
+      "ourSolutions": "Our",
+      "SolutionsSubTitle":"Innovative AI solutions designed to transform your business operations",
+      "solutions": [
+        {
+          "title": "AI-Powered Chatbots",
+          "description": "We develop intelligent chatbots that can handle customer inquiries, provide support, and guide users through your website or application.",
+          "list": [
+            {"text": "Natural language processing"},
+            {"text": "24/7 customer support"},
+            {"text": "Personalized user interactions"},
+            {"text": "Multi-channel deployment"},
+            {"text": "Integration with existing systems"},
+            {"text": "Continuous learning and improvement"}
+          ]
+        },
+        {
+          "title": "Business Process Automation",
+          "description": "We implement AI solutions that automate repetitive tasks and workflows, freeing up your team to focus on more strategic activities.",
+          "list": [
+            {"text": "Workflow automation"},
+            {"text": "Document processing"},
+            {"text": "Data entry and extraction"},
+            {"text": "Email automation"},
+            {"text": "Task scheduling and management"},
+            {"text": "Custom automation solutions"}
+          ]
+        },
+        {
+          "title": "AI-Driven Analytics",
+          "description": "We harness the power of AI to analyze your data, uncover insights, and provide actionable recommendations for your business.",
+          "list": [
+            {"text": "Predictive analytics"},
+            {"text": "Customer behavior analysis"},
+            {"text": "Sales forecasting"},
+            {"text": "Performance monitoring"},
+            {"text": "Trend identification"},
+            {"text": "Automated reporting"}
+          ]
+        }
+      ]
+    },
   "form":{
       "name": "Quel est votre nom ?",
       "nameText": "Entrez votre nom complet",

@@ -227,6 +227,116 @@
       "title": "Need a custom solution ?",
       "subtitle": "Contact us to get a custom solution for your business within 24 hours"
     },
+    "web-design-development":{
+      "development": "Development",
+      "subTitle": "We create stunning, responsive websites that captivate your audience and reflect your brand's unique identity",
+      "OurSolutions": "Our Solutions",
+      "SolutionsSubTitle": "Comprehensive web solutions designed to elevate your online presence",
+      "solutions": [
+        {
+          "title": "Custom Website Design",
+          "description": "Tailored designs that align with your brand's identity and user experience",
+          "features": [
+            {
+            "title": "Responsive Design",
+            "description": "Mobile-friendly designs that ensure accessibility and user engagement across all devices",
+            "list": [
+              {"text": "Responsive design for all devices"},
+              {"text": "Custom UI/UX design"},
+              {"text": "Brand-aligned visual elements"},
+              {"text": "Intuitive navigation"},
+              {"text": "Optimized user journeys"},
+              {"text": "Accessibility compliance"}
+            ]
+            },
+            {
+              "title": "Web Development",
+              "description": "Our development team builds robust, scalable websites and web applications that deliver exceptional performance and functionality using cutting-edge technologies.",
+              "list": [
+                {"text": "Front-end development (React, Next.js)"},
+                {"text": "Back-end development (Node.js, Python)"},
+                {"text": "Database design and implementation"},
+                {"text": "API development and integration"},
+                {"text": "E-commerce functionality"},
+                {"text": "Content management systems"}
+              ]
+            },
+            {
+              "title": "Mobile-First Approach",
+              "description": "We prioritize mobile experiences, ensuring your website performs flawlessly across all devices while maintaining visual appeal and functionality.",
+              "list": [
+                {"text": "Mobile-optimized layouts"},
+                {"text": "Touch-friendly interfaces"},
+                {"text": "Fast loading on mobile networks"},
+                {"text": "Progressive Web App capabilities"},
+                {"text": "Responsive images and media"},
+                {"text": "Mobile performance optimization"}
+              ]
+            }
+          ]
+        }
+      ],
+      "benefitsTitle1": "Our",
+      "benefitsTitle2": "Benefits",
+      "benefitsTitle3": "to your business",
+      "benefitsSubTitle": "Experience the advantages of our professional web design and development services",
+      "benefits": [
+        {"title": "Enhanced User Experience", "description": "Create intuitive, engaging interfaces that keep visitors on your site longer and guide them toward conversion."},
+        {"title": "Performance Optimization", "description": "Fast-loading, optimized websites that provide a seamless experience and rank better in search results."},
+        {"title": "Scalable Solutions", "description": "Future-proof websites that can grow with your business and adapt to changing needs and technologies."},
+        {"title": "SEO-Friendly Structure", "description": "Built-in search engine optimization that helps your website rank higher and attract more organic traffic."},
+        {"title": "Conversion-Focused Design", "description": "Strategic layouts and elements designed to guide visitors toward taking desired actions on your site."},
+        {"title": "Enhanced Security", "description": "Robust security measures to protect your website and user data from threats and vulnerabilities."}
+      ],
+      "ctaTitle1": "Ready for a website that",
+      "ctaTitle2": "stands out",
+      "ctaSubTitle": "Let's create something extraordinary together. Transform your online presence with a stunning, high-performance website",
+      "ctaButton": "GET STARTED"
+    },
+    "automation": {
+      "ai": "AI",
+      "subTitle": "We automate processes and enhance customer experiences with cutting-edge AI solutions",
+      "ourSolutions": "Our",
+      "SolutionsSubTitle":"Innovative AI solutions designed to transform your business operations",
+      "solutions": [
+        {
+          "title": "AI-Powered Chatbots",
+          "description": "We develop intelligent chatbots that can handle customer inquiries, provide support, and guide users through your website or application.",
+          "list": [
+            {"text": "Natural language processing"},
+            {"text": "24/7 customer support"},
+            {"text": "Personalized user interactions"},
+            {"text": "Multi-channel deployment"},
+            {"text": "Integration with existing systems"},
+            {"text": "Continuous learning and improvement"}
+          ]
+        },
+        {
+          "title": "Business Process Automation",
+          "description": "We implement AI solutions that automate repetitive tasks and workflows, freeing up your team to focus on more strategic activities.",
+          "list": [
+            {"text": "Workflow automation"},
+            {"text": "Document processing"},
+            {"text": "Data entry and extraction"},
+            {"text": "Email automation"},
+            {"text": "Task scheduling and management"},
+            {"text": "Custom automation solutions"}
+          ]
+        },
+        {
+          "title": "AI-Driven Analytics",
+          "description": "We harness the power of AI to analyze your data, uncover insights, and provide actionable recommendations for your business.",
+          "list": [
+            {"text": "Predictive analytics"},
+            {"text": "Customer behavior analysis"},
+            {"text": "Sales forecasting"},
+            {"text": "Performance monitoring"},
+            {"text": "Trend identification"},
+            {"text": "Automated reporting"}
+          ]
+        }
+      ]
+    },
     "form":{
       "name": "What's your name ?",
       "nameText": "Enter your full name",

@@ -12,7 +12,7 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
   
   return {
     title: lang === "fr" 
-      ? "Conception et Développement Web | Soluvia" 
+      ? "Design & Développement Web | Soluvia" 
       : "Web Design & Development | Soluvia",
     description: lang === "fr"
       ? "Création de sites web magnifiques et réactifs qui captent votre audience et reflètent l'identité unique de votre marque. Notre équipe utilise les dernières technologies pour construire des sites web performants."

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import ServicesClient from "./ServicesClient";
+import { getDictionary } from "../dictionaries";
 
 // Enhanced metadata for services page
 export async function generateMetadata({ params: paramsPromise }: { params: Promise<{ lang: string }> | { lang: string } }): Promise<Metadata> {
@@ -46,6 +47,9 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
   };
 }
 
-export default function Page() {
-  return <ServicesClient />;
+export default async function Page({ params }: { params: { lang: string } }) {
+  // Get the dictionary based on the current language
+  const dict = await getDictionary(params.lang);
+  
+  return <ServicesClient dictionary={dict} />;
 }

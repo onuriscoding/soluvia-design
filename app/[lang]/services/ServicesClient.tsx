@@ -16,7 +16,7 @@ import { ClientOnly } from "@/components/client-only";
 import GradientText from "@/app/animations/gradient-text";
 import ScrollReveal from "@/app/animations/scroll-reveal";
 
-export default function ServicesClient() {
+export default function ServicesClient({ dictionary }: { dictionary: any }) {
   const { lang } = useParams<{ lang: string }>();
   const currentLang = lang || "en";
   const [isMounted, setIsMounted] = useState(false);
@@ -191,7 +191,7 @@ export default function ServicesClient() {
                         <span className="whitespace-nowrap">
                           {currentLang === "fr"
                             ? service.id === "web-design"
-                              ? "Conception Web"
+                              ? "Web Design"
                               : service.id === "seo-optimization"
                               ? "Optimisation SEO"
                               : "Automatisation IA"
@@ -234,8 +234,8 @@ export default function ServicesClient() {
           <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
           <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
         </div>
-        <div className="container relative z-10 max-w-7xl mx-auto px-0 sm:px-0 lg:px-8">
-          <RedesignedPricingSection dictionary={{}} />
+        <div className="container relative z-10 max-w-10xl mx-auto px-0 sm:px-0 lg:px-8">
+          <RedesignedPricingSection dictionary={dictionary} />
         </div>
       </section>
     </main>
