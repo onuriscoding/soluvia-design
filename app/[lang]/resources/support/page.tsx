@@ -1,7 +1,8 @@
-"use client";
-
-import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { RedesignedContactSection } from "@/components/redesigned-contact-section";
+import { getDictionary } from "../../dictionaries";
+import GradientText from "@/app/animations/gradient-text";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import {
   ChevronDown,
   LifeBuoy,
@@ -9,61 +10,13 @@ import {
   FileText,
   MessageSquare,
 } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import GradientText from "@/app/animations/gradient-text";
-import { RedesignedContactSection } from "@/components/redesigned-contact-section";
-import { useParams } from "next/navigation";
-import { getDictionary } from "../../dictionaries";
 
-export default function SupportPage() {
-  const [isMounted, setIsMounted] = useState(false);
-  const [dictionary, setDictionary] = useState<any>(null);
-  const params = useParams();
-  const lang = params.lang as string;
-
-  useEffect(() => {
-    async function loadDictionary() {
-      const dict = await getDictionary(lang);
-      setDictionary(dict);
-      setIsMounted(true);
-    }
-    loadDictionary();
-  }, [lang]);
-
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-        mass: 0.5,
-      },
-    },
-  };
+export default async function SupportPage({
+  params: { lang },
+}: {
+  params: { lang: string };
+}) {
+  const dictionary = await getDictionary(lang);
 
   // Support options
   const supportOptions = [
@@ -100,47 +53,24 @@ export default function SupportPage() {
     <main className="flex min-h-screen flex-col">
       {/* Hero Section */}
       <section
-        ref={ref}
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
         <div className="absolute inset-0 z-0">
-          <motion.div
+          <div
             className="absolute left-0 top-0 h-[500px] w-[500px] rounded-full"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
           />
-          <motion.div
+          <div
             className="absolute right-0 bottom-0 h-[500px] w-[500px] rounded-full"
-            animate={{
-              scale: [1.2, 1, 1.2],
-              opacity: [0.5, 0.3, 0.5],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
           />
         </div>
 
-        <motion.div
-          style={{ y, opacity }}
+        <div
           className="container relative z-10 px-4"
         >
-          <motion.div
+          <div
             className="mx-auto max-w-4xl text-center"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
           >
-            <motion.div variants={itemVariants}>
+            <div>
               <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-8xl">
                 <GradientText
                   colors={[
@@ -158,26 +88,22 @@ export default function SupportPage() {
                   Support
                 </GradientText>
               </h1>
-            </motion.div>
+            </div>
 
-            <motion.div variants={itemVariants} className="mt-8">
+            <div className="mt-8">
               <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
                 We're here to help with any questions or concerns you may have
                 about our services.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              variants={itemVariants}
+            <div
               className="mt-12 flex flex-col items-center gap-6"
             >
               <div className="flex justify-center gap-4 flex-wrap">
                 {supportOptions.map((option) => (
-                  <motion.div
+                  <div
                     key={option.id}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.3 }}
                   >
                     <Button
                       asChild
@@ -200,32 +126,21 @@ export default function SupportPage() {
                         </span>
                       </Link>
                     </Button>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+            </div>
+          </div>
+        </div>
 
-        <motion.div
+        <div
           className="absolute bottom-10 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20"
-          animate={{ y: [0, 10, 0] }}
-          transition={{
-            duration: 1.5,
-            repeat: Number.POSITIVE_INFINITY,
-            repeatType: "loop",
-          }}
-          onClick={() => {
-            document
-              .getElementById("contact-section")
-              ?.scrollIntoView({ behavior: "smooth" });
-          }}
         >
           <div className="relative flex items-center justify-center">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-rose/30 to-sapphire/30 blur-sm"></div>
             <ChevronDown className="relative z-10 h-8 w-8 text-ivory" />
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Support Info Section */}
@@ -237,11 +152,7 @@ export default function SupportPage() {
         <div className="container relative z-10">
           <div className="mx-auto max-w-4xl">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
+              <div
                 className="p-8 rounded-2xl border border-ivory/10 bg-charcoal/30 backdrop-blur-sm"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-rose/10 text-rose mb-6">
@@ -261,13 +172,9 @@ export default function SupportPage() {
                   Visit FAQ
                   <ChevronDown className="ml-1 h-4 w-4 rotate-[-90deg]" />
                 </Link>
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+              <div
                 className="p-8 rounded-2xl border border-ivory/10 bg-charcoal/30 backdrop-blur-sm"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sapphire/10 text-sapphire mb-6">
@@ -287,13 +194,9 @@ export default function SupportPage() {
                   Get Support
                   <ChevronDown className="ml-1 h-4 w-4 rotate-[-90deg]" />
                 </Link>
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+              <div
                 className="p-8 rounded-2xl border border-ivory/10 bg-charcoal/30 backdrop-blur-sm"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-beige/10 text-beige mb-6">
@@ -310,14 +213,14 @@ export default function SupportPage() {
                   <li>Saturday: 10:00 AM - 4:00 PM</li>
                   <li>Sunday: Closed</li>
                 </ul>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      {dictionary && <RedesignedContactSection dictionary={dictionary} />}
+      <RedesignedContactSection dictionary={dictionary} />
     </main>
   );
 }
