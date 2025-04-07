@@ -32,7 +32,43 @@ interface Benefit {
   icon: LucideIcon;
 }
 
-export default function AiAutomationClientComponent() {
+interface AiAutomationClientProps {
+  dictionary: {
+    services: {
+      automation: string;
+      "automation-description": string;
+    };
+    automation: {
+      ai: string;
+      automation: string;
+      subTitle: string;
+      ourSolutions: string;
+      SolutionsSubTitle: string;
+      solutions: Array<{
+        title: string;
+        description: string;
+        list: Array<{ text: string }>;
+      }>;
+      benefitsTitle1: string;
+      benefitsTitle2: string;
+      benefitsTitle3: string;
+      benefitsSubTitle: string;
+      benefits: Array<{
+        title: string;
+        description: string;
+      }>;
+      ctaTitle1: string;
+      ctaTitle2: string;
+      ctaSubTitle: string;
+      ctaButton: string;
+    };
+    navigation: {
+      getStarted: string;
+    };
+  };
+}
+
+export default function AiAutomationClientComponent({ dictionary }: AiAutomationClientProps) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -69,109 +105,57 @@ export default function AiAutomationClientComponent() {
 
   const features = [
     {
-      title: "AI-Powered Chatbots",
-      description:
-        "We develop intelligent chatbots that can handle customer inquiries, provide support, and guide users through your website or application.",
+      title: dictionary.automation.solutions[0].title,
+      description: dictionary.automation.solutions[0].description,
       icon: <MessageSquare className="h-6 w-6" />,
-      features: [
-        "Natural language processing",
-        "24/7 customer support",
-        "Personalized user interactions",
-        "Multi-channel deployment",
-        "Integration with existing systems",
-        "Continuous learning and improvement",
-      ],
+      features: dictionary.automation.solutions[0].list.map(item => item.text),
       image: "/ai-chatbot.png?height=600&width=800",
       gradient: "from-rose/20 to-sapphire/20",
     },
     {
-      title: "Business Process Automation",
-      description:
-        "We implement AI solutions that automate repetitive tasks and workflows, freeing up your team to focus on more strategic activities.",
+      title: dictionary.automation.solutions[1].title,
+      description: dictionary.automation.solutions[1].description,
       icon: <Zap className="h-6 w-6" />,
-      features: [
-        "Workflow automation",
-        "Document processing",
-        "Data entry and extraction",
-        "Email automation",
-        "Task scheduling and management",
-        "Custom automation solutions",
-      ],
+      features: dictionary.automation.solutions[1].list.map(item => item.text),
       image: "/ai-automation.png?height=600&width=800",
       gradient: "from-sapphire/20 to-beige/20",
     },
     {
-      title: "AI-Driven Analytics",
-      description:
-        "We harness the power of AI to analyze your data, uncover insights, and provide actionable recommendations for your business.",
+      title: dictionary.automation.solutions[2].title,
+      description: dictionary.automation.solutions[2].description,
       icon: <BarChart className="h-6 w-6" />,
-      features: [
-        "Predictive analytics",
-        "Customer behavior analysis",
-        "Sales forecasting",
-        "Performance monitoring",
-        "Trend identification",
-        "Automated reporting",
-      ],
+      features: dictionary.automation.solutions[2].list.map(item => item.text),
       image: "/ai-analytics.png?height=600&width=800",
       gradient: "from-beige/20 to-rose/20",
     },
     {
-      title: "Intelligent Content Generation",
-      description:
+      title: dictionary.automation.solutions[3] ? dictionary.automation.solutions[3].title : "Intelligent Content Generation",
+      description: dictionary.automation.solutions[3] ? dictionary.automation.solutions[3].description : 
         "We leverage AI to create high-quality, relevant content for your website, marketing campaigns, and social media channels.",
       icon: <FileText className="h-6 w-6" />,
-      features: [
-        "Blog post generation",
-        "Product descriptions",
-        "Email content",
-        "Social media posts",
-        "SEO-optimized content",
-        "Multilingual content creation",
-      ],
+      features: dictionary.automation.solutions[3] ? 
+        dictionary.automation.solutions[3].list.map(item => item.text) : 
+        [
+          "Blog post generation",
+          "Product descriptions",
+          "Email content",
+          "Social media posts",
+          "SEO-optimized content",
+          "Multilingual content creation",
+        ],
       image: "/ai-content.png?height=600&width=800",
       gradient: "from-rose/20 to-sapphire/20",
     },
   ];
 
-  const benefits: Benefit[] = [
-    {
-      title: "Increased Efficiency",
-      description:
-        "Automate repetitive tasks and streamline workflows to save time and resources.",
-      icon: Zap,
-    },
-    {
-      title: "Enhanced Accuracy",
-      description:
-        "Minimize human error and ensure consistent results with AI-powered automation.",
-      icon: CheckCircle,
-    },
-    {
-      title: "24/7 Operation",
-      description:
-        "Keep your business running around the clock with automated processes.",
-      icon: Clock,
-    },
-    {
-      title: "Scalable Solutions",
-      description:
-        "Easily scale your operations without proportionally increasing costs.",
-      icon: TrendingUp,
-    },
-    {
-      title: "Data-Driven Insights",
-      description:
-        "Gain valuable insights from automated data collection and analysis.",
-      icon: BarChart,
-    },
-    {
-      title: "Cost Reduction",
-      description:
-        "Reduce operational costs by automating manual and time-consuming tasks.",
-      icon: DollarSign,
-    },
-  ];
+  const benefits: Benefit[] = dictionary.automation.benefits.map((benefit, index) => {
+    const icons = [Zap, CheckCircle, Clock, TrendingUp, BarChart, DollarSign];
+    return {
+      title: benefit.title,
+      description: benefit.description,
+      icon: icons[index % icons.length]
+    };
+  });
 
   const processSteps = [
     {
@@ -281,8 +265,10 @@ export default function AiAutomationClientComponent() {
             variants={containerVariants}
           >
             <motion.div variants={itemVariants}>
-              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem]">
-                AI &{" "}
+              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem] text-center flex flex-col items-center">
+                <div className="leading-tight">
+                  {dictionary.automation.ai} &
+                </div>
                 <GradientText
                   colors={[
                     "#3d5a80",
@@ -294,17 +280,16 @@ export default function AiAutomationClientComponent() {
                   ]}
                   animationSpeed={12}
                   showBorder={false}
-                  className="inline-block"
+                  className=" leading-tight"
                 >
-                  Automation
+                  {dictionary.automation.automation}
                 </GradientText>
               </h1>
             </motion.div>
 
             <motion.div variants={itemVariants} className="mt-8">
               <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
-                We automate processes and enhance customer experiences with
-                cutting-edge AI solutions.
+                {dictionary.automation.subTitle}
               </p>
             </motion.div>
           </motion.div>
@@ -352,7 +337,7 @@ export default function AiAutomationClientComponent() {
             }}
           >
             <h2 className="text-5xl font-bold tracking-tight text-ivory md:text-6xl mb-6">
-              Our{" "}
+              {dictionary.automation.ourSolutions}{" "}
               <GradientText
                 colors={[
                   "#3d5a80",
@@ -376,8 +361,7 @@ export default function AiAutomationClientComponent() {
               baseRotation={3}
               blurStrength={4}
             >
-              Innovative AI solutions designed to transform your business
-              operations
+              {dictionary.automation.SolutionsSubTitle}
             </ScrollReveal>
           </motion.div>
 
@@ -438,7 +422,7 @@ export default function AiAutomationClientComponent() {
             }}
           >
             <h2 className="text-5xl font-bold tracking-tight text-ivory md:text-6xl mb-6">
-              Our{" "}
+              {dictionary.automation.benefitsTitle1}{" "}
               <GradientText
                 colors={[
                   "#3d5a80",
@@ -452,9 +436,9 @@ export default function AiAutomationClientComponent() {
                 showBorder={false}
                 className="inline-block"
               >
-                Benefits
+                {dictionary.automation.benefitsTitle2}
               </GradientText>{" "}
-              to your business
+              {dictionary.automation.benefitsTitle3}
             </h2>
             <ScrollReveal
               textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
@@ -463,7 +447,7 @@ export default function AiAutomationClientComponent() {
               baseRotation={3}
               blurStrength={4}
             >
-              Discover how AI automation can transform your business operations
+              {dictionary.automation.benefitsSubTitle}
             </ScrollReveal>
           </motion.div>
 
@@ -506,7 +490,7 @@ export default function AiAutomationClientComponent() {
           <div className="relative z-10 md:mt-0">
             <motion.div className="mx-auto max-w-6xl text-center">
               <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
-                Ready to automate your{" "}
+                {dictionary.automation.ctaTitle1}{" "}
                 <GradientText
                   colors={[
                     "#3d5a80",
@@ -520,7 +504,7 @@ export default function AiAutomationClientComponent() {
                   showBorder={false}
                   className="inline-block"
                 >
-                  business
+                  {dictionary.automation.ctaTitle2}
                 </GradientText>
                 ?
               </h1>
@@ -531,8 +515,7 @@ export default function AiAutomationClientComponent() {
                 baseRotation={3}
                 blurStrength={4}
               >
-                Transform your operations with intelligent AI solutions that
-                drive efficiency and growth.
+                {dictionary.automation.ctaSubTitle}
               </ScrollReveal>
               <div
                 style={{
@@ -558,7 +541,7 @@ export default function AiAutomationClientComponent() {
                     >
                       <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                       <span className="relative z-10 flex items-center">
-                        GET STARTED
+                        {dictionary.navigation.getStarted}
                         <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                       </span>
                     </Link>

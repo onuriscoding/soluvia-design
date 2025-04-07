@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import GradientText from "@/app/animations/gradient-text";
 
-export function RedesignedContactSection() {
+export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -61,7 +61,7 @@ export function RedesignedContactSection() {
 
     if (!formState.name || !formState.email || !formState.message) {
       setStatus("error");
-      setMessage("Please fill out all required fields");
+      setMessage(dictionary.contact.contactForm.requiredFieldsMessage || "Please fill out all required fields");
       return;
     }
 
@@ -101,7 +101,7 @@ export function RedesignedContactSection() {
 
       setIsSubmitted(true);
       setStatus("success");
-      setMessage("Thank you for your message! We'll get back to you soon.");
+      setMessage(dictionary.contact.contactForm.confirmationThanks || "Thank you for your message! We'll get back to you soon.");
       setFormState({
         name: "",
         email: "",
@@ -157,13 +157,12 @@ export function RedesignedContactSection() {
               showBorder={false}
               className="inline-block"
             >
-              Contact
-            </GradientText>{" "}
-            us
+              {dictionary.contact.contactTitle1}
+            </GradientText>
+            {dictionary.contact.contactTitle2}
           </h2>
           <p className="mt-4 text-lg md:text-2xl text-ivory/70">
-            Have a project in mind? We'd love to hear from you. Fill out the
-            form below and we'll get back to you as soon as possible.
+            {dictionary.contact.contactSubTitle}
           </p>
         </motion.div>
 
@@ -197,17 +196,20 @@ export function RedesignedContactSection() {
                       <CheckCircle className="h-10 w-10 text-rose" />
                     </div>
                     <h3 className="mb-2 text-2xl font-bold text-ivory">
-                      Message Sent!
+                      {status === "success" 
+                        ? dictionary.contact.contactForm.confirmationThanks || "Message Sent!" 
+                        : dictionary.contact.contactForm.errorTitle || "Error"}
                     </h3>
                     <p className="mb-6 text-ivory/70">
-                      Thank you for reaching out. We'll get back to you as soon
-                      as possible.
+                      {status === "success" 
+                        ? dictionary.contact.contactForm.confirmationDescription || "Thank you for reaching out. We'll get back to you as soon as possible."
+                        : dictionary.contact.contactForm.errorMessage || "Failed to send message. Please try again."}
                     </p>
                     <Button
                       onClick={() => resetForm()}
                       className="bg-gradient-to-r from-rose to-sapphire hover:shadow-lg hover:shadow-rose/20"
                     >
-                      Send Another Message
+                      {dictionary.contact.contactForm.anotherMessage}
                     </Button>
                   </motion.div>
                 ) : (
@@ -215,12 +217,12 @@ export function RedesignedContactSection() {
                     <div className="grid gap-6 sm:grid-cols-2">
                       <div className="space-y-2">
                         <Label htmlFor="name" className="text-ivory/80">
-                          Name <span className="text-rose">*</span>
+                          {dictionary.contact.contactForm.name} <span className="text-rose">*</span>
                         </Label>
                         <Input
                           id="name"
                           name="name"
-                          placeholder="Your name"
+                          placeholder={dictionary.contact.contactForm.nameText}
                           value={formState.name}
                           onChange={handleChange}
                           required
@@ -229,13 +231,13 @@ export function RedesignedContactSection() {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="email" className="text-ivory/80">
-                          Email <span className="text-rose">*</span>
+                          {dictionary.contact.contactForm.email} <span className="text-rose">*</span>
                         </Label>
                         <Input
                           id="email"
                           name="email"
                           type="email"
-                          placeholder="Your email"
+                          placeholder={dictionary.contact.contactForm.emailText}
                           value={formState.email}
                           onChange={handleChange}
                           required
@@ -247,12 +249,13 @@ export function RedesignedContactSection() {
                     <div className="grid gap-6 sm:grid-cols-2">
                       <div className="space-y-2">
                         <Label htmlFor="phone" className="text-ivory/80">
-                          Phone (Optional)
+                          {dictionary.contact.contactForm.phone}
                         </Label>
                         <Input
                           id="phone"
                           name="phone"
-                          placeholder="Your phone number"
+                          type="tel"
+                          placeholder={dictionary.contact.contactForm.phoneText}
                           value={formState.phone}
                           onChange={handleChange}
                           className="border-ivory/10 bg-charcoal/50 text-ivory placeholder:text-ivory/50 focus:border-rose/50"
@@ -260,7 +263,7 @@ export function RedesignedContactSection() {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="service" className="text-ivory/80">
-                          Service Interested In
+                          {dictionary.contact.contactForm.servicesInterestedIn}
                         </Label>
                         <select
                           id="service"
@@ -269,17 +272,16 @@ export function RedesignedContactSection() {
                           onChange={handleChange}
                           className="w-full rounded-md border border-ivory/10 bg-charcoal/50 px-3 py-2 text-ivory focus:border-rose/50 focus:outline-none"
                         >
-                          <option value="web-design">Web Design</option>
-                          <option value="seo">SEO Optimization</option>
-                          <option value="development">Web Development</option>
-                          <option value="business">AI Automation</option>
+                          <option value="web-design">{dictionary.contact.contactForm.servicesOption1}</option>
+                          <option value="ai">{dictionary.contact.contactForm.servicesOption2}</option>
+                          <option value="seo">{dictionary.contact.contactForm.servicesOption3}</option>
                         </select>
                       </div>
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="budget" className="text-ivory/80">
-                        Budget Range <span className="text-rose">*</span>
+                        {dictionary.contact.contactForm.budgetRange} <span className="text-rose">*</span>
                       </Label>
                       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                         <div>
@@ -297,7 +299,7 @@ export function RedesignedContactSection() {
                             htmlFor="budget-1"
                             className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
                           >
-                            Under $1,000
+                            {dictionary.contact.contactForm.budgetOption1}
                           </label>
                         </div>
                         <div>
@@ -314,7 +316,7 @@ export function RedesignedContactSection() {
                             htmlFor="budget-2"
                             className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
                           >
-                            $1,000 - $5,000
+                            {dictionary.contact.contactForm.budgetOption2}
                           </label>
                         </div>
                         <div>
@@ -331,7 +333,7 @@ export function RedesignedContactSection() {
                             htmlFor="budget-3"
                             className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
                           >
-                            $5,000 - $10,000
+                            {dictionary.contact.contactForm.budgetOption3}
                           </label>
                         </div>
                         <div>
@@ -348,7 +350,7 @@ export function RedesignedContactSection() {
                             htmlFor="budget-4"
                             className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
                           >
-                            Over $10,000
+                            {dictionary.contact.contactForm.budgetOption4}
                           </label>
                         </div>
                       </div>
@@ -356,7 +358,7 @@ export function RedesignedContactSection() {
 
                     <div className="space-y-2">
                       <Label htmlFor="timeframe" className="text-ivory/80">
-                        Project Timeframe
+                        {dictionary.contact.contactForm.projectTimeframe}
                       </Label>
                       <div className="grid grid-cols-3 gap-4">
                         <div>
@@ -373,7 +375,7 @@ export function RedesignedContactSection() {
                             htmlFor="timeframe-1"
                             className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
                           >
-                            ASAP
+                            {dictionary.contact.contactForm.projectTimeframeOption1}
                           </label>
                         </div>
                         <div>
@@ -390,7 +392,7 @@ export function RedesignedContactSection() {
                             htmlFor="timeframe-2"
                             className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
                           >
-                            1-3 Months
+                            {dictionary.contact.contactForm.projectTimeframeOption2}
                           </label>
                         </div>
                         <div>
@@ -407,7 +409,7 @@ export function RedesignedContactSection() {
                             htmlFor="timeframe-3"
                             className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
                           >
-                            3+ Months
+                            {dictionary.contact.contactForm.projectTimeframeOption3}
                           </label>
                         </div>
                       </div>
@@ -415,17 +417,16 @@ export function RedesignedContactSection() {
 
                     <div className="space-y-2">
                       <Label htmlFor="message" className="text-ivory/80">
-                        Message <span className="text-rose">*</span>
+                        {dictionary.contact.contactForm.message} <span className="text-rose">*</span>
                       </Label>
                       <Textarea
                         id="message"
                         name="message"
-                        placeholder="Tell us about your project"
-                        rows={5}
+                        placeholder={dictionary.contact.contactForm.messageText}
                         value={formState.message}
                         onChange={handleChange}
                         required
-                        className="border-ivory/10 bg-charcoal/50 text-ivory placeholder:text-ivory/50 focus:border-rose/50"
+                        className="min-h-32 border-ivory/10 bg-charcoal/50 text-ivory placeholder:text-ivory/50 focus:border-rose/50"
                       />
                     </div>
 
@@ -438,59 +439,18 @@ export function RedesignedContactSection() {
                       >
                         <div className="flex items-center">
                           <AlertCircle className="h-4 w-4 mr-2" />
-                          <span>{message}</span>
+                          <span>{dictionary.contact.contactForm.errorMessage || message}</span>
                         </div>
                       </motion.div>
                     )}
 
                     <Button
                       type="submit"
-                      className="w-full overflow-hidden relative group mt-4"
+                      variant="default"
+                      className="mt-4 w-full bg-gradient-to-r from-rose to-sapphire hover:shadow-lg hover:shadow-rose/20"
                       disabled={isSubmitting}
                     >
-                      <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire"></span>
-                      <span className="absolute inset-0 bg-gradient-to-r from-sapphire to-rose opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-                      <span className="relative z-10 flex items-center justify-center">
-                        {isSubmitting ? (
-                          <span className="flex items-center">
-                            <svg
-                              className="mr-2 h-4 w-4 animate-spin"
-                              viewBox="0 0 24 24"
-                            >
-                              <circle
-                                className="opacity-25"
-                                cx="12"
-                                cy="12"
-                                r="10"
-                                stroke="currentColor"
-                                strokeWidth="4"
-                                fill="none"
-                              />
-                              <path
-                                className="opacity-75"
-                                fill="currentColor"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                              />
-                            </svg>
-                            Sending...
-                          </span>
-                        ) : (
-                          <span className="flex items-center">
-                            Send Message
-                            <motion.div
-                              animate={{ x: [0, 5, 0] }}
-                              transition={{
-                                duration: 1.5,
-                                repeat: Number.POSITIVE_INFINITY,
-                                repeatType: "reverse",
-                              }}
-                              className="ml-2 inline-flex"
-                            >
-                              <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                            </motion.div>
-                          </span>
-                        )}
-                      </span>
+                      {isSubmitting ? dictionary.contact.contactForm.sending : dictionary.contact.contactForm.sendMessage}
                     </Button>
                   </form>
                 )}
@@ -512,7 +472,7 @@ export function RedesignedContactSection() {
                   animate={isInView ? { opacity: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                  Contact Information
+                  {dictionary.contact.contactInformation}
                   <motion.div
                     className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-rose to-sapphire"
                     initial={{ width: 0 }}
@@ -521,9 +481,7 @@ export function RedesignedContactSection() {
                   />
                 </motion.h3>
                 <p className="text-ivory/70">
-                  We're here to help with any questions you may have about our
-                  services. Reach out to us through any of the following
-                  channels.
+                  {dictionary.contact.contactDescription}
                 </p>
               </div>
 
@@ -534,7 +492,7 @@ export function RedesignedContactSection() {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium text-ivory mb-1">
-                      Email Us
+                      {dictionary.contact.contactEmail}
                     </h4>
                     <a
                       href="mailto:info@soluvia.co"
@@ -551,7 +509,7 @@ export function RedesignedContactSection() {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium text-ivory mb-1">
-                      Call Us
+                      {dictionary.contact.contactPhone}
                     </h4>
                     <a
                       href="tel:+32499242951"
@@ -570,7 +528,7 @@ export function RedesignedContactSection() {
                   animate={isInView ? { opacity: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                  Business Hours
+                  {dictionary.contact.businessHours}
                   <motion.div
                     className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-rose to-sapphire"
                     initial={{ width: 0 }}
@@ -580,16 +538,16 @@ export function RedesignedContactSection() {
                 </motion.h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span className="text-ivory/70">Monday - Friday</span>
-                    <span className="text-ivory">9:00 AM - 6:00 PM</span>
+                    <span className="text-ivory/70">{dictionary.contact.monday} - {dictionary.contact.friday}</span>
+                    <span className="text-ivory">9:00 - 18:00</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-ivory/70">Saturday</span>
-                    <span className="text-ivory">10:00 AM - 4:00 PM</span>
+                    <span className="text-ivory/70">{dictionary.contact.saturday}</span>
+                    <span className="text-ivory">10:00 - 15:00</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-ivory/70">Sunday</span>
-                    <span className="text-ivory">Closed</span>
+                    <span className="text-ivory/70">{dictionary.contact.sunday}</span>
+                    <span className="text-ivory">{dictionary.contact.closed}</span>
                   </div>
                 </div>
               </div>
@@ -601,7 +559,7 @@ export function RedesignedContactSection() {
                   animate={isInView ? { opacity: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                  Connect With Us
+                  {dictionary.contact.connectwithUs}
                   <motion.div
                     className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-rose to-sapphire"
                     initial={{ width: 0 }}

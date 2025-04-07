@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { ServiceStructuredData } from "@/components/structured-data";
 import AiAutomationClientComponent from "./AiAutomationClient";
+import { getDictionary } from "../../dictionaries";
 
 // Enhanced metadata with multi-language support
 export async function generateMetadata({ params: paramsPromise }: { params: Promise<{ lang: string }> | { lang: string } }): Promise<Metadata> {
@@ -55,13 +56,14 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
   };
 }
 
-export default function Page({ params }: { params: { lang: string } }) {
+export default async function Page({ params }: { params: { lang: string } }) {
   const lang = params.lang || "en";
+  const dictionary = await getDictionary(lang);
   
   return (
     <>
       <ServiceStructuredData service="AI Automation" />
-      <AiAutomationClientComponent />
+      <AiAutomationClientComponent dictionary={dictionary} />
     </>
   );
 }

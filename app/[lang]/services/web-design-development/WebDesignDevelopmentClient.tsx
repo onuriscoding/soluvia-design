@@ -28,7 +28,20 @@ interface Benefit {
   icon: LucideIcon;
 }
 
-export default function WebDesignDevelopmentClient() {
+interface ListItem {
+  text: string;
+}
+
+interface DictionaryBenefit {
+  title: string;
+  description: string;
+}
+
+interface WebDesignDevelopmentClientProps {
+  dictionary: any;
+}
+
+export default function WebDesignDevelopmentClient({ dictionary }: WebDesignDevelopmentClientProps) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -38,11 +51,11 @@ export default function WebDesignDevelopmentClient() {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const features = [
+  // Define fallback features in case dictionary structure doesn't match
+  const defaultFeatures = [
     {
       title: "Custom Website Design",
-      description:
-        "We create stunning, responsive websites that captivate your audience and reflect your brand's unique identity. Our designs are tailored to your specific needs and goals.",
+      description: "We create stunning, responsive websites that captivate your audience and reflect your brand's unique identity.",
       icon: <Palette className="h-6 w-6" />,
       features: [
         "Responsive design for all devices",
@@ -58,8 +71,7 @@ export default function WebDesignDevelopmentClient() {
     },
     {
       title: "Web Development",
-      description:
-        "Our development team builds robust, scalable websites and web applications that deliver exceptional performance and functionality using cutting-edge technologies.",
+      description: "Our development team builds robust, scalable websites and web applications that deliver exceptional performance and functionality.",
       icon: <Code className="h-6 w-6" />,
       features: [
         "Front-end development (React, Next.js)",
@@ -75,8 +87,7 @@ export default function WebDesignDevelopmentClient() {
     },
     {
       title: "Mobile-First Approach",
-      description:
-        "We prioritize mobile experiences, ensuring your website performs flawlessly across all devices while maintaining visual appeal and functionality.",
+      description: "We prioritize mobile experiences, ensuring your website performs flawlessly across all devices.",
       icon: <Smartphone className="h-6 w-6" />,
       features: [
         "Mobile-optimized layouts",
@@ -92,44 +103,105 @@ export default function WebDesignDevelopmentClient() {
     },
   ];
 
-  const benefits: Benefit[] = [
+  // Try to access the features from dictionary with safer fallback pattern
+  const features = (() => {
+    try {
+      if (dictionary && 
+          dictionary["web-design-development"] && 
+          dictionary["web-design-development"].solutions &&
+          dictionary["web-design-development"].solutions[0] &&
+          dictionary["web-design-development"].solutions[0].features) {
+        return [
+          {
+            title: dictionary["web-design-development"].solutions[0].features[0].title,
+            description: dictionary["web-design-development"].solutions[0].features[0].description,
+            icon: <Palette className="h-6 w-6" />,
+            features: dictionary["web-design-development"].solutions[0].features[0].list.map((item: ListItem) => item.text),
+            image: "/web-design.png?height=600&width=800",
+            gradient: "from-rose/20 to-sapphire/20",
+            color: "rose",
+          },
+          {
+            title: dictionary["web-design-development"].solutions[0].features[1].title,
+            description: dictionary["web-design-development"].solutions[0].features[1].description,
+            icon: <Code className="h-6 w-6" />,
+            features: dictionary["web-design-development"].solutions[0].features[1].list.map((item: ListItem) => item.text),
+            image: "/web-development.png?height=600&width=800",
+            gradient: "from-sapphire/20 to-beige/20",
+            color: "sapphire",
+          },
+          {
+            title: dictionary["web-design-development"].solutions[0].features[2].title,
+            description: dictionary["web-design-development"].solutions[0].features[2].description,
+            icon: <Smartphone className="h-6 w-6" />,
+            features: dictionary["web-design-development"].solutions[0].features[2].list.map((item: ListItem) => item.text),
+            image: "/mobile.png?height=600&width=800",
+            gradient: "from-beige/20 to-rose/20",
+            color: "beige",
+          },
+        ];
+      }
+      return defaultFeatures;
+    } catch (error) {
+      console.error("Error accessing dictionary features:", error);
+      return defaultFeatures;
+    }
+  })();
+
+  // Default benefits
+  const defaultBenefits = [
     {
       title: "Enhanced User Experience",
-      description:
-        "Create intuitive, engaging interfaces that keep visitors on your site longer and guide them toward conversion.",
+      description: "Create intuitive, engaging interfaces that keep visitors on your site longer and guide them toward conversion.",
       icon: Users,
     },
     {
       title: "Performance Optimization",
-      description:
-        "Fast-loading, optimized websites that provide a seamless experience and rank better in search results.",
+      description: "Fast-loading, optimized websites that provide a seamless experience and rank better in search results.",
       icon: Zap,
     },
     {
       title: "Scalable Solutions",
-      description:
-        "Future-proof websites that can grow with your business and adapt to changing needs and technologies.",
+      description: "Future-proof websites that can grow with your business and adapt to changing needs and technologies.",
       icon: Layers,
     },
     {
       title: "SEO-Friendly Structure",
-      description:
-        "Built-in search engine optimization that helps your website rank higher and attract more organic traffic.",
+      description: "Built-in search engine optimization that helps your website rank higher and attract more organic traffic.",
       icon: Search,
     },
     {
       title: "Conversion-Focused Design",
-      description:
-        "Strategic layouts and elements designed to guide visitors toward taking desired actions on your site.",
+      description: "Strategic layouts and elements designed to guide visitors toward taking desired actions on your site.",
       icon: BarChart,
     },
     {
       title: "Enhanced Security",
-      description:
-        "Robust security measures to protect your website and user data from threats and vulnerabilities.",
+      description: "Robust security measures to protect your website and user data from threats and vulnerabilities.",
       icon: Shield,
     },
   ];
+
+  // Try to access benefits from dictionary with safer fallback pattern
+  const benefits: Benefit[] = (() => {
+    try {
+      if (dictionary && 
+          dictionary["web-design-development"] && 
+          dictionary["web-design-development"].benefits &&
+          Array.isArray(dictionary["web-design-development"].benefits)) {
+        const icons = [Users, Zap, Layers, Search, BarChart, Shield];
+        return dictionary["web-design-development"].benefits.map((benefit: DictionaryBenefit, index: number) => ({
+          title: benefit.title,
+          description: benefit.description,
+          icon: icons[index % icons.length]
+        }));
+      }
+      return defaultBenefits;
+    } catch (error) {
+      console.error("Error accessing dictionary benefits:", error);
+      return defaultBenefits;
+    }
+  })();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -162,6 +234,42 @@ export default function WebDesignDevelopmentClient() {
       document.documentElement.style.scrollBehavior = "auto";
     };
   }, []);
+
+  // Safely access dictionary values with fallbacks
+  const getWebDesignText = (key: string, fallback: string): string => {
+    try {
+      if (dictionary && dictionary["web-design-development"]) {
+        return dictionary["web-design-development"][key] || fallback;
+      }
+      return fallback;
+    } catch (error) {
+      return fallback;
+    }
+  };
+
+  // Access services section with fallback
+  const getServiceText = (key: string, fallback: string): string => {
+    try {
+      if (dictionary && dictionary.services) {
+        return dictionary.services[key] || fallback;
+      }
+      return fallback;
+    } catch (error) {
+      return fallback;
+    }
+  };
+
+  // Access navigation texts with fallback
+  const getNavigationText = (key: string, fallback: string): string => {
+    try {
+      if (dictionary && dictionary.navigation) {
+        return dictionary.navigation[key] || fallback;
+      }
+      return fallback;
+    } catch (error) {
+      return fallback;
+    }
+  };
 
   return (
     <main className="flex min-h-screen flex-col">
@@ -208,29 +316,29 @@ export default function WebDesignDevelopmentClient() {
             variants={containerVariants}
           >
             <motion.div variants={itemVariants}>
-              <h1 className="text-5xl font-bold tracking-tight text-ivory md:text-[9rem]">
-                Web Design &{" "}
+              <h1 className="text-5xl font-bold tracking-tight text-ivory md:text-[9rem] flex flex-col items-center text-center">
+                <div className="leading-tight">Web Design</div>
+                <div className="leading-tight text-[5rem] md:text-[7rem]">&</div>
                 <GradientText
                   colors={[
-                    "#3d5a80",
-                    "#b76e79",
-                    "#e0d5c0",
-                    "#3d5a80",
-                    "#b76e79",
-                    "#3d5a80",
-                  ]}
+                      "#3d5a80",
+                      "#b76e79",
+                      "#e0d5c0",
+                      "#3d5a80",
+                      "#b76e79",
+                      "#3d5a80",
+                    ]}
                   animationSpeed={12}
                   showBorder={false}
                   className="inline-block"
                 >
-                  Development
+                  {getWebDesignText("development", "Development")}
                 </GradientText>
               </h1>
             </motion.div>
             <motion.div variants={itemVariants} className="mt-8">
               <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
-                We create stunning, responsive websites that captivate your
-                audience and reflect your brand's unique identity.
+                {getWebDesignText("subTitle", "We create stunning, responsive websites that captivate your audience and reflect your brand's unique identity.")}
               </p>
             </motion.div>
           </motion.div>
@@ -278,7 +386,7 @@ export default function WebDesignDevelopmentClient() {
             }}
           >
             <h2 className="text-5xl font-bold tracking-tight text-ivory md:text-6xl mb-6">
-              Our{" "}
+              {getWebDesignText("ourSolutions", "Our")}{" "}
               <GradientText
                 colors={[
                   "#3d5a80",
@@ -302,8 +410,7 @@ export default function WebDesignDevelopmentClient() {
               baseRotation={3}
               blurStrength={4}
             >
-              Comprehensive web solutions designed to elevate your online
-              presence
+              {getWebDesignText("SolutionsSubTitle", "Comprehensive web solutions designed to elevate your online presence")}
             </ScrollReveal>
           </motion.div>
 
@@ -364,7 +471,7 @@ export default function WebDesignDevelopmentClient() {
             }}
           >
             <h2 className="text-5xl font-bold tracking-tight text-ivory md:text-6xl mb-6">
-              Our{" "}
+              {getWebDesignText("benefitsTitle1", "Our")}{" "}
               <GradientText
                 colors={[
                   "#3d5a80",
@@ -378,9 +485,9 @@ export default function WebDesignDevelopmentClient() {
                 showBorder={false}
                 className="inline-block"
               >
-                Benefits
+                {getWebDesignText("benefitsTitle2", "Benefits")}
               </GradientText>{" "}
-              to your business
+              {getWebDesignText("benefitsTitle3", "to your business")}
             </h2>
             <ScrollReveal
               textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
@@ -389,8 +496,7 @@ export default function WebDesignDevelopmentClient() {
               baseRotation={3}
               blurStrength={4}
             >
-              Experience the advantages of our professional web design and
-              development services
+              {getWebDesignText("benefitsSubTitle", "Experience the advantages of our professional web design and development services")}
             </ScrollReveal>
           </motion.div>
 
@@ -404,7 +510,7 @@ export default function WebDesignDevelopmentClient() {
               const Icon = benefit.icon;
               return (
                 <motion.div
-                  key={benefit.title}
+                  key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 + 0.4 }}
@@ -433,7 +539,7 @@ export default function WebDesignDevelopmentClient() {
           <div className="relative z-10 md:mt-0">
             <motion.div className="mx-auto max-w-6xl text-center">
               <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
-                Ready for a website that{" "}
+                {getWebDesignText("ctaTitle1", "Ready for a website that")}{" "}
                 <GradientText
                   colors={[
                     "#3d5a80",
@@ -447,7 +553,7 @@ export default function WebDesignDevelopmentClient() {
                   showBorder={false}
                   className="inline-block"
                 >
-                  stands out
+                  {getWebDesignText("ctaTitle2", "stands out")}
                 </GradientText>
                 ?
               </h1>
@@ -458,8 +564,7 @@ export default function WebDesignDevelopmentClient() {
                 baseRotation={3}
                 blurStrength={4}
               >
-                Let's create something extraordinary together. Transform your
-                online presence with a stunning, high-performance website.
+                {getWebDesignText("ctaSubTitle", "Let's create something extraordinary together. Transform your online presence with a stunning, high-performance website.")}
               </ScrollReveal>
               <div
                 style={{
@@ -484,7 +589,7 @@ export default function WebDesignDevelopmentClient() {
                     >
                       <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                       <span className="relative z-10 flex items-center">
-                        GET STARTED
+                        {getNavigationText("getStarted", "GET STARTED")}
                         <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                       </span>
                     </Link>

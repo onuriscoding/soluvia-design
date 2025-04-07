@@ -12,6 +12,7 @@ import {
   Zap,
   Brain,
   ChevronDown,
+  CheckCircle2,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,7 @@ import GradientText from "@/app/animations/gradient-text";
 import ScrollReveal from "@/app/animations/scroll-reveal";
 import Orb from "@/components/orb";
 
-export default function AboutPageClient() {
+export default function AboutPageClient({ dictionary }: { dictionary: any }) {
   const heroRef = useRef(null);
   const storyRef = useRef(null);
   const whyUsRef = useRef(null);
@@ -124,8 +125,8 @@ export default function AboutPageClient() {
             variants={containerVariants}
           >
             <motion.div variants={itemVariants}>
-              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem]">
-                About{" "}
+              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem] flex flex-wrap items-center justify-center gap-x-12">
+                <span>{dictionary.about.title1}</span>
                 <span className="inline-flex items-center relative">
                   <GradientText
                     colors={[
@@ -138,7 +139,7 @@ export default function AboutPageClient() {
                     ]}
                     animationSpeed={12}
                     showBorder={false}
-                    className="font-anton lowercase text-6xl md:text-[8.5rem]"
+                    className="font-anton lowercase text-6xl md:text-[8.5rem] mt-2"
                   >
                     soluvia
                   </GradientText>
@@ -155,8 +156,7 @@ export default function AboutPageClient() {
 
             <motion.div variants={itemVariants} className="mt-8">
               <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
-                We blend human creativity with AI technology to create digital
-                experiences that matter.
+                {dictionary.about.subTitle}
               </p>
             </motion.div>
           </motion.div>
@@ -204,8 +204,8 @@ export default function AboutPageClient() {
               mass: 0.5,
             }}
           >
-            <h2 className="text-5xl font-bold tracking-tight mb-8 md:text-6xl">
-              Our{" "}
+            <h2 className="text-5xl font-bold tracking-tight mb-8 md:text-6xl flex flex-wrap items-center justify-center gap-x-4">
+              <span>{dictionary.about.ourStoryTitle1}</span>
               <GradientText
                 colors={[
                   "#3d5a80",
@@ -219,11 +219,11 @@ export default function AboutPageClient() {
                 showBorder={false}
                 className="inline-block"
               >
-                Story
+                {dictionary.about.ourStoryTitle2}
               </GradientText>
             </h2>
             <p className="text-xl text-ivory/70 mt-4">
-              Where human creativity meets AI innovation
+              {dictionary.about.ourStorySubTitle}
             </p>
           </motion.div>
 
@@ -241,22 +241,13 @@ export default function AboutPageClient() {
               }}
             >
               <p className="text-lg text-ivory/80">
-                Soluvia was founded with a vision to bridge the gap between
-                human creativity and artificial intelligence. We believe that
-                the future of design lies in this harmony – where human
-                intuition and AI capabilities amplify each other.
+                {dictionary.about.ourStoryp1}
               </p>
               <p className="text-lg text-ivory/80">
-                Our approach combines the irreplaceable human touch – empathy,
-                creativity, and strategic thinking – with the efficiency and
-                analytical power of AI technologies. This unique blend allows us
-                to deliver solutions that are both innovative and authentic.
+                {dictionary.about.ourStoryp2}
               </p>
               <p className="text-lg text-ivory/80">
-                Today, we're proud to work with clients across various
-                industries, from startups to established enterprises, helping
-                them achieve their goals through our human-driven, AI-enhanced
-                creative process.
+                {dictionary.about.ourStoryp3}
               </p>
             </motion.div>
             <motion.div
@@ -307,8 +298,8 @@ export default function AboutPageClient() {
               mass: 0.5,
             }}
           >
-            <h2 className="text-5xl font-bold tracking-tight mb-8 md:text-6xl">
-              Our Core{" "}
+            <h2 className="text-5xl font-bold tracking-tight mb-8 md:text-6xl flex flex-wrap items-center justify-center gap-x-4">
+              <span>{dictionary.about.ourCoreValuesTitle1}</span>
               <GradientText
                 colors={[
                   "#3d5a80",
@@ -322,11 +313,11 @@ export default function AboutPageClient() {
                 showBorder={false}
                 className="inline-block"
               >
-                Values
+                {dictionary.about.ourCoreValuesTitle3}
               </GradientText>
             </h2>
             <p className="text-xl text-ivory/70 mt-4">
-              The principles that guide everything we do
+              {dictionary.about.ourCoreValuesSubTitle}
             </p>
           </motion.div>
 
@@ -344,44 +335,7 @@ export default function AboutPageClient() {
               },
             }}
           >
-            {[
-              {
-                title: "Human Creativity",
-                description:
-                  "We believe in the power of human creativity, intuition, and the emotional intelligence that only people can provide.",
-                icon: <Lightbulb className="h-6 w-6" />,
-              },
-              {
-                title: "AI Augmentation",
-                description:
-                  "We leverage AI technologies to enhance human capabilities, automate repetitive tasks, and provide data-driven insights.",
-                icon: <Bot className="h-6 w-6" />,
-              },
-              {
-                title: "Innovation",
-                description:
-                  "We constantly explore new ideas, technologies, and methodologies to deliver cutting-edge solutions for our clients.",
-                icon: <Zap className="h-6 w-6" />,
-              },
-              {
-                title: "Collaboration",
-                description:
-                  "We believe in the power of partnership – between humans and AI, as well as with our clients and within our team.",
-                icon: <Brain className="h-6 w-6" />,
-              },
-              {
-                title: "Excellence",
-                description:
-                  "We strive for excellence in everything we do, from design to implementation to client service.",
-                icon: <Code className="h-6 w-6" />,
-              },
-              {
-                title: "Adaptability",
-                description:
-                  "We embrace change and continuously evolve our approach to stay at the forefront of design and technology.",
-                icon: <Zap className="h-6 w-6" />,
-              },
-            ].map((value, index) => (
+            {dictionary.about.values.map((value: any, index: number) => (
               <motion.div
                 key={value.title}
                 variants={{
@@ -403,7 +357,21 @@ export default function AboutPageClient() {
 
                 <div className="relative">
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-r from-rose/20 to-sapphire/20 text-rose transition-colors duration-300 group-hover:bg-gradient-to-r group-hover:from-rose group-hover:to-sapphire group-hover:text-ivory">
-                    {value.icon}
+                    {/* This is tricky since we can't dynamically import icons from string names. 
+                       Let's keep the existing icon list but render based on index */}
+                    {index === 0 ? (
+                      <Lightbulb className="h-6 w-6" />
+                    ) : index === 1 ? (
+                      <Bot className="h-6 w-6" />
+                    ) : index === 2 ? (
+                      <Zap className="h-6 w-6" />
+                    ) : index === 3 ? (
+                      <Brain className="h-6 w-6" />
+                    ) : index === 4 ? (
+                      <Code className="h-6 w-6" />
+                    ) : (
+                      <Zap className="h-6 w-6" />
+                    )}
                   </div>
                   <h3 className="mb-3 text-xl font-bold text-ivory group-hover:text-rose transition-colors duration-300">
                     {value.title}
@@ -416,27 +384,20 @@ export default function AboutPageClient() {
         </div>
       </SectionTransition>
 
-      {/* Our Approach Section */}
-      <SectionTransition>
-        <div ref={whyUsRef} className="container relative py-32 md:py-40">
+     {/* Our Approach Section */}
+     <section
+        className="relative py-32 md:py-40"
+        id="approach-section"
+      >
+        <div className="container relative z-10">
           <div className="absolute inset-0 z-0">
-            <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
-            <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
+            <div className="absolute right-1/4 top-1/4 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
+            <div className="absolute left-1/4 bottom-1/4 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
           </div>
 
-          <motion.div
-            className="mx-auto max-w-3xl text-center relative z-10 mb-24"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isWhyUsInView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              type: "spring",
-              stiffness: 80,
-              damping: 20,
-              mass: 0.5,
-            }}
-          >
-            <h2 className="text-5xl font-bold tracking-tight mb-8 md:text-6xl">
-              Our{" "}
+          <div className="mx-auto max-w-3xl text-center relative z-10 mb-24">
+            <h2 className="text-5xl font-bold tracking-tight mb-8 md:text-6xl flex flex-wrap items-center justify-center gap-x-4">
+              <span>{dictionary.about.ourApproachTitle1}</span>
               <GradientText
                 colors={[
                   "#3d5a80",
@@ -450,19 +411,25 @@ export default function AboutPageClient() {
                 showBorder={false}
                 className="inline-block"
               >
-                Approach
+                {dictionary.about.ourApproachTitle2}
               </GradientText>
             </h2>
-            <p className="text-xl text-ivory/70 mt-4">
-              Human-driven creativity enhanced by AI technologies
-            </p>
-          </motion.div>
+            <ScrollReveal
+              textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
+              baseOpacity={0.2}
+              enableBlur={true}
+              baseRotation={2}
+              blurStrength={3}
+            >
+              {dictionary.about.ourStorySubTitle}
+            </ScrollReveal>
+          </div>
 
-          <div className="mt-4 grid gap-12 md:grid-cols-2 md:items-center">
+          <div className="grid gap-16 md:grid-cols-2 md:items-center">
             <motion.div
-              className="relative"
+              className="order-2 space-y-6 md:order-1"
               initial={{ opacity: 0, x: -50 }}
-              animate={isWhyUsInView ? { opacity: 1, x: 0 } : {}}
+              animate={{ opacity: 1, x: 0 }}
               transition={{
                 type: "spring",
                 stiffness: 80,
@@ -471,20 +438,29 @@ export default function AboutPageClient() {
                 delay: 0.2,
               }}
             >
-              <div className="absolute -inset-4 rounded-2xl bg-gradient-to-r from-rose/20 via-sapphire/20 to-beige/20 opacity-70 blur-lg"></div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-ivory/10">
-                <Image
-                  src="/our-approach.png?height=600&width=800"
-                  alt="Human-AI collaboration"
-                  fill
-                  className="object-cover"
-                />
+              <div className="space-y-6">
+                {dictionary.about.values && dictionary.about.values.slice(0, 4).map((item: any, index: number) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="mt-1 flex-shrink-0">
+                      <CheckCircle2 className={`h-6 w-6 ${index % 3 === 0 ? 'text-rose' : index % 3 === 1 ? 'text-sapphire' : 'text-beige'}`} />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-ivory">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-ivory/70">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </motion.div>
+
             <motion.div
-              className="space-y-6"
+              className="order-1 md:order-2"
               initial={{ opacity: 0, x: 50 }}
-              animate={isWhyUsInView ? { opacity: 1, x: 0 } : {}}
+              animate={{ opacity: 1, x: 0 }}
               transition={{
                 type: "spring",
                 stiffness: 80,
@@ -493,53 +469,21 @@ export default function AboutPageClient() {
                 delay: 0.4,
               }}
             >
-              <div>
-                <h3 className="text-2xl font-bold text-ivory">
-                  The Human Element
-                </h3>
-                <p className="mt-3 text-lg text-ivory/80">
-                  Our creative process begins with human insights, emotional
-                  intelligence, and strategic thinking. We listen, empathize,
-                  and understand your unique challenges before crafting
-                  solutions.
-                </p>
+              <div className="relative">
+                <div className="absolute -inset-4 rounded-2xl bg-gradient-to-r from-rose/20 via-sapphire/20 to-beige/20 opacity-70 blur-lg"></div>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-ivory/10">
+                  <Image
+                    src="/ourapproach.png"
+                    alt="Our approach to digital solutions"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-ivory">
-                  AI Enhancement
-                </h3>
-                <p className="mt-3 text-lg text-ivory/80">
-                  We integrate AI technologies to augment our human
-                  capabilities, analyze data patterns, automate repetitive
-                  tasks, and unlock creative possibilities that wouldn't be
-                  possible otherwise.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-ivory">
-                  Balanced Harmony
-                </h3>
-                <p className="mt-3 text-lg text-ivory/80">
-                  The magic happens in the balance – where human creativity and
-                  AI capabilities enhance each other. This approach allows us to
-                  deliver solutions that are both innovative and authentic,
-                  efficient and emotive.
-                </p>
-              </div>
-              <Link
-                href="/services"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
-                <span className="relative z-10 flex items-center">
-                  EXPLORE OUR SERVICES
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </span>
-              </Link>
             </motion.div>
           </div>
         </div>
-      </SectionTransition>
+      </section>
 
       {/* CTA Section - Styled like home page */}
       <section ref={ctaRef} className="py-24 md:py-32">
@@ -551,7 +495,7 @@ export default function AboutPageClient() {
         >
           <div className="absolute inset-0 z-0 text-center">
             <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
-              Ready to create something{" "}
+              {dictionary.about.ctaTitle1}{" "}
               <GradientText
                 colors={[
                   "#3d5a80",
@@ -565,7 +509,7 @@ export default function AboutPageClient() {
                 showBorder={false}
                 className="inline-block"
               >
-                extraordinary
+                {dictionary.about.ctaTitle2}
               </GradientText>
               ?
             </h1>
@@ -584,8 +528,7 @@ export default function AboutPageClient() {
                 baseRotation={3}
                 blurStrength={4}
               >
-                Let's combine human creativity with AI innovation to build your
-                digital future.
+                {dictionary.about.ctaSubTitle}
               </ScrollReveal>
 
               <div
@@ -616,7 +559,7 @@ export default function AboutPageClient() {
                     >
                       <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                       <span className="relative z-10 flex items-center">
-                        GET STARTED
+                        {dictionary.about.ctaButton}
                         <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                       </span>
                     </Link>

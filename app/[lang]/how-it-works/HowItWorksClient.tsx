@@ -20,7 +20,7 @@ import ScrollReveal from "@/app/animations/scroll-reveal";
 import Orb from "@/components/orb";
 import { RedesignedProcessSection } from "@/components/redesigned-process-section";
 
-export default function HowItWorksClient() {
+export default function HowItWorksClient({ dictionary }: { dictionary: any }) {
   const heroRef = useRef(null);
   const approachRef = useRef(null);
   const ctaRef = useRef(null);
@@ -131,7 +131,7 @@ export default function HowItWorksClient() {
           >
             <motion.div variants={itemVariants}>
               <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem]">
-                How It{" "}
+                {dictionary["how-it-works"].title1}{" "}
                 <GradientText
                   colors={[
                     "#3d5a80",
@@ -145,15 +145,14 @@ export default function HowItWorksClient() {
                   showBorder={false}
                   className="font-bold text-6xl md:text-[9rem]"
                 >
-                  Works
+                  {dictionary["how-it-works"].title2}
                 </GradientText>
               </h1>
             </motion.div>
 
             <motion.div variants={itemVariants} className="mt-8">
               <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
-                A thoughtful journey from concept to completion, blending human
-                creativity with AI-enhanced precision.
+                {dictionary["how-it-works"].subTitle}
               </p>
             </motion.div>
           </motion.div>
@@ -192,7 +191,7 @@ export default function HowItWorksClient() {
 
           <div className="mx-auto max-w-3xl text-center relative z-10 mb-24">
             <h2 className="text-5xl font-bold tracking-tight mb-8 md:text-6xl">
-              Our{" "}
+              {dictionary["how-it-works"].ourApproachTitle1}{" "}
               <GradientText
                 colors={[
                   "#3d5a80",
@@ -206,7 +205,7 @@ export default function HowItWorksClient() {
                 showBorder={false}
                 className="inline-block"
               >
-                Approach
+                {dictionary["how-it-works"].ourApproachTitle2}
               </GradientText>
             </h2>
             <ScrollReveal
@@ -216,7 +215,7 @@ export default function HowItWorksClient() {
               baseRotation={2}
               blurStrength={3}
             >
-              What makes our process unique and effective
+              {dictionary["how-it-works"].ourApproachSubTitle}
             </ScrollReveal>
           </div>
 
@@ -224,7 +223,7 @@ export default function HowItWorksClient() {
             <motion.div
               className="order-2 space-y-6 md:order-1"
               initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
+              animate={isApproachInView ? { opacity: 1, x: 0 } : {}}
               transition={{
                 type: "spring",
                 stiffness: 80,
@@ -234,67 +233,21 @@ export default function HowItWorksClient() {
               }}
             >
               <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="mt-1 flex-shrink-0">
-                    <CheckCircle2 className="h-6 w-6 text-rose" />
+                {dictionary["how-it-works"].steps.map((step: any, index: number) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="mt-1 flex-shrink-0">
+                      <CheckCircle2 className={`h-6 w-6 ${index % 4 === 0 ? 'text-rose' : index % 4 === 1 ? 'text-sapphire' : index % 4 === 2 ? 'text-beige' : 'text-ivory'}`} />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-ivory">
+                        {step.title}
+                      </h3>
+                      <p className="mt-2 text-ivory/70">
+                        {step.description}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-ivory">
-                      Human-Centered
-                    </h3>
-                    <p className="mt-2 text-ivory/70">
-                      We prioritize human needs and experiences in every
-                      project. Our approach begins with empathy and
-                      understanding of your audience.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="mt-1 flex-shrink-0">
-                    <CheckCircle2 className="h-6 w-6 text-sapphire" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-ivory">
-                      AI-Enhanced
-                    </h3>
-                    <p className="mt-2 text-ivory/70">
-                      We leverage cutting-edge AI tools to enhance efficiency,
-                      accuracy, and innovation without replacing the human
-                      creative touch.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="mt-1 flex-shrink-0">
-                    <CheckCircle2 className="h-6 w-6 text-beige" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-ivory">
-                      Collaborative
-                    </h3>
-                    <p className="mt-2 text-ivory/70">
-                      We work closely with you throughout the process, ensuring
-                      your vision is reflected in every aspect of the final
-                      product.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="mt-1 flex-shrink-0">
-                    <CheckCircle2 className="h-6 w-6 text-rose" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-ivory">Iterative</h3>
-                    <p className="mt-2 text-ivory/70">
-                      We believe in constant refinement. Our process includes
-                      regular feedback loops and iterations to perfect the
-                      outcome.
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
             </motion.div>
 
@@ -325,7 +278,7 @@ export default function HowItWorksClient() {
           </div>
         </div>
       </section>
-      <RedesignedProcessSection />
+      <RedesignedProcessSection dictionary={dictionary} />
     </>
   );
 }

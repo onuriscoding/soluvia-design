@@ -44,7 +44,43 @@ interface Benefit {
   icon: LucideIcon;
 }
 
-export default function SeoOptimizationClient() {
+interface SeoOptimizationClientProps {
+  dictionary: {
+    services: {
+      seo: string;
+      "seo-description": string;
+    };
+    "seo-optimization": {
+      title1: string;
+      title2: string;
+      subTitle: string;
+      ourSolutions: string;
+      SolutionsSubTitle: string;
+      solutions: Array<{
+        title: string;
+        description: string;
+        list: Array<{ text: string }>;
+      }>;
+      benefitsTitle1: string;
+      benefitsTitle2: string;
+      benefitsTitle3: string;
+      benefitsSubTitle: string;
+      benefits: Array<{
+        title: string;
+        description: string;
+      }>;
+      ctaTitle1: string;
+      ctaTitle2: string;
+      ctaSubTitle: string;
+      ctaButton: string;
+    };
+    navigation: {
+      getStarted: string;
+    };
+  };
+}
+
+export default function SeoOptimizationClient({ dictionary }: SeoOptimizationClientProps) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -91,17 +127,54 @@ export default function SeoOptimizationClient() {
     };
   }, []);
 
-  const features = seoServices.subServices;
-  const benefits = seoServices.mainService.benefits.map((benefit, index) => {
-    const icons = [TrendingUp, Users, FileText, Settings, BarChart, MapPin];
+  // Map service data from dictionary
+  const features = dictionary["seo-optimization"].solutions.map((solution, index) => {
+    let Icon;
+    
+    // Set icon based on index
+    switch(index) {
+      case 0:
+        Icon = Search;
+        break;
+      case 1:
+        Icon = Link2;
+        break;
+      case 2:
+        Icon = Settings;
+        break;
+      case 3:
+        Icon = MapPin;
+        break;
+      default:
+        Icon = FileText;
+    }
+    
+    // Use images that likely exist in the project
+    const imagePaths = [
+      "/on-page-seo.png",
+      "/off-page-seo.png",
+      "/technical-seo.png",
+      "/local-seo.png"
+    ];
+    
     return {
-      title: benefit.split(':')[0] || benefit,
-      description: benefit.split(':')[1] || benefit,
-      icon: icons[index % icons.length]
+      title: solution.title,
+      description: solution.description,
+      icon: <Icon className="h-6 w-6" />,
+      features: solution.list.map(item => item.text),
+      image: imagePaths[index % imagePaths.length],
+      gradient: index % 2 === 0 ? "from-rose/20 to-sapphire/20" : "from-sapphire/20 to-beige/20"
     };
   });
 
-  const processSteps = seoServices.processSteps;
+  const benefits = dictionary["seo-optimization"].benefits.map((benefit, index) => {
+    const icons = [TrendingUp, Users, FileText, Settings, BarChart, MapPin];
+    return {
+      title: benefit.title,
+      description: benefit.description,
+      icon: icons[index % icons.length]
+    };
+  });
 
   return (
     <main className="flex min-h-screen flex-col">
@@ -149,7 +222,7 @@ export default function SeoOptimizationClient() {
           >
             <motion.div variants={itemVariants}>
               <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem]">
-                SEO{" "}
+                {dictionary["seo-optimization"].title1}{" "}
                 <GradientText
                   colors={[
                     "#3d5a80",
@@ -163,14 +236,14 @@ export default function SeoOptimizationClient() {
                   showBorder={false}
                   className="inline-block"
                 >
-                  Optimization
+                  {dictionary["seo-optimization"].title2}
                 </GradientText>
               </h1>
             </motion.div>
 
             <motion.div variants={itemVariants} className="mt-8">
               <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
-                {seoServices.mainService.description}
+                {dictionary["seo-optimization"].subTitle}
               </p>
             </motion.div>
           </motion.div>
@@ -218,7 +291,7 @@ export default function SeoOptimizationClient() {
             }}
           >
             <h2 className="text-5xl font-bold tracking-tight text-ivory md:text-6xl mb-6">
-              Our{" "}
+              {dictionary["seo-optimization"].ourSolutions}{" "}
               <GradientText
                 colors={[
                   "#3d5a80",
@@ -242,7 +315,7 @@ export default function SeoOptimizationClient() {
               baseRotation={3}
               blurStrength={4}
             >
-              Strategic SEO solutions designed to boost your online visibility
+              {dictionary["seo-optimization"].SolutionsSubTitle}
             </ScrollReveal>
           </motion.div>
 
@@ -259,40 +332,30 @@ export default function SeoOptimizationClient() {
               },
             }}
           >
-            {features.map((feature, index) => {
-              const mappedFeature = {
-                title: feature.title,
-                description: feature.description,
-                icon: <FileText className="h-6 w-6" />, // Default icon
-                features: feature.features,
-                image: feature.image,
-                gradient: index % 2 === 0 ? "from-rose/20 to-sapphire/20" : "from-sapphire/20 to-beige/20"
-              };
-              return (
-                <motion.div
-                  key={index}
-                  className="mb-32 last:mb-0"
-                  variants={{
-                    hidden: { opacity: 0, y: 50 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: {
-                        type: "spring",
-                        stiffness: 100,
-                        damping: 20,
-                        mass: 0.5,
-                      },
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                className="mb-32 last:mb-0"
+                variants={{
+                  hidden: { opacity: 0, y: 50 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      type: "spring",
+                      stiffness: 100,
+                      damping: 20,
+                      mass: 0.5,
                     },
-                  }}
-                >
-                  <ServiceFeatureSection
-                    feature={mappedFeature}
-                    reversed={index % 2 !== 0}
-                  />
-                </motion.div>
-              );
-            })}
+                  },
+                }}
+              >
+                <ServiceFeatureSection
+                  feature={feature}
+                  reversed={index % 2 !== 0}
+                />
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -313,7 +376,7 @@ export default function SeoOptimizationClient() {
             }}
           >
             <h2 className="text-5xl font-bold tracking-tight text-ivory md:text-6xl mb-6">
-              Our{" "}
+              {dictionary["seo-optimization"].benefitsTitle1}{" "}
               <GradientText
                 colors={[
                   "#3d5a80",
@@ -327,9 +390,9 @@ export default function SeoOptimizationClient() {
                 showBorder={false}
                 className="inline-block"
               >
-                Benefits
+                {dictionary["seo-optimization"].benefitsTitle2}
               </GradientText>{" "}
-              to your business
+              {dictionary["seo-optimization"].benefitsTitle3}
             </h2>
             <ScrollReveal
               textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
@@ -338,7 +401,7 @@ export default function SeoOptimizationClient() {
               baseRotation={3}
               blurStrength={4}
             >
-              Maximize your online presence with our proven SEO strategies
+              {dictionary["seo-optimization"].benefitsSubTitle}
             </ScrollReveal>
           </motion.div>
 
@@ -381,7 +444,7 @@ export default function SeoOptimizationClient() {
           <div className="relative z-10 md:mt-0">
             <motion.div className="mx-auto max-w-6xl text-center">
               <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
-                Ready to boost your{" "}
+                {dictionary["seo-optimization"].ctaTitle1}{" "}
                 <GradientText
                   colors={[
                     "#3d5a80",
@@ -395,7 +458,7 @@ export default function SeoOptimizationClient() {
                   showBorder={false}
                   className="inline-block"
                 >
-                  business
+                  {dictionary["seo-optimization"].ctaTitle2}
                 </GradientText>
                 ?
               </h1>
@@ -406,8 +469,7 @@ export default function SeoOptimizationClient() {
                 baseRotation={3}
                 blurStrength={4}
               >
-                Let's optimize your website for better visibility and drive more
-                organic traffic to your business.
+                {dictionary["seo-optimization"].ctaSubTitle}
               </ScrollReveal>
               <div
                 style={{
@@ -432,7 +494,7 @@ export default function SeoOptimizationClient() {
                     >
                       <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                       <span className="relative z-10 flex items-center">
-                        GET STARTED
+                        {dictionary.navigation.getStarted}
                         <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                       </span>
                     </Link>

@@ -1,29 +1,37 @@
 import type { Metadata } from "next"
 import ContactPageClient from "./ContactPageClient"
+import { getDictionary } from "../dictionaries"
 
-export const metadata: Metadata = {
-  title: "Contact Us",
-  description: "Get in touch with our team to discuss how we can help you achieve your digital goals.",
-  openGraph: {
-    title: "Contact Us | Soluvia Design",
-    description: "Get in touch with our team to discuss how we can help you achieve your digital goals.",
-    url: "https://soluviadesign.com/contact",
-    images: [
-      {
-        url: "/contact-og.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Contact Soluvia Design",
-      },
-    ],
-  },
-  twitter: {
-    title: "Contact Us | Soluvia Design",
-    description: "Get in touch with our team to discuss how we can help you achieve your digital goals.",
-  },
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
+  const dict = await getDictionary(params.lang);
+  
+  return {
+    title: `${dict.contact.contactTitle1}${dict.contact.contactTitle2} | Soluvia`,
+    description: dict.contact.contactSubTitle,
+    openGraph: {
+      title: `${dict.contact.contactTitle1} ${dict.contact.contactTitle2} | Soluvia`,
+      description: dict.contact.contactSubTitle,
+      url: "https://soluviadesign.com/contact",
+      images: [
+        {
+          url: "/contact-og.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${dict.contact.contactTitle1} ${dict.contact.contactTitle2}`,
+        },
+      ],
+    },
+    twitter: {
+      title: `${dict.contact.contactTitle1} ${dict.contact.contactTitle2} | Soluvia`,
+      description: dict.contact.contactSubTitle,
+    },
+  };
 }
 
-export default function ContactPage() {
-  return <ContactPageClient />
+export default async function ContactPage({ params }: { params: { lang: string } }) {
+  // Get the dictionary based on the current language
+  const dict = await getDictionary(params.lang);
+  
+  return <ContactPageClient dictionary={dict} />;
 }
 

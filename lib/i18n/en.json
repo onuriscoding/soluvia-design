@@ -226,117 +226,338 @@
     "custom":{
       "title": "Need a custom solution ?",
       "subtitle": "Contact us to get a custom solution for your business within 24 hours"
-    },
-    "web-design-development":{
-      "development": "Development",
-      "subTitle": "We create stunning, responsive websites that captivate your audience and reflect your brand's unique identity",
-      "OurSolutions": "Our Solutions",
-      "SolutionsSubTitle": "Comprehensive web solutions designed to elevate your online presence",
-      "solutions": [
-        {
-          "title": "Custom Website Design",
-          "description": "Tailored designs that align with your brand's identity and user experience",
-          "features": [
-            {
-            "title": "Responsive Design",
-            "description": "Mobile-friendly designs that ensure accessibility and user engagement across all devices",
+    }
+  },
+  "web-design-development":{
+    "development": "Development",
+    "subTitle": "We create stunning, responsive websites that captivate your audience and reflect your brand's unique identity",
+    "ourSolutions": "Our",
+    "SolutionsSubTitle": "Comprehensive web solutions designed to elevate your online presence",
+    "solutions": [
+      {
+        "title": "Custom Website Design",
+        "description": "Tailored designs that align with your brand's identity and user experience",
+        "features": [
+          {
+          "title": "Responsive Design",
+          "description": "Mobile-friendly designs that ensure accessibility and user engagement across all devices",
+          "list": [
+            {"text": "Responsive design for all devices"},
+            {"text": "Custom UI/UX design"},
+            {"text": "Brand-aligned visual elements"},
+            {"text": "Intuitive navigation"},
+            {"text": "Optimized user journeys"},
+            {"text": "Accessibility compliance"}
+          ]
+          },
+          {
+            "title": "Web Development",
+            "description": "Our development team builds robust, scalable websites and web applications that deliver exceptional performance and functionality using cutting-edge technologies.",
             "list": [
-              {"text": "Responsive design for all devices"},
-              {"text": "Custom UI/UX design"},
-              {"text": "Brand-aligned visual elements"},
-              {"text": "Intuitive navigation"},
-              {"text": "Optimized user journeys"},
-              {"text": "Accessibility compliance"}
+              {"text": "Front-end development (React, Next.js)"},
+              {"text": "Back-end development (Node.js, Python)"},
+              {"text": "Database design and implementation"},
+              {"text": "API development and integration"},
+              {"text": "E-commerce functionality"},
+              {"text": "Content management systems"}
             ]
-            },
-            {
-              "title": "Web Development",
-              "description": "Our development team builds robust, scalable websites and web applications that deliver exceptional performance and functionality using cutting-edge technologies.",
-              "list": [
-                {"text": "Front-end development (React, Next.js)"},
-                {"text": "Back-end development (Node.js, Python)"},
-                {"text": "Database design and implementation"},
-                {"text": "API development and integration"},
-                {"text": "E-commerce functionality"},
-                {"text": "Content management systems"}
-              ]
-            },
-            {
-              "title": "Mobile-First Approach",
-              "description": "We prioritize mobile experiences, ensuring your website performs flawlessly across all devices while maintaining visual appeal and functionality.",
-              "list": [
-                {"text": "Mobile-optimized layouts"},
-                {"text": "Touch-friendly interfaces"},
-                {"text": "Fast loading on mobile networks"},
-                {"text": "Progressive Web App capabilities"},
-                {"text": "Responsive images and media"},
-                {"text": "Mobile performance optimization"}
-              ]
-            }
-          ]
-        }
-      ],
-      "benefitsTitle1": "Our",
-      "benefitsTitle2": "Benefits",
-      "benefitsTitle3": "to your business",
-      "benefitsSubTitle": "Experience the advantages of our professional web design and development services",
-      "benefits": [
-        {"title": "Enhanced User Experience", "description": "Create intuitive, engaging interfaces that keep visitors on your site longer and guide them toward conversion."},
-        {"title": "Performance Optimization", "description": "Fast-loading, optimized websites that provide a seamless experience and rank better in search results."},
-        {"title": "Scalable Solutions", "description": "Future-proof websites that can grow with your business and adapt to changing needs and technologies."},
-        {"title": "SEO-Friendly Structure", "description": "Built-in search engine optimization that helps your website rank higher and attract more organic traffic."},
-        {"title": "Conversion-Focused Design", "description": "Strategic layouts and elements designed to guide visitors toward taking desired actions on your site."},
-        {"title": "Enhanced Security", "description": "Robust security measures to protect your website and user data from threats and vulnerabilities."}
-      ],
-      "ctaTitle1": "Ready for a website that",
-      "ctaTitle2": "stands out",
-      "ctaSubTitle": "Let's create something extraordinary together. Transform your online presence with a stunning, high-performance website",
-      "ctaButton": "GET STARTED"
+          },
+          {
+            "title": "Mobile-First Approach",
+            "description": "We prioritize mobile experiences, ensuring your website performs flawlessly across all devices while maintaining visual appeal and functionality.",
+            "list": [
+              {"text": "Mobile-optimized layouts"},
+              {"text": "Touch-friendly interfaces"},
+              {"text": "Fast loading on mobile networks"},
+              {"text": "Progressive Web App capabilities"},
+              {"text": "Responsive images and media"},
+              {"text": "Mobile performance optimization"}
+            ]
+          }
+        ]
+      }
+    ],
+    "benefitsTitle1": "Our",
+    "benefitsTitle2": "Benefits",
+    "benefitsTitle3": "to your business",
+    "benefitsSubTitle": "Experience the advantages of our professional web design and development services",
+    "benefits": [
+      {"title": "Enhanced User Experience", "description": "Create intuitive, engaging interfaces that keep visitors on your site longer and guide them toward conversion."},
+      {"title": "Performance Optimization", "description": "Fast-loading, optimized websites that provide a seamless experience and rank better in search results."},
+      {"title": "Scalable Solutions", "description": "Future-proof websites that can grow with your business and adapt to changing needs and technologies."},
+      {"title": "SEO-Friendly Structure", "description": "Built-in search engine optimization that helps your website rank higher and attract more organic traffic."},
+      {"title": "Conversion-Focused Design", "description": "Strategic layouts and elements designed to guide visitors toward taking desired actions on your site."},
+      {"title": "Enhanced Security", "description": "Robust security measures to protect your website and user data from threats and vulnerabilities."}
+    ],
+    "ctaTitle1": "Ready for a website that",
+    "ctaTitle2": "stands out",
+    "ctaSubTitle": "Let's create something extraordinary together. Transform your online presence with a stunning, high-performance website",
+    "ctaButton": "GET STARTED"
+  },
+  "automation": {
+    "ai": "AI",
+    "automation": "Automation",
+    "subTitle": "We automate processes and enhance customer experiences with cutting-edge AI solutions",
+    "ourSolutions": "Our",
+    "SolutionsSubTitle":"Innovative AI solutions designed to transform your business operations",
+    "solutions": [
+      {
+        "title": "AI-Powered Chatbots",
+        "description": "We develop intelligent chatbots that can handle customer inquiries, provide support, and guide users through your website or application.",
+        "list": [
+          {"text": "Natural language processing"},
+          {"text": "24/7 customer support"},
+          {"text": "Personalized user interactions"},
+          {"text": "Multi-channel deployment"},
+          {"text": "Integration with existing systems"},
+          {"text": "Continuous learning and improvement"}
+        ]
+      },
+      {
+        "title": "Business Process Automation",
+        "description": "We implement AI solutions that automate repetitive tasks and workflows, freeing up your team to focus on more strategic activities.",
+        "list": [
+          {"text": "Workflow automation"},
+          {"text": "Document processing"},
+          {"text": "Data entry and extraction"},
+          {"text": "Email automation"},
+          {"text": "Task scheduling and management"},
+          {"text": "Custom automation solutions"}
+        ]
+      },
+      {
+        "title": "AI-Driven Analytics",
+        "description": "We harness the power of AI to analyze your data, uncover insights, and provide actionable recommendations for your business.",
+        "list": [
+          {"text": "Predictive analytics"},
+          {"text": "Customer behavior analysis"},
+          {"text": "Sales forecasting"},
+          {"text": "Performance monitoring"},
+          {"text": "Trend identification"},
+          {"text": "Automated reporting"}
+        ]
+      },
+      {
+        "title": "Intelligent Content Generation",
+        "description": "We leverage AI to create high-quality, relevant content for your website, marketing campaigns, and social media channels.",
+        "list": [
+          {"text": "Blog post generation"},
+          {"text": "Product descriptions"},
+          {"text": "Email content"},
+          {"text": "Social media posts"},
+          {"text": "SEO-optimized content"},
+          {"text": "Multilingual content creation"}
+        ]
+      }
+    ],
+    "benefitsTitle1": "Our",
+    "benefitsTitle2": "Benefits",
+    "benefitsTitle3": "to your business",
+    "benefitsSubTitle": "Discover how AI automation can transform your business operations",
+    "benefits": [
+      {"title": "Increased Efficiency", "description": "Automate repetitive tasks and streamline workflows to save time and resources."},
+      {"title": "Enhanced Accuracy", "description": "Minimize human error and ensure consistent results with AI-powered automation."},
+      {"title": "24/7 Operation", "description": "Keep your business running around the clock with automated processes."},
+      {"title": "Scalable Solutions", "description": "Easily scale your operations without proportionally increasing costs."},
+      {"title": "Data-Driven Insights", "description": "Gain valuable insights from automated data collection and analysis."},
+      {"title": "Cost Reduction", "description": "Reduce operational costs by automating manual and time-consuming tasks."}
+    ],
+    "ctaTitle1": "Ready to automate your",
+    "ctaTitle2": "business",
+    "ctaSubTitle": "Transform your operations with intelligent AI solutions that drive efficiency and growth",
+    "ctaButton": "GET STARTED"
+  },
+  "seo-optimization":{
+    "title1": "SEO",
+    "title2": "Optimization",
+    "subTitle": "Boost your online visibility and drive organic traffic with our comprehensive SEO strategies",
+    "ourSolutions": "Our",
+    "SolutionsSubTitle":"Strategic SEO solutions designed to boost your online visibility",
+    "solutions": [
+      {
+        "title": "On-Page SEO",
+        "description": "We optimize your website's content, structure, and HTML elements to improve visibility and rankings in search engine results.",
+        "list": [
+          {"text": "Keyword research and optimization"},
+          {"text": "Meta title and description optimization"},
+          {"text": "Header tag optimization"},
+          {"text": "Content optimization"},
+          {"text": "Image optimization"},
+          {"text": "URL structure improvement"}
+        ]
+      },
+      {
+        "title": "Off-Page SEO",
+        "description": "We build your website's authority through high-quality backlinks, social signals, and other external factors that influence search rankings.",
+        "list": [
+          {"text": "Link building strategies"},
+          {"text": "Guest posting opportunities"},
+          {"text": "Social media integration"},
+          {"text": "Brand mentions monitoring"},
+          {"text": "Competitor backlink analysis"},
+          {"text": "Authority building"}
+        ]
+      },
+      {
+        "title": "Technical SEO",
+        "description": "We ensure your website's technical foundation is solid, allowing search engines to crawl, index, and rank your site effectively.",
+        "list": [
+          {"text": "Site speed optimization"},
+          {"text": "Mobile-friendliness improvements"},
+          {"text": "Schema markup implementation"},
+          {"text": "XML sitemap creation"},
+          {"text": "Robots.txt optimization"},
+          {"text": "Fixing crawl errors and broken links"}
+        ]
+      },
+      {
+        "title": "Local SEO",
+        "description": "We optimize your online presence to attract more business from relevant local searches, helping you connect with nearby customers.",
+        "list": [
+          {"text": "Google Business Profile optimization"},
+          {"text": "Local keyword targeting"},
+          {"text": "Citation building and cleanup"},
+          {"text": "Review management"},
+          {"text": "Local link building"},
+          {"text": "Local content strategy"}
+        ]
+      }
+    ],
+    "benefitsTitle1": "Our",
+    "benefitsTitle2": "Benefits",
+    "benefitsTitle3": "to your business",
+    "benefitsSubTitle": "Maximize your online presence with our proven SEO strategies",
+    "benefits": [
+      {"title": "Higher search engine rankings", "description": "Higher search engine rankings for relevant keywords."},
+      {"title": "Increased organic traffic", "description": "Increased organic traffic to your website through improved search engine visibility."},
+      {"title": "Better user experience", "description": "Better user experience and website usability for your visitors."},
+      {"title": "Improved conversion rates", "description": "Improved conversion rates and ROI through optimized content and user engagement."},
+      {"title": "Long-term sustainable results", "description": "Long-term sustainable results through consistent, ethical SEO practices."},
+      {"title": "Competitive advantage in your industry", "description": "Competitive advantage in your industry through improved search engine visibility."}
+    ],
+    "ctaTitle1": "Ready to boost your",
+    "ctaTitle2": "business",
+    "ctaSubTitle": "Let's optimize your website for better visibility and drive more organic traffic to your business",
+    "ctaButton": "GET STARTED"
+  },
+  "how-it-works":{
+    "title1": "How It",
+    "title2": "Works",
+    "subTitle": "A thoughtful journey from concept to completion, blending human creativity with AI-enhanced precision",
+    "ourApproachTitle1": "Our",
+    "ourApproachTitle2": "Approach",
+    "ourApproachSubTitle": "A balanced approach combining human creativity with AI-enhanced precision",
+    "steps": [
+      {
+        "title": "Human-Centered",
+        "description": "We prioritize human needs and experiences in every project. Our approach begins with empathy and understanding of your audience."
+      },
+      {
+        "title": "AI-Enhanced",
+        "description": "We leverage cutting-edge AI tools to enhance efficiency, accuracy, and innovation without replacing the human creative touch."
+      },
+      {
+        "title": "Collaborative",
+        "description": "We work closely with you throughout the process, ensuring your vision is reflected in every aspect of the final product."
+      },
+      {
+        "title": "Iterative",
+        "description": "We believe in constant refinement. Our process includes regular feedback loops and iterations to ensure the final result meets your expectations."
+      }
+    ]
+  },
+  "about":{
+    "title1": "About ",
+    "subTitle": "We blend human creativity with AI technology to create digital experiences that matter.",
+    "ourStoryTitle1": "Our",
+    "ourStoryTitle2": "Story",
+    "ourStorySubTitle": "Where human creativity meets AI innovation to create digital experiences that matter",
+    "ourStoryp1": "Soluvia was founded with a vision to bridge the gap between human creativity and artificial intelligence. We believe that the future of design lies in this harmony – where human intuition and AI capabilities amplify each other.",
+    "ourStoryp2": "Our approach combines the irreplaceable human touch – empathy, creativity, and strategic thinking – with the efficiency and analytical power of AI technologies. This unique blend allows us to deliver solutions that are both innovative and authentic.",
+    "ourStoryp3": "Today, we're proud to work with clients across various industries, from startups to established enterprises, helping them achieve their goals through our human-driven, AI-enhanced creative process.",
+    "ourCoreValuesTitle1": "Our",
+    "ourCoreValuesTitle2": "Core",
+    "ourCoreValuesTitle3": "Values",
+    "ourCoreValuesSubTitle": "Our values are at the heart of everything we do",
+    "values": [
+      {
+        "title": "Human Creativity",
+        "description": "We believe in the power of human creativity, intuition, and the emotional intelligence that only people can provide."
+      },
+      {
+        "title": "AI Augmentation",
+        "description": "We leverage AI technologies to enhance human capabilities, automate repetitive tasks, and provide data-driven insights."
+      },
+      {
+        "title": "Innovation",
+        "description": "We constantly explore new ideas, technologies, and methodologies to deliver cutting-edge solutions for our clients."
+      },
+      {
+        "title": "Collaboration",
+        "description": "We believe in the power of partnership – between humans and AI, as well as with our clients and within our team."
+      },
+      {
+        "title": "Excellence",
+        "description": "We strive for excellence in everything we do, from design to implementation to client service."
+      },
+      {
+        "title": "Adaptability",
+        "description": "We embrace change and continuously evolve our approach to stay at the forefront of design and technology."
+      }
+      
+    ],
+    "ctaTitle1": "Ready to create something",
+    "ctaTitle2": "extraordinary",
+    "ctaSubTitle": "Let's combine human creativity with AI innovation to build your digital future",
+    "ctaButton": "GET STARTED"
+  },
+  "contact":{
+    "title1": "Get in",
+    "title2": "Touch",
+    "subTitle": "We'd love to hear from you. Reach out to discuss your project, ask questions, or explore how we can help",
+    "ctaButton": "Touch to Connect",
+    "contactTitle1": "Contact",
+    "contactTitle2": "Us",
+    "contactSubTitle": "Have a project in mind? We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible",
+    "contactForm":{
+      "name": "Name",
+      "nameText": "Your name",
+      "email": "Email",
+      "emailText": "Your email",
+      "phone": "Phone (optional)",
+      "phoneText": "Your phone number",
+      "servicesInterestedIn": "Services Interested In",
+      "servicesOption1": "Web Design & Development",
+      "servicesOption2": "AI Automation",
+      "servicesOption3": "SEO Optimization",
+      "budgetRange": "Budget Range",
+      "budgetOption1": "Under 1,000 €",
+      "budgetOption2": "1,000 - 5,000 €",
+      "budgetOption3": "5,000 - 10,000 €",
+      "budgetOption4": "Over 10,000 €",
+      "projectTimeframe": "Project Timeframe",
+      "projectTimeframeOption1": "ASAP",
+      "projectTimeframeOption2": "1-3 months",
+      "projectTimeframeOption3": "3+ months",
+      "message": "Message",
+      "messageText": "Tell us about your project",
+      "sendMessage": "Send Message",
+      "sending": "Sending...",
+      "anotherMessage": "Send another message",
+      "errorTitle": "Failed to send message"
     },
-    "automation": {
-      "ai": "AI",
-      "subTitle": "We automate processes and enhance customer experiences with cutting-edge AI solutions",
-      "ourSolutions": "Our",
-      "SolutionsSubTitle":"Innovative AI solutions designed to transform your business operations",
-      "solutions": [
-        {
-          "title": "AI-Powered Chatbots",
-          "description": "We develop intelligent chatbots that can handle customer inquiries, provide support, and guide users through your website or application.",
-          "list": [
-            {"text": "Natural language processing"},
-            {"text": "24/7 customer support"},
-            {"text": "Personalized user interactions"},
-            {"text": "Multi-channel deployment"},
-            {"text": "Integration with existing systems"},
-            {"text": "Continuous learning and improvement"}
-          ]
-        },
-        {
-          "title": "Business Process Automation",
-          "description": "We implement AI solutions that automate repetitive tasks and workflows, freeing up your team to focus on more strategic activities.",
-          "list": [
-            {"text": "Workflow automation"},
-            {"text": "Document processing"},
-            {"text": "Data entry and extraction"},
-            {"text": "Email automation"},
-            {"text": "Task scheduling and management"},
-            {"text": "Custom automation solutions"}
-          ]
-        },
-        {
-          "title": "AI-Driven Analytics",
-          "description": "We harness the power of AI to analyze your data, uncover insights, and provide actionable recommendations for your business.",
-          "list": [
-            {"text": "Predictive analytics"},
-            {"text": "Customer behavior analysis"},
-            {"text": "Sales forecasting"},
-            {"text": "Performance monitoring"},
-            {"text": "Trend identification"},
-            {"text": "Automated reporting"}
-          ]
-        }
-      ]
-    },
+    "contactInformation": "Contact Information",
+    "contactDescription": "We're here to help with any questions you may have about our services. Reach out to us through any of the following channels.",
+    "contactEmail": "Email us at",
+    "contactPhone": "Call us at",
+    "businessHours": "Business Hours",
+    "monday": "Monday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "closed": "Closed",
+    "connectwithUs": "Connect With Us"
+  },
     "form":{
       "name": "What's your name ?",
       "nameText": "Enter your full name",
@@ -359,8 +580,7 @@
       "anotherMessage": "Send another message",
       "errorTitle": "Failed to send message"
 
-    }
-  },
+    },
   "faq": {
     "sectionTitle": "Frequently Asked ",
     "sectionSubtitle": "Find answers to common questions about our services and process",

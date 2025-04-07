@@ -3,6 +3,7 @@ import SeoOptimizationClient from "./SeoOptimizationClient";
 import { ServiceStructuredData, FAQStructuredData } from "@/components/structured-data";
 import { seoServices } from "@/lib/seo-services";
 import { BreadcrumbsNav } from "@/components/breadcrumbs-nav";
+import { getDictionary } from "../../dictionaries";
 
 // Enhanced metadata with multi-language support, better structured data, and SEO optimizations
 export async function generateMetadata({ params: paramsPromise }: { params: Promise<{ lang: string }> | { lang: string } }): Promise<Metadata> {
@@ -62,9 +63,10 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
   };
 }
 
-export default function Page({ params }: { params: { lang: string } }) {
+export default async function Page({ params }: { params: { lang: string } }) {
   const lang = params.lang || "en";
   const homeLabel = lang === "fr" ? "Accueil" : "Home";
+  const dictionary = await getDictionary(lang);
   
   return (
     <>
@@ -73,7 +75,7 @@ export default function Page({ params }: { params: { lang: string } }) {
       <div className="container mx-auto px-4 pt-8">
         <BreadcrumbsNav homeLabel={homeLabel} className="mb-6" />
       </div>
-      <SeoOptimizationClient />
+      <SeoOptimizationClient dictionary={dictionary} />
     </>
   );
 }

@@ -450,7 +450,7 @@ export function RedesignedProcessSection({ dictionary }: { dictionary: any }) {
                         </h4>
                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           {dictionary?.process?.steps?.[index]
-                            ?.activities?.[0] &&
+                            ?.activities?.[0] ?
                             Object.values(
                               dictionary.process.steps[index].activities[0]
                             ).map((activity, i) => (
@@ -468,8 +468,7 @@ export function RedesignedProcessSection({ dictionary }: { dictionary: any }) {
                                 />
                                 {activity as string}
                               </motion.li>
-                            ))}
-                          {!dictionary?.process?.steps?.[index]?.activities &&
+                            )) :
                             step.details.map((detail, i) => (
                               <motion.li
                                 key={i}

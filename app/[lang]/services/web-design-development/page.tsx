@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { ServiceStructuredData } from "@/components/structured-data";
 import WebDesignDevelopmentClient from "./WebDesignDevelopmentClient";
+import { getDictionary } from "../../dictionaries";
 
 // Enhanced metadata with multi-language support, better structured data, and SEO optimizations
 export async function generateMetadata({ params: paramsPromise }: { params: Promise<{ lang: string }> | { lang: string } }): Promise<Metadata> {
@@ -56,11 +57,15 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
 }
 
 // Split component for better performance and proper separation of server/client code
-export default function Page({ params }: { params: { lang: string } }) {
+export default async function Page({ params }: { params: { lang: string } }) {
+  // Get the language parameter and load the appropriate dictionary
+  const lang = params.lang || "en";
+  const dictionary = await getDictionary(lang);
+  
   return (
     <>
       <ServiceStructuredData service="Web Design & Development" />
-      <WebDesignDevelopmentClient />
+      <WebDesignDevelopmentClient dictionary={dictionary} />
     </>
   );
 }

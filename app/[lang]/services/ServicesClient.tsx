@@ -191,7 +191,7 @@ export default function ServicesClient({ dictionary }: { dictionary: any }) {
                         <span className="whitespace-nowrap">
                           {currentLang === "fr"
                             ? service.id === "web-design"
-                              ? "Web Design"
+                              ? "Web Design & Développement"
                               : service.id === "seo-optimization"
                               ? "Optimisation SEO"
                               : "Automatisation IA"

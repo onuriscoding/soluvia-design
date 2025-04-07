@@ -21,7 +21,7 @@ import { Label } from "@/components/ui/label";
 import { RedesignedContactSection } from "@/components/redesigned-contact-section";
 import GradientText from "@/app/animations/gradient-text";
 
-export default function ContactPageClient() {
+export default function ContactPageClient({ dictionary }: { dictionary: any }) {
   const heroRef = useRef(null);
   const contactRef = useRef(null);
   const isContactInView = useInView(contactRef, { once: true, amount: 0.2 });
@@ -93,7 +93,7 @@ export default function ContactPageClient() {
             variants={containerVariants}
           >
             <motion.div variants={itemVariants}>
-              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem]">
+              <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem] flex flex-wrap items-center justify-center gap-x-8">
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -102,9 +102,8 @@ export default function ContactPageClient() {
                     delay: 0.2,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className="inline-block"
                 >
-                  Get in{" "}
+                  {dictionary.contact.title1}
                 </motion.span>
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -130,7 +129,7 @@ export default function ContactPageClient() {
                     showBorder={false}
                     className="inline-block"
                   >
-                    Touch
+                    {dictionary.contact.title2}
                   </GradientText>
                 </motion.div>
               </h1>
@@ -138,8 +137,7 @@ export default function ContactPageClient() {
 
             <motion.div variants={itemVariants} className="mt-8">
               <p className="leading-[1.5] tracking-tight font-medium text-xl md:text-3xl text-ivory/70">
-                We'd love to hear from you. Reach out to discuss your project,
-                ask questions, or explore how we can help.
+                {dictionary.contact.subTitle}
               </p>
             </motion.div>
           </motion.div>
@@ -197,7 +195,7 @@ export default function ContactPageClient() {
                 repeatType: "reverse",
               }}
             >
-              Touch to Connect
+              {dictionary.contact.ctaButton}
             </motion.p>
           </div>
         </motion.div>
@@ -220,7 +218,7 @@ export default function ContactPageClient() {
 
       {/* Contact Section */}
       <div ref={contactRef} id="contact-section">
-        <RedesignedContactSection />
+        <RedesignedContactSection dictionary={dictionary} />
       </div>
     </>
   );

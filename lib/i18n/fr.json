@@ -173,7 +173,7 @@
     "sectionTitle": "Tarification",
     "sectionSimple": "Simple",
     "sectionAdjective": "Transparente",
-    "sectionSubtitle": "Choisissez l’offre qui convient le mieux à votre entreprise",
+    "sectionSubtitle": "Choisissez l'offre qui convient le mieux à votre entreprise",
     "from": "à partir de",
     "monthly": "+ Maintenance mensuelle personnalisée",
     "getaQuote": "Obtenir un devis",
@@ -188,7 +188,7 @@
           {"included": true, "text": "Configuration SEO de base"},
           {"included": false, "text": "Optimisation SEO avancée"},
           {"included": false, "text": "Fonctionnalités e-commerce" },
-          {"included": false, "text": "Outils d’automatisation IA" },
+          {"included": false, "text": "Outils d'automatisation IA" },
           {"included": false, "text": "Fonctionnalités personnalisées"}
         ],
         "popular": false
@@ -203,7 +203,7 @@
           {"included": true, "text": "Configuration SEO de base"},
           {"included": true, "text": "Optimisation SEO avancée"},
           {"included": true, "text": "Fonctionnalités e-commerce" },
-          {"included": false, "text": "Outils d’automatisation IA" },
+          {"included": false, "text": "Outils d'automatisation IA" },
           {"included": false, "text": "Fonctionnalités personnalisées"}
         ],
         "popular": true,
@@ -220,21 +220,21 @@
           {"included": true, "text": "Configuration SEO de base"},
           {"included": true, "text": "Optimisation SEO avancée"},
           {"included": true, "text": "Fonctionnalités e-commerce" },
-          {"included": true, "text": "Outils d’automatisation IA" },
+          {"included": true, "text": "Outils d'automatisation IA" },
           {"included": true, "text": "Fonctionnalités personnalisées"}
         ],
         "popular": false
       }
     ],
     "custom":{
-      "title": "Besoin d’une solution sur mesure ?",
+      "title": "Besoin d'une solution sur mesure ?",
       "subtitle": "Contactez-nous pour obtenir une solution personnalisée pour votre entreprise sous 24 heures"
     }
   },
   "web-design-development":{
     "development": "Développement",
-    "subTitle": "Nous créons des sites web époustouflants et responsives qui captivent votre audience et reflètent l’identité unique de votre marque",
-    "OurSolutions": "Nos",
+    "subTitle": "Nous créons des sites web époustouflants et responsives qui captivent votre audience et reflètent l'identité unique de votre marque",
+    "ourSolutions": "Nos",
     "SolutionsSubTitle": "Solutions web complètes conçues pour améliorer votre présence en ligne",
       "solutions": [
         {
@@ -285,61 +285,287 @@
       "benefitsTitle3": "pour votre entreprise",
       "benefitsSubTitle": "Découvrez les bénéfices de nos services professionnels de design et de développement web",
       "benefits": [
-        {"title": "Expérience utilisateur améliorée", "description": "Nous créons des interfaces intuitives et engageantes qui retiennent l’attention des visiteurs et les guident vers la conversion."},
+        {"title": "Expérience utilisateur améliorée", "description": "Nous créons des interfaces intuitives et engageantes qui retiennent l'attention des visiteurs et les guident vers la conversion."},
         {"title": "Optimisation des performances", "description": "Nous créons des sites rapides et optimisés offrant une expérience fluide et un meilleur classement dans les résultats de recherche."},
-        {"title": "Solutions évolutives", "description": "Nous créons des sites web durables qui grandissent avec votre entreprise et s’adaptent aux évolutions technologiques et à vos besoins."},
-        {"title": "Structure optimisée pour le SEO", "description": "Nous réalisons une optimisation pour les moteurs de recherche afin d’améliorer votre positionnement et attirer plus de trafic organique."},
-        {"title": "Design orienté conversion", "description": "Nous créons des mises en page stratégiques et des éléments conçus pour encourager les visiteurs à passer à l’action."},
+        {"title": "Solutions évolutives", "description": "Nous créons des sites web durables qui grandissent avec votre entreprise et s'adaptent aux évolutions technologiques et à vos besoins."},
+        {"title": "Structure optimisée pour le SEO", "description": "Nous réalisons une optimisation pour les moteurs de recherche afin d'améliorer votre positionnement et attirer plus de trafic organique."},
+        {"title": "Design orienté conversion", "description": "Nous créons des mises en page stratégiques et des éléments conçus pour encourager les visiteurs à passer à l'action."},
         {"title": "Sécurité renforcée", "description": "Nous mettons en place des mesures de sécurité robustes pour protéger votre site web et les données de vos utilisateurs contre les menaces."}
       ],
       "ctaTitle1": "Prêt pour un site web qui",
       "ctaTitle2": "se démarque",
-      "ctaSubTitle": "Créons ensemble quelque chose d’extraordinaire. Transformez votre présence en ligne avec un site web performant et spectaculaire.",
+      "ctaSubTitle": "Créons ensemble quelque chose d'extraordinaire. Transformez votre présence en ligne avec un site web performant et spectaculaire.",
       "ctaButton": "COMMENCER"
   },
   "automation": {
       "ai": "IA",
-      "subTitle": "We automate processes and enhance customer experiences with cutting-edge AI solutions",
-      "ourSolutions": "Our",
-      "SolutionsSubTitle":"Innovative AI solutions designed to transform your business operations",
+      "automation": "Automatisation",
+      "subTitle": "Nous automatisons les processus et renforçons les expériences client avec des solutions IA de pointe",
+      "ourSolutions": "Nos",
+      "SolutionsSubTitle":"Solutions IA innovantes conçues pour transformer vos opérations commerciales",
       "solutions": [
         {
-          "title": "AI-Powered Chatbots",
-          "description": "We develop intelligent chatbots that can handle customer inquiries, provide support, and guide users through your website or application.",
+          "title": "Chatbots IA",
+          "description": "Nous développons des chatbots intelligents qui peuvent gérer les demandes des clients, fournir du support et guider les utilisateurs à travers votre site web ou application.",
           "list": [
-            {"text": "Natural language processing"},
-            {"text": "24/7 customer support"},
-            {"text": "Personalized user interactions"},
-            {"text": "Multi-channel deployment"},
-            {"text": "Integration with existing systems"},
-            {"text": "Continuous learning and improvement"}
+            {"text": "Traitement du langage naturel"},
+            {"text": "Support client 24/7"},
+            {"text": "Interactions personnalisées"},
+            {"text": "Déploiement multi-canal"},
+            {"text": "Intégration avec des systèmes existants"},
+            {"text": "Amélioration continue et apprentissage"}
           ]
         },
         {
-          "title": "Business Process Automation",
-          "description": "We implement AI solutions that automate repetitive tasks and workflows, freeing up your team to focus on more strategic activities.",
+          "title": "Automatisation des processus",
+          "description": "Nous mettons en place des solutions IA qui automatiquent les tâches répétitives et les flux de travail, libérant votre équipe pour se concentrer sur des activités plus stratégiques.",
           "list": [
-            {"text": "Workflow automation"},
-            {"text": "Document processing"},
-            {"text": "Data entry and extraction"},
-            {"text": "Email automation"},
-            {"text": "Task scheduling and management"},
-            {"text": "Custom automation solutions"}
+            {"text": "Automatisation des flux de travail"},
+            {"text": "Traitement de documents"},
+            {"text": "Entrée et extraction de données"},
+            {"text": "Automatisation des e-mails"},
+            {"text": "Gestion des tâches et planification"},
+            {"text": "Solutions d'automatisation personnalisées"}
           ]
         },
         {
-          "title": "AI-Driven Analytics",
-          "description": "We harness the power of AI to analyze your data, uncover insights, and provide actionable recommendations for your business.",
+          "title": "Analyse IA pilotée",
+          "description": "Nous utilisons la puissance de l'IA pour analyser vos données, découvrir des insights et fournir des recommandations pratiques pour votre entreprise.",
           "list": [
-            {"text": "Predictive analytics"},
-            {"text": "Customer behavior analysis"},
-            {"text": "Sales forecasting"},
-            {"text": "Performance monitoring"},
-            {"text": "Trend identification"},
-            {"text": "Automated reporting"}
+            {"text": "Analyse prédictive"},
+            {"text": "Analyse du comportement des clients"},
+            {"text": "Prévision des ventes"},
+            {"text": "Surveillance des performances"},
+            {"text": "Identification des tendances"},
+            {"text": "Reporting automatique"}
+          ]
+        },
+        {
+          "title": "Génération de contenu intelligente",
+          "description": "Nous utilisons l'IA pour créer du contenu de haute qualité, pertinent pour votre site web, campagnes marketing et réseaux sociaux.",
+          "list": [
+            {"text": "Génération de blog posts"},
+            {"text": "Descriptions de produits"},
+            {"text": "Contenu pour les e-mails"},
+            {"text": "Publicités sur les réseaux sociaux"},
+            {"text": "Contenu optimisé pour le SEO"},
+            {"text": "Création de contenu multilingue"}
           ]
         }
+      ],
+      "benefitsTitle1": "Nos",
+      "benefitsTitle2": "Avantages",
+      "benefitsTitle3": "pour votre entreprise",
+      "benefitsSubTitle": "Découvrez comment l'automatisation par IA peut transformer vos opérations commerciales",
+      "benefits": [
+        {"title": "Efficacité accrue", "description": "Automatisez les tâches répétitives et optimisez les flux de travail pour gagner du temps et des ressources."},
+        {"title": "Précision renforcée", "description": "Réduisez les erreurs humaines et garantissez des résultats cohérents avec l'automatisation par IA."},
+        {"title": "Opérationnel 24/7", "description": "Faites fonctionner votre entreprise 24 heures sur 24 avec des processus automatisés."},
+        {"title": "Solutions évolutives", "description": "Echellezfacilement vos opérations sans augmenter proportionnellement les coûts."},
+        {"title": "Insights de données", "description": "Gagnez des insights précieux grâce à la collecte et à l'analyse automatique des données."},
+        {"title": "Réduction des coûts", "description": "Réduisez les coûts opérationnels en automatisant les tâches manuelles et chronophages."}
+      ],
+      "ctaTitle1": "Prêt à automatiser votre",
+      "ctaTitle2": "entreprise",
+      "ctaSubTitle": "Transformez vos opérations avec des solutions IA intelligentes qui améliorent l'efficacité et la croissance",
+      "ctaButton": "COMMENCER"
+    },
+    "seo-optimization":{
+      "title1": "Optimisation",
+      "title2": "SEO",
+      "subTitle": "Boostez votre visibilité en ligne et faites grandir votre trafic organique avec nos stratégies SEO complètes",
+      "ourSolutions": "Nos",
+      "SolutionsSubTitle":"Solutions SEO stratégiques conçues pour améliorer votre visibilité en ligne",
+      "solutions": [
+        {
+          "title": "Optimisation On-Page",
+          "description": "Nous optimisons le contenu, la structure et les éléments HTML de votre site web pour améliorer la visibilité et les classements dans les résultats des moteurs de recherche.",
+          "list": [
+            {"text": "Recherche et optimisation des mots-clés"},
+            {"text": "Optimisation du titre et de la description"},
+            {"text": "Optimisation des balises d'en-tête"},
+            {"text": "Optimisation du contenu"},
+            {"text": "Optimisation des images"},
+            {"text": "Amélioration de la structure d'URL"}
+          ]
+        },
+        {
+          "title": "Optimisation Off-Page",
+          "description": "Nous construisons l'autorité de votre site web grâce à des liens de qualité, des signaux sociaux et d'autres facteurs externes qui influencent les classements dans les résultats des moteurs de recherche.",
+          "list": [
+            {"text": "Stratégies de construction de liens"},
+            {"text": "Possibilités de guest posting"},
+            {"text": "Intégration des médias sociaux"},
+            {"text": "Surveillance des mentions de marque"},
+            {"text": "Analyse des liens concurrents"},
+            {"text": "Construction de l'autorité"}
+          ]
+        },
+        {
+          "title": "Optimisation Technique",
+          "description": "Nous nous assurons que la base technique de votre site web est solide, permettant aux moteurs de recherche de parcourir, indexer et classer votre site de manière efficace.",
+          "list": [
+            {"text": "Optimisation de la vitesse du site"},
+            {"text": "Amélioration de la mobile-friendliness"},
+            {"text": "Implémentation du markup Schema"},
+            {"text": "Création d'un sitemap XML"},
+            {"text": "Optimisation du robots.txt"},
+            {"text": "Correction des erreurs de crawl et des liens cassés"}
+          ]
+        },
+        {
+          "title": "Optimisation Locale",
+          "description": "Nous optimisons votre présence en ligne pour attirer plus de clients provenant de recherches locales, vous permettant de vous connecter avec vos clients proches.",
+          "list": [
+            {"text": "Optimisation du profil Google Business"},
+            {"text": "Objectif des mots-clés locaux"},
+            {"text": "Construction et nettoyage des citations"},
+            {"text": "Gestion des avis"},
+            {"text": "Construction de liens locaux"},
+            {"text": "Stratégie de contenu locale"}
+          ]
+        }
+      ],
+      "benefitsTitle1": "Nos",
+      "benefitsTitle2": "Avantages",
+      "benefitsTitle3": "pour votre entreprise",
+      "benefitsSubTitle": "Maximisez votre présence en ligne avec nos stratégies SEO probées",
+      "benefits": [
+        {"title": "Meilleurs classements dans les moteurs de recherche", "description": "Meilleurs classements dans les moteurs de recherche pour les mots-clés pertinents."},
+        {"title": "Trafic organique accru", "description": "Trafic organique accru grâce à une visibilité améliorée dans les moteurs de recherche."},
+        {"title": "Meilleure expérience utilisateur", "description": "Meilleure expérience utilisateur et usabilité de votre site web pour vos visiteurs."},
+        {"title": "Taux de conversion améliorés", "description": "Taux de conversion et retour sur investissement améliorés grâce à un contenu optimisé et une engagement utilisateur."},
+        {"title": "Résultats durables", "description": "Résultats durables grâce à des pratiques SEO éthiques et cohérentes."},
+        {"title": "Avantage compétitif dans votre industrie", "description": "Avantage compétitif dans votre industrie grâce à une visibilité améliorée dans les moteurs de recherche."}
+      ],
+      "ctaTitle1": "Prêt à booster votre",
+      "ctaTitle2": "entreprise",
+      "ctaSubTitle": "Optimisons votre site web pour une meilleure visibilité et un plus grand trafic organique pour votre entreprise",
+      "ctaButton": "COMMENCER"
+    },
+    "how-it-works":{
+      "title1": "Comment Ça",
+      "title2": "Marche",
+      "subTitle": "Un parcours pensé de la conception à la réalisation, mélangeant créativité humaine avec précision IA",
+      "ourApproachTitle1": "Notre",
+      "ourApproachTitle2": "Approche",
+      "ourApproachSubTitle": "Une approche équilibrée combinant créativité humaine avec précision IA",
+      "steps": [
+        {
+          "title": "Créativité Humaine",
+          "description": "Nous privilégions les besoins et les expériences humaines dans chaque projet. Notre approche commence par l'empathie et la compréhension de votre audience."
+        },
+        {
+          "title": "IA Augmentée",
+          "description": "Nous utilisons les outils IA de pointe pour améliorer l'efficacité, la précision et l'innovation sans remplacer la créativité humaine."
+        },
+        {
+          "title": "Collaborative",
+          "description": "Nous travaillons de près avec vous tout au long du processus, garantissant que votre vision soit reflétée dans chaque aspect du produit final."
+        },
+        {
+          "title": "Itératif",
+          "description": "Nous croyons en la constante amélioration. Notre processus inclut des boucles de feedback régulières et des itérations pour garantir que le résultat final réponde à vos attentes."
+        }
       ]
+    },
+    "about":{
+      "title1": "À propos de",
+      "subTitle": "Nous mélangeons créativité humaine avec la technologie IA pour créer des expériences digitales qui comptent.",
+      "ourStoryTitle1": "Notre",
+      "ourStoryTitle2": "Histoire",
+      "ourStorySubTitle": "Où la créativité humaine rencontre l'innovation IA pour créer des expériences digitales qui comptent",
+      "ourStoryp1": "Soluvia a été fondée avec une vision de combler le fossé entre la créativité humaine et l'intelligence artificielle. Nous croyons que le futur du design réside dans cette harmonie – où l'intuition humaine et les capacités IA s'amplifient mutuellement.",
+      "ourStoryp2": "Notre approche combine le toucher humain irréversible – l'empathie, la créativité et la pensée stratégique – avec l'efficacité et la puissance analytique de la technologie IA. Cette combinaison unique nous permet de livrer des solutions qui sont à la fois innovantes et authentiques.",
+      "ourStoryp3": "Aujourd'hui, nous sommes fiers de travailler avec des clients dans divers secteurs d'activité, de startups à des entreprises établies, en nous appuyant sur notre processus créatif humain, IA-renforcé, pour atteindre leurs objectifs.",
+      "ourCoreValuesTitle1": "Nos Valeurs",
+      "ourCoreValuesTitle2": "Valeurs",
+      "ourCoreValuesTitle3": "Essentielles",
+      "ourCoreValuesSubTitle": "Nos valeurs sont au cœur de tout ce que nous faisons",
+      "values": [
+        {
+          "title": "Créativité Humaine",
+          "description": "Nous croyons dans la puissance de la créativité humaine, de l'intuition et de l'intelligence émotionnelle que seuls les humains peuvent offrir."
+        },
+        {
+          "title": "IA Augmentation",
+          "description": "Nous utilisons les technologies IA pour renforcer les capacités humaines, automatiser les tâches répétitives et fournir des insights basés sur les données."
+        },
+        {
+          "title": "Innovation",
+          "description": "Nous explorons constamment de nouvelles idées, technologies et méthodologies pour offrir des solutions de pointe à nos clients."
+        },
+        {
+          "title": "Collaboration",
+          "description": "Nous croyons dans la puissance de la collaboration – entre les humains et l'IA, ainsi qu'avec nos clients et dans notre équipe."
+        },
+        {
+          "title": "Excellence",
+          "description": "Nous nous engageons à l'excellence dans tout ce que nous faisons, du design à l'implémentation jusqu'au service client."
+        },
+        {
+          "title": "Adaptabilité",
+          "description": "Nous nous adaptons aux changements et évoluons constamment notre approche pour rester au cœur de la conception et de la technologie."
+        }
+        
+      ],
+      "ourApproachTitle1": "Notre",
+      "ourApproachTitle2": "Approche",
+      "ctaTitle1": "Prêt à créer quelque chose de",
+      "ctaTitle2": "extraordinaire",
+      "ctaSubTitle": "Combinons la créativité humaine avec l'innovation IA pour construire votre avenir digital",
+      "ctaButton": "COMMENCER"
+    },
+    "contact":{
+      "title1": "Entrez en",
+      "title2": "Contact",
+      "subTitle": "Nous aimerions vous entendre. Contactez-nous pour discuter de votre projet, poser des questions ou explorer comment nous pouvons vous aider",
+      "ctaButton": "Contactez-nous",
+      "contactTitle1": "Contactez",
+      "contactTitle2": "-nous",
+      "contactSubTitle": "Vous avez un projet en tête ? Nous aimerions vous entendre. Remplissez le formulaire ci-dessous et nous vous reviendrons dans les plus brefs délais",
+      "contactForm":{
+        "name": "Nom",
+        "nameText": "Votre nom",
+        "email": "Email",
+        "emailText": "Votre email",
+        "phone": "Téléphone (optionnel)",
+        "phoneText": "Votre numéro de téléphone",
+        "servicesInterestedIn": "Services qui vous intéressent",
+        "servicesOption1": "Design & Développement Web",
+        "servicesOption2": "Automatisation IA",
+        "servicesOption3": "Optimisation SEO",
+        "budgetRange": "Budget",
+        "budgetOption1": "Moins de 1 000 €",
+        "budgetOption2": "1 000 - 5 000 €",
+        "budgetOption3": "5 000 - 10 000 €",
+        "budgetOption4": "Plus de 10 000 €",
+        "projectTimeframe": "Délai du projet",
+        "projectTimeframeOption1": "Dès que possible",
+        "projectTimeframeOption2": "1-3 mois",
+        "projectTimeframeOption3": "3+ mois",
+        "message": "Message",
+        "messageText": "Parlez-nous de votre projet",
+        "sendMessage": "Envoyer le message",
+        "sending": "Envoi en cours...",
+        "anotherMessage": "Envoyer un autre message",
+        "errorTitle": "Échec de l'envoi du message",
+        "requiredFieldsMessage": "Veuillez remplir tous les champs obligatoires",
+        "confirmationThanks": "Merci !",
+        "confirmationDescription": "Nous avons bien reçu votre message et vous répondrons dans les plus brefs délais.",
+        "errorMessage": "Échec de l'envoi du message. Veuillez réessayer."
+      },
+      "contactInformation": "Informations de contact",
+      "contactDescription": "Nous sommes là pour vous aider avec toutes les questions que vous pourriez avoir sur nos services. Contactez-nous via l'une des chaînes de communication suivantes.",
+      "contactEmail": "Envoyez-nous un e-mail à",
+      "contactPhone": "Appelez-nous à",
+      "businessHours": "Heures d'ouverture",
+      "monday": "Lundi",
+      "friday": "Vendredi",
+      "saturday": "Samedi",
+      "sunday": "Dimanche",
+      "closed": "Fermé",
+      "connectwithUs": "Contactez-nous"
     },
   "form":{
       "name": "Quel est votre nom ?",
@@ -413,7 +639,7 @@
   "footer": {
     "company": "Entreprise",
     "about": "À propos",
-    "how-it-works": "Comment ça marche",
+    "how-it-works": "Comment Ça marche",
     "contact": "Contact",
     "resources":"Ressources",
     "description": "Nous créons des sites web sophistiqués et élégants qui favorisent la croissance de votre entreprise et optimisent votre présence en ligne. Nous sommes spécialisés dans la création de solutions digitales de haute qualité, conçues sur mesure pour votre marque.",
