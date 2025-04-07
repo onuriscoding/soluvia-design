@@ -4,8 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  Instagram,
-  Twitter,
   Linkedin,
   Facebook,
   ArrowRight,
@@ -21,6 +19,36 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useI18n } from "@/lib/i18n/i18nContext";
 import { LanguageSwitcher } from "./language-switcher";
+
+// Custom Instagram icon component
+const InstagramIcon = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+  </svg>
+);
+
+// Custom X (formerly Twitter) icon component
+const XIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
 
 export function RedesignedFooter() {
   const { t } = useI18n();
@@ -82,16 +110,20 @@ export function RedesignedFooter() {
 
               <div className="mt-8 flex gap-4">
                 <motion.a
-                  href="#"
+                  href="https://x.com/soluviaco"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ y: -5, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-[#252736] text-ivory/70 hover:bg-rose/20 hover:text-rose transition-all duration-300 border border-ivory/10"
-                  aria-label="Twitter"
+                  aria-label="X (formerly Twitter)"
                 >
-                  <Twitter className="h-5 w-5" />
+                  <XIcon className="h-5 w-5" />
                 </motion.a>
                 <motion.a
-                  href="#"
+                  href="https://www.facebook.com/profile.php?id=61574853640937"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ y: -5, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-[#252736] text-ivory/70 hover:bg-rose/20 hover:text-rose transition-all duration-300 border border-ivory/10"
@@ -100,16 +132,20 @@ export function RedesignedFooter() {
                   <Facebook className="h-5 w-5" />
                 </motion.a>
                 <motion.a
-                  href="#"
+                  href="https://www.instagram.com/soluviaco/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ y: -5, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-[#252736] text-ivory/70 hover:bg-rose/20 hover:text-rose transition-all duration-300 border border-ivory/10"
                   aria-label="Instagram"
                 >
-                  <Instagram className="h-5 w-5" />
+                  <InstagramIcon className="h-5 w-5" />
                 </motion.a>
                 <motion.a
-                  href="#"
+                  href="https://www.linkedin.com/company/soluviaco"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ y: -5, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-[#252736] text-ivory/70 hover:bg-rose/20 hover:text-rose transition-all duration-300 border border-ivory/10"

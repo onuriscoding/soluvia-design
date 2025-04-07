@@ -16,16 +16,14 @@ type Props = {
   params: Promise<{ lang: string }> | { lang: string };
 };
 
-export async function generateMetadata({ params: paramsPromise }: { params: Promise<{ lang: string }> | { lang: string } }): Promise<Metadata> {
-  // Ensure we await the params
-  const params = await Promise.resolve(paramsPromise);
-  
-  // Ensure we have a string for the language
-  const lang = params.lang || "en";
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
+  // Await params before accessing properties
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang || "en";
   
   return {
     title: lang === "fr" 
-      ? "Soluvia | Solutions Numériques Créatives" 
+      ? "Soluvia | Solutions Digitales Créatives" 
       : "Soluvia | Creative Digital Solutions",
     description: lang === "fr"
       ? "Soluvia fournit des services experts en conception web, développement, optimisation SEO et solutions IA pour aider les entreprises à prospérer dans le monde numérique."
@@ -86,12 +84,10 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
   };
 }
 
-export default async function Home({ params: paramsPromise }: Props) {
-  // Ensure we await the params
-  const params = await Promise.resolve(paramsPromise);
-
-  // Ensure we have a string for the language
-  const lang = params.lang || "en";
+export default async function Home({ params }: { params: { lang: string } }) {
+  // Await params before accessing properties
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang || "en";
   const dict = await getDictionary(lang);
 
   return (

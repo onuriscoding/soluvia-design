@@ -6,12 +6,14 @@ import { BreadcrumbsNav } from "@/components/breadcrumbs-nav";
 import { getDictionary } from "../../dictionaries";
 
 // Enhanced metadata with multi-language support, better structured data, and SEO optimizations
-export async function generateMetadata({ params: paramsPromise }: { params: Promise<{ lang: string }> | { lang: string } }): Promise<Metadata> {
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { lang: string } 
+}): Promise<Metadata> {
   // Ensure we await the params
-  const params = await Promise.resolve(paramsPromise);
-  
-  // Ensure we have a string for the language
-  const lang = params.lang || "en";
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang || "en";
   
   return {
     title: lang === "fr" 
@@ -63,8 +65,14 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
   };
 }
 
-export default async function Page({ params }: { params: { lang: string } }) {
-  const lang = params.lang || "en";
+export default async function Page({ 
+  params 
+}: { 
+  params: { lang: string } 
+}) {
+  // Await the params object before accessing its properties
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang || "en";
   const homeLabel = lang === "fr" ? "Accueil" : "Home";
   const dictionary = await getDictionary(lang);
   
@@ -72,9 +80,6 @@ export default async function Page({ params }: { params: { lang: string } }) {
     <>
       <ServiceStructuredData service="SEO Optimization" />
       <FAQStructuredData faqs={seoServices.faqs} />
-      <div className="container mx-auto px-4 pt-8">
-        <BreadcrumbsNav homeLabel={homeLabel} className="mb-6" />
-      </div>
       <SeoOptimizationClient dictionary={dictionary} />
     </>
   );

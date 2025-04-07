@@ -3,7 +3,9 @@ import HowItWorksClient from "./HowItWorksClient";
 import { getDictionary } from "../dictionaries";
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const dict = await getDictionary(params.lang);
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
+  const dict = await getDictionary(lang);
   
   return {
     title: `${dict["how-it-works"].title1} ${dict["how-it-works"].title2} | Soluvia`,
@@ -29,8 +31,9 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 }
 
 export default async function HowItWorksPage({ params }: { params: { lang: string } }) {
-  // Get the dictionary based on the current language
-  const dict = await getDictionary(params.lang);
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
+  const dict = await getDictionary(lang);
   
   return <HowItWorksClient dictionary={dict} />;
 } 

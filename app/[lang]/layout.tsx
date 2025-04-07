@@ -23,16 +23,14 @@ export async function generateStaticParams() {
 
 export default async function RootLayout({
   children,
-  params: paramsPromise,
+  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ lang: string }> | { lang: string };
+  params: { lang: string };
 }) {
-  // Ensure we await the params
-  const params = await Promise.resolve(paramsPromise);
-
-  // Ensure the language is one of the supported languages
-  const lang = params.lang === "fr" ? "fr" : "en";
+  // Await the params object before accessing its properties
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang === "fr" ? "fr" : "en";
 
   return (
     <html lang={lang} className={`${inter.className} ${anton.variable}`}>

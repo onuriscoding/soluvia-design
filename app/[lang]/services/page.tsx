@@ -3,12 +3,14 @@ import ServicesClient from "./ServicesClient";
 import { getDictionary } from "../dictionaries";
 
 // Enhanced metadata for services page
-export async function generateMetadata({ params: paramsPromise }: { params: Promise<{ lang: string }> | { lang: string } }): Promise<Metadata> {
-  // Ensure we await the params
-  const params = await Promise.resolve(paramsPromise);
-  
-  // Ensure we have a string for the language
-  const lang = params.lang || "en";
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { lang: string } 
+}): Promise<Metadata> {
+  // Await the params object before accessing its properties
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang || "en";
   
   return {
     title: lang === "fr" 
@@ -47,9 +49,15 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
   };
 }
 
-export default async function Page({ params }: { params: { lang: string } }) {
-  // Get the dictionary based on the current language
-  const dict = await getDictionary(params.lang);
+export default async function Page({ 
+  params 
+}: { 
+  params: { lang: string } 
+}) {
+  // Await params before accessing properties
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
+  const dict = await getDictionary(lang);
   
   return <ServicesClient dictionary={dict} />;
 }

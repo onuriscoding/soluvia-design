@@ -4,12 +4,14 @@ import WebDesignDevelopmentClient from "./WebDesignDevelopmentClient";
 import { getDictionary } from "../../dictionaries";
 
 // Enhanced metadata with multi-language support, better structured data, and SEO optimizations
-export async function generateMetadata({ params: paramsPromise }: { params: Promise<{ lang: string }> | { lang: string } }): Promise<Metadata> {
-  // Ensure we await the params
-  const params = await Promise.resolve(paramsPromise);
-  
-  // Ensure we have a string for the language
-  const lang = params.lang || "en";
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { lang: string } 
+}): Promise<Metadata> {
+  // Await the params object before accessing its properties
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang || "en";
   
   return {
     title: lang === "fr" 
@@ -57,9 +59,14 @@ export async function generateMetadata({ params: paramsPromise }: { params: Prom
 }
 
 // Split component for better performance and proper separation of server/client code
-export default async function Page({ params }: { params: { lang: string } }) {
-  // Get the language parameter and load the appropriate dictionary
-  const lang = params.lang || "en";
+export default async function Page({ 
+  params 
+}: { 
+  params: { lang: string } 
+}) {
+  // Await params before accessing properties
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
   const dictionary = await getDictionary(lang);
   
   return (
