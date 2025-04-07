@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   ChevronDown,
@@ -13,9 +13,24 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import GradientText from "@/app/animations/gradient-text";
 import { RedesignedContactSection } from "@/components/redesigned-contact-section";
+import { useParams } from "next/navigation";
+import { getDictionary } from "../../dictionaries";
 
 export default function SupportPage() {
   const [isMounted, setIsMounted] = useState(false);
+  const [dictionary, setDictionary] = useState<any>(null);
+  const params = useParams();
+  const lang = params.lang as string;
+
+  useEffect(() => {
+    async function loadDictionary() {
+      const dict = await getDictionary(lang);
+      setDictionary(dict);
+      setIsMounted(true);
+    }
+    loadDictionary();
+  }, [lang]);
+
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -302,7 +317,7 @@ export default function SupportPage() {
       </section>
 
       {/* Contact Section */}
-      <RedesignedContactSection />
+      {dictionary && <RedesignedContactSection dictionary={dictionary} />}
     </main>
   );
 }
