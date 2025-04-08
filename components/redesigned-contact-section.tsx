@@ -5,6 +5,7 @@ import type React from "react";
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Send, CheckCircle, AlertCircle, Mail, Phone, Linkedin, Facebook } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -59,6 +60,11 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
     "idle" | "loading" | "success" | "error"
   >("idle");
 
+  // Get the current pathname to extract locale
+  const pathname = usePathname();
+  // Extract locale from pathname (e.g., "/fr/contact" -> "fr")
+  const locale = pathname?.split('/')[1]?.match(/^(en|fr)$/) ? pathname.split('/')[1] : 'en';
+
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -110,6 +116,7 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
         service: formState.service,
         budget: formState.budget,
         timeframe: formState.timeframe,
+        locale, // Add the locale to the request body
       };
 
       // Call the API

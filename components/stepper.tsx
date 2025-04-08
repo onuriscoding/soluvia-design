@@ -4,6 +4,7 @@ import type React from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Send, Phone, Mail, AlertCircle } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 interface ContactStepperProps {
   onSubmit?: (data: {
@@ -31,6 +32,11 @@ export function RedesignedContactStepper({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
+  
+  // Get the current pathname to extract locale
+  const pathname = usePathname();
+  // Extract locale from pathname (e.g., "/fr/contact" -> "fr")
+  const locale = pathname?.split('/')[1]?.match(/^(en|fr)$/) ? pathname.split('/')[1] : 'en';
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -68,7 +74,10 @@ export function RedesignedContactStepper({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          locale, // Add the locale to the request body
+        }),
       });
 
       const data = await response.json();
