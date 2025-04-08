@@ -37,7 +37,7 @@ export default async function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="canonical" href={`https://soluvia.com/${lang}`} />
-        <meta name="google-site-verification" content="your-verification-code" />
+        <meta name="google-site-verification" content="C6PFuzOdUFnB3OIMk6MlfM6u0Q7326NrvzVxrj58Ilo" />
         <link rel="icon" href="/soluvia-s-no-bg.png" />
         <link rel="apple-touch-icon" href="/soluvia-s-no-bg.png" />
         <link rel="manifest" href="/manifest.json" />
