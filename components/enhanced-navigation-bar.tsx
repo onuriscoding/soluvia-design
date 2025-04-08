@@ -34,7 +34,7 @@ const navItems = [
         labelKey: "navigation.webDesign",
         href: "/services/web-design-development",
         descriptionKey: "navigation.webDesignDescription",
-        price: "from 699€",
+        price: "from 999€",
       },
       {
         labelKey: "navigation.aiAutomation",
@@ -46,7 +46,7 @@ const navItems = [
         labelKey: "navigation.seoOptimization",
         href: "/services/seo-optimization",
         descriptionKey: "navigation.seoOptimizationDescription",
-        price: "from 499€",
+        price: "from 799€",
       },
       {
         labelKey: "navigation.allServices",
