@@ -13,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/services/ai-automation',
     '/contact',
     '/how-it-works',
+    '/resources/faq',
+    '/resources/support',
   ];
 
   // Generate entries for English language
@@ -20,7 +22,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}/en${pathname}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: pathname === '' ? 1 : 0.8,
+    priority: pathname === '' ? 1 : 
+             pathname.startsWith('/services/') ? 0.9 : 
+             pathname === '/services' ? 0.8 : 
+             pathname.startsWith('/resources/') ? 0.7 : 0.8,
   }));
 
   // Generate entries for French language
@@ -28,7 +33,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}/fr${pathname}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: pathname === '' ? 0.9 : 0.7,
+    priority: pathname === '' ? 0.9 : 
+             pathname.startsWith('/services/') ? 0.8 : 
+             pathname === '/services' ? 0.7 : 
+             pathname.startsWith('/resources/') ? 0.6 : 0.7,
   }));
 
   // Add the root URL with a redirect notice
