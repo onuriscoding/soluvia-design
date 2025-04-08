@@ -3,40 +3,85 @@ import { MetadataRoute } from 'next';
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://soluvia.co';
   
-  // Define shared pathnames for both languages
+  // Define shared pathnames with their associated images
   const pathnames = [
-    '',
-    '/about',
-    '/services',
-    '/services/web-design-development',
-    '/services/seo-optimization',
-    '/services/ai-automation',
-    '/contact',
-    '/how-it-works',
-    '/resources/faq',
-    '/resources/support',
+    {
+      path: '',
+      images: [
+        '/soluvia.png',
+        '/soluvia-final-no-bg.png'
+      ]
+    },
+    {
+      path: '/services',
+      images: [
+        '/web-design.png',
+        '/seo.png',
+        '/ai.png'
+      ]
+    },
+    {
+      path: '/services/web-design-development',
+      images: [
+        '/web-design.png',
+        '/web-development.png',
+        '/mobile.png'
+      ]
+    },
+    {
+      path: '/services/seo-optimization',
+      images: [
+        '/seo.png',
+        '/on-page-seo.png',
+        '/off-page-seo.png',
+        '/technical-seo.png',
+        '/local-seo.png'
+      ]
+    },
+    {
+      path: '/services/ai-automation',
+      images: [
+        '/ai.png',
+        '/ai-chatbot.png',
+        '/ai-content.png',
+        '/ai-analytics.png'
+      ]
+    },
+    {
+      path: '/about',
+      images: [
+        '/our-story-2.png',
+        '/our-approach.png'
+      ]
+    },
+    { path: '/contact' },
+    { path: '/how-it-works' },
+    { path: '/resources/faq' },
+    { path: '/resources/support' },
   ];
 
   // Generate entries for English language
-  const enEntries = pathnames.map(pathname => ({
-    url: `${baseUrl}/en${pathname}`,
+  const enEntries = pathnames.map(({ path, images }) => ({
+    url: `${baseUrl}/en${path}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: pathname === '' ? 1 : 
-             pathname.startsWith('/services/') ? 0.9 : 
-             pathname === '/services' ? 0.8 : 
-             pathname.startsWith('/resources/') ? 0.7 : 0.8,
+    priority: path === '' ? 1 : 
+             path.startsWith('/services/') ? 0.9 : 
+             path === '/services' ? 0.8 : 
+             path.startsWith('/resources/') ? 0.7 : 0.8,
+    images: images?.map(img => `${baseUrl}${img}`)
   }));
 
   // Generate entries for French language
-  const frEntries = pathnames.map(pathname => ({
-    url: `${baseUrl}/fr${pathname}`,
+  const frEntries = pathnames.map(({ path, images }) => ({
+    url: `${baseUrl}/fr${path}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: pathname === '' ? 0.9 : 
-             pathname.startsWith('/services/') ? 0.8 : 
-             pathname === '/services' ? 0.7 : 
-             pathname.startsWith('/resources/') ? 0.6 : 0.7,
+    priority: path === '' ? 0.9 : 
+             path.startsWith('/services/') ? 0.8 : 
+             path === '/services' ? 0.7 : 
+             path.startsWith('/resources/') ? 0.6 : 0.7,
+    images: images?.map(img => `${baseUrl}${img}`)
   }));
 
   // Add the root URL with a redirect notice
@@ -45,6 +90,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: 'weekly' as const, 
     priority: 1,
+    images: [
+      `${baseUrl}/soluvia.png`,
+      `${baseUrl}/soluvia-final-no-bg.png`
+    ]
   };
 
   return [rootEntry, ...enEntries, ...frEntries];
