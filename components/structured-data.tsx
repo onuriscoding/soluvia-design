@@ -28,8 +28,8 @@ export function StructuredData({ type, data }: StructuredDataProps) {
 export function OrganizationStructuredData() {
   const data = {
     name: 'Soluvia',
-    url: 'https://soluvia.com',
-    logo: 'https://soluvia.com/soluvia-s-no-bg.png',
+    url: 'https://soluvia.co',
+    logo: 'https://soluvia.co/soluvia-s-no-bg.png',
     sameAs: [
       'https://twitter.com/SoluviaDesign',
       'https://www.linkedin.com/company/soluvia',
@@ -37,14 +37,14 @@ export function OrganizationStructuredData() {
     ],
     description: 'Soluvia provides expert web design, development, SEO optimization, and AI solutions to help businesses thrive in the digital world.',
     address: {
-      '@type': 'PostalAddress',
+      '@type': '1050',
       addressCountry: 'Belgium',
     },
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+32-000-000-000',
+      telephone: '+32-499-242-951',
       contactType: 'customer service',
-      email: 'contact@soluvia.com'
+      email: 'info@soluvia.co'
     }
   };
 
@@ -55,10 +55,10 @@ export function OrganizationStructuredData() {
 export function WebsiteStructuredData() {
   const data = {
     name: 'Soluvia',
-    url: 'https://soluvia.com',
+    url: 'https://soluvia.co',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://soluvia.com/search?q={search_term_string}',
+      target: 'https://soluvia.co/search?q={search_term_string}',
       'query-input': 'required name=search_term_string'
     },
     inLanguage: ['en', 'fr']
@@ -74,7 +74,7 @@ export function ServiceStructuredData({ service }: { service: string }) {
     provider: {
       '@type': 'Organization',
       name: 'Soluvia',
-      url: 'https://soluvia.com'
+      url: 'https://soluvia.co'
     }
   };
 
@@ -210,7 +210,7 @@ export function ArticleStructuredData({
       name: 'Soluvia',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://soluvia.com/soluvia-s-no-bg.png'
+        url: 'https://soluvia.co/soluvia-s-no-bg.png'
       }
     }
   };

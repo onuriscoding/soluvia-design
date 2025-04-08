@@ -36,7 +36,7 @@ export default async function RootLayout({
     <html lang={lang} className={`${inter.className} ${anton.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="canonical" href={`https://soluvia.com/${lang}`} />
+        <link rel="canonical" href={`https://soluvia.co/${lang}`} />
         <meta name="google-site-verification" content="C6PFuzOdUFnB3OIMk6MlfM6u0Q7326NrvzVxrj58Ilo" />
         <link rel="icon" href="/soluvia-s-no-bg.png" />
         <link rel="apple-touch-icon" href="/soluvia-s-no-bg.png" />
@@ -74,12 +74,12 @@ export const metadata = {
   title: "Soluvia | Creative Digital Solutions",
   description: "Soluvia provides expert web design, development, SEO optimization, and AI solutions to help businesses thrive in the digital world. Elevate your online presence with our creative digital solutions.",
   generator: "v0.dev",
-  metadataBase: new URL("https://soluvia.com"),
+  metadataBase: new URL("https://soluvia.co"),
   keywords: ["web design", "web development", "SEO", "AI solutions", "digital marketing", "Soluvia"],
   openGraph: {
     title: "Soluvia | Creative Digital Solutions",
     description: "Expert web design, development, SEO optimization, and AI solutions to help your business thrive online.",
-    url: "https://soluvia.com",
+    url: "https://soluvia.co",
     siteName: "Soluvia",
     images: [
       {

@@ -21,8 +21,8 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/images/',
       },
     ],
-    sitemap: 'https://soluvia.com/sitemap.xml',
-    host: 'https://soluvia.com',
+    sitemap: 'https://soluvia.co/sitemap.xml',
+    host: 'https://soluvia.co',
   }
 }
 

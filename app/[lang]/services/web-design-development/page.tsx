@@ -27,12 +27,12 @@ export async function generateMetadata({
       "business website", "e-commerce website", "web applications"
     ],
     alternates: {
-      canonical: `https://soluvia.com/${lang}/services/web-design-development`,
+      canonical: `https://soluvia.co/${lang}/services/web-design-development`,
     },
     openGraph: {
       type: "website",
       locale: lang === "fr" ? "fr_FR" : "en_US",
-      url: `https://soluvia.com/${lang}/services/web-design-development`,
+      url: `https://soluvia.co/${lang}/services/web-design-development`,
       siteName: "Soluvia",
       title: lang === "fr" ? "Conception et Développement Web | Soluvia" : "Web Design & Development | Soluvia",
       description: lang === "fr"

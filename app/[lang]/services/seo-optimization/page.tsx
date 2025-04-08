@@ -22,7 +22,7 @@ export async function generateMetadata({
     description: lang === "fr"
       ? "Améliorez votre visibilité en ligne et augmentez votre trafic organique avec nos stratégies SEO complètes. Services d'experts en référencement pour propulser votre entreprise."
       : "Boost your online visibility and drive organic traffic with our comprehensive SEO strategies. Expert search engine optimization services to propel your business forward.",
-    metadataBase: new URL("https://soluvia.com"),
+    metadataBase: new URL("https://soluvia.co"),
     keywords: [
       "SEO", "search engine optimization", "keyword research", 
       "on-page SEO", "off-page SEO", "technical SEO", 
@@ -30,16 +30,16 @@ export async function generateMetadata({
       "Google rankings", "search rankings", "SEO agency"
     ],
     alternates: {
-      canonical: `https://soluvia.com/${lang}/services/seo-optimization`,
+      canonical: `https://soluvia.co/${lang}/services/seo-optimization`,
       languages: {
-        'en': 'https://soluvia.com/en/services/seo-optimization',
-        'fr': 'https://soluvia.com/fr/services/seo-optimization',
+        'en': 'https://soluvia.co/en/services/seo-optimization',
+        'fr': 'https://soluvia.co/fr/services/seo-optimization',
       },
     },
     openGraph: {
       type: "website",
       locale: lang === "fr" ? "fr_FR" : "en_US",
-      url: `https://soluvia.com/${lang}/services/seo-optimization`,
+      url: `https://soluvia.co/${lang}/services/seo-optimization`,
       siteName: "Soluvia",
       title: lang === "fr" ? "Optimisation SEO | Soluvia" : "SEO Optimization | Soluvia",
       description: lang === "fr"

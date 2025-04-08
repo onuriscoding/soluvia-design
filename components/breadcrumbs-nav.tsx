@@ -42,14 +42,14 @@ export function BreadcrumbsNav({ homeLabel = "Home", className = "" }: Breadcrum
   
   // Generate structured data for SEO
   const structuredDataItems = [
-    { name: homeLabel, url: `https://soluvia.com/${lang}` },
+    { name: homeLabel, url: `https://soluvia.co/${lang}` },
     ...pathWithoutLang.map((part, index) => {
       const path = `/${pathWithoutLang.slice(0, index + 1).join("/")}`;
       let label = part.replace(/-/g, " ");
       label = label.charAt(0).toUpperCase() + label.slice(1);
       return { 
         name: label, 
-        url: `https://soluvia.com/${lang}${path}` 
+        url: `https://soluvia.co/${lang}${path}` 
       };
     }),
   ];

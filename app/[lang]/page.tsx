@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     description: lang === "fr"
       ? "Soluvia fournit des services experts en conception web, développement, optimisation SEO et solutions IA pour aider les entreprises à prospérer dans le monde numérique."
       : "Soluvia provides expert web design, development, SEO optimization, and AI solutions to help businesses thrive in the digital world. Transform your online presence with our innovative approach.",
-    metadataBase: new URL("https://soluvia.com"),
+    metadataBase: new URL("https://soluvia.co"),
     keywords: [
       "web design", "web development", "SEO", "AI solutions", 
       "digital marketing", "Soluvia", "creative agency",
@@ -36,16 +36,16 @@ export async function generateMetadata({ params }: { params: { lang: string } })
       "business growth", "online presence", "digital transformation"
     ],
     alternates: {
-      canonical: "https://soluvia.com",
+      canonical: "https://soluvia.co",
       languages: {
-        'en': 'https://soluvia.com/en',
-        'fr': 'https://soluvia.com/fr',
+        'en': 'https://soluvia.co/en',
+        'fr': 'https://soluvia.co/fr',
       },
     },
     openGraph: {
       type: "website",
       locale: lang === "fr" ? "fr_FR" : "en_US",
-      url: `https://soluvia.com/${lang}`,
+      url: `https://soluvia.co/${lang}`,
       siteName: "Soluvia",
       title: lang === "fr" ? "Soluvia | Solutions Numériques Créatives" : "Soluvia | Creative Digital Solutions",
       description: lang === "fr"

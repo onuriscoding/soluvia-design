@@ -19,7 +19,7 @@ export const seoServices = {
       "provider": {
         "@type": "Organization",
         "name": "Soluvia",
-        "url": "https://soluvia.com"
+        "url": "https://soluvia.co"
       },
       "areaServed": "Worldwide",
       "serviceType": "SEO Optimization"
@@ -47,7 +47,7 @@ export const seoServices = {
         "provider": {
           "@type": "Organization",
           "name": "Soluvia",
-          "url": "https://soluvia.com"
+          "url": "https://soluvia.co"
         }
       }
     },
@@ -72,7 +72,7 @@ export const seoServices = {
         "provider": {
           "@type": "Organization",
           "name": "Soluvia",
-          "url": "https://soluvia.com"
+          "url": "https://soluvia.co"
         }
       }
     },
@@ -97,7 +97,7 @@ export const seoServices = {
         "provider": {
           "@type": "Organization",
           "name": "Soluvia",
-          "url": "https://soluvia.com"
+          "url": "https://soluvia.co"
         }
       }
     },
@@ -122,7 +122,7 @@ export const seoServices = {
         "provider": {
           "@type": "Organization",
           "name": "Soluvia",
-          "url": "https://soluvia.com"
+          "url": "https://soluvia.co"
         }
       }
     }

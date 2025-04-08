@@ -3,7 +3,7 @@ const path = require('path');
 const prettier = require('prettier');
 
 // Base URL of the website
-const BASE_URL = 'https://soluvia.com';
+const BASE_URL = 'https://soluvia.co';
 
 // Languages supported
 const LANGUAGES = ['en', 'fr'];
