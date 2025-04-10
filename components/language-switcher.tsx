@@ -50,8 +50,8 @@ export function LanguageSwitcher({
           value={language}
           onChange={(e) => changeLanguage(e.target.value as "en" | "fr")}
         >
-          <option value="en">{t("language.en")}</option>
-          <option value="fr">{t("language.fr")}</option>
+          <option value="en">{t("languageSelector.en")}</option>
+          <option value="fr">{t("languageSelector.fr")}</option>
         </select>
       </div>
     );

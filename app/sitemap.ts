@@ -59,6 +59,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/how-it-works' },
     { path: '/resources/faq' },
     { path: '/resources/support' },
+    { path: '/privacy-policy' },
+    { path: '/terms-of-service' },
   ];
 
   // Generate entries for English language

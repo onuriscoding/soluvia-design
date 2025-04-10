@@ -1,4 +1,5 @@
 {
+  "language": "en",
   "navigation": {
     "services": "SERVICES",
     "howItWorks": "HOW IT WORKS",
@@ -6,7 +7,7 @@
     "contact": "CONTACT",
     "getStarted": "GET STARTED",
     "ourProcess": "OUR PROCESS",
-    "learnMore": "Learn More",
+    "learnMore": "Explore Service Details",
     "webDesign": "WEB DESIGN & DEVELOPMENT",
     "webDesignDescription": "Custom website design and development tailored to your brand.",
     "aiAutomation": "AI AUTOMATION",
@@ -151,19 +152,9 @@
     "sectionSubtitle": "Don't just take our word for it. Here's what our clients have to say about working with us.",
     "clients": [
       {
-        "name": "Elise Van den Broeck",
-        "position": "Marketing Director, NovaTex Brussels",
-        "testimonial": "Soluvia completely redefined our online presence. Their blend of creativity and technical precision truly exceeded our expectations."
-      },
-      {
-        "name": "Quentin Venturo",
-        "position": "Founder, Atelier Venturo",
-        "testimonial": "Soluvia truly understood the essence of our brand. The website they delivered is elegant, intuitive, and perfectly aligned with our vision."
-      },
-      {
-        "name": "Anke De Smet",
-        "position": "Communications Manager, Boutique Co",
-        "testimonial": "Working with Soluvia was a great decision. Their professionalism and ability to listen helped us launch a modern, high-performing website that attracts more prospects."
+        "name": "Mustafa Dogru",
+        "position": "Founder, MD Cars",
+        "testimonial": "Soluvia has really understood the essence of our brand. The website they delivered is elegant, intuitive, and perfectly aligned with our vision."
       }
     ]
   },
@@ -640,7 +631,7 @@
     "termsOfService": "Terms of Service",
     "sitemap": "Sitemap"
   },
-  "language": {
+  "languageSelector": {
     "en": "English",
     "fr": "Français"
   }

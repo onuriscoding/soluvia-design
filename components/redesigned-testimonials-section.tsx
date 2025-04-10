@@ -274,11 +274,11 @@ export function RedesignedTestimonialsSection({
                       "
                     </p>
                     <div className="flex items-center justify-center">
-                      <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-rose mr-4">
+                      <div className="relative h-20 w-20 overflow-hidden rounded-full border-2 border-rose mr-4">
                         <Image
                           src={
                             testimonialsToUse[currentIndex].avatar ||
-                            "/placeholder.svg"
+                            "/md-cars.jpg"
                           }
                           alt={testimonialsToUse[currentIndex].name}
                           fill
