@@ -53,14 +53,20 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Redirect to the appropriate locale path
+  // Handle root path - this ensures we don't have conflict between / and /en
+  if (pathname === '/') {
+    // Redirect to the appropriate locale path
+    const locale = getLocale(request);
+    request.nextUrl.pathname = `/${locale}`;
+    return NextResponse.redirect(request.nextUrl, 301); // Use 301 for permanent redirect
+  }
+
+  // For all other paths without locale, redirect to the appropriate locale path
   const locale = getLocale(request);
-  
-  // Build the new URL with locale
-  const newPath = pathname === '/' ? `/${locale}` : `/${locale}${pathname}`;
+  const newPath = `/${locale}${pathname}`;
   request.nextUrl.pathname = newPath;
   
-  return NextResponse.redirect(request.nextUrl);
+  return NextResponse.redirect(request.nextUrl, 301); // Use 301 for permanent redirect
 }
 
 // Configure matcher to handle all routes except static files

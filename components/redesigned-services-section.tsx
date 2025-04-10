@@ -441,7 +441,7 @@ export function RedesignedServicesSection() {
               <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
                 <Image
                   src={currentService.image || "/placeholder.svg"}
-                  alt={t(`services.${currentService.id}`)}
+                  alt={`Soluvia professional ${t(`services.${currentService.id}`)} services - Expert digital solutions for businesses`}
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"

@@ -298,6 +298,7 @@ export function RedesignedHeroSection({ dictionary }: { dictionary: any }) {
                     animationSpeed={12}
                     showBorder={false}
                     className="inline-block leading-tight"
+                    aria-label={`Soluvia ${text} - Creative Digital Solutions`}
                   >
                     {text}
                   </GradientText>

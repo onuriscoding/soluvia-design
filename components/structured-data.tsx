@@ -29,7 +29,13 @@ export function OrganizationStructuredData() {
   const data = {
     name: 'Soluvia',
     url: 'https://soluvia.co',
-    logo: 'https://soluvia.co/soluvia-s-no-bg.png',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://soluvia.co/soluvia-s-no-bg.png',
+      width: 112,
+      height: 112,
+      caption: 'Soluvia Logo'
+    },
     sameAs: [
       'https://twitter.com/SoluviaDesign',
       'https://www.linkedin.com/company/soluvia',

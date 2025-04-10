@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
       "business growth", "online presence", "digital transformation"
     ],
     alternates: {
-      canonical: "https://soluvia.co",
+      canonical: `https://soluvia.co/${lang}`,
       languages: {
         'en': 'https://soluvia.co/en',
         'fr': 'https://soluvia.co/fr',

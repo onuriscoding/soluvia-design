@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       path: '',
       images: [
+        '/soluvia-s-no-bg.png',
         '/soluvia.png',
         '/soluvia-final-no-bg.png'
       ]
@@ -92,7 +93,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 1,
     images: [
       `${baseUrl}/soluvia.png`,
-      `${baseUrl}/soluvia-final-no-bg.png`
+      `${baseUrl}/soluvia-final-no-bg.png`,
+      `${baseUrl}/soluvia-s-no-bg.png`
     ]
   };
 

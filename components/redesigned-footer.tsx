@@ -116,7 +116,7 @@ export function RedesignedFooter() {
                   whileHover={{ y: -5, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-[#252736] text-ivory/70 hover:bg-rose/20 hover:text-rose transition-all duration-300 border border-ivory/10"
-                  aria-label="X (formerly Twitter)"
+                  aria-label="Follow Soluvia on X (formerly Twitter)"
                 >
                   <XIcon className="h-5 w-5" />
                 </motion.a>
@@ -127,7 +127,7 @@ export function RedesignedFooter() {
                   whileHover={{ y: -5, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-[#252736] text-ivory/70 hover:bg-rose/20 hover:text-rose transition-all duration-300 border border-ivory/10"
-                  aria-label="Facebook"
+                  aria-label="Visit Soluvia Facebook Page"
                 >
                   <Facebook className="h-5 w-5" />
                 </motion.a>
@@ -138,7 +138,7 @@ export function RedesignedFooter() {
                   whileHover={{ y: -5, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-[#252736] text-ivory/70 hover:bg-rose/20 hover:text-rose transition-all duration-300 border border-ivory/10"
-                  aria-label="Instagram"
+                  aria-label="Follow Soluvia on Instagram"
                 >
                   <InstagramIcon className="h-5 w-5" />
                 </motion.a>
@@ -149,7 +149,7 @@ export function RedesignedFooter() {
                   whileHover={{ y: -5, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-[#252736] text-ivory/70 hover:bg-rose/20 hover:text-rose transition-all duration-300 border border-ivory/10"
-                  aria-label="LinkedIn"
+                  aria-label="Connect with Soluvia on LinkedIn"
                 >
                   <Linkedin className="h-5 w-5" />
                 </motion.a>
