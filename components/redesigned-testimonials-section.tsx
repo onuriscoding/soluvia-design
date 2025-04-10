@@ -292,7 +292,7 @@ export function RedesignedTestimonialsSection({
                         <p className="text-ivory/70">
                           {testimonialsToUse[currentIndex].role ||
                             testimonialsToUse[currentIndex].position}
-                          , {testimonialsToUse[currentIndex].company}
+                          {testimonialsToUse[currentIndex].company}
                         </p>
                       </div>
                     </div>
