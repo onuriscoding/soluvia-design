@@ -1,3 +1,60 @@
+export const metadata = {
+  title: "Soluvia | Creative Digital Solutions",
+  description: "Soluvia provides expert web design, development, SEO optimization, and AI solutions to help businesses thrive in the digital world. Elevate your online presence with our creative digital solutions.",
+  generator: "v0.dev",
+  metadataBase: new URL("https://soluvia.co"),
+  keywords: ["web design", "web development", "SEO", "AI solutions", "digital marketing", "Soluvia"],
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" }
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }
+    ],
+    other: [
+      { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" }
+    ]
+  },
+  manifest: "/site.webmanifest",
+  openGraph: {
+    title: "Soluvia | Creative Digital Solutions",
+    description: "Expert web design, development, SEO optimization, and AI solutions to help your business thrive online.",
+    url: "https://soluvia.co",
+    siteName: "Soluvia",
+    images: [
+      {
+        url: "/soluvia.png",
+        width: 1200,
+        height: 630,
+        alt: "Soluvia Design",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Soluvia | Creative Digital Solutions",
+    description: "Expert web design, development, SEO optimization, and AI solutions to help your business thrive online.",
+    images: ["/soluvia.png"],
+    creator: "@SoluviaDesign",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-video-preview': -1,
+      'max-snippet': -1,
+    },
+  },
+};
+
 import type React from "react";
 import { Inter, Anton } from "next/font/google";
 import { EnhancedNavigationBar } from "@/components/enhanced-navigation-bar";
@@ -37,14 +94,6 @@ export default async function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="google-site-verification" content="C6PFuzOdUFnB3OIMk6MlfM6u0Q7326NrvzVxrj58Ilo" />
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="android-chrome-192x192" sizes="192x192" href="/android-chrome-192x192.png" />
-        <link rel="android-chrome-512x512" sizes="512x512" href="/android-chrome-512x512.png" />
-        <link rel="manifest" href="/site.webmanifest" />
         
         {/* Logo Specific Structured Data */}
         <script
@@ -87,45 +136,3 @@ export default async function RootLayout({
     </html>
   );
 }
-
-export const metadata = {
-  title: "Soluvia | Creative Digital Solutions",
-  description: "Soluvia provides expert web design, development, SEO optimization, and AI solutions to help businesses thrive in the digital world. Elevate your online presence with our creative digital solutions.",
-  generator: "v0.dev",
-  metadataBase: new URL("https://soluvia.co"),
-  keywords: ["web design", "web development", "SEO", "AI solutions", "digital marketing", "Soluvia"],
-  openGraph: {
-    title: "Soluvia | Creative Digital Solutions",
-    description: "Expert web design, development, SEO optimization, and AI solutions to help your business thrive online.",
-    url: "https://soluvia.co",
-    siteName: "Soluvia",
-    images: [
-      {
-        url: "/soluvia.png",
-        width: 1200,
-        height: 630,
-        alt: "Soluvia Design",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Soluvia | Creative Digital Solutions",
-    description: "Expert web design, development, SEO optimization, and AI solutions to help your business thrive online.",
-    images: ["/soluvia.png"],
-    creator: "@SoluviaDesign",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-video-preview': -1,
-      'max-snippet': -1,
-    },
-  },
-};

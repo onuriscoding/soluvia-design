@@ -278,16 +278,7 @@ export function EnhancedNavigationBar() {
                                   {t(child.descriptionKey)}
                                 </div>
                               )}
-                              {"price" in child && child.price && (
-                                <div className="text-sm font-bold font-inter tracking-wide text-rose">
-                                  <span className="opacity-70 font-normal text-sm">
-                                    from{" "}
-                                  </span>
-                                  <span className="text-lg font-inter text-ivory">
-                                    {child.price.replace("from ", "")}
-                                  </span>
-                                </div>
-                              )}
+                              
                             </Link>
                           ))}
                         </div>
