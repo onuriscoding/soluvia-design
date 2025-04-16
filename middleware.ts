@@ -29,8 +29,20 @@ function getLocale(request: NextRequest): string {
   return defaultLocale;
 }
 
+// Add cache control for static assets
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const response = NextResponse.next();
+  
+  // Add cache control headers for static assets
+  if (
+    pathname.match(/\.(jpg|jpeg|png|webp|avif|gif|ico|svg|woff|woff2|ttf|eot)$/) ||
+    pathname.startsWith('/_next/image') ||
+    pathname.startsWith('/_next/static')
+  ) {
+    // Cache for 1 week (604800 seconds)
+    response.headers.set('Cache-Control', 'public, max-age=604800, immutable');
+  }
   
   // Skip middleware for static files and special routes
   if (
@@ -39,7 +51,7 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/api') || 
     pathname.includes('favicon')
   ) {
-    return;
+    return response;
   }
   
   // Check if the pathname already has a locale
@@ -50,7 +62,7 @@ export function middleware(request: NextRequest) {
   // If URL already has locale, don't redirect
   if (pathnameHasLocale) {
     // Allow the request to continue to the destination
-    return NextResponse.next();
+    return response;
   }
 
   // Handle root path - this ensures we don't have conflict between / and /en
@@ -80,5 +92,9 @@ export const config = {
      * 4. all files in the public folder
      */
     '/((?!api|_next/static|_next/image|static|.*\\..*|favicon.ico).*)',
+    
+    // Match image and asset paths for cache control
+    '/_next/image',
+    '/_next/static',
   ],
 }; 

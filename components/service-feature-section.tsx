@@ -92,7 +92,7 @@ export function ServiceFeatureSection({ feature, reversed = false }: ServiceFeat
         </div>
       </div>
       <motion.div
-        className="relative"
+        className={`relative ${reversed ? "md:order-1" : "md:order-2"}`}
         style={{
           perspective: "1000px",
         }}
@@ -105,7 +105,6 @@ export function ServiceFeatureSection({ feature, reversed = false }: ServiceFeat
           type: "spring",
           stiffness: 100,
         }}
-        className={`${reversed ? "md:order-1" : "md:order-2"}`}
       >
         <motion.div
           className={`absolute -inset-4 rounded-2xl bg-gradient-to-r ${gradient} opacity-70 blur-lg`}
@@ -131,7 +130,15 @@ export function ServiceFeatureSection({ feature, reversed = false }: ServiceFeat
             transition: { duration: 0.3 },
           }}
         >
-          <Image src={image || "/placeholder.svg"} alt={title} fill className="object-cover" />
+          <Image 
+            src={image || "/placeholder.svg"} 
+            alt={title} 
+            fill 
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            quality={80}
+            loading="lazy"
+          />
           <motion.div
             className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0`}
             whileHover={{ opacity: 0.3, transition: { duration: 0.3 } }}

@@ -207,6 +207,10 @@ export function RedesignedPortfolioSection() {
                           }`}
                           fill
                           className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          quality={80}
+                          loading={activeImageIndex === 0 ? "eager" : "lazy"}
+                          priority={activeImageIndex === 0}
                         />
                       </motion.div>
                     </AnimatePresence>

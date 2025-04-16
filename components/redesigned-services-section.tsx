@@ -426,7 +426,6 @@ export function RedesignedServicesSection() {
               transition={imageTransition}
               layout={!isMobile && !isLoading}
             >
-              {/* Gradient border effect with smoother animation */}
               <motion.div
                 className={`absolute -inset-1 bg-gradient-to-br from-${currentService.color} to-${currentService.color}-light rounded-xl opacity-70 blur-sm`}
                 initial={{ scale: 0.95, opacity: 0.5 }}
@@ -444,7 +443,8 @@ export function RedesignedServicesSection() {
                   alt={`Soluvia professional ${t(`services.${currentService.id}`)} services - Expert digital solutions for businesses`}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  quality={85}
                   priority={!isLoading}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-60"></div>

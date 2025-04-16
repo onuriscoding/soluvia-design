@@ -65,16 +65,6 @@ html, body {
   max-width: 100%;
 }
 
-/* Hide scrollbar but maintain functionality */
-/* html::-webkit-scrollbar {
-  display: none;
-}
-
-html {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-} */
-
 /* Custom scrollbar styles */
 ::-webkit-scrollbar {
   -webkit-appearance: none;
@@ -100,27 +90,10 @@ html {
   scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
-/* Safari iOS specific fixes */
-@supports (-webkit-touch-callout: none) {
-  ::-webkit-scrollbar {
-    width: 10px !important;
-    -webkit-appearance: none !important;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    border-radius: 4px !important;
-  }
-}
-
 /* Mobile styles */
 @media (max-width: 768px) {
   ::-webkit-scrollbar {
     width: 4px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
   }
 }
 
@@ -168,20 +141,23 @@ html {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-rose via-rose to-rose/80;
 }
 
-/* Animated floating elements */
+/* Animated floating elements - consolidated with will-change */
+.floating-element,
+.floating-element-slow,
+.floating-element-fast {
+  will-change: transform;
+}
+
 .floating-element {
   animation: float 8s ease-in-out infinite;
-  will-change: transform;
 }
 
 .floating-element-slow {
   animation: float 12s ease-in-out infinite;
-  will-change: transform;
 }
 
 .floating-element-fast {
   animation: float 6s ease-in-out infinite;
-  will-change: transform;
 }
 
 @keyframes float {
@@ -201,11 +177,12 @@ html {
   @apply h-2 w-2 rounded-full;
 }
 
-.dot-blue {
+/* Color dot styles - consolidated */
+.dot-blue, .dot-purple {
   @apply bg-sapphire;
 }
 
-.dot-pink {
+.dot-pink, .dot-orange {
   @apply bg-rose;
 }
 
@@ -215,14 +192,6 @@ html {
 
 .dot-yellow {
   @apply bg-ivory;
-}
-
-.dot-purple {
-  @apply bg-sapphire;
-}
-
-.dot-orange {
-  @apply bg-rose;
 }
 
 /* Animated background gradient */
