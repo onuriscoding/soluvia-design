@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { RedesignedContactSection } from "@/components/redesigned-contact-section";
 import { getDictionary } from "../../dictionaries";
 import GradientText from "@/app/animations/gradient-text";
@@ -10,6 +11,48 @@ import {
   FileText,
   MessageSquare,
 } from "lucide-react";
+
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { lang: string } 
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang || "en";
+  
+  return {
+    title: lang === "fr" 
+      ? "Support | Soluvia" 
+      : "Support | Soluvia",
+    description: lang === "fr"
+      ? "Nous sommes là pour vous aider avec toutes vos questions ou préoccupations concernant nos services."
+      : "We're here to help with any questions or concerns you may have about our services.",
+    alternates: {
+      canonical: `https://www.soluvia.co/${lang}/resources/support`,
+      languages: {
+        'en': 'https://www.soluvia.co/en/resources/support',
+        'fr': 'https://www.soluvia.co/fr/resources/support',
+      },
+    },
+    openGraph: {
+      title: "Support | Soluvia",
+      description: "We're here to help with any questions or concerns you may have about our services.",
+      url: `https://www.soluvia.co/${lang}/resources/support`,
+      images: [
+        {
+          url: "/support-og.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Soluvia Support",
+        },
+      ],
+    },
+    twitter: {
+      title: "Support | Soluvia",
+      description: "We're here to help with any questions or concerns you may have about our services.",
+    },
+  };
+}
 
 export default async function SupportPage({
   params: { lang },

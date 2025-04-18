@@ -2,7 +2,7 @@ export const metadata = {
   title: "Soluvia | Creative Digital Solutions",
   description: "Soluvia provides expert web design, development, SEO optimization, and AI solutions to help businesses thrive in the digital world. Elevate your online presence with our creative digital solutions.",
   generator: "v0.dev",
-  metadataBase: new URL("https://soluvia.co"),
+  metadataBase: new URL("https://www.soluvia.co"),
   keywords: ["web design", "web development", "SEO", "AI solutions", "digital marketing", "Soluvia"],
   icons: {
     icon: [
@@ -22,7 +22,7 @@ export const metadata = {
   openGraph: {
     title: "Soluvia | Creative Digital Solutions",
     description: "Expert web design, development, SEO optimization, and AI solutions to help your business thrive online.",
-    url: "https://soluvia.co",
+    url: "https://www.soluvia.co",
     siteName: "Soluvia",
     images: [
       {
@@ -102,8 +102,8 @@ export default async function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "url": "https://soluvia.co",
-              "logo": "https://soluvia.co/soluvia-s-no-bg.png"
+              "url": "https://www.soluvia.co",
+              "logo": "https://www.soluvia.co/soluvia-s-no-bg.png"
             })
           }}
         />

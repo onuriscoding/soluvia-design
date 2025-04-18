@@ -16,18 +16,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: lang === "fr"
       ? "Consultez les conditions d'utilisation de Soluvia qui régissent l'utilisation de notre site web et de nos services."
       : "Review Soluvia's terms of service that govern your use of our website and services.",
-    metadataBase: new URL("https://soluvia.co"),
+    metadataBase: new URL("https://www.soluvia.co"),
     alternates: {
-      canonical: `https://soluvia.co/${lang}/terms-of-service`,
+      canonical: `https://www.soluvia.co/${lang}/terms-of-service`,
       languages: {
-        'en': 'https://soluvia.co/en/terms-of-service',
-        'fr': 'https://soluvia.co/fr/terms-of-service',
+        'en': 'https://www.soluvia.co/en/terms-of-service',
+        'fr': 'https://www.soluvia.co/fr/terms-of-service',
       },
     },
     openGraph: {
       type: "website",
       locale: lang === "fr" ? "fr_FR" : "en_US",
-      url: `https://soluvia.co/${lang}/terms-of-service`,
+      url: `https://www.soluvia.co/${lang}/terms-of-service`,
       siteName: "Soluvia",
       title: lang === "fr" ? "Conditions d'utilisation | Soluvia" : "Terms of Service | Soluvia",
       description: lang === "fr"

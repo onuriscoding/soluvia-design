@@ -15,10 +15,17 @@ export async function generateMetadata({
   return {
     title: `${dict.contact.contactTitle1} ${dict.contact.contactTitle2} | Soluvia`,
     description: dict.contact.contactSubTitle,
+    alternates: {
+      canonical: `https://www.soluvia.co/${lang}/contact`,
+      languages: {
+        'en': 'https://www.soluvia.co/en/contact',
+        'fr': 'https://www.soluvia.co/fr/contact',
+      },
+    },
     openGraph: {
       title: `${dict.contact.contactTitle1} ${dict.contact.contactTitle2} | Soluvia`,
       description: dict.contact.contactSubTitle,
-      url: "https://soluviadesign.com/contact",
+      url: `https://www.soluvia.co/${lang}/contact`,
       images: [
         {
           url: "/contact-og.jpg",

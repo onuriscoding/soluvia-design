@@ -10,10 +10,17 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   return {
     title: `${dict.about.title1} | Soluvia`,
     description: dict.about.subTitle,
+    alternates: {
+      canonical: `https://www.soluvia.co/${lang}/about`,
+      languages: {
+        'en': 'https://www.soluvia.co/en/about',
+        'fr': 'https://www.soluvia.co/fr/about',
+      },
+    },
     openGraph: {
       title: `${dict.about.title1} | Soluvia Design`,
       description: dict.about.subTitle,
-      url: "https://soluviadesign.com/about",
+      url: `https://www.soluvia.co/${lang}/about`,
       images: [
         {
           url: "/about-og.jpg",

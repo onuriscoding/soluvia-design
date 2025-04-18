@@ -5,6 +5,14 @@ import type { NextRequest } from "next/server";
 const locales = ['en', 'fr'];
 const defaultLocale = 'en';
 
+// Define legacy paths that need special handling
+const legacyPaths = [
+  '/terms-of-service',
+  '/about',
+  '/contact',
+  '/privacy-policy',
+];
+
 // Get the preferred locale from the request
 function getLocale(request: NextRequest): string {
   // Check for locale cookie first
@@ -31,8 +39,15 @@ function getLocale(request: NextRequest): string {
 
 // Add cache control for static assets
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, host } = request.nextUrl;
   const response = NextResponse.next();
+  
+  // Handle non-www to www redirect for SEO consistency
+  if (!host.startsWith('www.') && !host.includes('localhost') && !host.includes('127.0.0.1')) {
+    const newUrl = new URL(request.url);
+    newUrl.host = 'www.' + host;
+    return NextResponse.redirect(newUrl, 301);
+  }
   
   // Add cache control headers for static assets
   if (
@@ -52,6 +67,13 @@ export function middleware(request: NextRequest) {
     pathname.includes('favicon')
   ) {
     return response;
+  }
+  
+  // Handle legacy paths without locale prefix
+  if (legacyPaths.includes(pathname)) {
+    const locale = getLocale(request);
+    request.nextUrl.pathname = `/${locale}${pathname}`;
+    return NextResponse.redirect(request.nextUrl, 301);
   }
   
   // Check if the pathname already has a locale
