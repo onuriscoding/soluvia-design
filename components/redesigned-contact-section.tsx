@@ -4,7 +4,7 @@ import type React from "react";
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Send, CheckCircle, AlertCircle, Mail, Phone, Linkedin, Facebook } from "lucide-react";
+import { Send, CheckCircle, AlertCircle, Mail, Phone, Linkedin} from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -40,6 +40,22 @@ const InstagramIcon = ({ className }: { className?: string }) => (
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+  </svg>
+);
+
+// Custom WhatsApp icon component
+const WhatsAppIcon = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
   </svg>
 );
 
@@ -549,10 +565,29 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                       {dictionary.contact.contactPhone}
                     </h4>
                     <a
-                      href="tel:+32499242951"
+                      href="tel:+442033186185"
                       className="text-ivory/70 hover:text-sapphire transition-colors"
                     >
-                      +32 499 24 29 51
+                      +44 (20) 3318 6185
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sapphire/10 text-sapphire mr-4">
+                    <WhatsAppIcon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-ivory mb-1">
+                      WhatsApp
+                    </h4>
+                    <a
+                      href="https://wa.me/447438799482"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-ivory/70 hover:text-sapphire transition-colors"
+                    >
+                      +44 (74) 3879 9482
                     </a>
                   </div>
                 </div>
@@ -576,11 +611,11 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-ivory/70">{dictionary.contact.monday} - {dictionary.contact.friday}</span>
-                    <span className="text-ivory">9:00 - 18:00</span>
+                    <span className="text-ivory">9:00 - 19:00</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-ivory/70">{dictionary.contact.saturday}</span>
-                    <span className="text-ivory">10:00 - 15:00</span>
+                    <span className="text-ivory">10:00 - 20:00</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-ivory/70">{dictionary.contact.sunday}</span>
@@ -605,6 +640,7 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                   />
                 </motion.h3>
                 <div className="flex gap-4">
+                  {/*}
                   <motion.a
                     href="https://x.com/soluviaco"
                     target="_blank"
@@ -619,6 +655,8 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                   >
                     <XIcon className="h-5 w-5" />
                   </motion.a>
+                  
+
                   <motion.a
                     href="https://www.facebook.com/profile.php?id=61574853640937"
                     target="_blank"
@@ -633,6 +671,7 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                   >
                     <Facebook className="h-5 w-5" />
                   </motion.a>
+                  */}
                   <motion.a
                     href="https://www.instagram.com/soluviaco/"
                     target="_blank"

@@ -255,7 +255,7 @@ export default function PrivacyPolicyClient({ dictionary, lang }: PrivacyPolicyC
               <div className="p-3 bg-charcoal/50 rounded-lg border border-ivory/10 mt-2">
                 <p className="font-medium">Soluvia</p>
                 <p>Email: <a href="mailto:info@soluvia.co" className="text-rose hover:text-rose/80 transition-colors">info@soluvia.co</a></p>
-                <p>{isEn ? "Phone: +32 (499) 24 29 51" : "Téléphone: +32 (499) 24 29 51"}</p>
+                <p>{isEn ? "Phone: +44 (20) 3318 6185" : "Téléphone: +44 (20) 3318 6185"}</p>
               </div>
             </div>
           </motion.section>

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Linkedin,
-  Facebook,
+
   ArrowRight,
   Phone,
   Mail,
@@ -47,6 +47,22 @@ const XIcon = ({ className }: { className?: string }) => (
     className={className}
   >
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
+// Custom WhatsApp icon component
+const WhatsAppIcon = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
   </svg>
 );
 
@@ -109,6 +125,7 @@ export function RedesignedFooter() {
               </p>
 
               <div className="mt-8 flex gap-4">
+                {/*
                 <motion.a
                   href="https://x.com/soluviaco"
                   target="_blank"
@@ -131,6 +148,7 @@ export function RedesignedFooter() {
                 >
                   <Facebook className="h-5 w-5" />
                 </motion.a>
+                */}
                 <motion.a
                   href="https://www.instagram.com/soluviaco/"
                   target="_blank"
@@ -168,10 +186,21 @@ export function RedesignedFooter() {
                 <div className="flex items-center">
                   <Phone className="h-5 w-5 text-rose mr-3" />
                   <a
-                    href="tel:+15551234567"
+                    href="tel:+442033186185"
                     className="text-ivory/70 hover:text-rose transition-colors"
                   >
-                    +32 (499) 24 29 51
+                    +44 (20) 3318 6185
+                  </a>
+                </div>
+                <div className="flex items-center">
+                  <WhatsAppIcon className="h-5 w-5 text-rose mr-3" />
+                  <a
+                    href="https://wa.me/447438799482"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-ivory/70 hover:text-rose transition-colors"
+                  >
+                    +44 (74) 3879 9482
                   </a>
                 </div>
               </div>

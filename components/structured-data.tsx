@@ -37,9 +37,9 @@ export function OrganizationStructuredData() {
       caption: 'Soluvia Logo'
     },
     sameAs: [
-      'https://twitter.com/SoluviaDesign',
-      'https://www.linkedin.com/company/soluvia',
-      'https://www.facebook.com/SoluviaDesign'
+      'https://www.instagram.com/soluviaco/',
+      'https://www.linkedin.com/company/soluviaco',
+
     ],
     description: 'Soluvia provides expert web design, development, SEO optimization, and AI solutions to help businesses thrive in the digital world.',
     address: {
@@ -48,7 +48,7 @@ export function OrganizationStructuredData() {
     },
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+32-499-242-951',
+      telephone: '+44-20-3318-6185',
       contactType: 'customer service',
       email: 'info@soluvia.co'
     }
