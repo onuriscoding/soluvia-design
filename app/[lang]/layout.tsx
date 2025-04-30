@@ -64,6 +64,7 @@ import { I18nProvider } from "@/lib/i18n/i18nContext";
 import { OrganizationStructuredData, WebsiteStructuredData } from "@/components/structured-data";
 import "@/styles/enhanced-animations.css";
 import Iridescence from "../animations/bg";
+import { WhatsAppButton } from "@/components/whatsapp-button";
 
 import "../globals.css";
 
@@ -130,6 +131,9 @@ export default async function RootLayout({
               </PageTransition>
               <RedesignedFooter />
             </div>
+
+            {/* WhatsApp Button */}
+            <WhatsAppButton />
           </div>
         </I18nProvider>
       </body>

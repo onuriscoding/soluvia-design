@@ -177,7 +177,7 @@ export function RedesignedFooter() {
                 <div className="flex items-center">
                   <Mail className="h-5 w-5 text-rose mr-3" />
                   <a
-                    href="mailto:hello@soluviadesign.com"
+                    href="mailto:info@soluvia.co"
                     className="text-ivory/70 hover:text-rose transition-colors"
                   >
                     info@soluvia.co
@@ -190,17 +190,6 @@ export function RedesignedFooter() {
                     className="text-ivory/70 hover:text-rose transition-colors"
                   >
                     +44 (20) 3318 6185
-                  </a>
-                </div>
-                <div className="flex items-center">
-                  <WhatsAppIcon className="h-5 w-5 text-rose mr-3" />
-                  <a
-                    href="https://wa.me/447438799482"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-ivory/70 hover:text-rose transition-colors"
-                  >
-                    +44 (74) 3879 9482
                   </a>
                 </div>
               </div>
