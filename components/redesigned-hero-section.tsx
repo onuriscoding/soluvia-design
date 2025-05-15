@@ -288,12 +288,10 @@ export function RedesignedHeroSection({ dictionary }: { dictionary: any }) {
                 renderText={(text) => (
                   <GradientText
                     colors={[
-                      "#3d5a80",
                       "#b76e79",
                       "#e0d5c0",
-                      "#3d5a80",
                       "#b76e79",
-                      "#3d5a80",
+                      "#e0d5c0"
                     ]}
                     animationSpeed={12}
                     showBorder={false}
@@ -308,7 +306,7 @@ export function RedesignedHeroSection({ dictionary }: { dictionary: any }) {
           </motion.h1>
 
           <motion.p
-            className="mx-auto mt-6 font-inter text-lg max-w-3xl text-medium text-ivory/70 md:text-2xl"
+            className="mx-auto mt-6 font-inter text-lg max-w-3xl text-medium text-ivory/90 md:text-2xl"
             variants={itemVariants}
           >
             {t("hero.description")}
@@ -320,9 +318,8 @@ export function RedesignedHeroSection({ dictionary }: { dictionary: any }) {
           >
             <Link
               href={localizeUrl("/contact")}
-              className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-ivory font-bold tracking-thighter shadow-lg transition-all duration-300 hover:shadow-rose/30"
+              className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 px-6 py-3 text-rose font-bold tracking-thighter hover:text-charcoal shadow-lg transition-all duration-300 hover:shadow-rose/30"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
               <span className="relative z-10 flex items-center">
                 {dictionary.navigation.getStarted}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />

@@ -136,12 +136,10 @@ export default function ServicesClient({ dictionary }: { dictionary: any }) {
                 {currentLang === "fr" ? "Nos " : "Our "}
                 <GradientText
                   colors={[
-                    "#3d5a80",
                     "#b76e79",
                     "#e0d5c0",
-                    "#3d5a80",
                     "#b76e79",
-                    "#3d5a80",
+                    "#e0d5c0",
                   ]}
                   animationSpeed={12}
                   showBorder={false}
@@ -174,14 +172,7 @@ export default function ServicesClient({ dictionary }: { dictionary: any }) {
                   >
                     <Button
                       asChild
-                      className={`group relative flex items-center gap-2 px-6 py-2.5 rounded-full 
-                        bg-gradient-to-r ${
-                          service.buttonGradient
-                        } text-ivory hover:shadow-lg 
-                        hover:shadow-${service.color.replace(
-                          "text-",
-                          ""
-                        )}/20 cursor-pointer`}
+                      className="group relative flex items-center gap-2 px-6 py-2.5 rounded-full bg-ivory/90 text-rose hover:text-charcoal font-bold tracking-tighter transition-all duration-300"
                     >
                       <Link
                         href={`/${currentLang}${service.link}`}

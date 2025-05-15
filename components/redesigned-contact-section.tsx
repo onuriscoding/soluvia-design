@@ -199,12 +199,10 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
           <h2 className="text-6xl font-bold tracking-tight sm:text-4xl md:text-8xl">
             <GradientText
               colors={[
-                "#3d5a80",
                 "#b76e79",
                 "#e0d5c0",
-                "#3d5a80",
                 "#b76e79",
-                "#3d5a80",
+                "#e0d5c0",
               ]}
               animationSpeed={12}
               showBorder={false}
@@ -212,6 +210,7 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
             >
               {dictionary.contact.contactTitle1}
             </GradientText>
+            
             {dictionary.contact.contactTitle2}
           </h2>
           <p className="mt-4 text-lg md:text-2xl text-ivory/70">
@@ -224,7 +223,7 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
             initial={{ opacity: 1, x: 0 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5 }}
-            whileHover={{ y: -5 }}
+
             className="transition-all duration-500 h-full"
           >
             <div className="relative overflow-hidden rounded-2xl border border-ivory/10 bg-charcoal/50 p-10 backdrop-blur-sm shadow-lg hover:shadow-rose/5 transition-all duration-300 group h-full">
@@ -260,7 +259,7 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                     </p>
                     <Button
                       onClick={() => resetForm()}
-                      className="bg-gradient-to-r from-rose to-sapphire hover:shadow-lg hover:shadow-rose/20"
+                      className="bg-ivory/90 text-rose hover:text-charcoal font-bold tracking-tighter transition-all duration-300"
                     >
                       {dictionary.contact.contactForm.anotherMessage}
                     </Button>
@@ -500,7 +499,7 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                     <Button
                       type="submit"
                       variant="default"
-                      className="mt-4 w-full bg-gradient-to-r from-rose to-sapphire hover:shadow-lg hover:shadow-rose/20"
+                      className="mt-4 w-full bg-ivory/90 text-rose hover:text-charcoal font-bold tracking-tighter transition-all duration-300"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? dictionary.contact.contactForm.sending : dictionary.contact.contactForm.sendMessage}

@@ -257,12 +257,10 @@ export function RedesignedServicesSection() {
             {t("services.sectionTitle")}{" "}
             <GradientText
               colors={[
-                "#3d5a80",
                 "#b76e79",
                 "#e0d5c0",
-                "#3d5a80",
                 "#b76e79",
-                "#3d5a80",
+                "#e0d5c0",
               ]}
               animationSpeed={12}
               showBorder={false}
@@ -287,22 +285,13 @@ export function RedesignedServicesSection() {
             <motion.button
               key={service.id}
               onClick={() => handleServiceClick(service.id)}
-              className={`px-4 py-2 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 flex items-center gap-2 ${
+              className={`group relative inline-flex items-center justify-center overflow-hidden rounded-full px-4 py-2 text-sm font-bold tracking-thighter transition-all duration-300 gap-2 ${
                 activeService === service.id
-                  ? "text-ivory backdrop-blur-sm border border-ivory/10"
-                  : "bg-charcoal/50 text-ivory/70 hover:text-ivory hover:bg-charcoal/70 border border-ivory/10"
+                  ? "bg-transparent text-ivory/90 shadow-rose/30 border border-ivory/10 backdrop-blur-sm"
+                  : "bg-ivory/90 text-rose hover:text-charcoal hover:shadow-rose/30 shadow-lg"
               }`}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              whileHover={{
-                scale: activeService === service.id ? 1 : 1.05,
-              }}
-              style={{
-                background:
-                  activeService === service.id
-                    ? `linear-gradient(to right, var(--${service.color}), var(--${service.color}-light))`
-                    : undefined,
-              }}
               transition={{
                 duration: 0.5,
                 delay: services.findIndex((s) => s.id === service.id) * 0.1,
@@ -410,7 +399,7 @@ export function RedesignedServicesSection() {
               >
                 <Link
                   href={localizeUrl(currentService.link)}
-                  className={`inline-flex items-center justify-center px-8 py-3 rounded-full bg-gradient-to-r from-${currentService.color} to-${currentService.color}-light text-ivory font-bold tracking-tighter hover:shadow-lg hover:shadow-${currentService.color}/20 transition-all duration-300`}
+                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-ivory/90 px-8 py-3 text-rose font-bold tracking-thighter hover:text-charcoal shadow-lg transition-all duration-300 hover:shadow-rose/30"
                 >
                   {t("navigation.learnMore")}
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

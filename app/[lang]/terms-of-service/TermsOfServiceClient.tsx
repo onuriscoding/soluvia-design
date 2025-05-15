@@ -73,12 +73,10 @@ export default function TermsOfServiceClient({ dictionary, lang }: TermsOfServic
               {isEn ? "Terms of " : "Conditions "}
               <GradientText
                 colors={[
-                  "#3d5a80",
                   "#b76e79",
                   "#e0d5c0",
-                  "#3d5a80",
                   "#b76e79",
-                  "#3d5a80",
+                  "#e0d5c0",
                 ]}
                 animationSpeed={12}
                 showBorder={false}

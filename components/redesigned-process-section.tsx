@@ -247,12 +247,10 @@ export function RedesignedProcessSection({ dictionary }: { dictionary: any }) {
             {t("process.sectionTitle1")}{" "}
             <GradientText
               colors={[
-                "#3d5a80",
                 "#b76e79",
                 "#e0d5c0",
-                "#3d5a80",
                 "#b76e79",
-                "#3d5a80",
+                "#e0d5c0",
               ]}
               animationSpeed={12}
               showBorder={false}
@@ -536,9 +534,8 @@ export function RedesignedProcessSection({ dictionary }: { dictionary: any }) {
           </h3>
           <Link
             href={localizeUrl("/contact")}
-            className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 font-bold tracking-thighter text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
+            className="group relative text-rose inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 px-6 py-3 font-bold tracking-thighter hover:text-charcoal shadow-lg transition-all duration-300 hover:shadow-rose/30"
           >
-            <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
             <span className="relative z-10 flex items-center">
               {dictionary?.navigation?.getStarted || "GET STARTED"}
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

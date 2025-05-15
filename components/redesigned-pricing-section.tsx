@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Check, X } from "lucide-react";
@@ -141,6 +141,31 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
   const [animationComplete, setAnimationComplete] = useState(false);
   const localizeUrl = useLocalizedUrl();
 
+  // useEffect for the rotating border animation on the popular CTA
+  useEffect(() => {
+    if (!animationComplete) return;
+
+    const popularButton = document.getElementById("popular-plan-cta") as HTMLElement | null;
+    if (!popularButton) return;
+
+    let angle = 0;
+    let animationFrameId: number;
+
+    const rotate = () => {
+      angle = (angle + 0.7) % 360; // Adjust speed of rotation here (0.7 is a moderate speed)
+      popularButton.style.setProperty("--angle", `${angle}deg`);
+      animationFrameId = requestAnimationFrame(rotate);
+    };
+
+    rotate();
+
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [animationComplete]);
+
   // Better way to determine current language
   // If the dictionary has French pricing title "Tarification", we're in French
   const isEnglish = dictionary?.pricing?.sectionTitle !== "Tarification";
@@ -181,12 +206,10 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
                 <span>{dictionary?.pricing?.sectionSimple || "Simple"}, </span>
                 <GradientText
                   colors={[
-                    "#3d5a80",
                     "#b76e79",
                     "#e0d5c0",
-                    "#3d5a80",
                     "#b76e79",
-                    "#3d5a80",
+                    "#e0d5c0",
                   ]}
                   animationSpeed={12}
                   showBorder={false}
@@ -205,12 +228,10 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
                 <span>{dictionary?.pricing?.sectionSimple || "simple"}, </span>
                 <GradientText
                   colors={[
-                    "#3d5a80",
                     "#b76e79",
                     "#e0d5c0",
-                    "#3d5a80",
                     "#b76e79",
-                    "#3d5a80",
+                    "#e0d5c0",
                   ]}
                   animationSpeed={12}
                   showBorder={false}
@@ -311,13 +332,14 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
                   <div className="mt-8">
                     <Link
                       href={localizeUrl("/contact")}
-                      className={`group relative inline-flex w-full items-center justify-center rounded-full px-6 py-3 font-medium transition-all duration-300 ${
+                      id={plan.popular ? "popular-plan-cta" : undefined}
+                      className={`group relative inline-flex w-full font-bold tracking-tighter items-center justify-center rounded-full px-6 py-3 transition-all duration-300 ${
                         plan.popular
-                          ? "bg-gradient-to-r from-rose to-sapphire text-ivory hover:shadow-4xl hover:shadow-rose/90"
-                          : "bg-charcoal/70 border border-ivory/10 text-ivory hover:bg-charcoal/90 hover:border-rose/30"
+                          ? "popular-cta-animated-border bg-rose text-ivory hover:text-charcoal hover:shadow-4xl hover:shadow-rose/90"
+                          : "bg-ivory/70 border border-ivory/10 text-rose hover:text-charcoal hover:border-rose/30"
                       }`}
                     >
-                      {dictionary?.pricing?.getaQuote || "Get a Quote"}{" "}
+                      {dictionary?.pricing?.getaQuote || "GET A QUOTE"}{" "}
                       <div className="ml-2 inline-flex arrow-animation">
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </div>
@@ -374,7 +396,7 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
 
         .pricing-card {
           position: relative;
-          transition: transform 0.5s ease, box-shadow 0.5s ease;
+          transition: transform 1s ease, box-shadow 2s ease;
           z-index: 1;
           box-shadow: 0 0 0 0 rgba(183, 110, 121, 0);
         }
@@ -382,6 +404,17 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
         .pricing-card:hover {
           transform: translateY(-10px) !important;
           box-shadow: 0 30px 30px -10px rgba(183, 110, 121, 0.3);
+        }
+
+        .popular-cta-animated-border {
+          --angle: 0deg;
+          border: 2px solid transparent !important; /* Ensure transparent border for conic gradient */
+          background:
+            linear-gradient(#B76E79, #B76E79) padding-box, /* Solid rose background */
+            conic-gradient(from var(--angle), transparent, #F8F4F1 5%, transparent 15%) border-box; /* Animated border (ivory/white) */
+          background-clip: padding-box, border-box;
+          background-origin: padding-box, border-box;
+          /* Text color is handled by Tailwind: text-charcoal hover:text-rose */
         }
       `}</style>
     </section>

@@ -2,11 +2,12 @@
   "navigation": {
     "services": "SERVICES",
     "howItWorks": "COMMENT ÇA MARCHE",
+    "templates": "MODÈLES",
     "about": "À PROPOS",
     "contact": "CONTACT",
     "getStarted": "COMMENCER",
     "ourProcess": "NOTRE PROCESSUS",
-    "learnMore": "En savoir plus",
+    "learnMore": "Explorer les détails du service",
     "webDesign": "DESIGN & DÉVELOPPEMENT WEB",
     "webDesignDescription": "Conception et développement de sites web personnalisés adaptés à votre marque",
     "aiAutomation": "AUTOMATISATION IA",
@@ -15,7 +16,7 @@
     "seoOptimizationDescription": "Améliorez votre visibilité dans les moteurs de recherche",
     "allServices": "TOUS LES SERVICES",
     "allServicesDescription": "Explorez notre gamme complète de services numériques",
-    "continue": "Continuer", 
+    "continue": "CONTINUER", 
     "back": "Retour",
     "submit": "Envoyer",
     "submitting": "Envoi en cours..."
@@ -166,7 +167,7 @@
     "sectionSubtitle": "Choisissez l'offre qui convient le mieux à votre entreprise",
     "from": "à partir de",
     "monthly": "+ Maintenance mensuelle personnalisée",
-    "getaQuote": "Obtenir un devis",
+    "getaQuote": "OBTENIR UN DEVIS",
     "plans": [
       {
         "name": "Essentiel",
@@ -642,5 +643,64 @@
   "languageSelector": {
     "en": "Anglais",
     "fr": "Français"
+  },
+  "templates": {
+    "title": "Modèles Gratuits",
+    "subtitle": "Parcourez notre collection de modèles gratuits pour démarrer rapidement vos projets",
+    "aiTemplatesTitle": "Modèles d'Automatisation IA",
+    "aiTemplatesDescription": "Modèles d'automatisation prêts à l'emploi pour simplifier vos flux de travail et améliorer la productivité",
+    "webTemplatesTitle": "Modèles de Design Web",
+    "webTemplatesDescription": "Modèles web professionnels pour améliorer votre présence en ligne",
+    "viewDetails": "Voir les détails",
+    "backToTemplates": "Retour aux modèles",
+    "needCustomSolution": "Besoin d'une solution sur mesure ?",
+    "customSolutionDescription": "Notre équipe peut vous aider à créer des modèles personnalisés ou des solutions sur mesure adaptées spécifiquement à vos besoins.",
+    "getInTouch": "NOUS CONTACTER",
+    "download": "TÉLÉCHARGER",
+    "features": "Fonctionnalités",
+    "howToUse": "Comment utiliser",
+    "needCustomDesign": "Besoin d'un design sur mesure ?",
+    "customDesignDescription": "Notre équipe peut vous aider à créer un site web de portfolio entièrement personnalisé adapté spécifiquement à votre style et à vos besoins professionnels.",
+    "contactUs": "CONTACTEZ-NOUS",
+    "templateDetails": {
+      "aiChatbot": {
+        "title": "Chatbot de Support Client",
+        "description": "Modèle de chatbot alimenté par l'IA pour l'automatisation du support client",
+        "features": [
+          "Reconnaissance d'intention client préétablie",
+          "Flux d'automatisation des FAQ",
+          "Intégration de transfert humain",
+          "Réponses personnalisables",
+          "Instructions de déploiement faciles"
+        ],
+        "usage": "Ce modèle fournit un cadre de départ pour mettre en œuvre un chatbot de support client utilisant les technologies IA. Suivez ces étapes pour commencer :",
+        "steps": [
+          "Téléchargez le package de modèle",
+          "Suivez les instructions d'installation dans le fichier README",
+          "Personnalisez les intentions et les réponses selon les besoins de votre entreprise",
+          "Déployez sur votre plateforme préférée en utilisant le guide de déploiement"
+        ],
+        "customSolution": "Notre équipe peut vous aider à créer une solution d'automatisation IA entièrement personnalisée, adaptée spécifiquement aux exigences et aux flux de travail de votre entreprise."
+      },
+      "portfolio": {
+        "title": "Modèle de Portfolio",
+        "description": "Design de portfolio moderne et épuré pour les créatifs et les professionnels",
+        "features": [
+          "Design responsive pour tous les appareils",
+          "Section de présentation de projets",
+          "Sections à propos et contact",
+          "Animations et transitions modernes",
+          "Construit avec React et Next.js"
+        ],
+        "usage": "Ce modèle de portfolio est conçu pour vous aider à présenter votre travail rapidement et professionnellement. Suivez ces étapes pour commencer :",
+        "steps": [
+          "Téléchargez le package de modèle",
+          "Installez les dépendances avec npm install",
+          "Remplacez le contenu de placeholder par vos propres projets et informations",
+          "Déployez sur votre plateforme d'hébergement préférée"
+        ],
+        "customSolution": "Notre équipe peut vous aider à créer un site web de portfolio entièrement personnalisé adapté spécifiquement à votre style et à vos besoins professionnels."
+      }
+    }
   }
 } 

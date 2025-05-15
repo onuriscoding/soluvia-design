@@ -55,12 +55,10 @@ export function RedesignedCTASection({
             {dictionary?.cta?.heading || "Ready for a solution that"}{" "}
             <GradientText
               colors={[
-                "#3d5a80",
                 "#b76e79",
                 "#e0d5c0",
-                "#3d5a80",
                 "#b76e79",
-                "#3d5a80",
+                "#e0d5c0",
               ]}
               animationSpeed={12}
               showBorder={false}
@@ -110,9 +108,8 @@ export function RedesignedCTASection({
                 >
                   <Link
                     href={localizeUrl("/contact")}
-                    className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-3 py-2 md:px-6 md:py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
+                    className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 text-rose font-bold tracking-tighter hover:text-charcoal px-3 py-2 md:px-6 md:py-3 transition-all duration-300"
                   >
-                    <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                     <span className="relative z-10 flex items-center">
                       {dictionary?.cta?.getStarted || "GET STARTED"}
                       <ArrowRight className="ml-2 md:h-5 md:w-5 h-4 w-3 transition-transform group-hover:translate-x-1" />

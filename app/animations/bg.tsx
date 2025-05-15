@@ -34,16 +34,33 @@ void main() {
   // Add a subtle offset based on the mouse position
   uv += (uMouse - vec2(0.5)) * uAmplitude;
 
+  // Original animation logic for fluid movement
   float d = -uTime * 0.5 * uSpeed;
   float a = 0.0;
-  for (float i = 0.0; i < 8.0; ++i) {
-    a += cos(i - d - a * uv.x);
-    d += sin(uv.y * i + a);
+  for (float i = 0.0; i < 7.5; ++i) { // Iterations kept similar to original for movement style
+    a += cos(i - d - a * uv.x * 0.9); // Slightly soften influence for color
+    d += sin(uv.y * i + a * 0.9);    // Slightly soften influence for color
   }
   d += uTime * 0.5 * uSpeed;
-  vec3 col = vec3(cos(uv * vec2(d, a)) * 0.6 + 0.4, cos(a + d) * 0.5 + 0.5);
-  col = cos(col * cos(vec3(d, a, 2.5)) * 0.5 + 0.5) * uColor;
-  gl_FragColor = vec4(col * 0.7, 0.8);
+
+  // Adjusted base_intensity to prevent overly dark areas
+  // Ensure it stays in a higher range, e.g., 0.6 to 1.0
+  float base_intensity = cos(d + uv.x * a * 0.5) * 0.2 + 0.8; // Was 0.7, now 0.8 to lift minimum
+  vec3 modulated_color = uColor * base_intensity;
+
+  // Softer color variations, less likely to darken channels significantly
+  modulated_color.r *= (0.9 + 0.1 * sin(a * 0.5)); // Reduced modulation range
+  modulated_color.g *= (0.9 + 0.1 * cos(d * 0.3)); // Reduced modulation range
+  modulated_color.b *= (0.9 + 0.1 * sin(a + d * 0.2)); // Reduced modulation range
+
+  // Clamp individual channels to prevent them from going too dark before pow function
+  modulated_color.r = max(modulated_color.r, 0.15);
+  modulated_color.g = max(modulated_color.g, 0.15);
+  modulated_color.b = max(modulated_color.b, 0.15);
+
+  vec3 final_col = pow(modulated_color, vec3(1.05)); // Slightly reduced power exponent
+
+  gl_FragColor = vec4(final_col * 0.85, 0.85); // Slightly increased brightness factor
 }
 `;
 
@@ -56,9 +73,9 @@ interface IridescenceProps {
 }
 
 export default function Iridescence({
-  color = [0.8, 0.3, 0.5],
-  speed = 1.0,
-  amplitude = 0.1,
+  color = [0.702, 0.439, 0.475], // Pink from brand palette #b37079
+  speed = 0.6,                   // Slightly reduced speed
+  amplitude = 0.05,              // Slightly reduced mouse reaction
   mouseReact = true,
   ...rest
 }: IridescenceProps) {
@@ -162,7 +179,7 @@ export default function Iridescence({
   return (
     <div
       ref={ctnDom}
-      className="w-full h-full overflow-hidden"
+      className="w-full h-full overflow-hidden filter"
       style={{ maxWidth: '100vw', position: 'relative' }}
       {...rest}
     />

@@ -146,14 +146,14 @@ export function RedesignedContactStepper({
 
   return (
     <motion.div
-      className="rounded-2xl backdrop-blur-md bg-black/20 p-8 max-w-2xl mx-auto"
+      className="rounded-2xl backdrop-blur-md bg-charcoal/50 p-8 max-w-2xl mx-auto"
       variants={containerVariants}
       animate="animate"
     >
       {isSubmitted ? (
         <div className="text-center py-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/20 mb-6">
-            <Send className="h-6 w-6 text-white" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-ivory/90 text-rose mb-6">
+            <Send className="h-6 w-6" />
           </div>
           <h3 className="text-2xl font-bold text-white mb-4">
             {dictionary?.form?.confirmationThanks || "Thank You!"}
@@ -168,7 +168,7 @@ export function RedesignedContactStepper({
           </p>
           <button
             onClick={resetForm}
-            className="mt-8 px-6 py-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+            className="mt-8 px-6 py-2 rounded-full bg-charcoal/20 text-ivory border border-ivory/10 hover:bg-charcoal/40 transition-colors"
           >
             {dictionary?.form?.anotherMessage || "Send another message"}
           </button>
@@ -179,15 +179,13 @@ export function RedesignedContactStepper({
           <div className="flex justify-center mb-12">
             <div className="relative w-[400px] flex items-center justify-between">
               {/* Step 1 */}
-              <div className="relative z-10 flex h-8 w-8 rounded-full items-center justify-center bg-gradient-soluvia text-white">
-                1
-              </div>
+              <div className={`relative z-10 flex h-8 w-8 rounded-full items-center justify-center border-2 ${step === 0 ? 'bg-ivory/90 text-rose border-rose shadow-lg' : 'bg-charcoal/50 text-ivory/70 border-ivory/10'}`}>1</div>
 
               {/* Line between step 1 and 2 */}
               <div className="relative flex-grow mx-2">
                 <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-white/20 -translate-y-1/2"></div>
                 <motion.div
-                  className="absolute top-1/2 left-0 h-0.5 bg-gradient-to-r from-rose via-sapphire to-rose -translate-y-1/2"
+                  className="absolute top-1/2 left-0 h-0.5 bg-ivory/90 -translate-y-1/2"
                   initial={{ width: "0%" }}
                   animate={{ width: step >= 1 ? "100%" : "0%" }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -196,19 +194,18 @@ export function RedesignedContactStepper({
 
               {/* Step 2 */}
               <motion.div
-                className="relative z-10 flex h-8 w-8 rounded-full items-center justify-center bg-gradient-soluvia text-white"
+                className={`relative z-10 flex h-8 w-8 rounded-full items-center justify-center border-2 ${step === 1 ? 'bg-ivory/90 text-rose border-rose shadow-lg' : 'bg-charcoal/50 text-ivory/70 border-ivory/10'}`}
                 initial={false}
                 animate={{
                   scale: step === 1 ? [1, 1.1, 1] : 1,
                   opacity: step >= 1 ? 1 : 0.6,
-                  boxShadow:
-                    step === 1 ? "0 0 15px rgba(183, 110, 121, 0.5)" : "none",
+                  boxShadow: step === 1 ? '0 0 15px rgba(183, 110, 121, 0.5)' : 'none',
                 }}
                 transition={{
                   scale: {
                     repeat: step === 1 ? Number.POSITIVE_INFINITY : 0,
                     duration: 2,
-                    ease: "easeInOut",
+                    ease: 'easeInOut',
                   },
                   opacity: { duration: 0.3 },
                   boxShadow: { duration: 0.3 },
@@ -221,7 +218,7 @@ export function RedesignedContactStepper({
               <div className="relative flex-grow mx-2">
                 <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-white/20 -translate-y-1/2"></div>
                 <motion.div
-                  className="absolute top-1/2 left-0 h-0.5 bg-gradient-to-r from-rose via-sapphire to-rose -translate-y-1/2"
+                  className="absolute top-1/2 left-0 h-0.5 bg-ivory/90 -translate-y-1/2"
                   initial={{ width: "0%" }}
                   animate={{ width: step >= 2 ? "100%" : "0%" }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -230,19 +227,18 @@ export function RedesignedContactStepper({
 
               {/* Step 3 */}
               <motion.div
-                className="relative z-10 flex h-8 w-8 rounded-full items-center justify-center bg-gradient-soluvia text-white"
+                className={`relative z-10 flex h-8 w-8 rounded-full items-center justify-center border-2 ${step === 2 ? 'bg-ivory/90 text-rose border-rose shadow-lg' : 'bg-charcoal/50 text-ivory/70 border-ivory/10'}`}
                 initial={false}
                 animate={{
                   scale: step === 2 ? [1, 1.1, 1] : 1,
                   opacity: step >= 2 ? 1 : 0.6,
-                  boxShadow:
-                    step === 2 ? "0 0 15px rgba(183, 110, 121, 0.5)" : "none",
+                  boxShadow: step === 2 ? '0 0 15px rgba(183, 110, 121, 0.5)' : 'none',
                 }}
                 transition={{
                   scale: {
                     repeat: step === 2 ? Number.POSITIVE_INFINITY : 0,
                     duration: 2,
-                    ease: "easeInOut",
+                    ease: 'easeInOut',
                   },
                   opacity: { duration: 0.3 },
                   boxShadow: { duration: 0.3 },
@@ -255,7 +251,7 @@ export function RedesignedContactStepper({
               <div className="relative flex-grow mx-2">
                 <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-white/20 -translate-y-1/2"></div>
                 <motion.div
-                  className="absolute top-1/2 left-0 h-0.5 bg-gradient-to-r from-rose via-sapphire to-rose -translate-y-1/2"
+                  className="absolute top-1/2 left-0 h-0.5 bg-ivory/90 -translate-y-1/2"
                   initial={{ width: "0%" }}
                   animate={{ width: step >= 3 ? "100%" : "0%" }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -264,19 +260,18 @@ export function RedesignedContactStepper({
 
               {/* Step 4 */}
               <motion.div
-                className="relative z-10 flex h-8 w-8 rounded-full items-center justify-center bg-gradient-soluvia text-white"
+                className={`relative z-10 flex h-8 w-8 rounded-full items-center justify-center border-2 ${step === 3 ? 'bg-ivory/90 text-rose border-rose shadow-lg' : 'bg-charcoal/50 text-ivory/70 border-ivory/10'}`}
                 initial={false}
                 animate={{
                   scale: step === 3 ? [1, 1.1, 1] : 1,
                   opacity: step >= 3 ? 1 : 0.6,
-                  boxShadow:
-                    step === 3 ? "0 0 15px rgba(183, 110, 121, 0.5)" : "none",
+                  boxShadow: step === 3 ? '0 0 15px rgba(183, 110, 121, 0.5)' : 'none',
                 }}
                 transition={{
                   scale: {
                     repeat: step === 3 ? Number.POSITIVE_INFINITY : 0,
                     duration: 2,
-                    ease: "easeInOut",
+                    ease: 'easeInOut',
                   },
                   opacity: { duration: 0.3 },
                   boxShadow: { duration: 0.3 },
@@ -329,11 +324,7 @@ export function RedesignedContactStepper({
                     <div className="flex gap-4">
                       <button
                         onClick={() => setContactPreference("phone")}
-                        className={`flex-1 p-4 rounded-xl flex flex-col items-center justify-center gap-3 transition-all ${
-                          formData.contactPreference === "phone"
-                            ? "bg-gradient-to-r from-rose to-sapphire text-white"
-                            : "bg-white/10 text-white hover:bg-white/20"
-                        }`}
+                        className={`flex-1 p-4 rounded-xl flex flex-col items-center justify-center gap-3 transition-all border-2 ${formData.contactPreference === "phone" ? "bg-ivory/90 text-rose border-rose font-bold" : "bg-charcoal/20 text-ivory border-ivory/10 hover:bg-charcoal/40"}`}
                       >
                         <Phone className="h-8 w-8" />
                         <span className="font-medium">
@@ -342,11 +333,7 @@ export function RedesignedContactStepper({
                       </button>
                       <button
                         onClick={() => setContactPreference("email")}
-                        className={`flex-1 p-4 rounded-xl flex flex-col items-center justify-center gap-3 transition-all ${
-                          formData.contactPreference === "email"
-                            ? "bg-gradient-to-r from-rose to-sapphire text-white"
-                            : "bg-white/10 text-white hover:bg-white/20"
-                        }`}
+                        className={`flex-1 p-4 rounded-xl flex flex-col items-center justify-center gap-3 transition-all border-2 ${formData.contactPreference === "email" ? "bg-ivory/90 text-rose border-rose font-bold" : "bg-charcoal/20 text-ivory border-ivory/10 hover:bg-charcoal/40"}`}
                       >
                         <Mail className="h-8 w-8" />
                         <span className="font-medium">
@@ -449,7 +436,7 @@ export function RedesignedContactStepper({
             {step > 0 ? (
               <button
                 onClick={prevStep}
-                className="px-6 py-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                className="px-6 py-2 rounded-full bg-charcoal/20 text-ivory border border-ivory/10 hover:bg-charcoal/40 transition-colors"
               >
                 {dictionary?.navigation?.back || "Back"}
               </button>
@@ -460,7 +447,7 @@ export function RedesignedContactStepper({
             <button
               onClick={nextStep}
               disabled={!isStepValid() || isSubmitting}
-              className="group relative inline-flex items-center justify-center rounded-full px-6 py-3 font-medium transition-all duration-300 bg-gradient-to-r from-rose to-sapphire text-white overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative inline-flex items-center justify-center rounded-full px-6 py-3 font-bold tracking-tighter transition-all hover:text-charcoal duration-300 bg-ivory/90 text-rose overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed group-hover:text-charcoal"
             >
               <span className="relative z-10 flex items-center">
                 {isSubmitting ? (
@@ -477,7 +464,6 @@ export function RedesignedContactStepper({
                   </>
                 )}
               </span>
-              <div className="absolute inset-0 -translate-x-full hover:translate-x-0 bg-gradient-to-r from-sapphire to-rose transition-transform duration-300 ease-in-out"></div>
             </button>
           </div>
         </>

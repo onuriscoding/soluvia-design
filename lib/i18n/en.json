@@ -3,6 +3,7 @@
   "navigation": {
     "services": "SERVICES",
     "howItWorks": "HOW IT WORKS",
+    "templates": "TEMPLATES",
     "about": "ABOUT",
     "contact": "CONTACT",
     "getStarted": "GET STARTED",
@@ -16,7 +17,7 @@
     "seoOptimizationDescription": "Improve your visibility in search engines",
     "allServices": "ALL SERVICES",
     "allServicesDescription": "Explore our complete range of digital services",
-    "continue": "Continue", 
+    "continue": "CONTINUE", 
     "back": "Back",
     "submit": "Submit",
     "submitting": "Submitting..."
@@ -165,7 +166,7 @@
     "sectionSubtitle": "Choose the perfect plan for your business needs",
     "from": "from",
     "monthly": "+ Custom monthly maintenance",
-    "getaQuote": "Get a Quote",
+    "getaQuote": "GET A QUOTE",
     "plans": [
       {
         "name": "Essential",
@@ -498,7 +499,7 @@
       
     ],
     "ctaTitle1": "Ready to create something",
-    "ctaTitle2": "extraordinary",
+    "ctaTitle2": "wonderful",
     "ctaSubTitle": "Let's combine human creativity with AI innovation to build your digital future",
     "ctaButton": "GET STARTED"
   },
@@ -507,8 +508,8 @@
     "title2": "Touch",
     "subTitle": "We'd love to hear from you. Reach out to discuss your project, ask questions, or explore how we can help",
     "ctaButton": "Touch to Connect",
-    "contactTitle1": "Contact",
-    "contactTitle2": "Us",
+    "contactTitle1": "Contact ",
+    "contactTitle2": " Us",
     "contactSubTitle": "Have a project in mind? We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible",
     "contactForm":{
       "name": "Name",
@@ -634,5 +635,64 @@
   "languageSelector": {
     "en": "English",
     "fr": "Français"
+  },
+  "templates": {
+    "title": "Templates",
+    "subtitle": "Browse our collection of free templates to kickstart your projects",
+    "aiTemplatesTitle": "AI Automation Templates",
+    "aiTemplatesDescription": "Ready-to-use automation templates to streamline your workflows and enhance productivity",
+    "webTemplatesTitle": "Web Design Templates",
+    "webTemplatesDescription": "Professional web design templates to elevate your online presence",
+    "viewDetails": "View Details",
+    "backToTemplates": "Back to templates",
+    "needCustomSolution": "Need a custom solution?",
+    "customSolutionDescription": "Our team can help you create personalized templates or custom solutions tailored specifically to your business needs.",
+    "getInTouch": "GET IN TOUCH",
+    "download": "DOWNLOAD TEMPLATE",
+    "features": "Features",
+    "howToUse": "How to use",
+    "needCustomDesign": "Need a custom design?",
+    "customDesignDescription": "Our team can help you create a fully customized portfolio website tailored specifically to your style and professional needs.",
+    "contactUs": "CONTACT US",
+    "templateDetails": {
+      "aiChatbot": {
+        "title": "Customer Support Chatbot",
+        "description": "AI-powered chatbot template for customer support automation",
+        "features": [
+          "Pre-built customer intent recognition",
+          "FAQ automation workflow",
+          "Human handoff integration",
+          "Customizable responses",
+          "Easy deployment instructions"
+        ],
+        "usage": "This template provides a starter framework for implementing a customer support chatbot using AI technologies. Follow these steps to get started:",
+        "steps": [
+          "Download the template package",
+          "Follow the setup instructions in the README file",
+          "Customize the intents and responses to match your business needs",
+          "Deploy to your preferred platform using the deployment guide"
+        ],
+        "customSolution": "Our team can help you create a fully customized AI automation solution tailored specifically to your business requirements and workflows."
+      },
+      "portfolio": {
+        "title": "Portfolio Template",
+        "description": "Clean, modern portfolio design for creatives and professionals",
+        "features": [
+          "Responsive design for all devices",
+          "Project showcase section",
+          "About and contact sections",
+          "Modern animations and transitions",
+          "Built with React and Next.js"
+        ],
+        "usage": "This portfolio template is designed to help you showcase your work quickly and professionally. Follow these steps to get started:",
+        "steps": [
+          "Download the template package",
+          "Install dependencies with npm install",
+          "Replace placeholder content with your own projects and information",
+          "Deploy to your preferred hosting platform"
+        ],
+        "customSolution": "Our team can help you create a fully customized portfolio website tailored specifically to your style and professional needs."
+      }
+    }
   }
 } 

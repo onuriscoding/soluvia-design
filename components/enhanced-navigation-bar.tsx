@@ -1,29 +1,28 @@
-"use client";
+"use client"
 
-import type React from "react";
+import type React from "react"
 
-import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { ChevronUp, X, ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useI18n } from "@/lib/i18n/i18nContext";
-import { LanguageSwitcher } from "./language-switcher";
-import { usePathname } from "next/navigation";
+import { useState, useEffect, useRef } from "react"
+import Link from "next/link"
+import { ChevronUp, X, ArrowRight } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { useI18n } from "@/lib/i18n/i18nContext"
+import { LanguageSwitcher } from "./language-switcher"
 
 // Helper hook to localize URLs
 const useLocalizedUrl = () => {
-  const { language } = useI18n();
+  const { language } = useI18n()
 
   return (path: string) => {
     // Handle root path
     if (path === "/") {
-      return `/${language}`;
+      return `/${language}`
     }
 
     // Handle other paths
-    return `/${language}${path}`;
-  };
-};
+    return `/${language}${path}`
+  }
+}
 
 const navItems = [
   {
@@ -59,136 +58,123 @@ const navItems = [
   { labelKey: "navigation.howItWorks", href: "/how-it-works" },
   { labelKey: "navigation.about", href: "/about" },
   { labelKey: "navigation.contact", href: "/contact" },
-];
+]
 
 export function EnhancedNavigationBar() {
   // State
-  const [activeMobileItem, setActiveMobileItem] = useState<string | null>(null);
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [logoHovered, setLogoHovered] = useState(false);
-  const [navWidth, setNavWidth] = useState(0);
-  const { t } = useI18n();
-  const localizeUrl = useLocalizedUrl();
+  const [activeMobileItem, setActiveMobileItem] = useState<string | null>(null)
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [logoHovered, setLogoHovered] = useState(false)
+  const [navWidth, setNavWidth] = useState(0)
+  const { t } = useI18n()
+  const localizeUrl = useLocalizedUrl()
 
   // Refs
-  const navRef = useRef<HTMLDivElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLDivElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
 
   // Handle scroll detection
   useEffect(() => {
     const handleScroll = () => {
       // Force check with the raw value
-      const scrollY =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop ||
-        0;
-      setScrolled(scrollY > 10);
-    };
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+      setScrolled(scrollY > 10)
+    }
 
     // Initial check on mount
-    handleScroll();
+    handleScroll()
 
     // More frequent checks with passive event for better performance
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true })
 
     // Fallback with requestAnimationFrame for mobile
-    let rafId: number;
+    let rafId: number
 
     const pollScrollPosition = () => {
-      handleScroll();
-      rafId = requestAnimationFrame(pollScrollPosition);
-    };
+      handleScroll()
+      rafId = requestAnimationFrame(pollScrollPosition)
+    }
 
     // Start polling on mobile devices
     if (window.innerWidth < 768) {
-      rafId = requestAnimationFrame(pollScrollPosition);
+      rafId = requestAnimationFrame(pollScrollPosition)
     }
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-  }, []);
+      window.removeEventListener("scroll", handleScroll)
+      if (rafId) cancelAnimationFrame(rafId)
+    }
+  }, [])
 
   // Get navigation bar width for mobile menu sizing
   useEffect(() => {
     if (navRef.current) {
       const updateNavWidth = () => {
         if (navRef.current) {
-          setNavWidth(navRef.current.offsetWidth);
+          setNavWidth(navRef.current.offsetWidth)
         }
-      };
+      }
 
       // Initial measurement
-      updateNavWidth();
+      updateNavWidth()
 
       // Update on resize
-      window.addEventListener("resize", updateNavWidth);
-      return () => window.removeEventListener("resize", updateNavWidth);
+      window.addEventListener("resize", updateNavWidth)
+      return () => window.removeEventListener("resize", updateNavWidth)
     }
-  }, [navRef, mobileMenuOpen]);
+  }, [navRef, mobileMenuOpen])
 
   // Handle clicks outside the menu to close it
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        mobileMenuOpen &&
-        menuRef.current &&
-        !menuRef.current.contains(event.target as Node)
-      ) {
+      if (mobileMenuOpen && menuRef.current && !menuRef.current.contains(event.target as Node)) {
         // Only close if clicking outside the menu and not on the toggle button
-        const toggleButton = document.getElementById("mobile-menu-toggle");
+        const toggleButton = document.getElementById("mobile-menu-toggle")
         if (!toggleButton?.contains(event.target as Node)) {
-          setMobileMenuOpen(false);
+          setMobileMenuOpen(false)
         }
       }
-    };
+    }
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [mobileMenuOpen]);
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [mobileMenuOpen])
 
   // Prevent scrolling when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = ""
       // Reset active item when menu closes
-      setActiveMobileItem(null);
+      setActiveMobileItem(null)
     }
 
     return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileMenuOpen]);
+      document.body.style.overflow = ""
+    }
+  }, [mobileMenuOpen])
 
   // Toggle mobile dropdown
   const toggleMobileDropdown = (label: string, event: React.MouseEvent) => {
     // Prevent event from bubbling up
-    event.stopPropagation();
-    setActiveMobileItem((prev) => (prev === label ? null : label));
-  };
+    event.stopPropagation()
+    setActiveMobileItem((prev) => (prev === label ? null : label))
+  }
 
   // Close mobile menu
   const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-  };
+    setMobileMenuOpen(false)
+  }
 
   return (
-    <header
-      className="fixed top-0 left-0 right-0 z-50 px-4 py-2 md:mt-0 mt-4"
-      ref={headerRef}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 py-2 md:mt-0 mt-4" ref={headerRef}>
       <div className="mx-auto max-w-7xl">
         <div
           className={`${
-            scrolled || mobileMenuOpen
-              ? "bg-charcoal/20 backdrop-blur-md shadow-lg"
-              : "bg-transparent"
+            scrolled || mobileMenuOpen ? "bg-charcoal/20 backdrop-blur-md shadow-lg" : "bg-transparent"
           } transition-all duration-500 rounded-full border border-ivory/10`}
           ref={navRef}
         >
@@ -248,12 +234,9 @@ export function EnhancedNavigationBar() {
                   {item.children ? (
                     <>
                       <div className="flex items-center text-ivory/90 hover:text-ivory transition-colors font-ivory font-semibold tracking-tight py-2 relative cursor-pointer">
-                        <Link
-                          href={localizeUrl(item.href!)}
-                          className="relative inline-block"
-                        >
+                        <Link href={localizeUrl(item.href!)} className="relative inline-block">
                           {t(item.labelKey)}
-                          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose group-hover:w-full transition-all duration-300"></span>
+                          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ivory group-hover:w-full transition-all duration-300"></span>
                         </Link>
                         <div className="ml-1 w-4 h-4 flex items-center justify-center">
                           <div className="w-1.5 h-1.5 rounded-full bg-rose group-hover:hidden transition-all duration-300" />
@@ -262,23 +245,22 @@ export function EnhancedNavigationBar() {
                       </div>
 
                       {/* Desktop Dropdown (Hover-based) */}
-                      <div className="absolute left-1/2 -translate-x-1/2 mt-4 py-6 bg-[#2b2d42]/95 rounded-xl border border-ivory/10 shadow-xl overflow-hidden min-w-[600px] z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                      <div className="absolute left-1/2 -translate-x-1/2 mt-4 py-6 bg-ivory/90 rounded-xl border border-ivory/10 shadow-xl overflow-hidden min-w-[600px] z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                         <div className="grid grid-cols-2 gap-6 p-4">
                           {item.children.map((child) => (
                             <Link
                               key={child.href}
                               href={localizeUrl(child.href)}
-                              className="group p-4 rounded-lg hover:bg-ivory/5 transition-colors"
+                              className="group p-4 rounded-lg hover:bg-[#2b2d42]/5 transition-colors"
                             >
-                              <div className="font-ivory tracking-tight text-ivory mb-1 group-hover:text-rose transition-colors">
+                              <div className="font-bold tracking-tight text-ivory mb-1 group-hover:text-rose transition-colors">
                                 {t(child.labelKey)}
                               </div>
                               {"descriptionKey" in child && (
-                                <div className="text-sm font-thin text-ivory/70 mb-2">
+                                <div className="text-sm font-medium text-[#2b2d42]/100 mb-2">
                                   {t(child.descriptionKey)}
                                 </div>
                               )}
-                              
                             </Link>
                           ))}
                         </div>
@@ -291,7 +273,7 @@ export function EnhancedNavigationBar() {
                     >
                       <span className="relative inline-block">
                         {t(item.labelKey)}
-                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose group-hover:w-full transition-all duration-300"></span>
+                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ivory group-hover:w-full transition-all duration-300"></span>
                       </span>
                     </Link>
                   )}
@@ -302,15 +284,16 @@ export function EnhancedNavigationBar() {
             {/* CTA Button (Desktop) */}
             <div className="hidden lg:flex items-center space-x-4">
               <LanguageSwitcher variant="minimal" className="mr-2" />
-              <Link
-                href={localizeUrl("/contact")}
-                className="group relative overflow-hidden rounded-full bg-rose px-6 py-2.5 text-sm font-bold tracking-tighter text-ivory transition-all duration-300 hover:shadow-lg hover:shadow-rose/30"
-              >
-                <span className="absolute inset-0 rounded-full bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
-                <span className="relative z-10">
-                  {t("navigation.getStarted")}
-                </span>
-              </Link>
+              <div className="relative overflow-hidden rounded-full">
+                <Link
+                  href={localizeUrl("/contact")}
+                  className="group relative z-10 inline-flex items-center justify-center overflow-hidden rounded-full bg-ivory/90 px-6 py-2.5 text-sm font-bold tracking-tighter text-rose transition-all duration-300 hover:shadow-lg hover:shadow-rose/30"
+                >
+                  <span className="relative z-10 transition-colors duration-300 group-hover:text-charcoal">
+                    {t("navigation.getStarted")}
+                  </span>
+                </Link>
+              </div>
             </div>
 
             {/* Mobile Menu Button - Pink dot */}
@@ -387,8 +370,7 @@ export function EnhancedNavigationBar() {
                   width: navWidth > 0 ? `${navWidth}px` : "calc(100% - 2rem)",
 
                   backdropFilter: "blur(12px)",
-                  boxShadow:
-                    "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
+                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
                 }}
               >
                 {/* Close button at top right */}
@@ -416,19 +398,13 @@ export function EnhancedNavigationBar() {
                       {navItems.map((item, index) => (
                         <li
                           key={item.labelKey}
-                          className={`${
-                            index < navItems.length - 1
-                              ? "border-b border-ivory/10 pb-6"
-                              : ""
-                          }`}
+                          className={`${index < navItems.length - 1 ? "border-b border-ivory/10 pb-6" : ""}`}
                         >
                           {item.children ? (
                             <div>
                               {/* SERVICES with dropdown */}
                               <motion.button
-                                onClick={(e) =>
-                                  toggleMobileDropdown(item.labelKey, e)
-                                }
+                                onClick={(e) => toggleMobileDropdown(item.labelKey, e)}
                                 className="flex items-center text-3xl font-semibold tracking-thigh text-ivory hover:text-rose transition-colors relative group w-full"
                                 whileHover={{
                                   x: 5,
@@ -478,8 +454,7 @@ export function EnhancedNavigationBar() {
                                         className="w-1.5 h-1.5 rounded-full bg-rose"
                                         whileHover={{
                                           scale: 1.3,
-                                          boxShadow:
-                                            "0 0 8px rgba(255, 107, 107, 0.6)",
+                                          boxShadow: "0 0 8px rgba(255, 107, 107, 0.6)",
                                         }}
                                       />
                                     )}
@@ -522,14 +497,9 @@ export function EnhancedNavigationBar() {
                                           )}
                                           {"price" in child && child.price && (
                                             <div className="text-sm font-bold font-inter tracking-wide text-rose">
-                                              <span className="opacity-70 font-normal text-sm">
-                                                from{" "}
-                                              </span>
+                                              <span className="opacity-70 font-normal text-sm">from </span>
                                               <span className="text-lg font-inter text-ivory">
-                                                {child.price.replace(
-                                                  "from ",
-                                                  ""
-                                                )}
+                                                {child.price.replace("from ", "")}
                                               </span>
                                             </div>
                                           )}
@@ -576,7 +546,7 @@ export function EnhancedNavigationBar() {
                   <Link
                     href={localizeUrl("/contact")}
                     onClick={closeMobileMenu}
-                    className="flex items-center justify-center w-full rounded-full bg-rose px-6 py-3 text-xl font-bold tracking-tighter text-ivory"
+                    className="flex items-center justify-center w-full rounded-full bg-ivory/90 px-6 py-3 text-xl font-bold tracking-tighter text-rose"
                   >
                     <span className="mr-2">{t("navigation.getStarted")}</span>
                     <ArrowRight className="h-5 w-5" />
@@ -588,5 +558,5 @@ export function EnhancedNavigationBar() {
         )}
       </AnimatePresence>
     </header>
-  );
+  )
 }

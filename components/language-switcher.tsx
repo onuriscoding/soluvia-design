@@ -60,14 +60,14 @@ export function LanguageSwitcher({
   if (variant === "pill") {
     return (
       <div
-        className={`p-1 rounded-full border border-ivory/10 bg-charcoal/30 backdrop-blur-sm flex items-center ${className}`}
+        className={`p-1 rounded-full border border-ivory/10 bg-white/30 backdrop-blur-sm flex items-center ${className}`}
       >
         <button
           onClick={() => changeLanguage("en")}
           className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
             language === "en"
-              ? "bg-rose text-white"
-              : "text-ivory/70 hover:text-ivory"
+              ? "bg-ivory/90 text-rose"
+              : "text-charcoal/70 hover:text-charcoal"
           }`}
         >
           EN
@@ -76,8 +76,8 @@ export function LanguageSwitcher({
           onClick={() => changeLanguage("fr")}
           className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
             language === "fr"
-              ? "bg-rose text-white"
-              : "text-ivory/70 hover:text-ivory"
+              ? "bg-ivory/90 text-rose"
+              : "text-charcoal/70 hover:text-charcoal"
           }`}
         >
           FR

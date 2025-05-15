@@ -118,12 +118,10 @@ export default function ContactPageClient({ dictionary }: { dictionary: any }) {
                 >
                   <GradientText
                     colors={[
-                      "#3d5a80",
                       "#b76e79",
                       "#e0d5c0",
-                      "#3d5a80",
                       "#b76e79",
-                      "#3d5a80",
+                      "#e0d5c0",
                     ]}
                     animationSpeed={12}
                     showBorder={false}
@@ -207,12 +205,7 @@ export default function ContactPageClient({ dictionary }: { dictionary: any }) {
           <div className="h-px w-full max-w-5xl bg-gradient-to-r from-transparent via-rose/30 to-transparent"></div>
         </div>
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <motion.div
-            className="h-12 w-12 rounded-full bg-charcoal/70 border border-ivory/10 flex items-center justify-center backdrop-blur-sm"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          ></motion.div>
+          
         </div>
       </div>
 

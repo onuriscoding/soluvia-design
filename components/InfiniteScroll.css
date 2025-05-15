@@ -1,0 +1,77 @@
+.infinite-scroll-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  width: 100%;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  height: 100%;
+}
+
+.infinite-scroll-container {
+  position: relative;
+  overflow: visible;
+  cursor: grab;
+  /* perspective: 1200px; */ /* Temporarily remove for testing */
+  /* transform-style: preserve-3d; */ /* Temporarily remove for testing */
+  /* height: 100%; */ /* REMOVED - Let GSAP control height */
+}
+
+.infinite-scroll-item {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, z-index 0s 0.4s;
+  transform: translateZ(0);
+  background-color: rgba(30, 30, 30, 0.5);
+}
+
+.infinite-scroll-item > * {
+  width: 100%;
+  height: 100%;
+}
+
+.infinite-scroll-item:hover {
+  z-index: 10;
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, z-index 0s 0s;
+}
+
+.infinite-scroll-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  transition: transform 0.4s ease-out;
+}
+
+.infinite-scroll-image:hover {
+}
+
+.infinite-scroll-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background: linear-gradient(0deg, rgba(10, 10, 10, 0.85) 0%, rgba(10, 10, 10, 0) 100%);
+  color: #fff;
+  font-size: 14px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 2;
+}
+
+.infinite-scroll-item:hover .infinite-scroll-caption {
+  opacity: 1;
+  transform: translateY(0);
+} 

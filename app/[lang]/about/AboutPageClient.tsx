@@ -130,12 +130,10 @@ export default function AboutPageClient({ dictionary }: { dictionary: any }) {
                 <span className="inline-flex items-center relative">
                   <GradientText
                     colors={[
-                      "#3d5a80",
                       "#b76e79",
                       "#e0d5c0",
-                      "#3d5a80",
                       "#b76e79",
-                      "#3d5a80",
+                      "#e0d5c0",
                     ]}
                     animationSpeed={12}
                     showBorder={false}
@@ -208,12 +206,10 @@ export default function AboutPageClient({ dictionary }: { dictionary: any }) {
               <span>{dictionary.about.ourStoryTitle1}</span>
               <GradientText
                 colors={[
-                  "#3d5a80",
                   "#b76e79",
                   "#e0d5c0",
-                  "#3d5a80",
                   "#b76e79",
-                  "#3d5a80",
+                  "#e0d5c0",
                 ]}
                 animationSpeed={12}
                 showBorder={false}
@@ -302,12 +298,10 @@ export default function AboutPageClient({ dictionary }: { dictionary: any }) {
               <span>{dictionary.about.ourCoreValuesTitle1}</span>
               <GradientText
                 colors={[
-                  "#3d5a80",
                   "#b76e79",
                   "#e0d5c0",
-                  "#3d5a80",
                   "#b76e79",
-                  "#3d5a80",
+                  "#e0d5c0",
                 ]}
                 animationSpeed={12}
                 showBorder={false}
@@ -384,126 +378,19 @@ export default function AboutPageClient({ dictionary }: { dictionary: any }) {
         </div>
       </SectionTransition>
 
-     {/* Our Approach Section */}
-     <section
-        className="relative py-32 md:py-40"
-        id="approach-section"
-      >
-        <div className="container relative z-10">
-          <div className="absolute inset-0 z-0">
-            <div className="absolute right-1/4 top-1/4 h-96 w-96 rounded-full bg-sapphire/5 blur-3xl"></div>
-            <div className="absolute left-1/4 bottom-1/4 h-96 w-96 rounded-full bg-rose/5 blur-3xl"></div>
-          </div>
-
-          <div className="mx-auto max-w-3xl text-center relative z-10 mb-24">
-            <h2 className="text-5xl font-bold tracking-tight mb-8 md:text-6xl flex flex-wrap items-center justify-center gap-x-4">
-              <span>{dictionary.about.ourApproachTitle1}</span>
-              <GradientText
-                colors={[
-                  "#3d5a80",
-                  "#b76e79",
-                  "#e0d5c0",
-                  "#3d5a80",
-                  "#b76e79",
-                  "#3d5a80",
-                ]}
-                animationSpeed={12}
-                showBorder={false}
-                className="inline-block"
-              >
-                {dictionary.about.ourApproachTitle2}
-              </GradientText>
-            </h2>
-            <ScrollReveal
-              textClassName="text-lg md:text-2xl mt-4 -mb-4 text-ivory/70"
-              baseOpacity={0.2}
-              enableBlur={true}
-              baseRotation={2}
-              blurStrength={3}
-            >
-              {dictionary.about.ourStorySubTitle}
-            </ScrollReveal>
-          </div>
-
-          <div className="grid gap-16 md:grid-cols-2 md:items-center">
-            <motion.div
-              className="order-2 space-y-6 md:order-1"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 80,
-                damping: 20,
-                mass: 0.5,
-                delay: 0.2,
-              }}
-            >
-              <div className="space-y-6">
-                {dictionary.about.values && dictionary.about.values.slice(0, 4).map((item: any, index: number) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="mt-1 flex-shrink-0">
-                      <CheckCircle2 className={`h-6 w-6 ${index % 3 === 0 ? 'text-rose' : index % 3 === 1 ? 'text-sapphire' : 'text-beige'}`} />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-ivory">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 text-ivory/70">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="order-1 md:order-2"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 80,
-                damping: 20,
-                mass: 0.5,
-                delay: 0.4,
-              }}
-            >
-              <div className="relative">
-                <div className="absolute -inset-4 rounded-2xl bg-gradient-to-r from-rose/20 via-sapphire/20 to-beige/20 opacity-70 blur-lg"></div>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-ivory/10">
-                  <Image
-                    src="/ourapproach.png"
-                    alt="Our approach to digital solutions"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
+     
       {/* CTA Section - Styled like home page */}
-      <section ref={ctaRef} className="py-24 md:py-32">
-        <motion.div
-          className="container"
-          initial={{ opacity: 0.2, y: 100 }}
-          animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
+      <section className="py-24 md:py-32">
+        <motion.div className="container">
           <div className="absolute inset-0 z-0 text-center">
             <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
               {dictionary.about.ctaTitle1}{" "}
               <GradientText
                 colors={[
-                  "#3d5a80",
                   "#b76e79",
                   "#e0d5c0",
-                  "#3d5a80",
                   "#b76e79",
-                  "#3d5a80",
+                  "#e0d5c0",
                 ]}
                 animationSpeed={12}
                 showBorder={false}
@@ -511,11 +398,12 @@ export default function AboutPageClient({ dictionary }: { dictionary: any }) {
               >
                 {dictionary.about.ctaTitle2}
               </GradientText>
-              ?
+              {" "}?
             </h1>
           </div>
           <div className="relative z-10 md:mt-0 mt-28">
             <motion.div
+              ref={ctaRef}
               className="mx-auto max-w-3xl text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
@@ -555,9 +443,8 @@ export default function AboutPageClient({ dictionary }: { dictionary: any }) {
                   >
                     <Link
                       href="/contact"
-                      className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-rose px-6 py-3 text-base font-bold tracking-tight text-ivory shadow-lg transition-all duration-300 hover:shadow-rose/30"
+                      className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 text-rose hover:text-charcoal font-bold tracking-tighter px-6 py-3 transition-all duration-300"
                     >
-                      <span className="absolute inset-0 bg-gradient-to-r from-rose to-sapphire opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                       <span className="relative z-10 flex items-center">
                         {dictionary.about.ctaButton}
                         <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />

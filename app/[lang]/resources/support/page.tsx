@@ -117,12 +117,10 @@ export default async function SupportPage({
               <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-8xl">
                 <GradientText
                   colors={[
-                    "#3d5a80",
                     "#b76e79",
                     "#e0d5c0",
-                    "#3d5a80",
                     "#b76e79",
-                    "#3d5a80",
+                    "#e0d5c0",
                   ]}
                   animationSpeed={12}
                   showBorder={false}

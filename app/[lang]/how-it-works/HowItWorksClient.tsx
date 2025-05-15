@@ -134,12 +134,10 @@ export default function HowItWorksClient({ dictionary }: { dictionary: any }) {
                 {dictionary["how-it-works"].title1}{" "}
                 <GradientText
                   colors={[
-                    "#3d5a80",
                     "#b76e79",
                     "#e0d5c0",
-                    "#3d5a80",
                     "#b76e79",
-                    "#3d5a80",
+                    "#e0d5c0",
                   ]}
                   animationSpeed={12}
                   showBorder={false}
@@ -194,12 +192,10 @@ export default function HowItWorksClient({ dictionary }: { dictionary: any }) {
               {dictionary["how-it-works"].ourApproachTitle1}{" "}
               <GradientText
                 colors={[
-                  "#3d5a80",
                   "#b76e79",
                   "#e0d5c0",
-                  "#3d5a80",
                   "#b76e79",
-                  "#3d5a80",
+                  "#e0d5c0",
                 ]}
                 animationSpeed={12}
                 showBorder={false}
