@@ -1,0 +1,492 @@
+{
+  "name": "Personal AI",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "67239a31-82ab-488f-a35e-d8a2a11f741b",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -40,
+        -80
+      ],
+      "id": "c312ef73-ca28-428d-af30-d03906b0d2ef",
+      "name": "Webhook GET",
+      "webhookId": "67239a31-82ab-488f-a35e-d8a2a11f741b"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.query['hub.challenge'] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.2,
+      "position": [
+        260,
+        -80
+      ],
+      "id": "a25026aa-824d-4fe6-8dc9-aa67d94f747f",
+      "name": "Webhook Challenges"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "67239a31-82ab-488f-a35e-d8a2a11f741b",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -60,
+        280
+      ],
+      "id": "a0eabcdb-62d1-431e-9c8c-26ab75e3fca2",
+      "name": "Webhook POST",
+      "webhookId": "67239a31-82ab-488f-a35e-d8a2a11f741b"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "23a9e25a-897b-4c30-9231-f770e25af596",
+              "name": "body.entry[0].changes[0].value.from.id",
+              "value": "={{ $json.body.entry[0].changes[0].value.from.id }}",
+              "type": "string"
+            },
+            {
+              "id": "65c0698a-7ec5-43bf-b910-c9054c8a6175",
+              "name": "body.entry[0].changes[0].value.from.username",
+              "value": "={{ $json.body.entry[0].changes[0].value.from.username }}",
+              "type": "string"
+            },
+            {
+              "id": "47402da1-20c0-44ef-bcd0-1301d70d8919",
+              "name": "body.entry[0].changes[0].value.id",
+              "value": "={{ $json.body.entry[0].changes[0].value.id }}",
+              "type": "string"
+            },
+            {
+              "id": "dc077957-dd5e-4cba-a0c0-e56c39e48340",
+              "name": "body.entry[0].changes[0].value.text",
+              "value": "={{ $json.body.entry[0].changes[0].value.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        280,
+        280
+      ],
+      "id": "21d30e9f-18d8-407c-bbca-33c4c3181414",
+      "name": "Handle Comment Data"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.instagram.com/v22.0/{{$json.body.entry[0].changes[0].value.id}}/replies\n",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message",
+              "value": "={{ $json.comment }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1460,
+        360
+      ],
+      "id": "2a884381-1ebb-461c-bf81-0b05e833f0a4",
+      "name": "Reply IG Comments",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "NpWH1IXaxuGz77EU",
+          "name": "Header Auth account"
+        },
+        "httpBearerAuth": {
+          "id": "67Bku1ikgTiISFKE",
+          "name": "Bearer Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "00520e94-db82-40c7-b527-994b5e06304c",
+              "leftValue": "={{ $json.body.entry[0].changes[0].value.from.username }}",
+              "rightValue": "onurdogan.ai",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "2db550b7-4d08-4720-846b-2bb1db04a6c7",
+              "leftValue": "={{ $json.body.entry[0].changes[0].value.from.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "8b5da3e7-66b3-471d-a5dd-c593f9b82898",
+              "leftValue": "={{ $json.body.entry[0].changes[0].value.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "d20c2f3d-c4ed-49a4-aa2c-5768a137002f",
+              "leftValue": "={{ $json.body.entry[0].changes[0].value.text }}",
+              "rightValue": "AI",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        520,
+        280
+      ],
+      "id": "8cfc37bd-a9ce-45c3-b390-d11db5e8df0d",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.instagram.com/v22.0/me/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"recipient\": {\n    \"id\": \"{{ $json.body.entry[0].changes[0].value.from.id }}\"\n  },\n  \"message\": {\n    \"text\": \"{{ $json.dm }}\"\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1460,
+        160
+      ],
+      "id": "63bfe2c3-bd39-4dce-9a16-7dacc1450daa",
+      "name": "Send DM",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "NpWH1IXaxuGz77EU",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-nano",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-NANO"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are a professional content creator. I want you to do two things for each person who comments on my Instagram reel :\n\nWrite exactly one custom comment reply that tells them to check their DMs. It should be friendly and engaging, like:\n\"Sent you a DM, check it out {emoji}\", \"Just messaged you {emoji}\", or \"You should have it now {emoji}\".\nUse your own variation with a natural tone.\n\nEach time, assume the user commented on a reel asking for a secret link. Be friendly, include an emoji, and keep it natural.\n\nWrite exactly one short DM message that includes a link. Assume they commented asking for a \"secret link\" mentioned in my reel. Example:\n\"Hey there {emoji}, I saw your comment about the secret link. Here it is: [insert link]\"\n\nFormat your response in JSON like this:\n{\n  \"comment\": \"your custom comment reply here\",\n  \"dm\": \"your direct message here\"\n}\n\nThe link to insert is : https://www.soluvia.co/en/templates"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        680,
+        40
+      ],
+      "id": "6fb5e12c-f6b6-42c9-a6ad-0dc659d62a06",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "ZUG8n5FeAed2bMGK",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        1160,
+        260
+      ],
+      "id": "7fb8a077-9885-4981-b64f-d0b638a482be",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "jsCode": "const content = $json.message.content;\n\ntry {\n  const parsed = JSON.parse(content);\n\n  // If it's an array, return first item only\n  if (Array.isArray(parsed)) {\n    return [{ json: parsed[0] }];\n  }\n\n  // Otherwise, return the parsed object\n  return [{ json: parsed }];\n} catch (e) {\n  throw new Error(\"Failed to parse AI response as JSON.\");\n}\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        980,
+        40
+      ],
+      "id": "9676eb51-8453-463c-9761-09ad809cf714",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "content": "## Step 1: Listening to Webhooks \nYou must set up a meta developer account.\n",
+        "width": 400
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -260
+      ],
+      "id": "d4af6536-94c3-4184-849a-363409077898",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Step 2: Handling the data\nWe set which part of data we want to keep from the received data.",
+        "width": 400,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        100
+      ],
+      "id": "bf122999-20f9-4fbf-ba88-cabf11f44106",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Step 3: Filter data & send to AI\nHere we filter the data, then send it to AI to create custom comments and dm messages. We create a JS function to transform the output of the AI generated data.",
+        "width": 380,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        680,
+        -140
+      ],
+      "id": "783a39c9-2d8a-4dcc-85ba-cd1236f12166",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Step 4: Merge webhook & AI generated data to make HTTP requests\nHere we merge the initial received data and the generated data. Then, we send http requests to meta to reply to comments, and send dms.",
+        "width": 480,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        -20
+      ],
+      "id": "632c2fc6-39a6-4c6e-a42f-6b45a616bc09",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {
+    "Handle Comment Data": [
+      {
+        "json": {
+          "body": {
+            "entry": [
+              {
+                "changes": [
+                  {
+                    "value": {
+                      "from": {
+                        "id": "682554924370210",
+                        "username": "onriscoding"
+                      },
+                      "id": "18117829210413466",
+                      "text": "test"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "Webhook POST": [
+      {
+        "json": {
+          "body": {
+            "entry": [
+              {
+                "changes": [
+                  {
+                    "value": {
+                      "from": {
+                        "id": "682554924370210",
+                        "username": "onriscoding"
+                      },
+                      "id": "18117829210413466",
+                      "text": "test"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook GET": {
+      "main": [
+        [
+          {
+            "node": "Webhook Challenges",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook POST": {
+      "main": [
+        [
+          {
+            "node": "Handle Comment Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Handle Comment Data": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Reply IG Comments": {
+      "main": [
+        []
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Reply IG Comments",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send DM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "43eca47b-1f75-4245-ad61-ed77cb51160a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "aae22c9b08c1243301af71cbfb5c0f353a136c0cfbee86abbaecb452d60e0f61"
+  },
+  "id": "EPoxWMlX3I9DfWPr",
+  "tags": []
+}

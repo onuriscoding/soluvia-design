@@ -246,12 +246,7 @@ export function RedesignedProcessSection({ dictionary }: { dictionary: any }) {
           >
             {t("process.sectionTitle1")}{" "}
             <GradientText
-              colors={[
-                "#b76e79",
-                "#e0d5c0",
-                "#b76e79",
-                "#e0d5c0",
-              ]}
+              colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
               animationSpeed={12}
               showBorder={false}
               className="inline-block"
@@ -447,42 +442,41 @@ export function RedesignedProcessSection({ dictionary }: { dictionary: any }) {
                           Key Activities:
                         </h4>
                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                          {dictionary?.process?.steps?.[index]
-                            ?.activities?.[0] ?
-                            Object.values(
-                              dictionary.process.steps[index].activities[0]
-                            ).map((activity, i) => (
-                              <motion.li
-                                key={i}
-                                className="flex items-center text-white/70 text-sm"
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                              >
-                                <div
-                                  className={`w-1.5 h-1.5 rounded-full ${
-                                    step.color.split(" ")[0]
-                                  } mr-2`}
-                                />
-                                {activity as string}
-                              </motion.li>
-                            )) :
-                            step.details.map((detail, i) => (
-                              <motion.li
-                                key={i}
-                                className="flex items-center text-white/70 text-sm"
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                              >
-                                <div
-                                  className={`w-1.5 h-1.5 rounded-full ${
-                                    step.color.split(" ")[0]
-                                  } mr-2`}
-                                />
-                                {detail}
-                              </motion.li>
-                            ))}
+                          {dictionary?.process?.steps?.[index]?.activities?.[0]
+                            ? Object.values(
+                                dictionary.process.steps[index].activities[0]
+                              ).map((activity, i) => (
+                                <motion.li
+                                  key={i}
+                                  className="flex items-center text-white/70 text-sm"
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: i * 0.1 }}
+                                >
+                                  <div
+                                    className={`w-1.5 h-1.5 rounded-full ${
+                                      step.color.split(" ")[0]
+                                    } mr-2`}
+                                  />
+                                  {activity as string}
+                                </motion.li>
+                              ))
+                            : step.details.map((detail, i) => (
+                                <motion.li
+                                  key={i}
+                                  className="flex items-center text-white/70 text-sm"
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: i * 0.1 }}
+                                >
+                                  <div
+                                    className={`w-1.5 h-1.5 rounded-full ${
+                                      step.color.split(" ")[0]
+                                    } mr-2`}
+                                  />
+                                  {detail}
+                                </motion.li>
+                              ))}
                         </ul>
                       </motion.div>
                     )}

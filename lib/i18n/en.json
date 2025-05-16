@@ -638,15 +638,15 @@
   },
   "templates": {
     "title": "Templates",
-    "subtitle": "Browse our collection of free templates to kickstart your projects",
-    "aiTemplatesTitle": "AI Automation Templates",
-    "aiTemplatesDescription": "Ready-to-use automation templates to streamline your workflows and enhance productivity",
-    "webTemplatesTitle": "Web Design Templates",
-    "webTemplatesDescription": "Professional web design templates to elevate your online presence",
-    "viewDetails": "View Details",
+    "subtitle": "Ready-to-implement AI solutions to transform your business operations and customer experiences",
+    "aiTemplatesTitle1": "Explore Our",
+    "aiTemplatesTitle2": "AI Automation Solutions",
+    "aiTemplatesDescription": "Discover powerful AI automation solutions designed to solve real business challenges. Each template can be customized and integrated into your existing systems.",
+    "viewDetails": "VIEW DETAILS",
     "backToTemplates": "Back to templates",
-    "needCustomSolution": "Need a custom solution?",
-    "customSolutionDescription": "Our team can help you create personalized templates or custom solutions tailored specifically to your business needs.",
+    "needCustomSolution1": "Need a custom",
+    "needCustomSolution2": "solution",
+    "customSolutionDescription": "Our team can help you create personalized solutions tailored specifically to your business needs.",
     "getInTouch": "GET IN TOUCH",
     "download": "DOWNLOAD TEMPLATE",
     "features": "Features",
@@ -655,22 +655,15 @@
     "customDesignDescription": "Our team can help you create a fully customized portfolio website tailored specifically to your style and professional needs.",
     "contactUs": "CONTACT US",
     "templateDetails": {
-      "aiChatbot": {
-        "title": "Customer Support Chatbot",
-        "description": "AI-powered chatbot template for customer support automation",
-        "features": [
-          "Pre-built customer intent recognition",
-          "FAQ automation workflow",
-          "Human handoff integration",
-          "Customizable responses",
-          "Easy deployment instructions"
-        ],
-        "usage": "This template provides a starter framework for implementing a customer support chatbot using AI technologies. Follow these steps to get started:",
-        "steps": [
-          "Download the template package",
-          "Follow the setup instructions in the README file",
-          "Customize the intents and responses to match your business needs",
-          "Deploy to your preferred platform using the deployment guide"
+      "instagramAutomation": {
+        "title": "Instagram Automation",
+        "description": "Automate your Instagram engagement with AI-powered comment replies and direct message responses. Save time while maintaining authentic connections with your audience.",
+        "howItWorksTitle": "How it works",
+        "howItWorks": [
+          "The automation listens to your Instagram webhooks for new comments.",
+          "Smart, context-aware replies are generated instantly by the AI.",
+          "It automatically replies to a comment and sends a custom DM to the user.",
+          "You can customize the AI model and parameters to fit your needs."
         ],
         "customSolution": "Our team can help you create a fully customized AI automation solution tailored specifically to your business requirements and workflows."
       },

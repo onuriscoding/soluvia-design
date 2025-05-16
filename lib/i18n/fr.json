@@ -645,16 +645,16 @@
     "fr": "Français"
   },
   "templates": {
-    "title": "Modèles Gratuits",
-    "subtitle": "Parcourez notre collection de modèles gratuits pour démarrer rapidement vos projets",
-    "aiTemplatesTitle": "Modèles d'Automatisation IA",
-    "aiTemplatesDescription": "Modèles d'automatisation prêts à l'emploi pour simplifier vos flux de travail et améliorer la productivité",
-    "webTemplatesTitle": "Modèles de Design Web",
-    "webTemplatesDescription": "Modèles web professionnels pour améliorer votre présence en ligne",
-    "viewDetails": "Voir les détails",
+    "title": "Modèles",
+    "subtitle": "Modèles prêts à l'emploi pour transformer vos opérations commerciales et les expériences client",
+    "aiTemplatesTitle1": "Explorez nos",
+    "aiTemplatesTitle2": "Solutions d'Automatisation IA",
+    "aiTemplatesDescription": "Découvrez des solutions d'automatisation IA puissantes conçues pour résoudre des défis commerciaux réels. Chaque modèle peut être personnalisé et intégré à vos systèmes existants.",
+    "viewDetails": "VOIR LES DÉTAILS",
     "backToTemplates": "Retour aux modèles",
-    "needCustomSolution": "Besoin d'une solution sur mesure ?",
-    "customSolutionDescription": "Notre équipe peut vous aider à créer des modèles personnalisés ou des solutions sur mesure adaptées spécifiquement à vos besoins.",
+    "needCustomSolution1": "Besoin d'une solution",
+    "needCustomSolution2": "sur mesure",
+    "customSolutionDescription": "Notre équipe peut vous aider à créer une solution d'automatisation IA entièrement personnalisée, adaptée spécifiquement aux exigences et aux flux de travail de votre entreprise.",
     "getInTouch": "NOUS CONTACTER",
     "download": "TÉLÉCHARGER",
     "features": "Fonctionnalités",
@@ -663,22 +663,15 @@
     "customDesignDescription": "Notre équipe peut vous aider à créer un site web de portfolio entièrement personnalisé adapté spécifiquement à votre style et à vos besoins professionnels.",
     "contactUs": "CONTACTEZ-NOUS",
     "templateDetails": {
-      "aiChatbot": {
-        "title": "Chatbot de Support Client",
-        "description": "Modèle de chatbot alimenté par l'IA pour l'automatisation du support client",
-        "features": [
-          "Reconnaissance d'intention client préétablie",
-          "Flux d'automatisation des FAQ",
-          "Intégration de transfert humain",
-          "Réponses personnalisables",
-          "Instructions de déploiement faciles"
-        ],
-        "usage": "Ce modèle fournit un cadre de départ pour mettre en œuvre un chatbot de support client utilisant les technologies IA. Suivez ces étapes pour commencer :",
-        "steps": [
-          "Téléchargez le package de modèle",
-          "Suivez les instructions d'installation dans le fichier README",
-          "Personnalisez les intentions et les réponses selon les besoins de votre entreprise",
-          "Déployez sur votre plateforme préférée en utilisant le guide de déploiement"
+      "instagramAutomation": {
+        "title": "Automatisation Instagram",
+        "description": "Automatisez votre engagement Instagram avec des réponses de commentaires et des réponses de messages directs alimentées par l'IA. Gagnez du temps tout en maintenant des connexions authentiques avec votre audience.",
+        "howItWorksTitle": "Comment ça marche",
+        "howItWorks": [
+          "L'automatisation écoute vos webhooks Instagram pour les nouveaux commentaires.",
+          "Les réponses intelligentes, contextuelles sont générées instantanément par l'IA.",
+          "Il répond automatiquement à un commentaire et envoie un message direct personnalisé à l'utilisateur.",
+          "Vous pouvez personnaliser le modèle et les paramètres de l'IA pour répondre à vos besoins."
         ],
         "customSolution": "Notre équipe peut vous aider à créer une solution d'automatisation IA entièrement personnalisée, adaptée spécifiquement aux exigences et aux flux de travail de votre entreprise."
       },
