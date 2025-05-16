@@ -316,7 +316,7 @@ export default function TemplatesClient({ dictionary }: { dictionary: any }) {
               ?
             </h1>
           </div>
-          <div className="relative z-10 md:mt-0 mt-28">
+          <div className="relative z-10 md:mt-4 mt-12">
             <motion.div
               ref={ctaRef}
               className="mx-auto max-w-3xl text-center"
@@ -341,7 +341,7 @@ export default function TemplatesClient({ dictionary }: { dictionary: any }) {
                   position: "relative",
                 }}
               >
-                <div className="absolute inset-0 z-10 md:mt-0 -mt-52">
+                <div className="absolute inset-0 z-10 md:mt-4 -mt-52">
                   <Orb
                     hoverIntensity={0.5}
                     rotateOnHover={true}

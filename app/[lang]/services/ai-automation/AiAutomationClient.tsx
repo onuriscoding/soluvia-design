@@ -68,7 +68,9 @@ interface AiAutomationClientProps {
   };
 }
 
-export default function AiAutomationClientComponent({ dictionary }: AiAutomationClientProps) {
+export default function AiAutomationClientComponent({
+  dictionary,
+}: AiAutomationClientProps) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -108,7 +110,9 @@ export default function AiAutomationClientComponent({ dictionary }: AiAutomation
       title: dictionary.automation.solutions[0].title,
       description: dictionary.automation.solutions[0].description,
       icon: <MessageSquare className="h-6 w-6" />,
-      features: dictionary.automation.solutions[0].list.map(item => item.text),
+      features: dictionary.automation.solutions[0].list.map(
+        (item) => item.text
+      ),
       image: "/ai-chatbot.png?height=600&width=800",
       gradient: "from-rose/20 to-sapphire/20",
     },
@@ -116,7 +120,9 @@ export default function AiAutomationClientComponent({ dictionary }: AiAutomation
       title: dictionary.automation.solutions[1].title,
       description: dictionary.automation.solutions[1].description,
       icon: <Zap className="h-6 w-6" />,
-      features: dictionary.automation.solutions[1].list.map(item => item.text),
+      features: dictionary.automation.solutions[1].list.map(
+        (item) => item.text
+      ),
       image: "/ai-automation.png?height=600&width=800",
       gradient: "from-sapphire/20 to-beige/20",
     },
@@ -124,38 +130,45 @@ export default function AiAutomationClientComponent({ dictionary }: AiAutomation
       title: dictionary.automation.solutions[2].title,
       description: dictionary.automation.solutions[2].description,
       icon: <BarChart className="h-6 w-6" />,
-      features: dictionary.automation.solutions[2].list.map(item => item.text),
+      features: dictionary.automation.solutions[2].list.map(
+        (item) => item.text
+      ),
       image: "/ai-analytics.png?height=600&width=800",
       gradient: "from-beige/20 to-rose/20",
     },
     {
-      title: dictionary.automation.solutions[3] ? dictionary.automation.solutions[3].title : "Intelligent Content Generation",
-      description: dictionary.automation.solutions[3] ? dictionary.automation.solutions[3].description : 
-        "We leverage AI to create high-quality, relevant content for your website, marketing campaigns, and social media channels.",
+      title: dictionary.automation.solutions[3]
+        ? dictionary.automation.solutions[3].title
+        : "Intelligent Content Generation",
+      description: dictionary.automation.solutions[3]
+        ? dictionary.automation.solutions[3].description
+        : "We leverage AI to create high-quality, relevant content for your website, marketing campaigns, and social media channels.",
       icon: <FileText className="h-6 w-6" />,
-      features: dictionary.automation.solutions[3] ? 
-        dictionary.automation.solutions[3].list.map(item => item.text) : 
-        [
-          "Blog post generation",
-          "Product descriptions",
-          "Email content",
-          "Social media posts",
-          "SEO-optimized content",
-          "Multilingual content creation",
-        ],
+      features: dictionary.automation.solutions[3]
+        ? dictionary.automation.solutions[3].list.map((item) => item.text)
+        : [
+            "Blog post generation",
+            "Product descriptions",
+            "Email content",
+            "Social media posts",
+            "SEO-optimized content",
+            "Multilingual content creation",
+          ],
       image: "/ai-content.png?height=600&width=800",
       gradient: "from-rose/20 to-sapphire/20",
     },
   ];
 
-  const benefits: Benefit[] = dictionary.automation.benefits.map((benefit, index) => {
-    const icons = [Zap, CheckCircle, Clock, TrendingUp, BarChart, DollarSign];
-    return {
-      title: benefit.title,
-      description: benefit.description,
-      icon: icons[index % icons.length]
-    };
-  });
+  const benefits: Benefit[] = dictionary.automation.benefits.map(
+    (benefit, index) => {
+      const icons = [Zap, CheckCircle, Clock, TrendingUp, BarChart, DollarSign];
+      return {
+        title: benefit.title,
+        description: benefit.description,
+        icon: icons[index % icons.length],
+      };
+    }
+  );
 
   const processSteps = [
     {
@@ -270,12 +283,7 @@ export default function AiAutomationClientComponent({ dictionary }: AiAutomation
                   {dictionary.automation.ai} &
                 </div>
                 <GradientText
-                  colors={[
-                    "#b76e79",
-                    "#e0d5c0",
-                    "#b76e79",
-                    "#e0d5c0",
-                  ]}
+                  colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                   animationSpeed={12}
                   showBorder={false}
                   className=" leading-tight"
@@ -337,12 +345,7 @@ export default function AiAutomationClientComponent({ dictionary }: AiAutomation
             <h2 className="text-5xl font-bold tracking-tight text-ivory md:text-6xl mb-6">
               {dictionary.automation.ourSolutions}{" "}
               <GradientText
-                colors={[
-                  "#b76e79",
-                  "#e0d5c0",
-                  "#b76e79",
-                  "#e0d5c0",
-                ]}
+                colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                 animationSpeed={12}
                 showBorder={false}
                 className="inline-block"
@@ -420,12 +423,7 @@ export default function AiAutomationClientComponent({ dictionary }: AiAutomation
             <h2 className="text-5xl font-bold tracking-tight text-ivory md:text-6xl mb-6">
               {dictionary.automation.benefitsTitle1}{" "}
               <GradientText
-                colors={[
-                  "#b76e79",
-                  "#e0d5c0",
-                  "#b76e79",
-                  "#e0d5c0",
-                ]}
+                colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                 animationSpeed={12}
                 showBorder={false}
                 className="inline-block"
@@ -486,12 +484,7 @@ export default function AiAutomationClientComponent({ dictionary }: AiAutomation
               <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
                 {dictionary.automation.ctaTitle1}{" "}
                 <GradientText
-                  colors={[
-                    "#b76e79",
-                    "#e0d5c0",
-                    "#b76e79",
-                    "#e0d5c0",
-                  ]}
+                  colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                   animationSpeed={12}
                   showBorder={false}
                   className="inline-block"
@@ -545,4 +538,4 @@ export default function AiAutomationClientComponent({ dictionary }: AiAutomation
       </section>
     </main>
   );
-} 
+}
