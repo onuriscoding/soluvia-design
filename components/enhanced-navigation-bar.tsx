@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect, useRef } from "react"
-import Link from "next/link"
-import { ChevronUp, X, ArrowRight } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
-import { useI18n } from "@/lib/i18n/i18nContext"
-import { LanguageSwitcher } from "./language-switcher"
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { ChevronUp, X, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useI18n } from "@/lib/i18n/i18nContext";
+import { LanguageSwitcher } from "./language-switcher";
 
 // Helper hook to localize URLs
 const useLocalizedUrl = () => {
-  const { language } = useI18n()
+  const { language } = useI18n();
 
   return (path: string) => {
     // Handle root path
     if (path === "/") {
-      return `/${language}`
+      return `/${language}`;
     }
 
     // Handle other paths
-    return `/${language}${path}`
-  }
-}
+    return `/${language}${path}`;
+  };
+};
 
 const navItems = [
   {
@@ -56,125 +56,139 @@ const navItems = [
   },
 
   { labelKey: "navigation.howItWorks", href: "/how-it-works" },
+  { labelKey: "navigation.templates", href: "/templates" },
   { labelKey: "navigation.about", href: "/about" },
   { labelKey: "navigation.contact", href: "/contact" },
-]
+];
 
 export function EnhancedNavigationBar() {
   // State
-  const [activeMobileItem, setActiveMobileItem] = useState<string | null>(null)
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [logoHovered, setLogoHovered] = useState(false)
-  const [navWidth, setNavWidth] = useState(0)
-  const { t } = useI18n()
-  const localizeUrl = useLocalizedUrl()
+  const [activeMobileItem, setActiveMobileItem] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [logoHovered, setLogoHovered] = useState(false);
+  const [navWidth, setNavWidth] = useState(0);
+  const { t } = useI18n();
+  const localizeUrl = useLocalizedUrl();
 
   // Refs
-  const navRef = useRef<HTMLDivElement>(null)
-  const menuRef = useRef<HTMLDivElement>(null)
-  const headerRef = useRef<HTMLDivElement>(null)
+  const navRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
 
   // Handle scroll detection
   useEffect(() => {
     const handleScroll = () => {
       // Force check with the raw value
-      const scrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-      setScrolled(scrollY > 10)
-    }
+      const scrollY =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+      setScrolled(scrollY > 10);
+    };
 
     // Initial check on mount
-    handleScroll()
+    handleScroll();
 
     // More frequent checks with passive event for better performance
-    window.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     // Fallback with requestAnimationFrame for mobile
-    let rafId: number
+    let rafId: number;
 
     const pollScrollPosition = () => {
-      handleScroll()
-      rafId = requestAnimationFrame(pollScrollPosition)
-    }
+      handleScroll();
+      rafId = requestAnimationFrame(pollScrollPosition);
+    };
 
     // Start polling on mobile devices
     if (window.innerWidth < 768) {
-      rafId = requestAnimationFrame(pollScrollPosition)
+      rafId = requestAnimationFrame(pollScrollPosition);
     }
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-      if (rafId) cancelAnimationFrame(rafId)
-    }
-  }, [])
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   // Get navigation bar width for mobile menu sizing
   useEffect(() => {
     if (navRef.current) {
       const updateNavWidth = () => {
         if (navRef.current) {
-          setNavWidth(navRef.current.offsetWidth)
+          setNavWidth(navRef.current.offsetWidth);
         }
-      }
+      };
 
       // Initial measurement
-      updateNavWidth()
+      updateNavWidth();
 
       // Update on resize
-      window.addEventListener("resize", updateNavWidth)
-      return () => window.removeEventListener("resize", updateNavWidth)
+      window.addEventListener("resize", updateNavWidth);
+      return () => window.removeEventListener("resize", updateNavWidth);
     }
-  }, [navRef, mobileMenuOpen])
+  }, [navRef, mobileMenuOpen]);
 
   // Handle clicks outside the menu to close it
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (mobileMenuOpen && menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      if (
+        mobileMenuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
         // Only close if clicking outside the menu and not on the toggle button
-        const toggleButton = document.getElementById("mobile-menu-toggle")
+        const toggleButton = document.getElementById("mobile-menu-toggle");
         if (!toggleButton?.contains(event.target as Node)) {
-          setMobileMenuOpen(false)
+          setMobileMenuOpen(false);
         }
       }
-    }
+    };
 
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [mobileMenuOpen])
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [mobileMenuOpen]);
 
   // Prevent scrolling when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = ""
+      document.body.style.overflow = "";
       // Reset active item when menu closes
-      setActiveMobileItem(null)
+      setActiveMobileItem(null);
     }
 
     return () => {
-      document.body.style.overflow = ""
-    }
-  }, [mobileMenuOpen])
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
 
   // Toggle mobile dropdown
   const toggleMobileDropdown = (label: string, event: React.MouseEvent) => {
     // Prevent event from bubbling up
-    event.stopPropagation()
-    setActiveMobileItem((prev) => (prev === label ? null : label))
-  }
+    event.stopPropagation();
+    setActiveMobileItem((prev) => (prev === label ? null : label));
+  };
 
   // Close mobile menu
   const closeMobileMenu = () => {
-    setMobileMenuOpen(false)
-  }
+    setMobileMenuOpen(false);
+  };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 py-2 md:mt-0 mt-4" ref={headerRef}>
+    <header
+      className="fixed top-0 left-0 right-0 z-50 px-4 py-2 md:mt-0 mt-4"
+      ref={headerRef}
+    >
       <div className="mx-auto max-w-7xl">
         <div
           className={`${
-            scrolled || mobileMenuOpen ? "bg-charcoal/20 backdrop-blur-md shadow-lg" : "bg-transparent"
+            scrolled || mobileMenuOpen
+              ? "bg-charcoal/20 backdrop-blur-md shadow-lg"
+              : "bg-transparent"
           } transition-all duration-500 rounded-full border border-ivory/10`}
           ref={navRef}
         >
@@ -234,7 +248,10 @@ export function EnhancedNavigationBar() {
                   {item.children ? (
                     <>
                       <div className="flex items-center text-ivory/90 hover:text-ivory transition-colors font-ivory font-semibold tracking-tight py-2 relative cursor-pointer">
-                        <Link href={localizeUrl(item.href!)} className="relative inline-block">
+                        <Link
+                          href={localizeUrl(item.href!)}
+                          className="relative inline-block"
+                        >
                           {t(item.labelKey)}
                           <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ivory group-hover:w-full transition-all duration-300"></span>
                         </Link>
@@ -370,7 +387,8 @@ export function EnhancedNavigationBar() {
                   width: navWidth > 0 ? `${navWidth}px` : "calc(100% - 2rem)",
 
                   backdropFilter: "blur(12px)",
-                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
+                  boxShadow:
+                    "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
                 }}
               >
                 {/* Close button at top right */}
@@ -404,7 +422,9 @@ export function EnhancedNavigationBar() {
                             <div>
                               {/* SERVICES with dropdown */}
                               <motion.button
-                                onClick={(e) => toggleMobileDropdown(item.labelKey, e)}
+                                onClick={(e) =>
+                                  toggleMobileDropdown(item.labelKey, e)
+                                }
                                 className="flex items-center text-3xl font-semibold tracking-thigh text-ivory hover:text-rose transition-colors relative group w-full"
                                 whileHover={{
                                   x: 5,
@@ -454,7 +474,8 @@ export function EnhancedNavigationBar() {
                                         className="w-1.5 h-1.5 rounded-full bg-rose"
                                         whileHover={{
                                           scale: 1.3,
-                                          boxShadow: "0 0 8px rgba(255, 107, 107, 0.6)",
+                                          boxShadow:
+                                            "0 0 8px rgba(255, 107, 107, 0.6)",
                                         }}
                                       />
                                     )}
@@ -497,9 +518,14 @@ export function EnhancedNavigationBar() {
                                           )}
                                           {"price" in child && child.price && (
                                             <div className="text-sm font-bold font-inter tracking-wide text-rose">
-                                              <span className="opacity-70 font-normal text-sm">from </span>
+                                              <span className="opacity-70 font-normal text-sm">
+                                                from{" "}
+                                              </span>
                                               <span className="text-lg font-inter text-ivory">
-                                                {child.price.replace("from ", "")}
+                                                {child.price.replace(
+                                                  "from ",
+                                                  ""
+                                                )}
                                               </span>
                                             </div>
                                           )}
@@ -558,5 +584,5 @@ export function EnhancedNavigationBar() {
         )}
       </AnimatePresence>
     </header>
-  )
+  );
 }
