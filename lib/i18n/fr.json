@@ -20,30 +20,31 @@
     "back": "Retour",
     "submit": "Envoyer",
     "submitting": "Envoi en cours...",
-    "bookADiscoveryCall": "Réservez un appel de découverte",
-    "bookADiscoveryCallSmall": "Réservez un appel sur Cal.com",
-    "bookADiscoveryCallDescription": "Réservez une consultation gratuite pour discuter de votre projet et de la manière dont nous pouvons vous aider",
-    "bookADiscoveryCallfeature1": "Appel de découverte de 15 minutes",
-    "bookADiscoveryCallfeature2": "Sans obligation, sans pression",
-    "bookADiscoveryCallfeature3": "Recommandations personnalisées"
+    "bookADiscoveryCall": "Réservez un appel découverte",
+    "bookADiscoveryCallSmall": "Planifiez un appel sur Cal.com",
+    "bookADiscoveryCallDescription": "Réservez un <b>appel de consultation gratuit</b> pour discuter de votre projet et voir comment nous pouvons vous aider.",
+    "bookADiscoveryCallfeature1": "Appel découverte de <b>15 minutes</b>",
+    "bookADiscoveryCallfeature2": "<b>Sans engagement</b>, <b>aucune pression</b>",
+    "bookADiscoveryCallfeature3": "<b>Recommandations personnalisées</b>"
   },
   "services": {
     "allServices": "Nos Services",
     "sectionTitle": "Nos",
     "sectionSubtitle": "Nous offrons des services digitaux qui élèvent votre entreprise et amplifient votre présence en ligne",
-    "web-design": "Design Web",
-    "web-design-description": "Nous concevons et développons des sites web sophistiqués et adaptatifs qui captivent votre audience et reflètent l'identité unique de votre marque.",
+    "web-design": "Sites web",
+    "web-design-description": "Nous concevons et développons des sites web <b>hautement performants</b> et <b>optimisés pour mobile</b> qui <b>transforment les visiteurs en clients</b>. Chaque site reflète <b>la personnalité de votre marque</b> et vise à générer des <b>résultats mesurables</b>.",
     "web-design-features": [
-      "Designs personnalisés",
-      "UI/UX interactifs",
-      "Optimisation des performances"
+      "Designs <b>sur mesure</b> et responsives, parfaitement adaptés à tous les appareils",
+      "Interface <b>UI/UX</b> intuitive et engageante, pensée pour la conversion",
+      "Vitesse de chargement optimisée et architecture <b>prête pour le SEO</b>"
     ],
+
     "automation": "Solutions IA",
-    "automation-description": "Nous créons des solutions IA personnalisées pour vous aider à automatiser les tâches répétitives et optimiser votre flux de travail.",
+    "automation-description": "Nous créons des <b>solutions sur mesure basées sur l’IA</b> pour <b>réduire les tâches répétitives</b>, <b>diminuer les coûts opérationnels</b> et offrir de <b>nouvelles opportunités de croissance</b> à votre entreprise.",
     "automation-features": [
-      "Solutions IA personnalisées",
-      "Automatisation des flux de travail",
-      "Chatbots IA"
+      "<b>Solutions d’IA personnalisées</b> adaptées à vos processus",
+      "<b>Automatisation des processus</b> pour gagner du temps et réduire les erreurs",
+      "<b>Chatbots IA</b> pour engager et assister vos clients <b>24h/7</b>"
     ],
     "seo": "Optimisation SEO",
     "seo-description": "Améliorez votre visibilité en ligne et générez du trafic organique grâce à nos stratégies SEO complètes",
@@ -625,7 +626,7 @@
     "title": "Solutions via",
     "rotatingText1": "Designs",
     "rotatingText2": "IA",
-    "description": "Nous créons des sites web élégants et puissants, pensés pour faire grandir votre activité. Offrez à votre marque une présence en ligne unique grâce à des solutions digitales sur mesure"
+    "description": "Nous concevons des <b>sites web remarquables</b> et développons des solutions d’<b>IA intelligente</b> pour aider votre entreprise à <b>se développer</b> avec <b>clarté</b> et <b>confiance</b>. Démarquez-vous en ligne grâce à des expériences numériques <b>modernes</b>, <b>automatisées</b> et <b>scalables</b>."
   },
   "cta": {
     "heading": "Prêt pour une solution qui",
