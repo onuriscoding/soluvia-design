@@ -16,6 +16,7 @@ import {
 import { ArrowRight, MousePointer, ChevronDown } from "lucide-react";
 import { RotatingText } from "@/app/animations/rotating-text";
 import GradientText from "@/app/animations/gradient-text";
+import parse from "html-react-parser";
 
 // Helper hook to localize URLs
 const useLocalizedUrl = () => {
@@ -304,7 +305,7 @@ export function RedesignedHeroSection({ dictionary }: { dictionary: any }) {
             className="mx-auto mt-6 font-inter text-lg max-w-3xl text-medium text-ivory/90 md:text-2xl"
             variants={itemVariants}
           >
-            {t("hero.description")}
+            {parse(t("hero.description"))}
           </motion.p>
 
           <motion.div

@@ -23,28 +23,29 @@
     "submitting": "Submitting...",
     "bookADiscoveryCall": "Book a Discovery Call",
     "bookADiscoveryCallSmall": "Book a Call on Cal.com",
-    "bookADiscoveryCallDescription": "Book a free consultation call to discuss your project and how we can help",
-    "bookADiscoveryCallfeature1": "15-minute discovery Call",
-    "bookADiscoveryCallfeature2": "No obligation, no pressure",  
-    "bookADiscoveryCallfeature3": "Personalized recommendations"
+    "bookADiscoveryCallDescription": "Book a <b>free consultation call</b> to discuss your project and how we can help.",
+    "bookADiscoveryCallfeature1": "<b>15-minute</b> Discovery Call",
+    "bookADiscoveryCallfeature2": "<b>No obligation</b>, <b>no pressure</b>",
+    "bookADiscoveryCallfeature3": "<b>Personalized recommendations</b>"
+
   },
   "services": {
     "allServices": "Our Services",
     "sectionTitle": "Our",
-    "sectionSubtitle": "From strategy to execution, we deliver digital services that elevate your business and amplify your presence online.",
+    "sectionSubtitle": "<b>Design meets automation</b>. We create <b>digital solutions</b> that <b>save you time</b>, <b>boost visibility</b>, and <b>accelerate growth</b>.",
     "web-design": "Web Design",
-    "web-design-description": "We design and develop sophisticated, responsive websites that captivate your audience and reflect your brand's unique identity.",
+    "web-design-description": "We design and develop <b>high-performance</b>, <b>mobile-friendly websites</b> that <b>convert visitors into clients</b>. Every site is built to reflect your <b>brand’s personality</b> and drive <b>measurable results.</b>",
     "web-design-features": [
-      "Custom responsive designs",
-      "Interactive UI/UX",
-      "Performance optimization"
-    ],
+    "<b>Custom</b>, responsive designs that adapt beautifully on all devices",
+    "Engaging and intuitive <b>UI/UX</b> focused on conversion",
+    "Optimized loading speed and <b>SEO-ready</b> architecture"
+  ],
     "automation": "AI Solutions",
-    "automation-description": "We create custom AI solutions to empower your business and decrease your costs by increasing your efficiency.",
+    "automation-description": "We build <b>custom AI-powered systems</b> that <b>reduce repetitive work</b>, <b>cut operational costs</b>, and unlock <b>new growth opportunities</b> for your business.",
     "automation-features": [
-      "Custom AI solutions",
-      "Workflow automation",
-      "AI Chatbots"
+    "<b>Tailored AI solutions</b> built around your workflows",
+    "<b>Business process automation</b> to save time and reduce errors",
+    "<b>AI chatbots</b> to engage and support your clients <b>24h/7</b>"
     ],
     "seo": "SEO Optimization",
     "seo-description": "Boost your online visibility and drive organic traffic with our comprehensive SEO strategies.",
@@ -618,7 +619,7 @@
     "title": "Solutions via",
     "rotatingText1": "Designs",
     "rotatingText2": "AI",
-    "description": "We create elegant, high-impact websites designed to elevate your brand. Empower your business with a unique online presence through tailored digital solutions"
+    "description": "We design <b>impactful websites</b> and build <b>smart AI</b> solutions to help your business <b>scale</b> with <b>clarity</b> and <b>confidence</b>. Stand out online with <b>modern</b>, <b>automated</b>, and <b>scalable</b> digital experiences."
   },
   "cta": {
     "heading": "Ready for a solution that",
