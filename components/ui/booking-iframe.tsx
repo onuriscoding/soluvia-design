@@ -25,7 +25,7 @@ export function BookingIframe({
     >
       <iframe
         src={url}
-        className={`w-full border-0 bg-transparent pointer-events-auto ${iframeClassName}`}
+        className={`w-full h-full border-0 bg-transparent pointer-events-auto ${iframeClassName}`}
         style={{
           height: typeof height === "number" ? `${height}px` : height,
           boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.1)",

@@ -24,7 +24,11 @@ import { cn } from "@/lib/utils";
 export default function ContactPageClient({ dictionary }: { dictionary: any }) {
   const heroRef = useRef(null);
   const contactRef = useRef(null);
-  const isContactInView = useInView(contactRef, { once: true, amount: 0.2 });
+  const isContactInView = useInView(contactRef, {
+    once: true,
+    amount: 0.05, // Reduced from 0.2 to 0.05 to trigger earlier
+    margin: "0px 0px -10% 0px", // Negative bottom margin to trigger before element is in view
+  });
 
   // For parallax scrolling effect
   const { scrollYProgress } = useScroll({
@@ -124,12 +128,7 @@ export default function ContactPageClient({ dictionary }: { dictionary: any }) {
                   className="inline-block"
                 >
                   <GradientText
-                    colors={[
-                      "#b76e79",
-                      "#e0d5c0",
-                      "#b76e79",
-                      "#e0d5c0",
-                    ]}
+                    colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                     animationSpeed={12}
                     showBorder={false}
                     className="inline-block"
@@ -163,15 +162,11 @@ export default function ContactPageClient({ dictionary }: { dictionary: any }) {
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-rose/30 to-sapphire/30 blur-sm"></div>
             <ChevronDown className="relative z-10 h-8 w-8 text-ivory " />
           </div>
-        </motion.div>     
-        
+        </motion.div>
       </section>
 
-
-
-
       {/* Contact Section */}
-      <div ref={contactRef} id="contact-section">
+      <div ref={contactRef} id="booking-section" className="mt-[-5vh] md:mt-0">
         <RedesignedContactSection dictionary={dictionary} />
       </div>
     </>

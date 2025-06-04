@@ -168,9 +168,8 @@ export function RedesignedServicesSection() {
   // Precompute transition properties to avoid recalculation during animation
   const contentTransition = getTransitionProps(0.1);
   const imageTransition = getTransitionProps(0.2);
-
   return (
-    <section ref={ref} className="relative py-32 md:py-48">
+    <section ref={ref} className="relative py-20 md:py-32 lg:py-48">
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute left-0 top-0 h-96 w-96 rounded-full bg-rose/0 blur-3xl"></div>
@@ -190,7 +189,7 @@ export function RedesignedServicesSection() {
           >
             {" "}
             <motion.h2
-              className="text-4xl md:text-5xl font-bold tracking-tight text-ivory"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-ivory"
               initial={{ opacity: 0.2, y: 100 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
@@ -214,12 +213,12 @@ export function RedesignedServicesSection() {
               {t("services.sectionSubtitle")}
             </motion.p>
           </motion.div>{" "}
-          <div className="mt-12 flex flex-wrap justify-center gap-3">
+          <div className="mt-8 sm:mt-10 md:mt-12 flex flex-wrap justify-center gap-2 sm:gap-3">
             {services.map((service) => (
               <motion.button
                 key={service.id}
                 onClick={() => handleServiceClick(service.id)}
-                className={`group relative inline-flex items-center justify-center overflow-hidden rounded-full px-4 py-2 text-sm font-bold tracking-tighter transition-all duration-300 gap-2 ${
+                className={`group relative inline-flex items-center justify-center overflow-hidden rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-bold tracking-tighter transition-all duration-300 gap-1.5 sm:gap-2 ${
                   activeService === service.id
                     ? "bg-transparent text-ivory/90 shadow-rose/30 border border-ivory/10 backdrop-blur-sm"
                     : "bg-ivory/90 text-rose hover:text-charcoal hover:shadow-rose/30 shadow-lg"
@@ -231,7 +230,8 @@ export function RedesignedServicesSection() {
                   delay: services.findIndex((s) => s.id === service.id) * 0.1,
                 }}
               >
-                <service.icon className="h-4 w-4" />
+                {" "}
+                <service.icon className="h-3 w-3 sm:h-4 sm:w-4" />
                 {t(`services.${service.id}`)}
               </motion.button>
             ))}
@@ -253,11 +253,11 @@ export function RedesignedServicesSection() {
                   duration: isMobile ? 0.2 : 0.3,
                 },
               }}
-              className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              className="mt-6 sm:mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center"
             >
               {" "}
               <motion.div
-                className="lg:col-span-5 xl:col-span-4 lg:order-1 order-2 lg:pr-8 xl:pr-12"
+                className="lg:col-span-5 xl:col-span-4 lg:order-1 order-1 lg:pr-8 xl:pr-12"
                 initial={{ opacity: 0, x: isMobile ? 10 : 20 }}
                 animate={{
                   opacity: 1,
@@ -275,29 +275,29 @@ export function RedesignedServicesSection() {
               >
                 {" "}
                 <motion.div
-                  className="flex items-center mb-6"
+                  className="flex flex-col sm:flex-row sm:items-center mb-4 md:mb-6"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: isMobile ? 0.3 : 0.5, delay: 0.2 }}
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-rose/10 text-rose mr-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-rose/10 text-rose mb-3 sm:mb-0 sm:mr-3">
                     {<currentService.icon className="h-6 w-6" />}
                   </div>
-                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-ivory">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-ivory">
                     {t(`services.${currentService.id}`)}
                   </h2>
-                </motion.div>
+                </motion.div>{" "}
                 <motion.p
-                  className="text-lg md:text-2xl text-ivory/70 mb-6 leading-relaxed"
+                  className="text-base md:text-lg lg:text-2xl text-ivory/70 mb-5 md:mb-6 leading-relaxed"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: isMobile ? 0.3 : 0.5, delay: 0.25 }}
                 >
                   {t(`services.${currentService.id}-description`)}
-                </motion.p>
+                </motion.p>{" "}
                 {/* Feature list with optimized animations */}
                 <motion.div
-                  className="mb-8 space-y-4"
+                  className="mb-6 md:mb-8 space-y-3 md:space-y-4"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.3, delay: 0.3 }}
@@ -313,13 +313,13 @@ export function RedesignedServicesSection() {
                         delay: 0.35 + index * (isMobile ? 0.05 : 0.1),
                       }}
                     >
-                      <CheckCircle2 className="h-5 w-5 text-rose mr-3" />{" "}
+                      <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
                       <span className="text-sm text-ivory/80">
                         {t(`services.${currentService.id}-features.${index}`)}
                       </span>
                     </motion.div>
                   ))}
-                </motion.div>
+                </motion.div>{" "}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -327,15 +327,15 @@ export function RedesignedServicesSection() {
                 >
                   <Link
                     href={localizeUrl(currentService.link)}
-                    className="group inline-flex items-center justify-center rounded-full bg-ivory/90 px-8 py-3 text-rose hover:text-charcoal font-bold tracking-tighter shadow-lg transition-all duration-300 hover:shadow-rose/30"
+                    className="group inline-flex items-center justify-center rounded-full bg-ivory/90 px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base text-rose hover:text-charcoal font-bold tracking-tighter shadow-lg transition-all duration-300 hover:shadow-rose/30"
                   >
                     {t("navigation.learnMore")}
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </motion.div>
               </motion.div>{" "}
               <motion.div
-                className="lg:col-span-7 xl:col-span-8 order-1 lg:order-2 relative"
+                className="lg:col-span-7 xl:col-span-8 order-2 lg:order-2 relative"
                 initial={{ opacity: 0, x: isMobile ? -10 : -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: isMobile ? -5 : -20 }}
@@ -352,8 +352,8 @@ export function RedesignedServicesSection() {
                     delay: 0.2,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                ></motion.div>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
+                ></motion.div>{" "}
+                <div className="relative h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden rounded-xl">
                   <Image
                     src={currentService.image || "/placeholder.svg"}
                     alt={`Soluvia professional ${t(`services.${currentService.id}`)} services - Expert digital solutions for businesses`}
@@ -385,7 +385,7 @@ export function RedesignedServicesSection() {
         </motion.div>
       </div>{" "}
       {/* Booking Section */}
-      <div className="mt-24 md:mt-32 px-4">
+      <div className="mt-16 sm:mt-20 md:mt-24 lg:mt-32 px-4">
         <motion.div
           className="max-w-7xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
@@ -393,35 +393,35 @@ export function RedesignedServicesSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
             {" "}
             {/* Text Content - Mobile first order (shows on top for mobile) */}
             <div className="order-1 lg:order-2 lg:col-span-5 xl:col-span-4 lg:pl-8 xl:pl-12">
               <div className="space-y-6">
                 {" "}
                 <div className="inline-block">
-                  <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/90 text-rose">
-                    <Calendar className="mr-3 h-4 w-4" />
+                  <span className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium bg-white/90 text-rose">
+                    <Calendar className="mr-2 sm:mr-3 h-3 w-3 sm:h-4 sm:w-4" />
                     {t("navigation.bookADiscoveryCallSmall")}
                   </span>
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-ivory">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-ivory">
                   {t("navigation.bookADiscoveryCall")}
                 </h2>
-                <p className="text-lg md:text-2xl text-ivory/70 leading-relaxed">
+                <p className="text-base md:text-lg lg:text-2xl text-ivory/70 leading-relaxed">
                   {t("navigation.bookADiscoveryCallDescription")}
                 </p>{" "}
-                <div className="pt-2 space-y-4">
-                  <div className="flex items-center text-sm text-ivory/80">
-                    <CheckCircle2 className="h-5 w-5 text-rose mr-3" />
+                <div className="pt-2 space-y-3 md:space-y-4">
+                  <div className="flex items-center text-xs sm:text-sm text-ivory/80">
+                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
                     <span>{t("navigation.bookADiscoveryCallfeature1")}</span>
                   </div>
-                  <div className="flex items-center text-sm text-ivory/80">
-                    <CheckCircle2 className="h-5 w-5 text-rose mr-3" />
+                  <div className="flex items-center text-xs sm:text-sm text-ivory/80">
+                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
                     <span>{t("navigation.bookADiscoveryCallfeature2")}</span>
                   </div>
-                  <div className="flex items-center text-sm text-ivory/80">
-                    <CheckCircle2 className="h-5 w-5 text-rose mr-3" />
+                  <div className="flex items-center text-xs sm:text-sm text-ivory/80">
+                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
                     <span>{t("navigation.bookADiscoveryCallfeature3")}</span>
                   </div>
                 </div>

@@ -91,9 +91,12 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
   const locale = pathname?.split("/")[1]?.match(/^(en|fr)$/)
     ? pathname.split("/")[1]
     : "en";
-
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.01, // Significantly reduced to trigger as soon as just 1% of the element is visible
+    margin: "0px 0px -15% 0px", // Negative bottom margin to trigger before element is in view
+  });
   const localizeUrl = useLocalizedUrl();
 
   const resetForm = () => {
@@ -194,12 +197,11 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
       setIsSubmitting(false);
     }
   };
-
   return (
     <section
       ref={ref}
       id="contact-section"
-      className="relative py-24 md:py-32 overflow-hidden"
+      className="relative py-16 md:py-24 lg:py-32 overflow-hidden"
     >
       <div className="container relative z-10">
         <motion.div
