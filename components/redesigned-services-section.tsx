@@ -171,11 +171,6 @@ export function RedesignedServicesSection() {
   const imageTransition = getTransitionProps(0.2);
   return (
     <section ref={ref} className="relative py-20 md:py-32 lg:py-48">
-      {/* Background elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute left-0 top-0 h-96 w-96 rounded-full bg-rose/0 blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-sapphire/0 blur-3xl"></div>
-      </div>{" "}
       <div className="px-4 relative z-10">
         <motion.div
           ref={scrollRef}
@@ -190,7 +185,7 @@ export function RedesignedServicesSection() {
           >
             {" "}
             <motion.h2
-              className="text-4xl md:text-4xl lg:text-5xl font-bold tracking-tight text-ivory"
+              className="text-5xl md:text-7xl font-bold tracking-tight text-ivory"
               initial={{ opacity: 0.2, y: 100 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
