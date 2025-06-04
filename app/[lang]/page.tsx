@@ -6,15 +6,8 @@ import { ParallaxSection } from "@/components/parallax-section";
 import { getDictionary } from "./dictionaries";
 
 // Dynamically import non-critical components
-const RedesignedProcessSection = dynamic(() => 
-  import("@/components/redesigned-process-section").then(mod => mod.RedesignedProcessSection),
-  { ssr: true, loading: () => <div className="min-h-[50vh]" /> }
-);
 
-const RedesignedPortfolioSection = dynamic(() => 
-  import("@/components/redesigned-portfolio-section").then(mod => mod.RedesignedPortfolioSection),
-  { ssr: true, loading: () => <div className="min-h-[50vh]" /> }
-);
+
 
 const RedesignedTestimonialsSection = dynamic(() => 
   import("@/components/redesigned-testimonials-section").then(mod => mod.RedesignedTestimonialsSection),
@@ -121,9 +114,6 @@ export default async function Home({ params }: { params: { lang: string } }) {
         <RedesignedServicesSection />
       </ParallaxSection>
       {/*<StatsCounter />*/}
-      <ParallaxSection speed={0.4} direction="down">
-        <RedesignedProcessSection dictionary={dict} />
-      </ParallaxSection>
 
       <ParallaxSection speed={0.3}>
         <RedesignedTestimonialsSection dictionary={dict} />

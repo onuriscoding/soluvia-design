@@ -317,7 +317,7 @@ export function RedesignedHeroSection({ dictionary }: { dictionary: any }) {
             variants={itemVariants}
           >
             <Link
-              href={localizeUrl("/contact")}
+              href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
               className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 px-6 py-3 text-rose font-bold tracking-thighter hover:text-charcoal shadow-lg transition-all duration-300 hover:shadow-rose/30"
             >
               <span className="relative z-10 flex items-center">

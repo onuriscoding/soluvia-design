@@ -564,10 +564,12 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                       {dictionary.contact.contactPhone}
                     </h4>
                     <a
-                      href="tel:+442033186185"
-                      className="text-ivory/70 hover:text-sapphire transition-colors"
+                      href="https://cal.com/soluviaco/15min?overlayCalendar=true"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-ivory/70 hover:text-sapphire transition-colors font-semibold"
                     >
-                      +44 (20) 3318 6185
+                      {dictionary.navigation?.bookADiscoveryCallSmall || "Book a Discovery Call"}
                     </a>
                   </div>
                 </div>

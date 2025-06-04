@@ -284,7 +284,7 @@ export default function TemplatesClient({ dictionary }: { dictionary: any }) {
               </div>
               <div className="w-full flex justify-end p-6 pt-0">
                 <Link
-                  href={localizeUrl("/templates/ai-automations/instagram")}
+                  href={localizeUrl("/templates/ai-solutions/instagram")}
                   className="group relative z-10 inline-flex items-center justify-center overflow-hidden rounded-full bg-ivory/90 px-6 py-2.5 text-sm font-bold tracking-tighter text-rose transition-all duration-300 hover:shadow-lg hover:shadow-rose/30"
                 >
                   <span className="relative z-10 transition-colors duration-300 group-hover:text-charcoal">
@@ -357,7 +357,7 @@ export default function TemplatesClient({ dictionary }: { dictionary: any }) {
                     transition={{ duration: 0.5, delay: 0.2 }}
                   >
                     <Link
-                      href="/contact"
+                      href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
                       className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 text-rose hover:text-charcoal font-bold tracking-tighter px-6 py-3 transition-all duration-300"
                     >
                       <span className="relative z-10 flex items-center">

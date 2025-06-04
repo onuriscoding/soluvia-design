@@ -44,6 +44,18 @@ const useLocalizedUrl = () => {
 
 const services = [
   {
+    id: "automation",
+    icon: Code,
+    title: "AI Solutions",
+    description:
+      "We create custom AI solutions to empower your business and decrease your costs by increasing your efficiency.",
+    color: "rose",
+    buttonGradient: "from-rose to-sapphire",
+    image: "/n8n.png?height=600&width=800",
+    link: "/services/ai-solutions",
+    features: ["Custom AI solutions", "Workflow automation", "AI Chatbots"],
+  },
+  {
     id: "web-design",
     icon: Palette,
     title: "Web Design & Development",
@@ -51,42 +63,14 @@ const services = [
       "Sophisticated, responsive websites that captivate your audience and reflect your brand's unique identity.",
     color: "rose",
     buttonGradient: "from-rose to-sapphire",
-    image: "/soluvia.png?height=600&width=800",
+    image: "/md-cars.png?height=600&width=800",
     link: "/services/web-design-development",
     features: [
       "Custom responsive designs",
       "Interactive UI/UX",
       "Performance optimization",
     ],
-  },
-  {
-    id: "seo",
-    icon: Globe,
-    title: "SEO Optimization",
-    description:
-      "Boost your online visibility and drive organic traffic with our comprehensive SEO strategies.",
-    color: "sapphire",
-    buttonGradient: "from-sapphire to-beige",
-    image: "/seo.png?height=600&width=800",
-    link: "/services/seo-optimization",
-    features: [
-      "Keyword research & analysis",
-      "On-page optimization",
-      "Content strategy",
-    ],
-  },
-  {
-    id: "automation",
-    icon: Code,
-    title: "AI Automation",
-    description:
-      "Automate repetitive tasks and streamline your workflow with our AI automation solutions.",
-    color: "beige",
-    buttonGradient: "from-beige to-rose",
-    image: "/ai.png?height=600&width=800",
-    link: "/services/ai-automation",
-    features: ["Custom AI solutions", "Workflow automation", "AI Chatbots"],
-  },
+  }
 ];
 
 export function RedesignedServicesSection() {

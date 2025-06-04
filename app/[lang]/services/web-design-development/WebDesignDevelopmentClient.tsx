@@ -576,7 +576,7 @@ export default function WebDesignDevelopmentClient({ dictionary }: WebDesignDeve
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:mt-0 -mt-52">
                   <motion.div className="flex flex-col items-center justify-center gap-4 pointer-events-auto">
                     <Link
-                      href="/contact"
+                      href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
                       className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 text-rose hover:text-charcoal font-bold tracking-tighter px-6 py-3 transition-all duration-300"
                     >
                       <span className="relative z-10 flex items-center">

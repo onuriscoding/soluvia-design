@@ -64,7 +64,7 @@ const services: Service[] = [
       "Automate repetitive tasks and streamline your workflow with our AI automation solutions.",
     color: "sapphire",
     image: "/ai.jpg?height=600&width=800",
-    link: "/services/ai-automation",
+    link: "/services/ai-solutions",
   },
 ];
 
@@ -331,7 +331,7 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
 
                   <div className="mt-8">
                     <Link
-                      href={localizeUrl("/contact")}
+                      href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
                       id={plan.popular ? "popular-plan-cta" : undefined}
                       className={`group relative inline-flex w-full font-bold tracking-tighter items-center justify-center rounded-full px-6 py-3 transition-all duration-300 ${
                         plan.popular
@@ -349,6 +349,7 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
               </div>
             ))}
           </div>
+           {/*
           <div className="mt-32 text-center">
             <ScrollReveal
               textClassName="text-4xl md:text-6xl mt-4 text-ivory"
@@ -371,12 +372,14 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
             </ScrollReveal>
           </div>
           <div className="mt-24">
-            {/* Redesigned Contact Stepper */}
+            {/* Redesigned Contact Stepper 
             <RedesignedContactStepper
               onSubmit={handleContactSubmit}
               dictionary={dictionary}
             />
+          
           </div>
+          */} 
         </motion.div>
       </div>
 

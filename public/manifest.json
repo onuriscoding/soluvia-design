@@ -44,7 +44,7 @@
       "name": "AI Automation",
       "short_name": "AI",
       "description": "Learn about our AI automation services",
-      "url": "/en/services/ai-automation",
+      "url": "/en/services/ai-solutions",
       "icons": [{ "src": "/soluvia-s-no-bg.png", "sizes": "96x96" }]
     }
   ]

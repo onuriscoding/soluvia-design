@@ -10,9 +10,9 @@
     "ourProcess": "OUR PROCESS",
     "learnMore": "Explore Service Details",
     "webDesign": "WEB DESIGN & DEVELOPMENT",
-    "webDesignDescription": "Custom website design and development tailored to your brand.",
-    "aiAutomation": "AI AUTOMATION",
-    "aiAutomationDescription": "Automate repetitive tasks and streamline your workflow",
+    "webDesignDescription": "Custom website design and development tailored to your brand",
+    "aiAutomation": "AI SOLUTIONS",
+    "aiAutomationDescription": "Custom AI solutions for your needs",
     "seoOptimization": "SEO OPTIMIZATION",
     "seoOptimizationDescription": "Improve your visibility in search engines",
     "allServices": "ALL SERVICES",
@@ -20,21 +20,23 @@
     "continue": "CONTINUE", 
     "back": "Back",
     "submit": "Submit",
-    "submitting": "Submitting..."
+    "submitting": "Submitting...",
+    "bookADiscoveryCall": "Book a Discovery Call",
+    "bookADiscoveryCallSmall": "Book a Call on Cal.com"
   },
   "services": {
     "allServices": "Our Services",
     "sectionTitle": "Our",
     "sectionSubtitle": "From strategy to execution, we deliver digital services that elevate your business and amplify your presence online.",
     "web-design": "Web Design & Development",
-    "web-design-description": "Sophisticated, responsive websites that captivate your audience and reflect your brand's unique identity.",
+    "web-design-description": "We design and develop sophisticated, responsive websites that captivate your audience and reflect your brand's unique identity.",
     "web-design-features": [
       "Custom responsive designs",
       "Interactive UI/UX",
       "Performance optimization"
     ],
-    "automation": "AI Automation",
-    "automation-description": "Automate repetitive tasks and streamline your workflow with our AI automation solutions.",
+    "automation": "AI Solutions",
+    "automation-description": "We create custom AI solutions to empower your business and decrease your costs by increasing your efficiency.",
     "automation-features": [
       "Custom AI solutions",
       "Workflow automation",
@@ -217,7 +219,7 @@
     ],
     "custom":{
       "title": "Need a custom solution ?",
-      "subtitle": "Contact us to get a custom solution for your business within 24 hours"
+      "subtitle": "Book a discovery call with us to get to know each other and discuss your project"
     }
   },
   "web-design-development":{
@@ -288,7 +290,7 @@
   },
   "automation": {
     "ai": "AI",
-    "automation": "Automation",
+    "automation": "Solutions",
     "subTitle": "We automate processes and enhance customer experiences with cutting-edge AI solutions",
     "ourSolutions": "Our",
     "SolutionsSubTitle":"Innovative AI solutions designed to transform your business operations",
@@ -345,7 +347,7 @@
     "benefitsTitle1": "Our",
     "benefitsTitle2": "Benefits",
     "benefitsTitle3": "to your business",
-    "benefitsSubTitle": "Discover how AI automation can transform your business operations",
+    "benefitsSubTitle": "Discover how AI solutions can transform your business operations",
     "benefits": [
       {"title": "Increased Efficiency", "description": "Automate repetitive tasks and streamline workflows to save time and resources."},
       {"title": "Enhanced Accuracy", "description": "Minimize human error and ensure consistent results with AI-powered automation."},
@@ -520,7 +522,7 @@
       "phoneText": "Your phone number",
       "servicesInterestedIn": "Services Interested In",
       "servicesOption1": "Web Design & Development",
-      "servicesOption2": "AI Automation",
+      "servicesOption2": "AI Solutions",
       "servicesOption3": "SEO Optimization",
       "budgetRange": "Budget Range",
       "budgetOption1": "Under 1,000 €",

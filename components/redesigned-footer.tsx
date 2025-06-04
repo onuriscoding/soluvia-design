@@ -230,7 +230,7 @@ export function RedesignedFooter() {
 
               <li>
                 <Link
-                  href="/services/ai-automation"
+                  href="/services/ai-solutions"
                   className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
                 >
                   <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />

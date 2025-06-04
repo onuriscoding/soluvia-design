@@ -10,8 +10,8 @@
     "learnMore": "Explorer les détails du service",
     "webDesign": "DESIGN & DÉVELOPPEMENT WEB",
     "webDesignDescription": "Conception et développement de sites web personnalisés adaptés à votre marque",
-    "aiAutomation": "AUTOMATISATION IA",
-    "aiAutomationDescription": "Automatisez les tâches répétitives et simplifiez votre flux de travail",
+    "aiAutomation": "SOLUTIONS IA",
+    "aiAutomationDescription": "Création de solutions IA personnalisées pour vos besoins",
     "seoOptimization": "OPTIMISATION SEO",
     "seoOptimizationDescription": "Améliorez votre visibilité dans les moteurs de recherche",
     "allServices": "TOUS LES SERVICES",
@@ -19,21 +19,24 @@
     "continue": "CONTINUER", 
     "back": "Retour",
     "submit": "Envoyer",
-    "submitting": "Envoi en cours..."
+    "submitting": "Envoi en cours...",
+    "bookADiscoveryCall": "RESERVEZ UN APPEL DECOUVERTE",
+    "bookADiscoveryCallSmall": "Réservez un appel sur Cal.com"
+
   },
   "services": {
     "allServices": "Nos Services",
     "sectionTitle": "Nos",
     "sectionSubtitle": "Nous offrons des services digitaux qui élèvent votre entreprise et amplifient votre présence en ligne",
     "web-design": "Design & Développement Web",
-    "web-design-description": "Des sites web sophistiqués et adaptatifs qui captivent votre audience et reflètent l'identité unique de votre marque.",
+    "web-design-description": "Nous concevons et développons des sites web sophistiqués et adaptatifs qui captivent votre audience et reflètent l'identité unique de votre marque.",
     "web-design-features": [
       "Designs personnalisés",
       "UI/UX interactifs",
       "Optimisation des performances"
     ],
-    "automation": "Automatisation AI",
-    "automation-description": "Automatisez les tâches répétitives et optimisez votre flux de travail grâce à nos solutions d'automatisation par intelligence artificielle.",
+    "automation": "Solutions IA",
+    "automation-description": "Nous créons des solutions IA personnalisées pour vous aider à automatiser les tâches répétitives et optimiser votre flux de travail.",
     "automation-features": [
       "Solutions IA personnalisées",
       "Automatisation des flux de travail",
@@ -147,7 +150,7 @@
     "cta": "Prêt à donner vie à votre vision ?"
   },
   "testimonials": {
-    "sectionTitle1": "Découvez Ce",
+    "sectionTitle1": "Découvrez Ce",
     "sectionTitle2": "Que Disent",
     "sectionTitle3": "Nos Clients",
     "subheading": "Écoutez les entreprises qui ont transformé leur présence numérique avec",
@@ -219,7 +222,7 @@
     ],
     "custom":{
       "title": "Besoin d'une solution sur mesure ?",
-      "subtitle": "Contactez-nous pour obtenir une solution personnalisée pour votre entreprise sous 24 heures"
+      "subtitle": "Réservez un appel découverte avec nous pour faire connaissance et discuter de votre projet"
     }
   },
   "web-design-development":{
@@ -290,7 +293,7 @@
   },
   "automation": {
       "ai": "IA",
-      "automation": "Automatisation",
+      "automation": "Solutions",
       "subTitle": "Nous automatisons les processus et renforçons les expériences client avec des solutions IA de pointe",
       "ourSolutions": "Nos",
       "SolutionsSubTitle":"Solutions IA innovantes conçues pour transformer vos opérations commerciales",
@@ -549,7 +552,7 @@
       "contactInformation": "Informations de contact",
       "contactDescription": "Nous sommes là pour vous aider avec toutes les questions que vous pourriez avoir sur nos services. Contactez-nous via l'une des chaînes de communication suivantes.",
       "contactEmail": "Envoyez-nous un e-mail à",
-      "contactPhone": "Appelez-nous à",
+      "contactPhone": "Réservez un appel",
       "businessHours": "Heures d'ouverture",
       "monday": "Lundi",
       "friday": "Vendredi",

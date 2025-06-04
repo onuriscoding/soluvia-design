@@ -27,12 +27,12 @@ export async function generateMetadata({
       "predictive analytics", "natural language processing", "AI solutions"
     ],
     alternates: {
-      canonical: `https://soluvia.co/${lang}/services/ai-automation`,
+      canonical: `https://soluvia.co/${lang}/services/ai-solutions`,
     },
     openGraph: {
       type: "website",
       locale: lang === "fr" ? "fr_FR" : "en_US",
-      url: `https://soluvia.co/${lang}/services/ai-automation`,
+      url: `https://soluvia.co/${lang}/services/ai-solutions`,
       siteName: "Soluvia",
       title: lang === "fr" ? "Automatisation IA | Soluvia" : "AI Automation | Soluvia",
       description: lang === "fr"

@@ -40,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ]
     },
     {
-      path: '/services/ai-automation',
+      path: '/services/ai-solutions',
       images: [
         '/ai.png',
         '/ai-chatbot.png',

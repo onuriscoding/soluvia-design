@@ -14,7 +14,7 @@ const ROUTES = [
   { path: '/services', priority: 0.9, changefreq: 'weekly' },
   { path: '/services/web-design-development', priority: 0.8, changefreq: 'monthly' },
   { path: '/services/seo-optimization', priority: 0.8, changefreq: 'monthly' },
-  { path: '/services/ai-automation', priority: 0.8, changefreq: 'monthly' },
+  { path: '/services/ai-solutions', priority: 0.8, changefreq: 'monthly' },
   { path: '/how-it-works', priority: 0.7, changefreq: 'monthly' },
   { path: '/about', priority: 0.7, changefreq: 'monthly' },
   { path: '/contact', priority: 0.7, changefreq: 'monthly' },

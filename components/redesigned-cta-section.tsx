@@ -107,7 +107,7 @@ export function RedesignedCTASection({
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
                   <Link
-                    href={localizeUrl("/contact")}
+                    href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
                     className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 text-rose font-bold tracking-tighter hover:text-charcoal px-3 py-2 md:px-6 md:py-3 transition-all duration-300"
                   >
                     <span className="relative z-10 flex items-center">

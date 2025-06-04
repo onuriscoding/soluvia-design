@@ -37,7 +37,7 @@ const navItems = [
       },
       {
         labelKey: "navigation.aiAutomation",
-        href: "/services/ai-automation",
+        href: "/services/ai-solutions",
         descriptionKey: "navigation.aiAutomationDescription",
         price: "from 1499€",
       },
@@ -303,7 +303,7 @@ export function EnhancedNavigationBar() {
               <LanguageSwitcher variant="minimal" className="mr-2" />
               <div className="relative overflow-hidden rounded-full">
                 <Link
-                  href={localizeUrl("/contact")}
+                  href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
                   className="group relative z-10 inline-flex items-center justify-center overflow-hidden rounded-full bg-ivory/90 px-6 py-2.5 text-sm font-bold tracking-tighter text-rose transition-all duration-300 hover:shadow-lg hover:shadow-rose/30"
                 >
                   <span className="relative z-10 transition-colors duration-300 group-hover:text-charcoal">
@@ -570,7 +570,7 @@ export function EnhancedNavigationBar() {
                 {/* Footer with CTA button */}
                 <div className="p-6 border-t border-ivory/10">
                   <Link
-                    href={localizeUrl("/contact")}
+                    href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
                     onClick={closeMobileMenu}
                     className="flex items-center justify-center w-full rounded-full bg-ivory/90 px-6 py-3 text-xl font-bold tracking-tighter text-rose"
                   >

@@ -76,14 +76,14 @@ export default function ServicesClient({ dictionary }: { dictionary: any }) {
       link: "/services/seo-optimization",
     },
     {
-      id: "ai-automation",
-      title: "AI Automation",
+      id: "ai-solutions",
+      title: "AI Solutions",
       description:
         "Automate processes and enhance customer experiences with AI.",
       icon: <Bot className="h-5 w-5" />,
       color: "text-beige",
       buttonGradient: "from-beige to-rose",
-      link: "/services/ai-automation",
+      link: "/services/ai-solutions",
     },
   ];
 
