@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
         : "Expert web design, development, SEO optimization, and AI solutions for your business.",
       images: [
         {
-          url: "/soluvia.png",
+          url: "/soluvia-placeholder.png",
           width: 1200,
           height: 630,
           alt: "Soluvia Design",
