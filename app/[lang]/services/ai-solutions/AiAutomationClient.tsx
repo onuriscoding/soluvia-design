@@ -16,6 +16,7 @@ import {
   ChevronDown,
   ArrowRight,
 } from "lucide-react";
+import { useLocalizedUrl } from "@/app/hooks/use-localized-url";
 import { ServiceFeatureSection } from "@/components/service-feature-section";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect } from "react";
@@ -79,7 +80,7 @@ export default function AiAutomationClientComponent({
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
+  const localizeUrl = useLocalizedUrl();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -521,7 +522,7 @@ export default function AiAutomationClientComponent({
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:mt-0 -mt-52">
                   <motion.div className="flex flex-col items-center justify-center gap-4 pointer-events-auto">
                     <Link
-                      href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
+                      href={localizeUrl("/contact")}
                       className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 text-rose hover:text-charcoal font-bold tracking-tighter px-6 py-3 transition-all duration-300"
                     >
                       <span className="relative z-10 flex items-center">

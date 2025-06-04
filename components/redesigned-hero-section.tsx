@@ -287,12 +287,7 @@ export function RedesignedHeroSection({ dictionary }: { dictionary: any }) {
                 className="flex items-center justify-center"
                 renderText={(text) => (
                   <GradientText
-                    colors={[
-                      "#b76e79",
-                      "#e0d5c0",
-                      "#b76e79",
-                      "#e0d5c0"
-                    ]}
+                    colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                     animationSpeed={12}
                     showBorder={false}
                     className="inline-block leading-tight"
@@ -317,7 +312,7 @@ export function RedesignedHeroSection({ dictionary }: { dictionary: any }) {
             variants={itemVariants}
           >
             <Link
-              href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
+              href={localizeUrl("/contact")}
               className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 px-6 py-3 text-rose font-bold tracking-thighter hover:text-charcoal shadow-lg transition-all duration-300 hover:shadow-rose/30"
             >
               <span className="relative z-10 flex items-center">

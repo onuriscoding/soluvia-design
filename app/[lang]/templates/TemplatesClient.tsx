@@ -357,7 +357,7 @@ export default function TemplatesClient({ dictionary }: { dictionary: any }) {
                     transition={{ duration: 0.5, delay: 0.2 }}
                   >
                     <Link
-                      href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
+                      href={localizeUrl("/contact")}
                       className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 text-rose hover:text-charcoal font-bold tracking-tighter px-6 py-3 transition-all duration-300"
                     >
                       <span className="relative z-10 flex items-center">

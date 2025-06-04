@@ -54,12 +54,7 @@ export function RedesignedCTASection({
           <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
             {dictionary?.cta?.heading || "Ready for a solution that"}{" "}
             <GradientText
-              colors={[
-                "#b76e79",
-                "#e0d5c0",
-                "#b76e79",
-                "#e0d5c0",
-              ]}
+              colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
               animationSpeed={12}
               showBorder={false}
               className="inline-block"
@@ -107,7 +102,7 @@ export function RedesignedCTASection({
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
                   <Link
-                    href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
+                    href={localizeUrl("/contact")}
                     className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 text-rose font-bold tracking-tighter hover:text-charcoal px-3 py-2 md:px-6 md:py-3 transition-all duration-300"
                   >
                     <span className="relative z-10 flex items-center">

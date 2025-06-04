@@ -13,13 +13,13 @@ import {
   ChevronDown,
   Hand,
 } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RedesignedContactSection } from "@/components/redesigned-contact-section";
 import GradientText from "@/app/animations/gradient-text";
+import { cn } from "@/lib/utils";
 
 export default function ContactPageClient({ dictionary }: { dictionary: any }) {
   const heroRef = useRef(null);
@@ -34,6 +34,13 @@ export default function ContactPageClient({ dictionary }: { dictionary: any }) {
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const handleScrollDown = () => {
+    const bookingSection = document.getElementById("booking-section");
+    if (bookingSection) {
+      bookingSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   // Animation variants
   const containerVariants = {
@@ -62,9 +69,9 @@ export default function ContactPageClient({ dictionary }: { dictionary: any }) {
   };
 
   const handleScrollToContact = () => {
-    const contactSection = document.getElementById("contact-section");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
+    const bookingSection = document.getElementById("booking-section");
+    if (bookingSection) {
+      bookingSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -140,74 +147,28 @@ export default function ContactPageClient({ dictionary }: { dictionary: any }) {
             </motion.div>
           </motion.div>
         </motion.div>
-
-        {/* Touch Icon Animation - Centered */}
         <motion.div
-          className="absolute -mt-24 top-3/4 -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 -mt-24"
+          animate={{ y: [0, 10, 0] }}
           transition={{
-            duration: 0.8,
-            delay: 1.5,
-            type: "spring",
-            stiffness: 200,
+            duration: 1.5,
+            repeat: Number.POSITIVE_INFINITY,
+            repeatType: "loop",
           }}
-          whileHover={{
-            scale: 1.1,
-            y: [0, -5, 0],
-            transition: {
-              y: {
-                duration: 0.5,
-                repeat: 3,
-                repeatType: "reverse",
-              },
-            },
-          }}
-          onClick={handleScrollToContact}
+          onClick={handleScrollDown}
+          initial={{ opacity: 0.7 }}
+          whileHover={{ opacity: 1, scale: 1.1 }}
         >
-          <div className="relative flex flex-col items-center justify-center">
-            <motion.div
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-rose to-sapphire opacity-60 blur-md"
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.6, 0.9, 0.6],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: "reverse",
-              }}
-            />
-            <div className="relative z-10 flex h-24 w-24 items-center justify-center rounded-full bg-charcoal/70 backdrop-blur-sm border border-ivory/20 shadow-xl">
-              <Hand className="h-10 w-10 text-ivory" />
-            </div>
-            <motion.p
-              className="absolute -bottom-10 whitespace-nowrap text-center text-base font-medium text-ivory/90"
-              animate={{
-                y: [0, 3, 0],
-                opacity: [0.8, 1, 0.8],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: "reverse",
-              }}
-            >
-              {dictionary.contact.ctaButton}
-            </motion.p>
+          <div className="relative flex items-center justify-center -left-1/2 -mt-32">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-rose/30 to-sapphire/30 blur-sm"></div>
+            <ChevronDown className="relative z-10 h-8 w-8 text-ivory " />
           </div>
-        </motion.div>
+        </motion.div>     
+        
       </section>
 
-      {/* Elegant divider with gradient effect */}
-      <div className="relative h-24 overflow-hidden bg-transparent">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="h-px w-full max-w-5xl bg-gradient-to-r from-transparent via-rose/30 to-transparent"></div>
-        </div>
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          
-        </div>
-      </div>
+
+
 
       {/* Contact Section */}
       <div ref={contactRef} id="contact-section">

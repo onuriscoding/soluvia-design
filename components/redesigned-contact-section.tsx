@@ -4,14 +4,23 @@ import type React from "react";
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Send, CheckCircle, AlertCircle, Mail, Phone, Linkedin} from "lucide-react";
+import {
+  Send,
+  CheckCircle,
+  AlertCircle,
+  Mail,
+  Phone,
+  Linkedin,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { BookingIframe } from "@/components/ui/booking-iframe";
 import GradientText from "@/app/animations/gradient-text";
+import { useLocalizedUrl } from "@/app/hooks/use-localized-url";
 
 // Custom X (formerly Twitter) icon component
 const XIcon = ({ className }: { className?: string }) => (
@@ -27,14 +36,14 @@ const XIcon = ({ className }: { className?: string }) => (
 
 // Custom Instagram icon component
 const InstagramIcon = ({ className }: { className?: string }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     className={className}
   >
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -45,14 +54,14 @@ const InstagramIcon = ({ className }: { className?: string }) => (
 
 // Custom WhatsApp icon component
 const WhatsAppIcon = ({ className }: { className?: string }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     className={className}
   >
     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
@@ -79,10 +88,13 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
   // Get the current pathname to extract locale
   const pathname = usePathname();
   // Extract locale from pathname (e.g., "/fr/contact" -> "fr")
-  const locale = pathname?.split('/')[1]?.match(/^(en|fr)$/) ? pathname.split('/')[1] : 'en';
+  const locale = pathname?.split("/")[1]?.match(/^(en|fr)$/)
+    ? pathname.split("/")[1]
+    : "en";
 
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const localizeUrl = useLocalizedUrl();
 
   const resetForm = () => {
     setIsSubmitted(false);
@@ -113,7 +125,10 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
 
     if (!formState.name || !formState.email || !formState.message) {
       setStatus("error");
-      setMessage(dictionary.contact.contactForm.requiredFieldsMessage || "Please fill out all required fields");
+      setMessage(
+        dictionary.contact.contactForm.requiredFieldsMessage ||
+          "Please fill out all required fields"
+      );
       return;
     }
 
@@ -154,7 +169,10 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
 
       setIsSubmitted(true);
       setStatus("success");
-      setMessage(dictionary.contact.contactForm.confirmationThanks || "Thank you for your message! We'll get back to you soon.");
+      setMessage(
+        dictionary.contact.contactForm.confirmationThanks ||
+          "Thank you for your message! We'll get back to you soon."
+      );
       setFormState({
         name: "",
         email: "",
@@ -183,12 +201,6 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
       id="contact-section"
       className="relative py-24 md:py-32 overflow-hidden"
     >
-      {/* Background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-rose/0 blur-3xl"></div>
-        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-sapphire/0 blur-3xl"></div>
-      </div>
-
       <div className="container relative z-10">
         <motion.div
           className="mx-auto max-w-3xl text-center mb-16"
@@ -198,19 +210,14 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
         >
           <h2 className="text-6xl font-bold tracking-tight sm:text-4xl md:text-8xl">
             <GradientText
-              colors={[
-                "#b76e79",
-                "#e0d5c0",
-                "#b76e79",
-                "#e0d5c0",
-              ]}
+              colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
               animationSpeed={12}
               showBorder={false}
               className="inline-block"
             >
               {dictionary.contact.contactTitle1}
             </GradientText>
-            
+
             {dictionary.contact.contactTitle2}
           </h2>
           <p className="mt-4 text-lg md:text-2xl text-ivory/70">
@@ -218,12 +225,28 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
           </p>
         </motion.div>
 
+        {/* Full-width Booking Frame */}
+        <motion.div
+          className="w-full mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+        >
+          <BookingIframe height={700} />
+        </motion.div>
+        {/* Elegant divider with gradient effect */}
+        <div className="relative h-24 overflow-hidden bg-transparent">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="h-px w-full max-w-5xl bg-gradient-to-r from-transparent via-rose/30 to-transparent"></div>
+          </div>
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+        </div>
+        {/* Contact Sections */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <motion.div
-            initial={{ opacity: 1, x: 0 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5 }}
-
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="transition-all duration-500 h-full"
           >
             <div className="relative overflow-hidden rounded-2xl border border-ivory/10 bg-charcoal/50 p-10 backdrop-blur-sm shadow-lg hover:shadow-rose/5 transition-all duration-300 group h-full">
@@ -248,14 +271,18 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                       <CheckCircle className="h-10 w-10 text-rose" />
                     </div>
                     <h3 className="mb-2 text-2xl font-bold text-ivory">
-                      {status === "success" 
-                        ? dictionary.contact.contactForm.confirmationThanks || "Message Sent!" 
+                      {status === "success"
+                        ? dictionary.contact.contactForm.confirmationThanks ||
+                          "Message Sent!"
                         : dictionary.contact.contactForm.errorTitle || "Error"}
                     </h3>
                     <p className="mb-6 text-ivory/70">
-                      {status === "success" 
-                        ? dictionary.contact.contactForm.confirmationDescription || "Thank you for reaching out. We'll get back to you as soon as possible."
-                        : dictionary.contact.contactForm.errorMessage || "Failed to send message. Please try again."}
+                      {status === "success"
+                        ? dictionary.contact.contactForm
+                            .confirmationDescription ||
+                          "Thank you for reaching out. We'll get back to you as soon as possible."
+                        : dictionary.contact.contactForm.errorMessage ||
+                          "Failed to send message. Please try again."}
                     </p>
                     <Button
                       onClick={() => resetForm()}
@@ -269,7 +296,8 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                     <div className="grid gap-6 sm:grid-cols-2">
                       <div className="space-y-2">
                         <Label htmlFor="name" className="text-ivory/80">
-                          {dictionary.contact.contactForm.name} <span className="text-rose">*</span>
+                          {dictionary.contact.contactForm.name}{" "}
+                          <span className="text-rose">*</span>
                         </Label>
                         <Input
                           id="name"
@@ -283,7 +311,8 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="email" className="text-ivory/80">
-                          {dictionary.contact.contactForm.email} <span className="text-rose">*</span>
+                          {dictionary.contact.contactForm.email}{" "}
+                          <span className="text-rose">*</span>
                         </Label>
                         <Input
                           id="email"
@@ -324,16 +353,23 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                           onChange={handleChange}
                           className="w-full rounded-md border border-ivory/10 bg-charcoal/50 px-3 py-2 text-ivory focus:border-rose/50 focus:outline-none"
                         >
-                          <option value="web-design">{dictionary.contact.contactForm.servicesOption1}</option>
-                          <option value="ai">{dictionary.contact.contactForm.servicesOption2}</option>
-                          <option value="seo">{dictionary.contact.contactForm.servicesOption3}</option>
+                          <option value="web-design">
+                            {dictionary.contact.contactForm.servicesOption1}
+                          </option>
+                          <option value="ai">
+                            {dictionary.contact.contactForm.servicesOption2}
+                          </option>
+                          <option value="seo">
+                            {dictionary.contact.contactForm.servicesOption3}
+                          </option>
                         </select>
                       </div>
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="budget" className="text-ivory/80">
-                        {dictionary.contact.contactForm.budgetRange} <span className="text-rose">*</span>
+                        {dictionary.contact.contactForm.budgetRange}{" "}
+                        <span className="text-rose">*</span>
                       </Label>
                       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                         <div>
@@ -427,7 +463,10 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                             htmlFor="timeframe-1"
                             className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
                           >
-                            {dictionary.contact.contactForm.projectTimeframeOption1}
+                            {
+                              dictionary.contact.contactForm
+                                .projectTimeframeOption1
+                            }
                           </label>
                         </div>
                         <div>
@@ -444,7 +483,10 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                             htmlFor="timeframe-2"
                             className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
                           >
-                            {dictionary.contact.contactForm.projectTimeframeOption2}
+                            {
+                              dictionary.contact.contactForm
+                                .projectTimeframeOption2
+                            }
                           </label>
                         </div>
                         <div>
@@ -461,7 +503,10 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                             htmlFor="timeframe-3"
                             className="flex cursor-pointer justify-center rounded-md border border-ivory/10 bg-charcoal/30 p-3 text-sm peer-checked:border-rose peer-checked:bg-rose/10 hover:bg-charcoal/50"
                           >
-                            {dictionary.contact.contactForm.projectTimeframeOption3}
+                            {
+                              dictionary.contact.contactForm
+                                .projectTimeframeOption3
+                            }
                           </label>
                         </div>
                       </div>
@@ -469,7 +514,8 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
 
                     <div className="space-y-2">
                       <Label htmlFor="message" className="text-ivory/80">
-                        {dictionary.contact.contactForm.message} <span className="text-rose">*</span>
+                        {dictionary.contact.contactForm.message}{" "}
+                        <span className="text-rose">*</span>
                       </Label>
                       <Textarea
                         id="message"
@@ -491,7 +537,10 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                       >
                         <div className="flex items-center">
                           <AlertCircle className="h-4 w-4 mr-2" />
-                          <span>{dictionary.contact.contactForm.errorMessage || message}</span>
+                          <span>
+                            {dictionary.contact.contactForm.errorMessage ||
+                              message}
+                          </span>
                         </div>
                       </motion.div>
                     )}
@@ -502,7 +551,9 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                       className="mt-4 w-full bg-ivory/90 text-rose hover:text-charcoal font-bold tracking-tighter transition-all duration-300"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? dictionary.contact.contactForm.sending : dictionary.contact.contactForm.sendMessage}
+                      {isSubmitting
+                        ? dictionary.contact.contactForm.sending
+                        : dictionary.contact.contactForm.sendMessage}
                     </Button>
                   </form>
                 )}
@@ -564,12 +615,13 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                       {dictionary.contact.contactPhone}
                     </h4>
                     <a
-                      href="https://cal.com/soluviaco/15min?overlayCalendar=true"
+                      href={localizeUrl("/contact")}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-ivory/70 hover:text-sapphire transition-colors font-semibold"
                     >
-                      {dictionary.navigation?.bookADiscoveryCallSmall || "Book a Discovery Call"}
+                      {dictionary.navigation?.bookADiscoveryCallSmall ||
+                        "Book a Discovery Call"}
                     </a>
                   </div>
                 </div>
@@ -611,16 +663,24 @@ export function RedesignedContactSection({ dictionary }: { dictionary: any }) {
                 </motion.h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span className="text-ivory/70">{dictionary.contact.monday} - {dictionary.contact.friday}</span>
+                    <span className="text-ivory/70">
+                      {dictionary.contact.monday} - {dictionary.contact.friday}
+                    </span>
                     <span className="text-ivory">9:00 - 19:00</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-ivory/70">{dictionary.contact.saturday}</span>
+                    <span className="text-ivory/70">
+                      {dictionary.contact.saturday}
+                    </span>
                     <span className="text-ivory">10:00 - 20:00</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-ivory/70">{dictionary.contact.sunday}</span>
-                    <span className="text-ivory">{dictionary.contact.closed}</span>
+                    <span className="text-ivory/70">
+                      {dictionary.contact.sunday}
+                    </span>
+                    <span className="text-ivory">
+                      {dictionary.contact.closed}
+                    </span>
                   </div>
                 </div>
               </div>

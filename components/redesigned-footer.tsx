@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Linkedin,
-
   ArrowRight,
   Phone,
   Mail,
@@ -19,17 +18,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useI18n } from "@/lib/i18n/i18nContext";
 import { LanguageSwitcher } from "./language-switcher";
+import { useLocalizedUrl } from "@/app/hooks/use-localized-url";
 
 // Custom Instagram icon component
 const InstagramIcon = ({ className }: { className?: string }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     className={className}
   >
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -50,26 +50,10 @@ const XIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-// Custom WhatsApp icon component
-const WhatsAppIcon = ({ className }: { className?: string }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
-    className={className}
-  >
-    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-  </svg>
-);
-
 export function RedesignedFooter() {
   const { t } = useI18n();
   const currentYear = new Date().getFullYear();
-
+  const localizeUrl = useLocalizedUrl();
   return (
     <footer className="relative border-t border-ivory/10 bg-[#1a1c2a]/70 py-20 w-full z-10 mt-auto">
       {/* Background elements */}
@@ -273,7 +257,7 @@ export function RedesignedFooter() {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href={localizeUrl("/contact")}
                   className="group flex items-center text-ivory/70 transition-colors hover:text-rose"
                 >
                   <ChevronRight className="mr-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />

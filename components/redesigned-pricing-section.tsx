@@ -145,7 +145,9 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
   useEffect(() => {
     if (!animationComplete) return;
 
-    const popularButton = document.getElementById("popular-plan-cta") as HTMLElement | null;
+    const popularButton = document.getElementById(
+      "popular-plan-cta"
+    ) as HTMLElement | null;
     if (!popularButton) return;
 
     let angle = 0;
@@ -205,12 +207,7 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
               <h2 className="text-5xl font-bold tracking-tight sm:text-4xl md:text-7xl flex flex-wrap justify-center items-center gap-x-4">
                 <span>{dictionary?.pricing?.sectionSimple || "Simple"}, </span>
                 <GradientText
-                  colors={[
-                    "#b76e79",
-                    "#e0d5c0",
-                    "#b76e79",
-                    "#e0d5c0",
-                  ]}
+                  colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                   animationSpeed={12}
                   showBorder={false}
                   className="inline-block"
@@ -227,12 +224,7 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
                 </span>
                 <span>{dictionary?.pricing?.sectionSimple || "simple"}, </span>
                 <GradientText
-                  colors={[
-                    "#b76e79",
-                    "#e0d5c0",
-                    "#b76e79",
-                    "#e0d5c0",
-                  ]}
+                  colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                   animationSpeed={12}
                   showBorder={false}
                   className="inline-block"
@@ -331,7 +323,7 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
 
                   <div className="mt-8">
                     <Link
-                      href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
+                      href={localizeUrl("/contact")}
                       id={plan.popular ? "popular-plan-cta" : undefined}
                       className={`group relative inline-flex w-full font-bold tracking-tighter items-center justify-center rounded-full px-6 py-3 transition-all duration-300 ${
                         plan.popular
@@ -349,7 +341,7 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
               </div>
             ))}
           </div>
-           {/*
+          {/*
           <div className="mt-32 text-center">
             <ScrollReveal
               textClassName="text-4xl md:text-6xl mt-4 text-ivory"
@@ -379,7 +371,7 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
             />
           
           </div>
-          */} 
+          */}
         </motion.div>
       </div>
 
@@ -399,7 +391,9 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
 
         .pricing-card {
           position: relative;
-          transition: transform 1s ease, box-shadow 2s ease;
+          transition:
+            transform 1s ease,
+            box-shadow 2s ease;
           z-index: 1;
           box-shadow: 0 0 0 0 rgba(183, 110, 121, 0);
         }
@@ -413,8 +407,15 @@ export function RedesignedPricingSection({ dictionary }: { dictionary: any }) {
           --angle: 0deg;
           border: 2px solid transparent !important; /* Ensure transparent border for conic gradient */
           background:
-            linear-gradient(#B76E79, #B76E79) padding-box, /* Solid rose background */
-            conic-gradient(from var(--angle), transparent, #F8F4F1 5%, transparent 15%) border-box; /* Animated border (ivory/white) */
+            linear-gradient(#b76e79, #b76e79) padding-box,
+            /* Solid rose background */
+              conic-gradient(
+                from var(--angle),
+                transparent,
+                #f8f4f1 5%,
+                transparent 15%
+              )
+              border-box; /* Animated border (ivory/white) */
           background-clip: padding-box, border-box;
           background-origin: padding-box, border-box;
           /* Text color is handled by Tailwind: text-charcoal hover:text-rose */

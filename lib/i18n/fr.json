@@ -20,15 +20,18 @@
     "back": "Retour",
     "submit": "Envoyer",
     "submitting": "Envoi en cours...",
-    "bookADiscoveryCall": "RESERVEZ UN APPEL DECOUVERTE",
-    "bookADiscoveryCallSmall": "Réservez un appel sur Cal.com"
-
+    "bookADiscoveryCall": "Réservez un appel de découverte",
+    "bookADiscoveryCallSmall": "Réservez un appel sur Cal.com",
+    "bookADiscoveryCallDescription": "Réservez une consultation gratuite pour discuter de votre projet et de la manière dont nous pouvons vous aider",
+    "bookADiscoveryCallfeature1": "Appel de découverte de 15 minutes",
+    "bookADiscoveryCallfeature2": "Sans obligation, sans pression",
+    "bookADiscoveryCallfeature3": "Recommandations personnalisées"
   },
   "services": {
     "allServices": "Nos Services",
     "sectionTitle": "Nos",
     "sectionSubtitle": "Nous offrons des services digitaux qui élèvent votre entreprise et amplifient votre présence en ligne",
-    "web-design": "Design & Développement Web",
+    "web-design": "Design Web",
     "web-design-description": "Nous concevons et développons des sites web sophistiqués et adaptatifs qui captivent votre audience et reflètent l'identité unique de votre marque.",
     "web-design-features": [
       "Designs personnalisés",

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useLocalizedUrl } from "@/app/hooks/use-localized-url";
 
 interface ServicePageLayoutProps {
   children: ReactNode;
@@ -14,6 +15,7 @@ interface ServicePageLayoutProps {
   ctaLink?: string;
 }
 
+const localizeUrl = useLocalizedUrl();
 export function ServicePageLayout({
   children,
   title,
@@ -214,7 +216,7 @@ export function ServicePageLayout({
                   size="lg"
                   className="bg-gradient-to-r from-rose to-sapphire hover:shadow-lg hover:shadow-rose/20"
                 >
-                  <Link href="/contact">
+                  <Link href={localizeUrl("/contact")}>
                     <motion.span
                       className="flex items-center"
                       whileHover={{ x: 5 }}

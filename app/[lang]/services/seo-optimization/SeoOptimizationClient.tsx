@@ -37,6 +37,7 @@ import Link from "next/link";
 import { RedesignedCTASection } from "@/components/redesigned-cta-section";
 import Orb from "@/components/orb";
 import { seoServices } from "@/lib/seo-services";
+import { useLocalizedUrl } from "@/app/hooks/use-localized-url";
 
 interface Benefit {
   title: string;
@@ -80,7 +81,9 @@ interface SeoOptimizationClientProps {
   };
 }
 
-export default function SeoOptimizationClient({ dictionary }: SeoOptimizationClientProps) {
+export default function SeoOptimizationClient({
+  dictionary,
+}: SeoOptimizationClientProps) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -89,7 +92,7 @@ export default function SeoOptimizationClient({ dictionary }: SeoOptimizationCli
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
+  const localizeUrl = useLocalizedUrl();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -128,53 +131,60 @@ export default function SeoOptimizationClient({ dictionary }: SeoOptimizationCli
   }, []);
 
   // Map service data from dictionary
-  const features = dictionary["seo-optimization"].solutions.map((solution, index) => {
-    let Icon;
-    
-    // Set icon based on index
-    switch(index) {
-      case 0:
-        Icon = Search;
-        break;
-      case 1:
-        Icon = Link2;
-        break;
-      case 2:
-        Icon = Settings;
-        break;
-      case 3:
-        Icon = MapPin;
-        break;
-      default:
-        Icon = FileText;
-    }
-    
-    // Use images that likely exist in the project
-    const imagePaths = [
-      "/on-page-seo.png",
-      "/off-page-seo.png",
-      "/technical-seo.png",
-      "/local-seo.png"
-    ];
-    
-    return {
-      title: solution.title,
-      description: solution.description,
-      icon: <Icon className="h-6 w-6" />,
-      features: solution.list.map(item => item.text),
-      image: imagePaths[index % imagePaths.length],
-      gradient: index % 2 === 0 ? "from-rose/20 to-sapphire/20" : "from-sapphire/20 to-beige/20"
-    };
-  });
+  const features = dictionary["seo-optimization"].solutions.map(
+    (solution, index) => {
+      let Icon;
 
-  const benefits = dictionary["seo-optimization"].benefits.map((benefit, index) => {
-    const icons = [TrendingUp, Users, FileText, Settings, BarChart, MapPin];
-    return {
-      title: benefit.title,
-      description: benefit.description,
-      icon: icons[index % icons.length]
-    };
-  });
+      // Set icon based on index
+      switch (index) {
+        case 0:
+          Icon = Search;
+          break;
+        case 1:
+          Icon = Link2;
+          break;
+        case 2:
+          Icon = Settings;
+          break;
+        case 3:
+          Icon = MapPin;
+          break;
+        default:
+          Icon = FileText;
+      }
+
+      // Use images that likely exist in the project
+      const imagePaths = [
+        "/on-page-seo.png",
+        "/off-page-seo.png",
+        "/technical-seo.png",
+        "/local-seo.png",
+      ];
+
+      return {
+        title: solution.title,
+        description: solution.description,
+        icon: <Icon className="h-6 w-6" />,
+        features: solution.list.map((item) => item.text),
+        image: imagePaths[index % imagePaths.length],
+        gradient:
+          index % 2 === 0
+            ? "from-rose/20 to-sapphire/20"
+            : "from-sapphire/20 to-beige/20",
+      };
+    }
+  );
+
+  const benefits = dictionary["seo-optimization"].benefits.map(
+    (benefit, index) => {
+      const icons = [TrendingUp, Users, FileText, Settings, BarChart, MapPin];
+      return {
+        title: benefit.title,
+        description: benefit.description,
+        icon: icons[index % icons.length],
+      };
+    }
+  );
 
   return (
     <main className="flex min-h-screen flex-col">
@@ -224,12 +234,7 @@ export default function SeoOptimizationClient({ dictionary }: SeoOptimizationCli
               <h1 className="text-6xl font-bold tracking-tight text-ivory md:text-[9rem]">
                 {dictionary["seo-optimization"].title1}{" "}
                 <GradientText
-                  colors={[
-                    "#b76e79",
-                    "#e0d5c0",
-                    "#b76e79",
-                    "#e0d5c0",
-                  ]}
+                  colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                   animationSpeed={12}
                   showBorder={false}
                   className="inline-block"
@@ -291,12 +296,7 @@ export default function SeoOptimizationClient({ dictionary }: SeoOptimizationCli
             <h2 className="text-5xl font-bold tracking-tight text-ivory md:text-6xl mb-6">
               {dictionary["seo-optimization"].ourSolutions}{" "}
               <GradientText
-                colors={[
-                  "#b76e79",
-                  "#e0d5c0",
-                  "#b76e79",
-                  "#e0d5c0",
-                ]}
+                colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                 animationSpeed={12}
                 showBorder={false}
                 className="inline-block"
@@ -374,12 +374,7 @@ export default function SeoOptimizationClient({ dictionary }: SeoOptimizationCli
             <h2 className="text-5xl font-bold tracking-tight text-ivory md:text-6xl mb-6">
               {dictionary["seo-optimization"].benefitsTitle1}{" "}
               <GradientText
-                colors={[
-                  "#b76e79",
-                  "#e0d5c0",
-                  "#b76e79",
-                  "#e0d5c0",
-                ]}
+                colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                 animationSpeed={12}
                 showBorder={false}
                 className="inline-block"
@@ -440,12 +435,7 @@ export default function SeoOptimizationClient({ dictionary }: SeoOptimizationCli
               <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
                 {dictionary["seo-optimization"].ctaTitle1}{" "}
                 <GradientText
-                  colors={[
-                    "#b76e79",
-                    "#e0d5c0",
-                    "#b76e79",
-                    "#e0d5c0",
-                  ]}
+                  colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                   animationSpeed={12}
                   showBorder={false}
                   className="inline-block"
@@ -481,7 +471,7 @@ export default function SeoOptimizationClient({ dictionary }: SeoOptimizationCli
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none md:mt-0 -mt-52">
                   <motion.div className="flex flex-col items-center justify-center gap-4 pointer-events-auto">
                     <Link
-                      href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
+                      href={localizeUrl("/contact")}
                       className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 text-rose hover:text-charcoal font-bold tracking-tighter px-6 py-3 transition-all duration-300"
                     >
                       <span className="relative z-10 flex items-center">
@@ -498,4 +488,4 @@ export default function SeoOptimizationClient({ dictionary }: SeoOptimizationCli
       </section>
     </main>
   );
-} 
+}

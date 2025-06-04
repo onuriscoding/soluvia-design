@@ -22,13 +22,17 @@
     "submit": "Submit",
     "submitting": "Submitting...",
     "bookADiscoveryCall": "Book a Discovery Call",
-    "bookADiscoveryCallSmall": "Book a Call on Cal.com"
+    "bookADiscoveryCallSmall": "Book a Call on Cal.com",
+    "bookADiscoveryCallDescription": "Book a free consultation call to discuss your project and how we can help",
+    "bookADiscoveryCallfeature1": "15-minute discovery Call",
+    "bookADiscoveryCallfeature2": "No obligation, no pressure",  
+    "bookADiscoveryCallfeature3": "Personalized recommendations"
   },
   "services": {
     "allServices": "Our Services",
     "sectionTitle": "Our",
     "sectionSubtitle": "From strategy to execution, we deliver digital services that elevate your business and amplify your presence online.",
-    "web-design": "Web Design & Development",
+    "web-design": "Web Design",
     "web-design-description": "We design and develop sophisticated, responsive websites that captivate your audience and reflect your brand's unique identity.",
     "web-design-features": [
       "Custom responsive designs",

@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useLocalizedUrl } from "../../hooks/use-localized-url";
 import { SectionTransition } from "@/components/section-transition";
 import GradientText from "@/app/animations/gradient-text";
 import ScrollReveal from "@/app/animations/scroll-reveal";
@@ -39,6 +40,7 @@ export default function AboutPageClient({ dictionary }: { dictionary: any }) {
   // Direct transform without spring for consistent behavior with service pages
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
+  const localizeUrl = useLocalizedUrl();
 
   // Optimized variants for staggered animations
   const containerVariants = {
@@ -129,12 +131,7 @@ export default function AboutPageClient({ dictionary }: { dictionary: any }) {
                 <span>{dictionary.about.title1}</span>
                 <span className="inline-flex items-center relative">
                   <GradientText
-                    colors={[
-                      "#b76e79",
-                      "#e0d5c0",
-                      "#b76e79",
-                      "#e0d5c0",
-                    ]}
+                    colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                     animationSpeed={12}
                     showBorder={false}
                     className="font-anton lowercase text-6xl md:text-[8.5rem] mt-2"
@@ -205,12 +202,7 @@ export default function AboutPageClient({ dictionary }: { dictionary: any }) {
             <h2 className="text-5xl font-bold tracking-tight mb-8 md:text-6xl flex flex-wrap items-center justify-center gap-x-4">
               <span>{dictionary.about.ourStoryTitle1}</span>
               <GradientText
-                colors={[
-                  "#b76e79",
-                  "#e0d5c0",
-                  "#b76e79",
-                  "#e0d5c0",
-                ]}
+                colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                 animationSpeed={12}
                 showBorder={false}
                 className="inline-block"
@@ -297,12 +289,7 @@ export default function AboutPageClient({ dictionary }: { dictionary: any }) {
             <h2 className="text-5xl font-bold tracking-tight mb-8 md:text-6xl flex flex-wrap items-center justify-center gap-x-4">
               <span>{dictionary.about.ourCoreValuesTitle1}</span>
               <GradientText
-                colors={[
-                  "#b76e79",
-                  "#e0d5c0",
-                  "#b76e79",
-                  "#e0d5c0",
-                ]}
+                colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                 animationSpeed={12}
                 showBorder={false}
                 className="inline-block"
@@ -378,7 +365,6 @@ export default function AboutPageClient({ dictionary }: { dictionary: any }) {
         </div>
       </SectionTransition>
 
-     
       {/* CTA Section - Styled like home page */}
       <section className="py-24 md:py-32">
         <motion.div className="container">
@@ -386,19 +372,14 @@ export default function AboutPageClient({ dictionary }: { dictionary: any }) {
             <h1 className="text-4xl font-bold tracking-tight text-ivory sm:text-4xl md:text-6xl">
               {dictionary.about.ctaTitle1}{" "}
               <GradientText
-                colors={[
-                  "#b76e79",
-                  "#e0d5c0",
-                  "#b76e79",
-                  "#e0d5c0",
-                ]}
+                colors={["#b76e79", "#e0d5c0", "#b76e79", "#e0d5c0"]}
                 animationSpeed={12}
                 showBorder={false}
                 className="inline-block"
               >
                 {dictionary.about.ctaTitle2}
-              </GradientText>
-              {" "}?
+              </GradientText>{" "}
+              ?
             </h1>
           </div>
           <div className="relative z-10 md:mt-0 mt-28">
@@ -442,7 +423,7 @@ export default function AboutPageClient({ dictionary }: { dictionary: any }) {
                     transition={{ duration: 0.5, delay: 0.2 }}
                   >
                     <Link
-                      href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
+                      href={localizeUrl("/contact")}
                       className="group relative inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 text-rose hover:text-charcoal font-bold tracking-tighter px-6 py-3 transition-all duration-300"
                     >
                       <span className="relative z-10 flex items-center">

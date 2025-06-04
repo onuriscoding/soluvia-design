@@ -527,7 +527,7 @@ export function RedesignedProcessSection({ dictionary }: { dictionary: any }) {
             {dictionary?.process?.cta || "Ready to start your journey?"}
           </h3>
           <Link
-            href={"https://cal.com/soluviaco/15min?overlayCalendar=true"}
+            href={localizeUrl("/contact")}
             className="group relative text-rose inline-flex min-w-[200px] items-center justify-center overflow-hidden rounded-full bg-ivory/90 px-6 py-3 font-bold tracking-thighter hover:text-charcoal shadow-lg transition-all duration-300 hover:shadow-rose/30"
           >
             <span className="relative z-10 flex items-center">
