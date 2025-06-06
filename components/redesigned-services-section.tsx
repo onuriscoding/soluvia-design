@@ -384,59 +384,51 @@ export function RedesignedServicesSection() {
       </div>{" "}
       {/* Booking Section */}
       <div className="mt-24 sm:mt-20 md:mt-24 lg:mt-32 px-4">
-        <motion.div
-          className="max-w-7xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
-            {" "}
-            {/* Text Content - Mobile first order (shows on top for mobile) */}
-            <div className="order-1 lg:order-2 lg:col-span-5 xl:col-span-4 lg:pl-8 xl:pl-12">
-              <div className="space-y-6">
-                {" "}
-                <div className="inline-block md:ml-0 ml-2 ">
-                  <span className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-sm sm:text-sm font-medium bg-white/90 text-rose">
-                    <Calendar className="mr-2 sm:mr-3 h-3 w-3 sm:h-4 sm:w-4" />
-                    {parse(t("navigation.bookADiscoveryCallSmall"))}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+          {" "}
+          {/* Text Content - Mobile first order (shows on top for mobile) */}
+          <div className="order-1 lg:order-2 lg:col-span-5 xl:col-span-4 lg:pl-8 xl:pl-12">
+            <div className="space-y-6">
+              {" "}
+              <div className="inline-block md:ml-0 ml-2 ">
+                <span className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-sm sm:text-sm font-medium bg-white/90 text-rose">
+                  <Calendar className="mr-2 sm:mr-3 h-3 w-3 sm:h-4 sm:w-4" />
+                  {parse(t("navigation.bookADiscoveryCallSmall"))}
+                </span>
+              </div>
+              <h2 className="text-4xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-ivory">
+                {parse(t("navigation.bookADiscoveryCall"))}
+              </h2>
+              <p className="text-lg md:text-lg lg:text-2xl text-ivory/70 leading-relaxed">
+                {parse(t("navigation.bookADiscoveryCallDescription"))}
+              </p>{" "}
+              <div className="md:ml-0 ml-4 pt-2 space-y-3 md:space-y-4">
+                <div className="flex items-center text-sm sm:text-sm text-ivory/80">
+                  <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
+                  <span>
+                    {parse(t("navigation.bookADiscoveryCallfeature1"))}
                   </span>
                 </div>
-                <h2 className="text-4xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-ivory">
-                  {parse(t("navigation.bookADiscoveryCall"))}
-                </h2>
-                <p className="text-lg md:text-lg lg:text-2xl text-ivory/70 leading-relaxed">
-                  {parse(t("navigation.bookADiscoveryCallDescription"))}
-                </p>{" "}
-                <div className="md:ml-0 ml-4 pt-2 space-y-3 md:space-y-4">
-                  <div className="flex items-center text-sm sm:text-sm text-ivory/80">
-                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
-                    <span>
-                      {parse(t("navigation.bookADiscoveryCallfeature1"))}
-                    </span>
-                  </div>
-                  <div className="flex items-center text-sm sm:text-sm text-ivory/80">
-                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
-                    <span>
-                      {parse(t("navigation.bookADiscoveryCallfeature2"))}
-                    </span>
-                  </div>
-                  <div className="flex items-center text-sm sm:text-sm text-ivory/80">
-                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
-                    <span>
-                      {parse(t("navigation.bookADiscoveryCallfeature3"))}
-                    </span>
-                  </div>
+                <div className="flex items-center text-sm sm:text-sm text-ivory/80">
+                  <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
+                  <span>
+                    {parse(t("navigation.bookADiscoveryCallfeature2"))}
+                  </span>
+                </div>
+                <div className="flex items-center text-sm sm:text-sm text-ivory/80">
+                  <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
+                  <span>
+                    {parse(t("navigation.bookADiscoveryCallfeature3"))}
+                  </span>
                 </div>
               </div>
             </div>
-            {/* Booking Frame - Second order for mobile */}
-            <div className="order-2 lg:order-1 lg:col-span-7 xl:col-span-8">
-              <BookingIframe height={700} />
-            </div>
           </div>
-        </motion.div>
+          {/* Booking Frame - Second order for mobile */}
+          <div className="order-2 lg:order-1 lg:col-span-7 xl:col-span-8">
+            <BookingIframe height={700} />
+          </div>
+        </div>
       </div>
     </section>
   );
