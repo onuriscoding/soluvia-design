@@ -323,90 +323,90 @@ export function RedesignedServicesSection() {
               </AnimatePresence>
             </div>{" "}
             {/* Cards Column */}
-            <div className=" lg:mt-0 w-full lg:w-1/2 flex justify-center">
-              {" "}
-              <div className="transform lg:-translate-x-20 xl:translate-x-48 xl:translate-y-72">
-                {" "}
-                <CardSwap
-                  width={isMobile ? 340 : 450}
-                  height={isMobile ? 360 : 340}
-                  cardDistance={isMobile ? 35 : 30}
-                  verticalDistance={isMobile ? 18 : 14}
-                  delay={4500}
-                  pauseOnHover={true}
-                  easing="elastic"
-                >
-                  {" "}
-                  {/* Card 1 - Video Card */}
-                  <Card className="p-3 sm:p-4 bg-white shadow-lg border border-gray-100 rounded-xl overflow-hidden h-full flex flex-col">
-                    <div className="bg-gradient-to-r from-rose-500 to-white p-2 sm:p-3 text-left">
-                      <div className="flex items-center space-x-2 sm:space-x-3">
-                        <Code className="w-4 h-4 sm:w-5 sm:h-5 text-charcoal" />
-                        <h3 className="text-charcoal text-sm sm:text-base md:text-lg font-bold drop-shadow-sm">
-                          AI Solutions
-                        </h3>
+            <div className="mt-20 lg:mt-0 mb-16 lg:mb-0 w-full lg:w-1/2">
+              <div className="w-full h-[400px] relative lg:h-auto lg:transform lg:-translate-x-32 xl:translate-x-48 xl:translate-y-72">
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 xl:-translate-x-48 -translate-y-1/2 lg:static lg:transform-none">
+                  <CardSwap
+                    width={isMobile ? 300 : 450}
+                    height={isMobile ? 320 : 340}
+                    cardDistance={isMobile ? 35 : 30}
+                    verticalDistance={isMobile ? 18 : 14}
+                    delay={4500}
+                    pauseOnHover={true}
+                    easing="elastic"
+                  >
+                    {" "}
+                    {/* Card 1 - Video Card */}
+                    <Card className="p-3 sm:p-4 bg-white shadow-lg border border-gray-100 rounded-xl overflow-hidden h-full flex flex-col">
+                      <div className="bg-gradient-to-r from-rose-500 to-white p-2 sm:p-3 text-left">
+                        <div className="flex items-center space-x-2 sm:space-x-3">
+                          <Code className="w-4 h-4 sm:w-5 sm:h-5 text-charcoal" />
+                          <h3 className="text-charcoal text-sm sm:text-base md:text-lg font-bold drop-shadow-sm">
+                            AI Solutions
+                          </h3>
+                        </div>
                       </div>
-                    </div>
-                    <div className="h-px bg-rose-500"></div>
-                    <div className="flex-1 p-1 sm:p-3">
-                      <video
-                        className="w-full h-full object-cover rounded-lg"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                      >
-                        <source src="/1.mp4" type="video/mp4" />
-                      </video>
-                    </div>
-                  </Card>
-                  {/* Card 2 - Video Card */}
-                  <Card className="p-3 sm:p-4 bg-white shadow-lg border border-gray-100 rounded-xl overflow-hidden h-full flex flex-col">
-                    <div className="bg-gradient-to-r from-rose-500 to-white p-2 sm:p-3 text-left">
-                      <div className="flex items-center space-x-2 sm:space-x-3">
-                        <Palette className="w-4 h-4 sm:w-5 sm:h-5 text-charcoal" />
-                        <h3 className="text-charcoal text-sm sm:text-base md:text-lg font-bold drop-shadow-sm">
-                          Web Design
-                        </h3>
+                      <div className="h-px bg-rose-500"></div>
+                      <div className="flex-1 p-1 sm:p-3">
+                        <video
+                          className="w-full h-full object-cover rounded-lg"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                        >
+                          <source src="/1.mp4" type="video/mp4" />
+                        </video>
                       </div>
-                    </div>
-                    <div className="h-px bg-rose-500"></div>
-                    <div className="flex-1 p-1 sm:p-3">
-                      <video
-                        className="w-full h-full object-cover rounded-lg"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                      >
-                        <source src="/2.mp4" type="video/mp4" />
-                      </video>
-                    </div>
-                  </Card>
-                  {/* Card 3 - Video Card */}
-                  <Card className="p-3 sm:p-4 bg-white shadow-lg border border-gray-100 rounded-xl overflow-hidden h-full flex flex-col">
-                    <div className="bg-gradient-to-r from-rose-500 to-white p-2 sm:p-3 text-left">
-                      <div className="flex items-center space-x-2 sm:space-x-3">
-                        <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-charcoal" />
-                        <h3 className="text-charcoal text-sm sm:text-base md:text-lg font-bold drop-shadow-sm">
-                          Web Development
-                        </h3>
+                    </Card>
+                    {/* Card 2 - Video Card */}
+                    <Card className="p-3 sm:p-4 bg-white shadow-lg border border-gray-100 rounded-xl overflow-hidden h-full flex flex-col">
+                      <div className="bg-gradient-to-r from-rose-500 to-white p-2 sm:p-3 text-left">
+                        <div className="flex items-center space-x-2 sm:space-x-3">
+                          <Palette className="w-4 h-4 sm:w-5 sm:h-5 text-charcoal" />
+                          <h3 className="text-charcoal text-sm sm:text-base md:text-lg font-bold drop-shadow-sm">
+                            Web Design
+                          </h3>
+                        </div>
                       </div>
-                    </div>
-                    <div className="h-px bg-rose-500"></div>
-                    <div className="flex-1 p-1 sm:p-3">
-                      <video
-                        className="w-full h-full object-cover rounded-lg"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                      >
-                        <source src="/3.mp4" type="video/mp4" />
-                      </video>
-                    </div>
-                  </Card>
-                </CardSwap>
+                      <div className="h-px bg-rose-500"></div>
+                      <div className="flex-1 p-1 sm:p-3">
+                        <video
+                          className="w-full h-full object-cover rounded-lg"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                        >
+                          <source src="/2.mp4" type="video/mp4" />
+                        </video>
+                      </div>
+                    </Card>
+                    {/* Card 3 - Video Card */}
+                    <Card className="p-3 sm:p-4 bg-white shadow-lg border border-gray-100 rounded-xl overflow-hidden h-full flex flex-col">
+                      <div className="bg-gradient-to-r from-rose-500 to-white p-2 sm:p-3 text-left">
+                        <div className="flex items-center space-x-2 sm:space-x-3">
+                          <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-charcoal" />
+                          <h3 className="text-charcoal text-sm sm:text-base md:text-lg font-bold drop-shadow-sm">
+                            Web Development
+                          </h3>
+                        </div>
+                      </div>
+                      <div className="h-px bg-rose-500"></div>
+                      <div className="flex-1 p-1 sm:p-3">
+                        <video
+                          className="w-full h-full object-cover rounded-lg"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                        >
+                          <source src="/3.mp4" type="video/mp4" />
+                        </video>
+                      </div>{" "}
+                    </Card>
+                  </CardSwap>
+                </div>
               </div>
             </div>
           </div>
