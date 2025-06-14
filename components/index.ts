@@ -1,2 +1,2 @@
 // Export components
-export { default as InfiniteScroll } from './infinite-scroll'; 
+export { default as InfiniteScroll } from './infinite-scroll';

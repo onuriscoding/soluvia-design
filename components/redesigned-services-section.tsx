@@ -323,7 +323,7 @@ export function RedesignedServicesSection() {
               </AnimatePresence>
             </div>{" "}
             {/* Cards Column */}
-            <div className="mt-20 lg:mt-0 mb-16 lg:mb-0 w-full lg:w-1/2">
+            <div className="mt-20 lg:mt-0 -mb-16 w-full lg:w-1/2 md:mb-16">
               <div className="w-full h-[400px] relative lg:h-auto lg:transform lg:-translate-x-32 xl:translate-x-48 xl:translate-y-72">
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 xl:-translate-x-48 -translate-y-1/2 lg:static lg:transform-none">
                   <CardSwap
