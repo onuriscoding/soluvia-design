@@ -332,7 +332,7 @@ export function RedesignedServicesSection() {
                     cardDistance={isMobile ? 35 : 30}
                     verticalDistance={isMobile ? 18 : 14}
                     delay={4500}
-                    pauseOnHover={true}
+                    pauseOnHover={false}
                     easing="elastic"
                   >
                     {" "}
