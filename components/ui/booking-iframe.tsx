@@ -61,7 +61,7 @@ export function BookingIframe({
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="flex flex-col items-center justify-center h-full bg-charcoal/50 rounded-2xl border border-ivory/10 backdrop-blur-sm"
+      className="flex flex-col items-center justify-center h-full bg-charcoal/10 rounded-2xl border border-ivory/10 backdrop-blur-sm"
     >
       <div className="space-y-6 text-center max-w-sm mx-auto p-8">
         <div className="flex justify-center">
@@ -97,7 +97,7 @@ export function BookingIframe({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex flex-col items-center justify-center h-full bg-charcoal/50 rounded-2xl border border-ivory/10 backdrop-blur-sm p-8"
+      className="flex flex-col items-center justify-center h-full bg-charcoal/10 rounded-2xl border border-ivory/10 backdrop-blur-sm p-8"
     >
       <div className="text-center space-y-6 max-w-md">
         <div className="w-16 h-16 bg-rose/20 rounded-full flex items-center justify-center mx-auto">
@@ -117,7 +117,7 @@ export function BookingIframe({
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center w-full px-6 py-3 bg-rose text-white rounded-lg font-medium hover:bg-rose/90 transition-colors"
+            className="inline-flex items-center justify-center w-full px-6 py-3 bg-ivory/90 text-rose rounded-lg font-medium hover:text-charcoal transition-colors"
           >
             <Calendar className="w-4 h-4 mr-2" />
             Open Booking Calendar

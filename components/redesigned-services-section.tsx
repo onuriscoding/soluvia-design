@@ -29,6 +29,7 @@ import parse from "html-react-parser";
 import GradientText from "@/app/animations/gradient-text";
 import { useI18n } from "@/lib/i18n/i18nContext";
 import { BookingIframe } from "@/components/ui/booking-iframe";
+import CardSwap, { Card } from "./card-swap";
 
 // Helper hook to localize URLs
 const useLocalizedUrl = () => {
@@ -170,23 +171,24 @@ export function RedesignedServicesSection() {
   const contentTransition = getTransitionProps(0.1);
   const imageTransition = getTransitionProps(0.2);
   return (
-    <section ref={ref} className="relative py-20 md:py-32 lg:py-48">
-      <div className="px-4 relative z-10">
+    <section ref={ref} className="relative py-20 md:py-28 lg:py-36">
+      {" "}
+      <div className="px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={scrollRef}
-          className="max-w-7xl mx-auto"
+          className="max-w-6xl mx-auto"
           initial="hidden"
           animate={controls}
           variants={containerVariants}
         >
+          {" "}
           <motion.div
-            className="mx-auto max-w-3xl text-center"
+            className="mx-auto max-w-4xl text-center mb-16"
             variants={containerVariants}
           >
-            {" "}
             <motion.h2
-              className="text-5xl md:text-7xl font-bold tracking-tight text-ivory"
-              initial={{ opacity: 0.2, y: 100 }}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-ivory"
+              initial={{ opacity: 0.2, y: 80 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
             >
@@ -199,17 +201,17 @@ export function RedesignedServicesSection() {
               >
                 Services
               </GradientText>
-            </motion.h2>{" "}
+            </motion.h2>
             <motion.p
-              className="text-lg md:text-2xl mt-4 text-ivory/70"
+              className="text-lg md:text-xl lg:text-2xl mt-6 md:mt-8 text-ivory/70 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               {parse(t("services.sectionSubtitle"))}
             </motion.p>
-          </motion.div>{" "}
-          <div className="mt-8 sm:mt-10 md:mt-12 flex flex-wrap justify-center gap-2 sm:gap-3">
+          </motion.div>
+          <div className="mt-6 sm:mt-8 md:mt-10 flex flex-wrap justify-center gap-3 sm:gap-4">
             {services.map((service) => (
               <motion.button
                 key={service.id}
@@ -226,196 +228,222 @@ export function RedesignedServicesSection() {
                   delay: services.findIndex((s) => s.id === service.id) * 0.1,
                 }}
               >
-                {" "}
                 <service.icon className="h-3 w-3 sm:h-4 sm:w-4" />
                 {t(`services.${service.id}`)}
               </motion.button>
             ))}
           </div>{" "}
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={activeService}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                transition: contentTransition,
-              }}
-              exit={{
-                opacity: 0,
-                y: -10,
-                transition: {
-                  ...contentTransition,
-                  duration: isMobile ? 0.2 : 0.3,
-                },
-              }}
-              className="mt-6 sm:mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center"
-            >
-              {" "}
-              <motion.div
-                className="lg:col-span-5 xl:col-span-4 lg:order-1 order-1 lg:pr-8 xl:pr-12"
-                initial={{ opacity: 0, x: isMobile ? 10 : 20 }}
-                animate={{
-                  opacity: 1,
-                  x: 0,
-                  transition: contentTransition,
-                }}
-                exit={{
-                  opacity: 0,
-                  x: isMobile ? 5 : 20,
-                  transition: {
-                    ...contentTransition,
-                    duration: isMobile ? 0.15 : 0.3,
-                  },
-                }}
-              >
+          <div className="mt-20 lg:mt-36 flex flex-col lg:flex-row items-start">
+            {/* Text Content Column */}
+            <div className="w-full lg:w-1/2 px-4">
+              <AnimatePresence mode="wait" initial={false}>
                 {" "}
                 <motion.div
-                  className="flex flex-row sm:items-center mb-4 md:mb-6 mt-12"
+                  key={activeService}
                   initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: isMobile ? 0.3 : 0.5, delay: 0.2 }}
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-rose/10 text-rose mr-4 mb-3 md:ml-0 ml-4 sm:mb-0 sm:mr-6">
-                    {<currentService.icon className="h-6 w-6" />}
-                  </div>
-                  <h2 className="md:mt-0 mt-2 text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-ivory">
-                    {t(`services.${currentService.id}`)}
-                  </h2>
-                </motion.div>{" "}
-                <motion.p
-                  className="text-base text-lg mr-2 md:text-lg lg:text-2xl text-ivory/70 mb-6 ml-2 md:ml-0 md:mb-6 leading-relaxed"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: isMobile ? 0.3 : 0.5, delay: 0.25 }}
-                >
-                  {parse(t(`services.${currentService.id}-description`))}
-                </motion.p>{" "}
-                {/* Feature list with optimized animations */}
-                <motion.div
-                  className="ml-4 md:ml-2 mb-6 md:mb-8 space-y-3 md:space-y-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 0.3 }}
-                >
-                  {currentService.features.map((feature, index) => (
-                    <motion.div
-                      key={index}
-                      className="flex items-center"
-                      initial={{ opacity: 0, x: -5 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.2,
-                        delay: 0.35 + index * (isMobile ? 0.05 : 0.1),
-                      }}
-                    >
-                      <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
-                      <span className="text-sm text-ivory/80">
-                        {parse(
-                          t(`services.${currentService.id}-features.${index}`)
-                        )}
-                      </span>
-                    </motion.div>
-                  ))}
-                </motion.div>{" "}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.3 }}
-                >
-                  <Link
-                    href={localizeUrl(currentService.link)}
-                    className="group ml-2 md:ml-0 inline-flex items-center justify-center rounded-full bg-ivory/90 px-6 sm:px-8 py-3 sm:py-3 text-sm sm:text-base text-rose hover:text-charcoal font-bold tracking-tighter shadow-lg transition-all duration-300 hover:shadow-rose/30"
-                  >
-                    {t("navigation.learnMore")}
-                    <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </motion.div>
-              </motion.div>{" "}
-              <motion.div
-                className="lg:col-span-7 xl:col-span-8 order-2 lg:order-2 relative"
-                initial={{ opacity: 0, x: isMobile ? -10 : -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: isMobile ? -5 : -20 }}
-                transition={imageTransition}
-                layout={!isMobile && !isLoading}
-              >
-                {" "}
-                <motion.div
-                  className="absolute -inset-1 bg-gradient-to-br from-rose to-sapphire rounded-xl opacity-70 blur-sm"
-                  initial={{ scale: 0.95, opacity: 0.5 }}
-                  animate={{ scale: 1, opacity: 0.7 }}
-                  transition={{
-                    duration: isMobile ? 0.3 : 0.5,
-                    delay: 0.2,
-                    ease: [0.22, 1, 0.36, 1],
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    transition: contentTransition,
                   }}
-                ></motion.div>{" "}
-                <div className="relative h-[350px] md:h-[550px] lg:h-[700px] overflow-hidden rounded-xl">
-                  <Image
-                    src={currentService.image || "/placeholder.svg"}
-                    alt={`Soluvia professional ${t(`services.${currentService.id}`)} services - Expert digital solutions for businesses`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    quality={100}
-                    priority={!isLoading}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-60"></div>
+                  exit={{
+                    opacity: 0,
+                    y: -10,
+                    transition: {
+                      ...contentTransition,
+                      duration: isMobile ? 0.2 : 0.3,
+                    },
+                  }}
+                  className="px-0 sm:px-0 lg:pr-16 xl:pr-20"
+                >
                   <motion.div
-                    className="absolute bottom-4 left-4"
-                    initial={{ opacity: 0, y: 5 }}
+                    className="flex flex-row sm:items-center mb-4 md:mb-6"
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: isMobile ? 0.2 : 0.4,
-                      delay: isMobile ? 0.3 : 0.5,
-                    }}
+                    transition={{ duration: isMobile ? 0.3 : 0.5, delay: 0.2 }}
                   >
-                    {" "}
-                    <span className="px-3 py-1 text-xs font-medium rounded-full bg-rose/20 text-rose">
+                    <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-rose/10 text-rose mr-3 sm:mr-4">
+                      {
+                        <currentService.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                      }
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-ivory">
                       {t(`services.${currentService.id}`)}
-                    </span>
+                    </h2>
                   </motion.div>
-                </div>
-              </motion.div>{" "}
-            </motion.div>
-          </AnimatePresence>
+                  <motion.p
+                    className="text-base sm:text-lg md:text-xl text-ivory/70 mb-6 leading-relaxed"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: isMobile ? 0.3 : 0.5, delay: 0.25 }}
+                  >
+                    {parse(t(`services.${currentService.id}-description`))}
+                  </motion.p>
+                  {/* Feature list with optimized animations */}
+                  <motion.div
+                    className="mb-6 md:mb-8 space-y-3 md:space-y-4"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 0.3 }}
+                  >
+                    {currentService.features.map((feature, index) => (
+                      <motion.div
+                        key={index}
+                        className="flex items-center"
+                        initial={{ opacity: 0, x: -5 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{
+                          duration: 0.2,
+                          delay: 0.35 + index * (isMobile ? 0.05 : 0.1),
+                        }}
+                      >
+                        <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
+                        <span className="text-sm sm:text-base text-ivory/80">
+                          {parse(
+                            t(`services.${currentService.id}-features.${index}`)
+                          )}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.3 }}
+                  >
+                    <Link
+                      href={localizeUrl(currentService.link)}
+                      className="group inline-flex items-center justify-center rounded-full bg-ivory/90 px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base text-rose hover:text-charcoal font-bold tracking-tighter shadow-lg transition-all duration-300 hover:shadow-rose/30"
+                    >
+                      {t("navigation.learnMore")}
+                      <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </motion.div>
+                </motion.div>
+              </AnimatePresence>
+            </div>{" "}
+            {/* Cards Column */}
+            <div className=" lg:mt-0 w-full lg:w-1/2 flex justify-center">
+              {" "}
+              <div className="transform lg:-translate-x-20 xl:translate-x-48 xl:translate-y-72">
+                {" "}
+                <CardSwap
+                  width={isMobile ? 340 : 450}
+                  height={isMobile ? 360 : 340}
+                  cardDistance={isMobile ? 35 : 30}
+                  verticalDistance={isMobile ? 18 : 14}
+                  delay={4500}
+                  pauseOnHover={true}
+                  easing="elastic"
+                >
+                  {" "}
+                  {/* Card 1 - Video Card */}
+                  <Card className="p-3 sm:p-4 bg-white shadow-lg border border-gray-100 rounded-xl overflow-hidden h-full flex flex-col">
+                    <div className="bg-gradient-to-r from-rose-500 to-white p-2 sm:p-3 text-left">
+                      <div className="flex items-center space-x-2 sm:space-x-3">
+                        <Code className="w-4 h-4 sm:w-5 sm:h-5 text-charcoal" />
+                        <h3 className="text-charcoal text-sm sm:text-base md:text-lg font-bold drop-shadow-sm">
+                          AI Solutions
+                        </h3>
+                      </div>
+                    </div>
+                    <div className="h-px bg-rose-500"></div>
+                    <div className="flex-1 p-1 sm:p-3">
+                      <video
+                        className="w-full h-full object-cover rounded-lg"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                      >
+                        <source src="/1.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                  </Card>
+                  {/* Card 2 - Video Card */}
+                  <Card className="p-3 sm:p-4 bg-white shadow-lg border border-gray-100 rounded-xl overflow-hidden h-full flex flex-col">
+                    <div className="bg-gradient-to-r from-rose-500 to-white p-2 sm:p-3 text-left">
+                      <div className="flex items-center space-x-2 sm:space-x-3">
+                        <Palette className="w-4 h-4 sm:w-5 sm:h-5 text-charcoal" />
+                        <h3 className="text-charcoal text-sm sm:text-base md:text-lg font-bold drop-shadow-sm">
+                          Web Design
+                        </h3>
+                      </div>
+                    </div>
+                    <div className="h-px bg-rose-500"></div>
+                    <div className="flex-1 p-1 sm:p-3">
+                      <video
+                        className="w-full h-full object-cover rounded-lg"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                      >
+                        <source src="/2.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                  </Card>
+                  {/* Card 3 - Video Card */}
+                  <Card className="p-3 sm:p-4 bg-white shadow-lg border border-gray-100 rounded-xl overflow-hidden h-full flex flex-col">
+                    <div className="bg-gradient-to-r from-rose-500 to-white p-2 sm:p-3 text-left">
+                      <div className="flex items-center space-x-2 sm:space-x-3">
+                        <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-charcoal" />
+                        <h3 className="text-charcoal text-sm sm:text-base md:text-lg font-bold drop-shadow-sm">
+                          Web Development
+                        </h3>
+                      </div>
+                    </div>
+                    <div className="h-px bg-rose-500"></div>
+                    <div className="flex-1 p-1 sm:p-3">
+                      <video
+                        className="w-full h-full object-cover rounded-lg"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                      >
+                        <source src="/3.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                  </Card>
+                </CardSwap>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>{" "}
       {/* Booking Section */}
-      <div className="mt-24 sm:mt-20 md:mt-24 lg:mt-32 px-4">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
-          {" "}
-          {/* Text Content - Mobile first order (shows on top for mobile) */}
-          <div className="order-1 lg:order-2 lg:col-span-5 xl:col-span-4 lg:pl-8 xl:pl-12">
-            <div className="space-y-6">
-              {" "}
-              <div className="inline-block md:ml-0 ml-2 ">
-                <span className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-sm sm:text-sm font-medium bg-white/90 text-rose">
+      <div className="mt-20 sm:mt-24 md:mt-28 lg:mt-32 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-10 items-center">
+          {/* Text Content */}
+          <div className="order-1 lg:order-2 lg:col-span-5 xl:col-span-4">
+            <div className="space-y-5 sm:space-y-6">
+              <div className="inline-block">
+                <span className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-sm font-medium bg-white/90 text-rose">
                   <Calendar className="mr-2 sm:mr-3 h-3 w-3 sm:h-4 sm:w-4" />
                   {parse(t("navigation.bookADiscoveryCallSmall"))}
                 </span>
               </div>
-              <h2 className="text-4xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-ivory">
+              <h2 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-bold tracking-tight text-ivory">
                 {parse(t("navigation.bookADiscoveryCall"))}
               </h2>
-              <p className="text-lg md:text-lg lg:text-2xl text-ivory/70 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-lg lg:text-xl text-ivory/70 leading-relaxed">
                 {parse(t("navigation.bookADiscoveryCallDescription"))}
-              </p>{" "}
-              <div className="md:ml-0 ml-4 pt-2 space-y-3 md:space-y-4">
-                <div className="flex items-center text-sm sm:text-sm text-ivory/80">
+              </p>
+              <div className="pt-2 space-y-3 md:space-y-4">
+                <div className="flex items-center text-sm text-ivory/80">
                   <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
                   <span>
                     {parse(t("navigation.bookADiscoveryCallfeature1"))}
                   </span>
                 </div>
-                <div className="flex items-center text-sm sm:text-sm text-ivory/80">
+                <div className="flex items-center text-sm text-ivory/80">
                   <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
                   <span>
                     {parse(t("navigation.bookADiscoveryCallfeature2"))}
                   </span>
                 </div>
-                <div className="flex items-center text-sm sm:text-sm text-ivory/80">
+                <div className="flex items-center text-sm text-ivory/80">
                   <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-rose mr-2 md:mr-3 flex-shrink-0" />
                   <span>
                     {parse(t("navigation.bookADiscoveryCallfeature3"))}
@@ -424,9 +452,12 @@ export function RedesignedServicesSection() {
               </div>
             </div>
           </div>
-          {/* Booking Frame - Second order for mobile */}
+
+          {/* Booking Frame */}
           <div className="order-2 lg:order-1 lg:col-span-7 xl:col-span-8">
-            <BookingIframe height={700} />
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden">
+              <BookingIframe height={650} />
+            </div>
           </div>
         </div>
       </div>
