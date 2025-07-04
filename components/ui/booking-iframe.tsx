@@ -173,7 +173,6 @@ export function BookingIframe({
           zIndex: 10,
           position: "relative",
         }}
-        loading="lazy"
         title="Book a call with Soluvia"
         allow="camera; microphone; autoplay; clipboard-write; encrypted-media; fullscreen; display-capture"
         referrerPolicy="no-referrer"

@@ -11,6 +11,7 @@ import React, {
   useRef,
 } from "react";
 import gsap from "gsap";
+import { cn } from "@/lib/utils";
 
 export interface CardSwapProps {
   width?: number | string;
@@ -23,6 +24,8 @@ export interface CardSwapProps {
   skewAmount?: number;
   easing?: "linear" | "elastic";
   children: ReactNode;
+  isMobile?: boolean;
+  className?: string;
 }
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -84,6 +87,8 @@ const CardSwap: React.FC<CardSwapProps> = ({
   skewAmount = 6,
   easing = "elastic",
   children,
+  isMobile,
+  className,
 }) => {
   const config =
     easing === "elastic"
@@ -234,7 +239,13 @@ const CardSwap: React.FC<CardSwapProps> = ({
   return (
     <div
       ref={container}
-      className="absolute bottom-0 right-0 transform translate-x-[5%] translate-y-[20%] origin-bottom-right perspective-[900px] overflow-visible max-[768px]:translate-x-[25%] max-[768px]:translate-y-[25%] max-[768px]:scale-[0.75] max-[480px]:translate-x-[25%] max-[480px]:translate-y-[25%] max-[480px]:scale-[0.55]"
+      className={cn(
+        "transform perspective-[900px] overflow-visible",
+        isMobile
+          ? "relative"
+          : "absolute bottom-0 right-0 translate-x-[5%] translate-y-[20%] origin-bottom-right",
+        className
+      )}
       style={{ width, height }}
     >
       {rendered}

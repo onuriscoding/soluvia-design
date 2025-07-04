@@ -183,7 +183,7 @@ export function RedesignedServicesSection() {
         >
           {" "}
           <motion.div
-            className="mx-auto max-w-4xl text-center mb-16"
+            className="mx-auto max-w-4xl text-center mb-4"
             variants={containerVariants}
           >
             <motion.h2
@@ -233,7 +233,7 @@ export function RedesignedServicesSection() {
               </motion.button>
             ))}
           </div>{" "}
-          <div className="mt-20 lg:mt-36 flex flex-col lg:flex-row items-start">
+          <div className="mt-6 lg:mt-36 flex flex-col lg:flex-row items-start">
             {/* Text Content Column */}
             <div className="w-full lg:w-1/2 px-4">
               <AnimatePresence mode="wait" initial={false}>
@@ -321,19 +321,21 @@ export function RedesignedServicesSection() {
                   </motion.div>
                 </motion.div>
               </AnimatePresence>
-            </div>{" "}
+            </div>
             {/* Cards Column */}
-            <div className="mt-20 lg:mt-0 -mb-16 w-full lg:w-1/2 md:mb-16">
-              <div className="w-full h-[400px] relative lg:h-auto lg:transform lg:-translate-x-32 xl:translate-x-48 xl:translate-y-72">
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 xl:-translate-x-48 -translate-y-1/2 lg:static lg:transform-none">
+            <div className="mt-20 mb-20 w-full lg:-mb-16 lg:mt-0 lg:w-1/2">
+              <div className="w-full h-[400px] relative overflow-hidden lg:overflow-visible lg:h-auto lg:transform lg:-translate-x-48 xl:translate-x-74 xl:-translate-x-12 xl:translate-y-72">
+                <div className="absolute inset-0 flex items-center justify-center lg:static">
                   <CardSwap
-                    width={isMobile ? 300 : 450}
-                    height={isMobile ? 320 : 340}
-                    cardDistance={isMobile ? 35 : 30}
-                    verticalDistance={isMobile ? 18 : 14}
+                    width={isMobile ? 280 : 450}
+                    height={isMobile ? 300 : 340}
+                    cardDistance={isMobile ? 20 : 30}
+                    verticalDistance={isMobile ? 10 : 14}
                     delay={4500}
                     pauseOnHover={false}
                     easing="elastic"
+                    isMobile={isMobile}
+                    className={isMobile ? "-translate-x-4" : ""}
                   >
                     {" "}
                     {/* Card 1 - Video Card */}
@@ -454,10 +456,8 @@ export function RedesignedServicesSection() {
           </div>
 
           {/* Booking Frame */}
-          <div className="order-2 lg:order-1 lg:col-span-7 xl:col-span-8">
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden">
-              <BookingIframe height={650} />
-            </div>
+          <div className="order-2 mx-4 lg:mx-0 lg:order-1 lg:col-span-7 xl:col-span-8">
+            <BookingIframe height={650} />
           </div>
         </div>
       </div>
