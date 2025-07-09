@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { ChevronUp, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -76,70 +76,67 @@ export function EnhancedNavigationBar() {
   const menuRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 
-  // Handle scroll detection
+  // Memoized scroll handler for better performance
+  const handleScroll = useCallback(() => {
+    const scrollY =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+    setScrolled(scrollY > 10);
+  }, []);
+
+  // Handle scroll detection with throttling
   useEffect(() => {
-    const handleScroll = () => {
-      // Force check with the raw value
-      const scrollY =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop ||
-        0;
-      setScrolled(scrollY > 10);
+    let ticking = false;
+
+    const throttledScrollHandler = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     // Initial check on mount
     handleScroll();
 
-    // More frequent checks with passive event for better performance
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    // Fallback with requestAnimationFrame for mobile
-    let rafId: number;
-
-    const pollScrollPosition = () => {
-      handleScroll();
-      rafId = requestAnimationFrame(pollScrollPosition);
-    };
-
-    // Start polling on mobile devices
-    if (window.innerWidth < 768) {
-      rafId = requestAnimationFrame(pollScrollPosition);
-    }
+    window.addEventListener("scroll", throttledScrollHandler, {
+      passive: true,
+    });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (rafId) cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", throttledScrollHandler);
+    };
+  }, [handleScroll]);
+
+  // Get navigation bar width for mobile menu sizing - optimized
+  useEffect(() => {
+    if (!navRef.current) return;
+
+    const updateNavWidth = () => {
+      if (navRef.current) {
+        setNavWidth(navRef.current.offsetWidth);
+      }
+    };
+
+    // Use ResizeObserver for better performance
+    const resizeObserver = new ResizeObserver(updateNavWidth);
+    resizeObserver.observe(navRef.current);
+
+    return () => {
+      resizeObserver.disconnect();
     };
   }, []);
 
-  // Get navigation bar width for mobile menu sizing
+  // Handle clicks outside the menu to close it - optimized
   useEffect(() => {
-    if (navRef.current) {
-      const updateNavWidth = () => {
-        if (navRef.current) {
-          setNavWidth(navRef.current.offsetWidth);
-        }
-      };
+    if (!mobileMenuOpen) return;
 
-      // Initial measurement
-      updateNavWidth();
-
-      // Update on resize
-      window.addEventListener("resize", updateNavWidth);
-      return () => window.removeEventListener("resize", updateNavWidth);
-    }
-  }, [navRef, mobileMenuOpen]);
-
-  // Handle clicks outside the menu to close it
-  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        mobileMenuOpen &&
-        menuRef.current &&
-        !menuRef.current.contains(event.target as Node)
-      ) {
-        // Only close if clicking outside the menu and not on the toggle button
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         const toggleButton = document.getElementById("mobile-menu-toggle");
         if (!toggleButton?.contains(event.target as Node)) {
           setMobileMenuOpen(false);
@@ -151,13 +148,12 @@ export function EnhancedNavigationBar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [mobileMenuOpen]);
 
-  // Prevent scrolling when mobile menu is open
+  // Prevent scrolling when mobile menu is open - optimized
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
-      // Reset active item when menu closes
       setActiveMobileItem(null);
     }
 
@@ -166,17 +162,141 @@ export function EnhancedNavigationBar() {
     };
   }, [mobileMenuOpen]);
 
-  // Toggle mobile dropdown
-  const toggleMobileDropdown = (label: string, event: React.MouseEvent) => {
-    // Prevent event from bubbling up
-    event.stopPropagation();
-    setActiveMobileItem((prev) => (prev === label ? null : label));
-  };
+  // Memoized toggle functions for better performance
+  const toggleMobileDropdown = useCallback(
+    (label: string, event: React.MouseEvent) => {
+      event.stopPropagation();
+      setActiveMobileItem((prev) => (prev === label ? null : label));
+    },
+    []
+  );
 
-  // Close mobile menu
-  const closeMobileMenu = () => {
+  const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false);
-  };
+  }, []);
+
+  const toggleMobileMenu = useCallback(() => {
+    setMobileMenuOpen((prev) => !prev);
+  }, []);
+
+  // Memoized mobile menu items to prevent unnecessary re-renders
+  const mobileMenuItems = useMemo(
+    () => (
+      <ul className="space-y-4">
+        {navItems.map((item, index) => (
+          <motion.li
+            key={item.labelKey}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{
+              duration: 0.3,
+              delay: index * 0.1,
+              ease: "easeOut",
+            }}
+            className={`${index < navItems.length - 1 ? "border-b border-ivory/10 pb-4" : ""}`}
+          >
+            {item.children ? (
+              <div>
+                <motion.button
+                  onClick={(e) => toggleMobileDropdown(item.labelKey, e)}
+                  className="flex items-center text-2xl font-semibold tracking-tight text-ivory hover:text-rose transition-colors w-full"
+                  whileHover={{ x: 5 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Link
+                    href={localizeUrl(item.href!)}
+                    className="relative inline-block"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {t(item.labelKey)}
+                  </Link>
+
+                  <div className="ml-2 w-4 h-4 flex items-center justify-center">
+                    <AnimatePresence mode="wait">
+                      {activeMobileItem === item.labelKey ? (
+                        <motion.div
+                          key="chevron"
+                          initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
+                          animate={{ opacity: 1, scale: 1, rotate: 180 }}
+                          exit={{ opacity: 0, scale: 0.5, rotate: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="w-4 h-4"
+                        >
+                          <ChevronUp className="h-4 w-4 text-rose" />
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="dot"
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.5 }}
+                          transition={{ duration: 0.2 }}
+                          className="w-1.5 h-1.5 rounded-full bg-rose"
+                        />
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </motion.button>
+
+                <AnimatePresence>
+                  {activeMobileItem === item.labelKey && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{
+                        height: { duration: 0.3, ease: "easeOut" },
+                        opacity: { duration: 0.2 },
+                      }}
+                      className="overflow-hidden mt-3 pl-4 space-y-2"
+                    >
+                      {item.children.map((child, childIndex) => (
+                        <motion.div
+                          key={child.href}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{
+                            duration: 0.2,
+                            delay: childIndex * 0.05,
+                          }}
+                        >
+                          <Link
+                            href={localizeUrl(child.href)}
+                            onClick={closeMobileMenu}
+                            className="block p-2 rounded-lg hover:bg-ivory/5 transition-colors"
+                          >
+                            <div className="font-medium text-ivory text-lg mb-1 hover:text-rose transition-colors">
+                              {t(child.labelKey)}
+                            </div>
+                            {"descriptionKey" in child && (
+                              <div className="text-sm text-ivory/70">
+                                {t(child.descriptionKey)}
+                              </div>
+                            )}
+                          </Link>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <motion.div whileHover={{ x: 5 }} whileTap={{ scale: 0.98 }}>
+                <Link
+                  href={localizeUrl(item.href!)}
+                  onClick={closeMobileMenu}
+                  className="block text-2xl font-semibold tracking-tight text-ivory hover:text-rose transition-colors"
+                >
+                  {t(item.labelKey)}
+                </Link>
+              </motion.div>
+            )}
+          </motion.li>
+        ))}
+      </ul>
+    ),
+    [activeMobileItem, t, localizeUrl, toggleMobileDropdown, closeMobileMenu]
+  );
 
   return (
     <header
@@ -313,28 +433,23 @@ export function EnhancedNavigationBar() {
               </div>
             </div>
 
-            {/* Mobile Menu Button - Pink dot */}
+            {/* Mobile Menu Button - Optimized with light animations */}
             <motion.button
               id="mobile-menu-toggle"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={toggleMobileMenu}
               className="lg:hidden relative w-8 h-8 flex items-center justify-center focus:outline-none"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >
-              {/* Pink dot */}
               <motion.div
-                className="absolute inset-0 flex items-center justify-center"
+                className="w-3 h-3 rounded-full bg-rose shadow-md shadow-rose/20"
                 animate={{
-                  scale: mobileMenuOpen ? 0.85 : 1,
-                  opacity: mobileMenuOpen ? 0.8 : 1,
+                  scale: mobileMenuOpen ? 0.8 : 1,
+                  opacity: mobileMenuOpen ? 0.7 : 1,
                 }}
                 transition={{ duration: 0.2 }}
-              >
-                <div className="w-3 h-3 rounded-full bg-rose shadow-md shadow-rose/20" />
-              </motion.div>
-
-              {/* X icon that appears when menu is open */}
+              />
               <AnimatePresence>
                 {mobileMenuOpen && (
                   <motion.div
@@ -353,7 +468,7 @@ export function EnhancedNavigationBar() {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu - Sized to match navigation bar */}
+      {/* Mobile Navigation Menu - Optimized with beautiful animations */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
@@ -362,36 +477,31 @@ export function EnhancedNavigationBar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
               className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm pointer-events-auto lg:hidden"
               onClick={closeMobileMenu}
             />
 
-            {/* Mobile menu sized to match navigation bar */}
+            {/* Mobile menu */}
             <div className="absolute top-full left-0 right-0 z-40 flex justify-center px-4 lg:hidden">
               <motion.div
                 ref={menuRef}
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
+                initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -20, scale: 0.95 }}
                 transition={{
-                  height: {
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 30,
-                  },
-                  opacity: { duration: 0.3 },
+                  duration: 0.3,
+                  ease: "easeOut",
                 }}
                 className="w-full bg-charcoal/20 max-w-[calc(100%-2rem)] overflow-hidden flex flex-col pointer-events-auto rounded-2xl border border-ivory/10 origin-top mt-2 max-h-[80vh]"
                 style={{
                   width: navWidth > 0 ? `${navWidth}px` : "calc(100% - 2rem)",
-
                   backdropFilter: "blur(12px)",
                   boxShadow:
                     "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
                 }}
               >
-                {/* Close button at top right */}
+                {/* Close button */}
                 <div className="absolute top-4 right-4 z-50">
                   <motion.button
                     onClick={closeMobileMenu}
@@ -404,154 +514,14 @@ export function EnhancedNavigationBar() {
                   </motion.button>
                 </div>
 
-                {/* Mobile Language Switcher - centered at top */}
+                {/* Language Switcher */}
                 <div className="w-full flex justify-center py-4 border-b border-ivory/10 bg-transparent">
                   <LanguageSwitcher variant="pill" className="shadow-lg" />
                 </div>
 
                 {/* Menu items */}
                 <div className="flex-1 overflow-y-auto overscroll-contain">
-                  <nav className="p-6 pt-6">
-                    <ul className="space-y-6">
-                      {navItems.map((item, index) => (
-                        <li
-                          key={item.labelKey}
-                          className={`${index < navItems.length - 1 ? "border-b border-ivory/10 pb-6" : ""}`}
-                        >
-                          {item.children ? (
-                            <div>
-                              {/* SERVICES with dropdown */}
-                              <motion.button
-                                onClick={(e) =>
-                                  toggleMobileDropdown(item.labelKey, e)
-                                }
-                                className="flex items-center text-3xl font-semibold tracking-thigh text-ivory hover:text-rose transition-colors relative group w-full"
-                                whileHover={{
-                                  x: 5,
-                                  transition: { duration: 0.2 },
-                                }}
-                              >
-                                {/* Text with hover underline animation */}
-                                <Link
-                                  href={localizeUrl(item.href!)}
-                                  className="relative inline-block"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  {t(item.labelKey)}
-                                  <motion.span
-                                    className="absolute -bottom-1 left-0 h-0.5 bg-rose"
-                                    initial={{ width: 0 }}
-                                    whileHover={{ width: "100%" }}
-                                    transition={{ duration: 0.3 }}
-                                  />
-                                </Link>
-
-                                <div className="ml-2 w-4 h-4 flex items-center justify-center">
-                                  {/* Dot that transforms to chevron, just like desktop */}
-                                  <AnimatePresence mode="wait">
-                                    {activeMobileItem === item.labelKey ? (
-                                      <motion.div
-                                        key="chevron"
-                                        initial={{ opacity: 0, scale: 0.5 }}
-                                        animate={{
-                                          opacity: 1,
-                                          scale: 1,
-                                          rotate: 180,
-                                        }}
-                                        exit={{ opacity: 0, scale: 0.5 }}
-                                        transition={{ duration: 0.2 }}
-                                        whileHover={{ scale: 1.1 }}
-                                      >
-                                        <ChevronUp className="h-4 w-4 text-rose" />
-                                      </motion.div>
-                                    ) : (
-                                      <motion.div
-                                        key="dot"
-                                        initial={{ opacity: 0, scale: 0.5 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 0.5 }}
-                                        transition={{ duration: 0.2 }}
-                                        className="w-1.5 h-1.5 rounded-full bg-rose"
-                                        whileHover={{
-                                          scale: 1.3,
-                                          boxShadow:
-                                            "0 0 8px rgba(255, 107, 107, 0.6)",
-                                        }}
-                                      />
-                                    )}
-                                  </AnimatePresence>
-                                </div>
-                              </motion.button>
-
-                              <AnimatePresence initial={false}>
-                                {activeMobileItem === item.labelKey && (
-                                  <motion.div
-                                    initial={{ height: 0, opacity: 0 }}
-                                    animate={{ height: "auto", opacity: 1 }}
-                                    exit={{ height: 0, opacity: 0 }}
-                                    transition={{
-                                      height: {
-                                        type: "spring",
-                                        stiffness: 300,
-                                        damping: 30,
-                                      },
-                                      opacity: { duration: 0.2 },
-                                    }}
-                                    className="overflow-visible mt-4 pl-4"
-                                  >
-                                    {/* Detailed sub-elements like desktop */}
-                                    <div className="grid grid-cols-1 gap-4">
-                                      {item.children.map((child) => (
-                                        <Link
-                                          key={child.href}
-                                          href={localizeUrl(child.href)}
-                                          onClick={closeMobileMenu}
-                                          className="p-3 rounded-lg hover:bg-ivory/5 transition-colors border border-ivory/5"
-                                        >
-                                          <div className="font-ivory tracking-wide text-ivory text-xl mb-1 hover:text-rose transition-colors">
-                                            {t(child.labelKey)}
-                                          </div>
-                                          {"descriptionKey" in child && (
-                                            <div className="text-sm font-thin text-ivory/70 mb-2">
-                                              {t(child.descriptionKey)}
-                                            </div>
-                                          )}
-                                        </Link>
-                                      ))}
-                                    </div>
-                                  </motion.div>
-                                )}
-                              </AnimatePresence>
-                            </div>
-                          ) : (
-                            // Other navigation items with consistent hover animations
-                            <motion.div
-                              whileHover={{
-                                x: 5,
-                                transition: { duration: 0.2 },
-                              }}
-                            >
-                              <Link
-                                href={localizeUrl(item.href!)}
-                                onClick={closeMobileMenu}
-                                className="relative inline-block text-3xl font-semibold tracking-tighter text-ivory hover:text-rose transition-colors"
-                              >
-                                <span className="relative inline-block">
-                                  {t(item.labelKey)}
-                                  <motion.span
-                                    className="absolute -bottom-1 left-0 h-0.5 bg-rose"
-                                    initial={{ width: 0 }}
-                                    whileHover={{ width: "100%" }}
-                                    transition={{ duration: 0.3 }}
-                                  />
-                                </span>
-                              </Link>
-                            </motion.div>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
+                  <nav className="p-6 pt-6">{mobileMenuItems}</nav>
                 </div>
 
                 {/* Footer with CTA button */}

@@ -158,6 +158,40 @@ html, body {
   ::-webkit-scrollbar {
     width: 4px;
   }
+  
+  /* Prevent white space during fast scrolling on mobile */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    position: relative !important;
+    background: #2b2d42 !important;
+  }
+  
+  /* Ensure all elements stay within viewport */
+  * {
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+  
+  /* Prevent any element from causing horizontal overflow */
+  body > * {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  /* Force background to cover entire viewport */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #2b2d42;
+    z-index: -1;
+    pointer-events: none;
+  }
 }
 
 /* Glass effect for components that need to stand out from the video */

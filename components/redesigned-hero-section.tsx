@@ -276,7 +276,7 @@ export function RedesignedHeroSection({ dictionary }: { dictionary: any }) {
           </motion.div>
 
           <motion.h1
-            className="mx-auto max-w-4xl text-5xl -mt-10 md:-mt-6 font-ivory font-bold tracking-tight text-ivory md:text-[9rem]"
+            className="mx-auto max-w-4xl text-[3rem] -mt-10 md:-mt-6 font-ivory font-bold tracking-tight text-ivory md:text-[9rem]"
             variants={itemVariants}
           >
             <span className="block leading-tight">Solutions via</span>
