@@ -29,7 +29,8 @@ export function ConditionalBackground() {
       <div
         className="fixed inset-0 w-full h-full z-0"
         style={{
-          background: "#2b2d42",
+          background:
+            "linear-gradient(135deg,rgb(85, 57, 55) 0%, #a86d6d 40%,rgb(198, 143, 130) 70%, #7e5a4d 100%)",
           position: "fixed",
           top: 0,
           left: 0,
